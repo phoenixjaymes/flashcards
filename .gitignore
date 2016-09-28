@@ -1,0 +1,9 @@
+
+# Ignore node modules
+node_modules/
+
+# Ignore netbeans
+nbproject/
+
+# Ignore dist folder
+dist/
