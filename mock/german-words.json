@@ -1,0 +1,22 @@
+[
+  {
+    "id"          : 0,
+    "word"        : "blau",
+    "definition"  : "blue",
+    "pos"         : "adjective"
+  },
+  {
+    "id"          : 1,
+    "word"        : "rot",
+    "definition"  : "red",
+    "pos"         : "adjective"
+  },
+  {
+    "id"          : 2,
+    "word"        : "pink",
+    "definition"  : "pink",
+    "pos"         : "adjective"
+  }
+  
+]
+

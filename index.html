@@ -4,7 +4,7 @@
   Date     : Sep 28, 2016
   Author   : Jaymes Young <jaymes@phoenixjaymes.com>
 -->
-<html lang="en">
+<html lang="en" ng-app="flashcards">
   <head>
     <title>Flashcards</title>
     <meta charset="UTF-8">
@@ -12,16 +12,24 @@
     <link rel="stylesheet" href="assets/css/styles.css">
   </head>
 
-  <body>
-    <header>
-
+  <body ng-controller="Main">
+    <header class="main-header">
+      <nav class="main-nav">
+        <ul>
+          <li ng-click="sectionType='home'">Home</li>
+          <li ng-click="sectionType='cards'">Cards</li>
+        </ul>
+      </nav>
     </header>
 
-    <main>
-      <div>TODO write content</div>
+    <main class="main-content">
+      <div class="main-content__wrap" ng-switch="sectionType">
+        <cards ng-switch-when="cards"></cards>
+        <home ng-switch-default></home>
+      </div>
     </main>
 
-    <footer>
+    <footer class="main-footer">
 
     </footer>
     

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<!--
+  File     : cards.html
+  Date     : Sep 28, 2016
+  Author   : Jaymes Young <jaymes@phoenixjaymes.com>
+-->
+<section>
+  <h1>Something</h1>
+  
+  <select>
+    <option value="all">All</option>
+    <option value="adjectives">Adjectives</option>
+  </select>
+  
+  <div>
+    <div>
+      <div>{{ word }}</div>
+      <div>{{ definition }}</div>
+    </div>
+    
+    <div class="controls">
+      <button ng-click="prevCard()">Back</button>
+      <span> {{ currentCard }} of {{ totalCards }}</span>
+      <button ng-click="nextCard()">Prev</button>
+    </div>
+  </div>
+</section>

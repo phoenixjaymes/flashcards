@@ -22,8 +22,9 @@ gulp.task("concatScripts", function() {
   return gulp.src([
     'app/app.module.js',
     'app/main.js',
+    'app/cards.js',
     'app/directives.js',
-    'app/words.service.js'
+    'app/cards.service.js'
   ])
       .pipe(maps.init())
       .pipe(concat('app.js'))
@@ -77,13 +78,14 @@ gulp.task('minifyStyles', ['compileSass'], function() {
 // Start server and watch files
 gulp.task("serve", function() {
   browserSync.init({
-      proxy: "http://localhost/words/"
+      proxy: "http://localhost/flashcards/"
     });
     
   gulp.watch('assets/scss/**/*.scss', ['watchSass']);
-  gulp.watch('app/app.js', ['watchJs']);
+  gulp.watch('app/*.js', ['watchJs']);
     
 });
+
 
 
 // Clean up files
