@@ -1,0 +1,63 @@
+[
+  {
+    "translation" : "blau",
+    "english"     : "blue",
+    "img"         : "blue.gif",
+    "pos"         : "adjective"
+  },
+  {
+    "translation"  : "rot",
+    "english"     : "red",
+    "img"         : "red.gif",
+    "pos"         : "adjective"
+  },
+  {
+    "translation" : "pink",
+    "english"     : "pink",
+    "img"         : "pink.gif",
+    "pos"         : "adjective"
+  },
+  {
+    "translation" : "orange",
+    "english"     : "orange",
+    "img"         : "orange.gif",
+    "pos"         : "adjective"
+  },
+  {
+    "translation" : "gr\u00FCn",
+    "english"     : "green",
+    "img"         : "green.gif",
+    "pos"         : "adjective"
+  },
+  {
+    "translation" : "schwarz",
+    "english"     : "black",
+    "img"         : "black.gif",
+    "pos"         : "adjective"
+  },
+  {
+    "translation" : "grau",
+    "english"     : "grey",
+    "img"         : "grey.gif",
+    "pos"         : "adjective"
+  },
+  {
+    "translation" : "lila",
+    "english"     : "purple",
+    "img"         : "purple.gif",
+    "pos"         : "adjective"
+  },
+  {
+    "translation" : "wei\u00DF",
+    "english"     : "white",
+    "img"         : "white.gif",
+    "pos"         : "adjective"
+  },
+  {
+    "translation" : "braun",
+    "english"     : "brown",
+    "img"         : "brown.gif",
+    "pos"         : "adjective"
+  }
+]
+

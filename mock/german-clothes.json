@@ -1,0 +1,58 @@
+[
+  {
+    "translation" : "Jacke",
+    "english"     : "Jacket",
+    "img"         : "white.gif",
+    "pos"         : "noun"
+  },
+  {
+    "translation" : "Kleid",
+    "english"     : "dress",
+    "img"         : "white.gif",
+    "pos"         : "noun"
+  },
+  {
+    "translation" : "Rock",
+    "english"     : "skirt",
+    "img"         : "white.gif",
+    "pos"         : "noun"
+  },
+  {
+    "translation" : "Hemd",
+    "english"     : "shirt",
+    "img"         : "white.gif",
+    "pos"         : "noun"
+  },
+  {
+    "translation" : "Schuhe",
+    "english"     : "shoe",
+    "img"         : "white.gif",
+    "pos"         : "noun"
+  },
+  {
+    "translation" : "Hut",
+    "english"     : "hat",
+    "img"         : "white.gif",
+    "pos"         : "noun"
+  },
+  {
+    "translation" : "Hose",
+    "english"     : "pants",
+    "img"         : "white.gif",
+    "pos"         : "noun"
+  },
+  {
+    "translation" : "Stiefel",
+    "english"     : "boots",
+    "img"         : "white.gif",
+    "pos"         : "noun"
+  },
+  {
+    "translation" : "Anzug",
+    "english"     : "suit",
+    "img"         : "white.gif",
+    "pos"         : "noun"
+  }
+  
+]
+
