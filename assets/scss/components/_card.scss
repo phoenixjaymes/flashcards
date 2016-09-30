@@ -1,0 +1,40 @@
+/* 
+    File     : _card.scss
+    Date     : Sep 29, 2016
+    Author   : Jaymes Young <jaymes@phoenixjaymes.com>
+*/
+
+.card {
+  height: 400px;
+  margin: 0 auto 20px auto;
+  position: relative;
+  text-align: center;
+  width: 300px;
+}
+
+.card__front {
+  @extend %card-display;
+  transform: rotateX(0) rotateY(0);
+}
+
+.card__back {
+  @extend %card-display;
+  transform: rotateY(-179deg);
+}
+
+.card__img {
+  border-radius: 5px;
+}
+
+.card__text {
+  padding-top: 10px;
+  font-size: 2em;
+}
+
+.card:hover .card__front {
+  transform: rotateY(179deg);
+}
+
+.card:hover .card__back {
+  transform: rotateY(0deg);
+}

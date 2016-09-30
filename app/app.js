@@ -31,25 +31,25 @@ angular.module('flashcards')
       $scope.currentCard = 1;
       $scope.totalCards = 1;
       
-      $scope.word = "Ich";
-      $scope.definition = "I";
+      $scope.translation = "Ich";
+      $scope.english = "I"; 
       
       // Set card
       var setCard = function(card) {
-        $scope.word = $scope.cards[card].word;
-        $scope.definition = $scope.cards[card].definition;
+        $scope.english = $scope.cards[card].english;
+        $scope.translation = $scope.cards[card].translation;
+        $scope.image = $scope.cards[card].img;
       };
       
       // Get cards
       cardsService.getWords(function(response) {
         $scope.cards = response.data;
         $scope.totalCards = $scope.cards.length;
-        
         setCard(0);
       });
       
       
-      
+      // Go to next card
       $scope.nextCard = function() {
         // Check if number is out of bounds
         if ($scope.currentCard >= $scope.totalCards) {
@@ -61,6 +61,7 @@ angular.module('flashcards')
         setCard($scope.currentCard - 1);
       };
       
+      // Go to previous card
       $scope.prevCard = function() {
         // Check if number is out of bounds
         if ($scope.currentCard <= 1) {

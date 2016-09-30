@@ -1,6 +1,16 @@
 /* 
-    File     : _index.scss
+    File     : base/_index.scss
     Date     : Sep 28, 2016
     Author   : Jaymes Young <jaymes@phoenixjaymes.com>
 */
 
+// ===============================
+// Normalize
+// ===============================
+@import 'normalize';
+
+
+// ===============================
+// Extends
+// ===============================
+@import 'extends';

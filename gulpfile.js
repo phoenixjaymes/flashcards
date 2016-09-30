@@ -108,7 +108,7 @@ gulp.task('build', ['concatScripts', 'minifyStyles'], function() {
     'assets/img/**',
     'app/app.js',
     'app/views/**',
-    'mock/*.html',
+    'mock/*.json',
     'node_modules/angular/angular.min.js'
   ], {base: './'})
       .pipe(gulp.dest('dist'));

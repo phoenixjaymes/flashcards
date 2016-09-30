@@ -2,26 +2,38 @@
 <!--
   File     : cards.html
   Date     : Sep 28, 2016
-  Author   : Jaymes Young <jaymes@phoenixjaymes.com>
+  Author   : Jaymes Young
 -->
-<section>
-  <h1>Something</h1>
+<section class="flashcards">
+  <h2>Flashcards</h2>
   
-  <select>
-    <option value="all">All</option>
-    <option value="adjectives">Adjectives</option>
-  </select>
+  <form class="cards-form">
+    <select>
+      <option value="all">All</option>
+      <option value="colors">Colors</option>
+      <option value="clothing">Clothing</option>
+      <option value="adjectives">Adjectives</option>
+    </select>
+  </form>
   
-  <div>
-    <div>
-      <div>{{ word }}</div>
-      <div>{{ definition }}</div>
-    </div>
-    
-    <div class="controls">
-      <button ng-click="prevCard()">Back</button>
-      <span> {{ currentCard }} of {{ totalCards }}</span>
-      <button ng-click="nextCard()">Prev</button>
-    </div>
+  
+  <div class="card">
+    <figure class="card__front">
+      <img class="card__img" ng-src="assets/img/{{ image }}" alt="{{ english }}">
+      <figcaption class="card__text">{{ english }}</figcaption>
+    </figure>
+
+    <figure class="card__back">
+      <img class="card__img" ng-src="assets/img/{{ image }}" alt="{{ translation }}">
+      <figcaption class="card__text">{{ translation }}</figcaption>
+    </figure>
   </div>
+
+  <div class="cards-controls">
+    <progress value="{{ currentCard }}" max="{{ totalCards }}"></progress><br>
+    <button class="cards-controls__btn" ng-click="prevCard()">Prev</button>
+    <span> {{ currentCard }} of {{ totalCards }}</span>
+    <button class="cards-controls__btn" ng-click="nextCard()">Next</button>
+  </div>
+ 
 </section>

@@ -1,21 +1,117 @@
 [
   {
-    "id"          : 0,
-    "word"        : "blau",
-    "definition"  : "blue",
+    "translation" : "blau",
+    "english"     : "blue",
+    "img"         : "blue.gif",
     "pos"         : "adjective"
   },
   {
-    "id"          : 1,
-    "word"        : "rot",
-    "definition"  : "red",
+    "translation"  : "rot",
+    "english"     : "red",
+    "img"         : "red.gif",
     "pos"         : "adjective"
   },
   {
-    "id"          : 2,
-    "word"        : "pink",
-    "definition"  : "pink",
+    "translation" : "pink",
+    "english"     : "pink",
+    "img"         : "pink.gif",
     "pos"         : "adjective"
+  },
+  {
+    "translation" : "orange",
+    "english"     : "orange",
+    "img"         : "orange.gif",
+    "pos"         : "adjective"
+  },
+  {
+    "translation" : "gr\u00FCn",
+    "english"     : "green",
+    "img"         : "green.gif",
+    "pos"         : "adjective"
+  },
+  {
+    "translation" : "schwarz",
+    "english"     : "black",
+    "img"         : "black.gif",
+    "pos"         : "adjective"
+  },
+  {
+    "translation" : "grau",
+    "english"     : "grey",
+    "img"         : "grey.gif",
+    "pos"         : "adjective"
+  },
+  {
+    "translation" : "lila",
+    "english"     : "purple",
+    "img"         : "purple.gif",
+    "pos"         : "adjective"
+  },
+  {
+    "translation" : "wei\u00DF",
+    "english"     : "white",
+    "img"         : "white.gif",
+    "pos"         : "adjective"
+  },
+  {
+    "translation" : "braun",
+    "english"     : "brown",
+    "img"         : "brown.gif",
+    "pos"         : "adjective"
+  },
+  {
+    "translation" : "Jacke",
+    "english"     : "Jacket",
+    "img"         : "white.gif",
+    "pos"         : "noun"
+  },
+  {
+    "translation" : "Kleid",
+    "english"     : "dress",
+    "img"         : "white.gifnoun",
+    "pos"         : ""
+  },
+  {
+    "translation" : "Rock",
+    "english"     : "skirt",
+    "img"         : "white.gif",
+    "pos"         : "noun"
+  },
+  {
+    "translation" : "Hemd",
+    "english"     : "shirt",
+    "img"         : "white.gif",
+    "pos"         : "noun"
+  },
+  {
+    "translation" : "Schuhe",
+    "english"     : "white.gifshoes",
+    "img"         : "",
+    "pos"         : "noun"
+  },
+  {
+    "translation" : "Hut",
+    "english"     : "hat",
+    "img"         : "white.gif",
+    "pos"         : "noun"
+  },
+  {
+    "translation" : "Hose",
+    "english"     : "pants",
+    "img"         : "white.gif",
+    "pos"         : "noun"
+  },
+  {
+    "translation" : "Stiefel",
+    "english"     : "boots",
+    "img"         : "white.gif",
+    "pos"         : "noun"
+  },
+  {
+    "translation" : "Anzug",
+    "english"     : "suit",
+    "img"         : "white.gif",
+    "pos"         : "noun"
   }
   
 ]
