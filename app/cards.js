@@ -7,18 +7,26 @@
 'use strict';
 
 angular.module('flashcards')
-    .controller('Cards', function($scope, cardsService) {
+    .controller('Cards', function($scope, $timeout, cardsService) {
       $scope.currentCard = 1;
-      $scope.totalCards = 1;
-      
-      $scope.translation = "Ich";
-      $scope.english = "I"; 
+      $scope.totalCards = 1; 
+      $scope.translation = 'Ich';
+      $scope.english = 'I';
+      $scope.flip = false;
+      $scope.test = 'unflip';
       
       // Set card
       var setCard = function(card) {
-        $scope.english = $scope.cards[card].english;
-        $scope.translation = $scope.cards[card].translation;
-        $scope.image = $scope.cards[card].img;
+        // Reset card
+        $scope.flip = false;
+        
+        $timeout(function() {
+          $scope.english = $scope.cards[card].english;
+          $scope.translation = $scope.cards[card].translation;
+          $scope.image = $scope.cards[card].img;
+        }, 500);
+        
+          
       };
       
       // Get cards

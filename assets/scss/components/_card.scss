@@ -24,6 +24,8 @@
 
 .card__img {
   border-radius: 5px;
+  height: 260px;
+  width: 260px;
 }
 
 .card__text {
@@ -31,10 +33,19 @@
   font-size: 2em;
 }
 
-.card:hover .card__front {
+/*.card:hover .card__front {
   transform: rotateY(179deg);
 }
 
 .card:hover .card__back {
+  transform: rotateY(0deg);
+}*/ 
+
+
+.card.js-flip-card .card__front {
+  transform: rotateY(179deg);
+}
+
+.card.js-flip-card .card__back {
   transform: rotateY(0deg);
 }

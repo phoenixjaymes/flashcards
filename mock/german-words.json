@@ -68,8 +68,8 @@
   {
     "translation" : "Kleid",
     "english"     : "dress",
-    "img"         : "white.gifnoun",
-    "pos"         : ""
+    "img"         : "white.gif",
+    "pos"         : "noun"
   },
   {
     "translation" : "Rock",
@@ -85,8 +85,8 @@
   },
   {
     "translation" : "Schuhe",
-    "english"     : "white.gifshoes",
-    "img"         : "",
+    "english"     : "shoe",
+    "img"         : "white.gif",
     "pos"         : "noun"
   },
   {
