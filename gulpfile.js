@@ -75,6 +75,13 @@ gulp.task('minifyStyles', ['compileSass'], function() {
 });
 
 
+// Concatenate JS files for watching with browserSync
+gulp.task('watchHtml', function(done) {
+  browserSync.reload();
+  done();
+});
+
+
 // Start server and watch files
 gulp.task("serve", function() {
   browserSync.init({
@@ -83,6 +90,7 @@ gulp.task("serve", function() {
     
   gulp.watch('assets/scss/**/*.scss', ['watchSass']);
   gulp.watch('app/*.js', ['watchJs']);
+  gulp.watch('app/views/cards.html', ['watchHtml']);
     
 });
 

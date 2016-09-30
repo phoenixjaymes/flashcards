@@ -28,33 +28,46 @@ angular.module('flashcards')
 
 angular.module('flashcards')
     .controller('Cards', function($scope, $timeout, cardsService) {
+      // Default card
+      $scope.cards = [{
+        "translation" : "Ich",
+        "english"     : "I",
+        "img"         : "white.gif",
+        "pos"         : "adjective"
+      }];
       $scope.currentCard = 1;
-      $scope.totalCards = 1; 
-      $scope.translation = 'Ich';
-      $scope.english = 'I';
+      $scope.totalCards = $scope.cards.length;
       $scope.flip = false;
-      $scope.test = 'unflip';
+      
+      // Options for flash cards
+      $scope.cardOptions = [
+        {name : 'All',      value : 'all'},
+        {name : 'Colors',   value : 'colors'},
+        {name : 'Clothes',  value : 'clothes'}
+      ];
+      
       
       // Set card
       var setCard = function(card) {
         // Reset card
         $scope.flip = false;
-        
+        // Wait for card to flip over
         $timeout(function() {
           $scope.english = $scope.cards[card].english;
           $scope.translation = $scope.cards[card].translation;
           $scope.image = $scope.cards[card].img;
-        }, 500);
-        
-          
+        }, 500);   
       };
       
+      
       // Get cards
-      cardsService.getWords(function(response) {
-        $scope.cards = response.data;
-        $scope.totalCards = $scope.cards.length;
-        setCard(0);
-      });
+      $scope.getCards = function(type) {
+        cardsService.getWords(type, function(response) {
+          $scope.cards = response.data;
+          $scope.totalCards = $scope.cards.length;
+          setCard(0);
+        });
+      };
       
       
       // Go to next card
@@ -69,6 +82,7 @@ angular.module('flashcards')
         setCard($scope.currentCard - 1);
       };
       
+      
       // Go to previous card
       $scope.prevCard = function() {
         // Check if number is out of bounds
@@ -79,7 +93,11 @@ angular.module('flashcards')
         }
         
         setCard($scope.currentCard - 1);
-      }; 
+      };
+      
+      
+      // Set initial card
+      setCard(0);
 });
 /* 
  File     : directives.js
@@ -112,9 +130,15 @@ angular.module('flashcards')
 angular.module('flashcards')
     .service('cardsService', function($http) {
       // Get words
-      this.getWords = function(callback) {
-        $http.get('mock/german-words.json').then(callback);
-      };
-      
+      this.getWords = function(type, callback) {
+        
+        if (type === 'colors') {
+          $http.get('mock/german-colors.json').then(callback);
+        } else if (type === 'clothes') {
+          $http.get('mock/german-clothes.json').then(callback);
+        } else {
+          $http.get('mock/german-words.json').then(callback);
+        } 
+      }; 
 });
 //# sourceMappingURL=app.js.map

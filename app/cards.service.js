@@ -9,8 +9,14 @@
 angular.module('flashcards')
     .service('cardsService', function($http) {
       // Get words
-      this.getWords = function(callback) {
-        $http.get('mock/german-words.json').then(callback);
-      };
-      
+      this.getWords = function(type, callback) {
+        
+        if (type === 'colors') {
+          $http.get('mock/german-colors.json').then(callback);
+        } else if (type === 'clothes') {
+          $http.get('mock/german-clothes.json').then(callback);
+        } else {
+          $http.get('mock/german-words.json').then(callback);
+        } 
+      }; 
 });

@@ -1,37 +1,34 @@
-<!DOCTYPE html>
 <!--
   File     : cards.html
   Date     : Sep 28, 2016
   Author   : Jaymes Young
 -->
 <section class="flashcards">
-  <h2>Flashcards</h2>
+  <h2>Flash Cards</h2>
   
   <form class="cards-form">
-    <select>
-      <option value="all">All</option>
-      <option value="colors">Colors</option>
-      <option value="clothing">Clothing</option>
-      <option value="adjectives">Adjectives</option>
+    <label for="flashcard-type">Select your Cards</label>
+    <select id="flashcard-type" ng-model="cardType" ng-change="getCards(cardType)">
+      <option ng-repeat="option in cardOptions" value="{{option.value}}">{{option.name}}</option>
     </select>
   </form>
   
   <div class="card" ng-class="{'js-flip-card' : flip}">
     <figure class="card__front" ng-click="flip = true; test='flip'">
-      <img class="card__img" ng-src="assets/img/{{ image }}" alt="{{ english }}">
+      <img class="card__img" ng-src="assets/img/{{image}}" alt="{{english}}">
       <figcaption class="card__text">{{ english }}</figcaption>
     </figure>
 
     <figure class="card__back" ng-click="flip = false; test='unflip'">
-      <img class="card__img" ng-src="assets/img/{{ image }}" alt="{{ translation }}">
+      <img class="card__img" ng-src="assets/img/{{image}}" alt="{{translation}}">
       <figcaption class="card__text">{{ translation }}</figcaption>
     </figure>
   </div>
 <!-- on click set flip to false -->
   <div class="cards-controls">
-    <progress value="{{ currentCard }}" max="{{ totalCards }}"></progress><br>
+    <progress value="{{currentCard}}" max="{{totalCards}}"></progress><br>
     <button class="cards-controls__btn" ng-click="prevCard()">Prev</button>
-    <span> {{ currentCard }} of {{ totalCards }}</span>
+    <span>{{currentCard}} of {{totalCards}}</span>
     <button class="cards-controls__btn" ng-click="nextCard()">Next</button>
   </div>
  
