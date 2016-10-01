@@ -8,19 +8,19 @@
   {
     "translation" : "Kleid",
     "english"     : "dress",
-    "img"         : "white.gif",
+    "img"         : "dress.svg",
     "pos"         : "noun"
   },
   {
     "translation" : "Rock",
     "english"     : "skirt",
-    "img"         : "white.gif",
+    "img"         : "skirt.svg",
     "pos"         : "noun"
   },
   {
     "translation" : "Hemd",
     "english"     : "shirt",
-    "img"         : "white.gif",
+    "img"         : "shirt.svg",
     "pos"         : "noun"
   },
   {
@@ -32,7 +32,7 @@
   {
     "translation" : "Hut",
     "english"     : "hat",
-    "img"         : "white.gif",
+    "img"         : "hat.svg",
     "pos"         : "noun"
   },
   {
@@ -50,7 +50,7 @@
   {
     "translation" : "Anzug",
     "english"     : "suit",
-    "img"         : "white.gif",
+    "img"         : "suit.svg",
     "pos"         : "noun"
   }
   

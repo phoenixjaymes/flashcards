@@ -478,4 +478,12 @@ textarea {
   .cards-controls__btn {
     width: 70px; }
 
+/* 
+    File     : _main-header.scss
+    Date     : Sep 30, 2016
+    Author   : Jaymes Young <jaymes@phoenixjaymes.com>
+*/
+.main-header__logo {
+  width: 100px; }
+
 /*# sourceMappingURL=styles.css.map */
