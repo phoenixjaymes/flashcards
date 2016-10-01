@@ -16,10 +16,10 @@
   <div class="card" ng-class="{'js-flip-card' : flip}">
     <figure class="card__front" ng-click="flip = true; test='flip'">
       <img class="card__img" ng-src="assets/img/{{image}}" alt="{{english}}">
-      <figcaption class="card__text">{{ english }}</figcaption>
+<!--      <figcaption class="card__text">{{ english }}</figcaption>-->
     </figure>
 
-    <figure class="card__back" ng-click="flip = false; test='unflip'">
+    <figure class="card__back {{gender}}" ng-click="flip = false; test='unflip'">
       <img class="card__img" ng-src="assets/img/{{image}}" alt="{{translation}}">
       <figcaption class="card__text">{{ translation }}</figcaption>
     </figure>

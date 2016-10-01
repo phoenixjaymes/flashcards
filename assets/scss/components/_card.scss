@@ -14,12 +14,30 @@
 
 .card__front {
   @extend %card-display;
+  background: #ededed;
   transform: rotateX(0) rotateY(0);
 }
 
 .card__back {
   @extend %card-display;
   transform: rotateY(-179deg);
+  
+  &.male {
+    background: #89cff0;
+  }
+  
+  &.female {
+    background: #f4c2c2;
+  }
+  
+  &.neuter {
+    background: #efdecd;
+  }
+  
+  &.none {
+    background: #efefef;
+  }
+  
 }
 
 .card__img {

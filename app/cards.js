@@ -13,7 +13,8 @@ angular.module('flashcards')
         "translation" : "Ich",
         "english"     : "I",
         "img"         : "white.gif",
-        "pos"         : "adjective"
+        "pos"         : "noun",
+        "gender"      : "m"
       }];
       $scope.currentCard = 1;
       $scope.totalCards = $scope.cards.length;
@@ -36,6 +37,7 @@ angular.module('flashcards')
           $scope.english = $scope.cards[card].english;
           $scope.translation = $scope.cards[card].translation;
           $scope.image = $scope.cards[card].img;
+          $scope.gender = $scope.cards[card].gender;
         }, 500);   
       };
       
