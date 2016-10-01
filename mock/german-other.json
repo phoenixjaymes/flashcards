@@ -1,0 +1,17 @@
+[
+  {
+    "translation" : "blau",
+    "english"     : "blue",
+    "img"         : "white.gif",
+    "pos"         : "adjective",
+    "gender"      : "none"
+  },
+  {
+    "translation"  : "rot",
+    "english"     : "red",
+    "img"         : "white.gif",
+    "pos"         : "adjective",
+    "gender"      : "none"
+  }
+]
+

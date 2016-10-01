@@ -24,7 +24,8 @@ angular.module('flashcards')
       $scope.cardOptions = [
         {name : 'All',      value : 'all'},
         {name : 'Colors',   value : 'colors'},
-        {name : 'Clothes',  value : 'clothes'}
+        {name : 'Clothes',  value : 'clothes'},
+        {name : 'Other',    value : 'other'}
       ];
       
       
