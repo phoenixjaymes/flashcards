@@ -1,0 +1,16 @@
+/* 
+    File     : _main-footer.scss
+    Date     : Oct 4, 2016
+    Author   : Jaymes Young <jaymes@phoenixjaymes.com>
+*/
+
+.main-footer {
+  background: #efefef;
+  text-align: center;
+  
+  &__wrap {
+    @extend %wrap-max-width;
+    height: 60px;
+    line-height: 60px;
+  }
+}

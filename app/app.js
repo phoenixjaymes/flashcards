@@ -44,7 +44,8 @@ angular.module('flashcards')
       $scope.cardOptions = [
         {name : 'All',      value : 'all'},
         {name : 'Colors',   value : 'colors'},
-        {name : 'Clothes',  value : 'clothes'}
+        {name : 'Clothes',  value : 'clothes'},
+        {name : 'Other',    value : 'other'}
       ];
       
       
@@ -67,6 +68,8 @@ angular.module('flashcards')
         cardsService.getWords(type, function(response) {
           $scope.cards = response.data;
           $scope.totalCards = $scope.cards.length;
+          // Reset current card
+          $scope.currentCard = 1;
           setCard(0);
         });
       };
@@ -138,6 +141,8 @@ angular.module('flashcards')
           $http.get('mock/german-colors.json').then(callback);
         } else if (type === 'clothes') {
           $http.get('mock/german-clothes.json').then(callback);
+        } else if (type === 'other') {
+          $http.get('mock/german-other.json').then(callback);
         } else {
           $http.get('mock/german-words.json').then(callback);
         } 

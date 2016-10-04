@@ -15,6 +15,8 @@ angular.module('flashcards')
           $http.get('mock/german-colors.json').then(callback);
         } else if (type === 'clothes') {
           $http.get('mock/german-clothes.json').then(callback);
+        } else if (type === 'other') {
+          $http.get('mock/german-other.json').then(callback);
         } else {
           $http.get('mock/german-words.json').then(callback);
         } 

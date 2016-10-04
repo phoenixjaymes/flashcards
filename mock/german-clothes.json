@@ -30,7 +30,7 @@
   {
     "translation" : "der Schuh",
     "english"     : "shoe",
-    "img"         : "white.gif",
+    "img"         : "shoe.svg",
     "pos"         : "noun",
     "gender"      : "male"
   },

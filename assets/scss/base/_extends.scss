@@ -4,6 +4,31 @@
     Author   : Jaymes Young <jaymes@phoenixjaymes.com>
 */
 
+// Add map in config and mixin in utilities?
+%wrap-max-width {
+  padding: 0 20px; 
+  margin-left: auto;
+  margin-right: auto;
+  
+  @media #{$brk-sm} {
+    max-width: 576px;
+  }
+  
+  @media #{$brk-md} {
+    max-width: 720px;
+  }
+  
+  @media #{$brk-lg} {
+    max-width: 940px;
+  }
+  
+  @media #{$brk-lg} {
+    max-width: 1140px;
+  }
+}
+
+
+
 %card-display {
   position: absolute;
   left: 0;

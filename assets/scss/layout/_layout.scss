@@ -4,9 +4,26 @@
     Author   : Jaymes Young <jaymes@phoenixjaymes.com>
 */
 
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main {
+  flex: 1;
+}
+
+
+
 .flashcards {
   padding: 15px;
   margin: 0 auto;
   
   max-width: 800px;
+}
+
+.main-content__wrap {
+  @extend %wrap-max-width;
 }

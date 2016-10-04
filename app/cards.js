@@ -48,6 +48,8 @@ angular.module('flashcards')
         cardsService.getWords(type, function(response) {
           $scope.cards = response.data;
           $scope.totalCards = $scope.cards.length;
+          // Reset current card
+          $scope.currentCard = 1;
           setCard(0);
         });
       };

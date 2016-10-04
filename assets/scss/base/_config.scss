@@ -1,0 +1,61 @@
+// Filename: _config.scss
+// Date: 21 Jul 16
+// Programmer: Jaymes Young-Liebgott
+
+
+// ===============================
+// Global Config
+// ==============================
+
+// Font stacks
+//$font-url--google           : 'https://fonts.googleapis.com/css?family=Merienda+One|Open+Sans:400,400italic,600';
+$font-family--primary       : 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+$font-family--secondary     : 'Merienda One', 'Brush Script MT', cursive;
+
+
+// Font weights
+$font-weight--medium        : 400; 
+$font-weight--bold          : 600; 
+
+// http://paletton.com/#uid=61L0E0kqJPSeSVtleSxyWMrHKuB
+// Decriptive color variables
+
+$white                  : #fff;
+$black                  : #000;
+$light-grey             : #ededed;
+$red                    : #f00;
+$sunglow                : #ffc52a;
+$purple-heart           : #8e33e2;
+$broom                  : #fff42a;
+$green-yellow           : #acf829;
+
+
+// Functional color variables
+$text-color             : $black;
+
+$brdr-color             : $broom;
+$brdr-hover-color       : $purple-heart;
+
+$brdr-form-color        : $green-yellow;
+
+$error-color            : lighten($red, 10%);
+$success-color          : $sunglow;
+
+// Text
+$base__font-size        : 16px;
+$base__line             : 24px;
+
+// Path to assets
+$path-bg                : 'backgrounds/';
+$path-assets            : '../img/';
+
+
+// Misc variables
+$brd-radius         : 5px;
+
+
+// Media query breakpoints
+$brk-sm            : '(min-width: 544px)';
+$brk-md            : '(min-width: 720px)';
+$brk-lg            : '(min-width: 940px)';
+$brk-xl            : '(min-width: 1140px)';

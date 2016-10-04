@@ -9,18 +9,22 @@
     <title>Flashcards</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/styles.min.css">
   </head>
 
   <body ng-controller="Main">
     <header class="main-header">
-      <img class="main-header__logo" src="assets/img/flash-cards.svg" alt="flash cards logo">
-      <nav class="main-nav">
-        <ul>
-          <li ng-click="sectionType='home'">Home</li>
-          <li ng-click="sectionType='cards'">Cards</li>
-        </ul>
-      </nav>
+      <div class="main-header__wrap">
+        <img class="main-header__logo" src="assets/img/flash-cards.svg" alt="flash cards logo">
+        <p class="main-header__name">Flash Cards</p>
+        <nav class="main-header__nav">
+          <ul class="main-menu">
+            <li class="main-menu__item" ng-click="sectionType='home'"><a href="">Home</a></li>
+            <li class="main-menu__item" ng-click="sectionType='cards'"><a href="">German</a></li>
+            <li class="main-menu__item" ng-click="sectionType='cards'"><a href="">Dutch</a></li>
+          </ul>
+        </nav>
+      </div>
     </header>
 
     <main class="main-content">
@@ -31,10 +35,12 @@
     </main>
 
     <footer class="main-footer">
-
+      <div class="main-footer__wrap">
+        <small>&copy;2016 PhoenixJaymes</small>
+      </div>
     </footer>
     
-    <script src="node_modules/angular/angular.js"></script>
+    <script src="node_modules/angular/angular.min.js"></script>
     <script src="app/app.js"></script>
   </body>
 </html>

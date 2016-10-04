@@ -1,0 +1,41 @@
+/* 
+    File     : _main-menu.scss
+    Date     : Oct 4, 2016
+    Author   : Jaymes Young <jaymes@phoenixjaymes.com>
+*/
+
+.main-menu {
+  text-align: center;
+  
+  @media #{$brk-md} {
+    text-align: right;
+  }
+  
+  &__item {
+    display: inline-block;
+    font-weight: bold;
+    
+    width: 80px;
+    
+    a {
+        display: inline-block;
+      
+        line-height: 40px;
+        text-align: center;
+        text-decoration: none;
+        width: 100%;
+      
+        &:link, &:visited {
+
+        }
+
+        &:hover, &:active {
+          color: #fff;
+        }
+        
+        @media #{$brk-md} {
+          line-height: 60px;
+        }
+    }
+  }
+}

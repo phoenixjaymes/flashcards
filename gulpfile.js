@@ -90,7 +90,7 @@ gulp.task("serve", function() {
     
   gulp.watch('assets/scss/**/*.scss', ['watchSass']);
   gulp.watch('app/*.js', ['watchJs']);
-  gulp.watch('app/views/cards.html', ['watchHtml']);
+  gulp.watch('app/views/index.html', ['watchHtml']);
     
 });
 
