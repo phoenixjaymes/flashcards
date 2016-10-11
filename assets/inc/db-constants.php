@@ -6,7 +6,7 @@
  * Programmer: Jaymes Young-Liebgott
  */
 
-// projects
+// Local variables
 const DB_SERVER = 'localhost';
 const DB_USER = 'jayl';
 const DB_PASSWORD = 'jay+tim';

@@ -20,10 +20,14 @@ header('content-type: application/json; charset=utf-8');
     $sql = "SELECT * FROM fc_german WHERE category = 'clothing'";
   } elseif (isset($_GET) && $_GET['category'] === 'colors') {
     $sql = "SELECT * FROM fc_german WHERE category = 'colors'";
+  } elseif (isset($_GET) && $_GET['category'] === 'descriptions') {
+    $sql = "SELECT * FROM fc_german WHERE category = 'descriptions'";
+  } elseif (isset($_GET) && $_GET['category'] === 'geography') {
+    $sql = "SELECT * FROM fc_german WHERE category = 'geography'";
   } elseif (isset($_GET) && $_GET['category'] === 'nature') {
     $sql = "SELECT * FROM fc_german WHERE category = 'nature'";
   } else {
-    $sql = "SELECT * FROM fc_german LIMIT 15";
+    $sql = "SELECT * FROM fc_german WHERE category = 'none' LIMIT 20";
   }
 
 $testArray = array('english'=>'blue', 'translation'=> 'blau', 'img'=>'blue.gif', 'gender'=>'none');

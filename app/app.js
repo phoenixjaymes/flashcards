@@ -63,6 +63,8 @@ angular.module('flashcards')
         {name : 'Body',   value : 'body'},
         {name : 'Colors',   value : 'colors'},
         {name : 'Clothing',  value : 'clothing'},
+        {name : 'Descriptions',  value : 'descriptions'},
+        {name : 'Geography',  value : 'geography'},
         {name : 'Nature',  value : 'nature'},
         {name : 'Other',    value : 'other'}
       ];
@@ -159,28 +161,21 @@ angular.module('flashcards')
         
         if (type === 'body') {
           var url = 'assets/inc/fc-german.php?category=body';
-          $http.get(url).then(callback);
-          
         } else if (type === 'colors') {
-          var url = 'assets/inc/fc-german.php?category=colors';
-          $http.get(url).then(callback);
-          
+          var url = 'assets/inc/fc-german.php?category=colors'; 
         } else if (type === 'clothing') {
-          var url = 'assets/inc/fc-german.php?category=clothing';
-          $http.get(url).then(callback);
-          
+          var url = 'assets/inc/fc-german.php?category=clothing'; 
+        } else if (type === 'descriptions') {
+          var url = 'assets/inc/fc-german.php?category=descriptions';     
+        } else if (type === 'geography') {
+          var url = 'assets/inc/fc-german.php?category=geography';  
         } else if (type === 'nature') {
           var url = 'assets/inc/fc-german.php?category=nature';
-          $http.get(url).then(callback);
-          
-        } else if (type === 'other') {
-          var url = 'assets/inc/fc-german.php?category=other';
-          $http.get(url).then(callback);
-          
         } else {
-          var url = 'assets/inc/fc-german.php?category=all';
-          $http.get(url).then(callback);   
-        } 
+          var url = 'assets/inc/fc-german.php?category=none';   
+        }
+        
+        $http.get(url).then(callback); 
       }; 
 });
 

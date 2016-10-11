@@ -26,6 +26,8 @@ angular.module('flashcards')
         {name : 'Body',   value : 'body'},
         {name : 'Colors',   value : 'colors'},
         {name : 'Clothing',  value : 'clothing'},
+        {name : 'Descriptions',  value : 'descriptions'},
+        {name : 'Geography',  value : 'geography'},
         {name : 'Nature',  value : 'nature'},
         {name : 'Other',    value : 'other'}
       ];
