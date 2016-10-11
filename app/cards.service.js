@@ -8,17 +8,33 @@
 
 angular.module('flashcards')
     .service('cardsService', function($http) {
+            
       // Get words
       this.getWords = function(type, callback) {
         
-        if (type === 'colors') {
-          $http.get('mock/german-colors.json').then(callback);
-        } else if (type === 'clothes') {
-          $http.get('mock/german-clothes.json').then(callback);
+        if (type === 'body') {
+          var url = 'assets/inc/fc-german.php?category=body';
+          $http.get(url).then(callback);
+          
+        } else if (type === 'colors') {
+          var url = 'assets/inc/fc-german.php?category=colors';
+          $http.get(url).then(callback);
+          
+        } else if (type === 'clothing') {
+          var url = 'assets/inc/fc-german.php?category=clothing';
+          $http.get(url).then(callback);
+          
+        } else if (type === 'nature') {
+          var url = 'assets/inc/fc-german.php?category=nature';
+          $http.get(url).then(callback);
+          
         } else if (type === 'other') {
-          $http.get('mock/german-other.json').then(callback);
+          var url = 'assets/inc/fc-german.php?category=other';
+          $http.get(url).then(callback);
+          
         } else {
-          $http.get('mock/german-words.json').then(callback);
+          var url = 'assets/inc/fc-german.php?category=all';
+          $http.get(url).then(callback);   
         } 
       }; 
 });

@@ -21,6 +21,7 @@ var gulp = require('gulp'),
 gulp.task("concatScripts", function() {
   return gulp.src([
     'app/app.module.js',
+    'app/config.js',
     'app/main.js',
     'app/cards.js',
     'app/directives.js',

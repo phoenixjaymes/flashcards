@@ -7,6 +7,23 @@
 
 angular.module('flashcards', []);
 /* 
+ File     : config.js
+ Date     : Oct 7, 2016
+ Author   : Jaymes Young <jaymes@phoenixjaymes.com>
+ */
+'use strict';
+
+angular.module('flashcards')
+    .config(['$sceDelegateProvider', function($sceDelegateProvider) {
+        
+  // We must whitelist the JSONP endpoint that we are using to show that we trust it
+  $sceDelegateProvider.resourceUrlWhitelist([
+    'self',
+    'http://phoenixjaymes.com/data/**'
+  ]);
+}]);
+
+/* 
  File     : main.js
  Date     : Sep 28, 2016
  Author   : Jaymes Young <jaymes@phoenixjaymes.com>
@@ -27,7 +44,7 @@ angular.module('flashcards')
 'use strict';
 
 angular.module('flashcards')
-    .controller('Cards', function($scope, $timeout, cardsService) {
+    .controller('Cards', function($scope, $timeout, $sce, cardsService) {
       // Default card
       $scope.cards = [{
         "translation" : "Ich",
@@ -43,8 +60,10 @@ angular.module('flashcards')
       // Options for flash cards
       $scope.cardOptions = [
         {name : 'All',      value : 'all'},
+        {name : 'Body',   value : 'body'},
         {name : 'Colors',   value : 'colors'},
-        {name : 'Clothes',  value : 'clothes'},
+        {name : 'Clothing',  value : 'clothing'},
+        {name : 'Nature',  value : 'nature'},
         {name : 'Other',    value : 'other'}
       ];
       
@@ -56,7 +75,7 @@ angular.module('flashcards')
         // Wait for card to flip over
         $timeout(function() {
           $scope.english = $scope.cards[card].english;
-          $scope.translation = $scope.cards[card].translation;
+          $scope.translation = $sce.trustAsHtml($scope.cards[card].translation) ;
           $scope.image = $scope.cards[card].img;
           $scope.gender = $scope.cards[card].gender;
         }, 500);   
@@ -134,18 +153,35 @@ angular.module('flashcards')
 
 angular.module('flashcards')
     .service('cardsService', function($http) {
+            
       // Get words
       this.getWords = function(type, callback) {
         
-        if (type === 'colors') {
-          $http.get('mock/german-colors.json').then(callback);
-        } else if (type === 'clothes') {
-          $http.get('mock/german-clothes.json').then(callback);
+        if (type === 'body') {
+          var url = 'assets/inc/fc-german.php?category=body';
+          $http.get(url).then(callback);
+          
+        } else if (type === 'colors') {
+          var url = 'assets/inc/fc-german.php?category=colors';
+          $http.get(url).then(callback);
+          
+        } else if (type === 'clothing') {
+          var url = 'assets/inc/fc-german.php?category=clothing';
+          $http.get(url).then(callback);
+          
+        } else if (type === 'nature') {
+          var url = 'assets/inc/fc-german.php?category=nature';
+          $http.get(url).then(callback);
+          
         } else if (type === 'other') {
-          $http.get('mock/german-other.json').then(callback);
+          var url = 'assets/inc/fc-german.php?category=other';
+          $http.get(url).then(callback);
+          
         } else {
-          $http.get('mock/german-words.json').then(callback);
+          var url = 'assets/inc/fc-german.php?category=all';
+          $http.get(url).then(callback);   
         } 
       }; 
 });
+
 //# sourceMappingURL=app.js.map
