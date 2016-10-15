@@ -7,6 +7,14 @@
   <h2>German Cards</h2>
   
   <form class="cards-form">
+    <h3>Select your Cards</h3>
+    
+    <label for="flashcard-pos">Part of Speech</label>
+    <select id="flashcard-type" ng-model="cardPos" ng-change="">
+      <option value="adjective">Adjective</option>
+      <option value="noun">Noun</option>
+    </select>
+    
     <label for="flashcard-type">Select your Cards</label>
     <select id="flashcard-type" ng-model="cardType" ng-change="getCards(cardType)">
       <option ng-repeat="option in cardOptions" value="{{option.value}}">{{option.name}}</option>

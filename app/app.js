@@ -60,13 +60,15 @@ angular.module('flashcards')
       // Options for flash cards
       $scope.cardOptions = [
         {name : 'All',      value : 'all'},
-        {name : 'Body',   value : 'body'},
-        {name : 'Colors',   value : 'colors'},
-        {name : 'Clothing',  value : 'clothing'},
-        {name : 'Descriptions',  value : 'descriptions'},
-        {name : 'Geography',  value : 'geography'},
-        {name : 'Nature',  value : 'nature'},
-        {name : 'Other',    value : 'other'}
+        {name : 'Body',   value : '1'},
+        {name : 'Colors',   value : '6'},
+        {name : 'Clothing',  value : '2'},
+        {name : 'Descriptions',  value : '7'},
+        {name : 'Geography',  value : '3'},
+        {name : 'Weather',  value : '4'},
+        {name : 'Other',    value : '5'},
+        {name : 'Leisure Time', value : '8'},
+        {name : 'Places', value: '9'}
       ];
       
       
@@ -158,21 +160,27 @@ angular.module('flashcards')
             
       // Get words
       this.getWords = function(type, callback) {
+        console.log(type);
+//        if (type === 'body') {
+//          var url = 'assets/inc/fc-german.php?category=body';
+//        } else if (type === 'colors') {
+//          var url = 'assets/inc/fc-german.php?category=colors'; 
+//        } else if (type === 'clothing') {
+//          var url = 'assets/inc/fc-german.php?category=clothing'; 
+//        } else if (type === 'descriptions') {
+//          var url = 'assets/inc/fc-german.php?category=descriptions';     
+//        } else if (type === 'geography') {
+//          var url = 'assets/inc/fc-german.php?category=geography';  
+//        } else if (type === 'nature') {
+//          var url = 'assets/inc/fc-german.php?category=nature';
+//        } else {
+//          var url = 'assets/inc/fc-german.php?category=none';   
+//        }
         
-        if (type === 'body') {
-          var url = 'assets/inc/fc-german.php?category=body';
-        } else if (type === 'colors') {
-          var url = 'assets/inc/fc-german.php?category=colors'; 
-        } else if (type === 'clothing') {
-          var url = 'assets/inc/fc-german.php?category=clothing'; 
-        } else if (type === 'descriptions') {
-          var url = 'assets/inc/fc-german.php?category=descriptions';     
-        } else if (type === 'geography') {
-          var url = 'assets/inc/fc-german.php?category=geography';  
-        } else if (type === 'nature') {
-          var url = 'assets/inc/fc-german.php?category=nature';
+        if (type === 'all') {
+          var url = 'assets/inc/fc-german.php?category=all';
         } else {
-          var url = 'assets/inc/fc-german.php?category=none';   
+          var url = 'assets/inc/fc-german.php?category=' + type;
         }
         
         $http.get(url).then(callback); 

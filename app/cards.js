@@ -23,13 +23,15 @@ angular.module('flashcards')
       // Options for flash cards
       $scope.cardOptions = [
         {name : 'All',      value : 'all'},
-        {name : 'Body',   value : 'body'},
-        {name : 'Colors',   value : 'colors'},
-        {name : 'Clothing',  value : 'clothing'},
-        {name : 'Descriptions',  value : 'descriptions'},
-        {name : 'Geography',  value : 'geography'},
-        {name : 'Nature',  value : 'nature'},
-        {name : 'Other',    value : 'other'}
+        {name : 'Body',   value : '1'},
+        {name : 'Colors',   value : '6'},
+        {name : 'Clothing',  value : '2'},
+        {name : 'Descriptions',  value : '7'},
+        {name : 'Geography',  value : '3'},
+        {name : 'Weather',  value : '4'},
+        {name : 'Other',    value : '5'},
+        {name : 'Leisure Time', value : '8'},
+        {name : 'Places', value: '9'}
       ];
       
       
