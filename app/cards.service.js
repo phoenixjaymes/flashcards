@@ -10,8 +10,8 @@ angular.module('flashcards')
     .service('cardsService', function($http) {
             
       // Get words
-      this.getWords = function(type, callback) {
-        console.log(type);
+      this.getWords = function(pos, category, callback) {
+        console.log('Part of speech: ' + pos + ' - Category: ' + category);
 //        if (type === 'body') {
 //          var url = 'assets/inc/fc-german.php?category=body';
 //        } else if (type === 'colors') {
@@ -28,11 +28,23 @@ angular.module('flashcards')
 //          var url = 'assets/inc/fc-german.php?category=none';   
 //        }
         
-        if (type === 'all') {
-          var url = 'assets/inc/fc-german.php?category=all';
+        
+        
+        if (pos === 'noun') {
+          var url = 'assets/inc/fc-german.php?pos=' + pos + '&category=all';
+        } else if (pos === 'verb') {
+          var url = 'assets/inc/fc-german.php?pos=' + pos + '&category=all';
         } else {
-          var url = 'assets/inc/fc-german.php?category=' + type;
+          var url = 'assets/inc/fc-german.php?category=' + category;
         }
+        
+        
+        
+//        if (category === 'all') {
+//          var url = 'assets/inc/fc-german.php?category=all';
+//        } else {
+//          var url = 'assets/inc/fc-german.php?category=' + category;
+//        }
         
         $http.get(url).then(callback); 
       }; 

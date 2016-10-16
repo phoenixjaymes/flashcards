@@ -39,24 +39,49 @@ angular.module('flashcards')
       var setCard = function(card) {
         // Reset card
         $scope.flip = false;
-        // Wait for card to flip over
-        $timeout(function() {
-          $scope.english = $scope.cards[card].english;
-          $scope.translation = $sce.trustAsHtml($scope.cards[card].translation) ;
-          $scope.image = $scope.cards[card].img;
-          $scope.gender = $scope.cards[card].gender;
-        }, 500);   
+        
+        if ($scope.cardPos === 'verb') {
+          // Wait for card to flip over
+          $timeout(function() {
+            $scope.english = $scope.cards[card].english;
+            $scope.translation = $sce.trustAsHtml($scope.cards[card].translation);
+            $scope.ich = $scope.cards[card].ich;
+            $scope.du = $scope.cards[card].du;
+            $scope.er_sie_es = $scope.cards[card].er_sie_es;
+            $scope.wir = $scope.cards[card].wir;
+            $scope.ihr = $scope.cards[card].ihr;
+            $scope.sie_Sie = $scope.cards[card].sie_Sie;
+            
+            
+            $scope.image = $scope.cards[card].img;
+            
+          }, 500);
+        } else {
+          // Wait for card to flip over
+          $timeout(function() {
+            $scope.english = $scope.cards[card].english;
+            $scope.translation = $sce.trustAsHtml($scope.cards[card].translation);
+            $scope.image = $scope.cards[card].img;
+            $scope.gender = $scope.cards[card].gender;
+          }, 500);
+        }  
       };
       
       
       // Get cards
-      $scope.getCards = function(type) {
-        cardsService.getWords(type, function(response) {
+      $scope.getCards = function(pos, category) {
+        cardsService.getWords(pos, category, function(response) {
           $scope.cards = response.data;
+          
+          console.log($scope.cards);
+
+          
           $scope.totalCards = $scope.cards.length;
           // Reset current card
           $scope.currentCard = 1;
           setCard(0);
+          
+          
         });
       };
       
@@ -89,4 +114,9 @@ angular.module('flashcards')
       
       // Set initial card
       setCard(0);
+      
+      // Flip back of card to front
+      $scope.$on('cardBackFlip', function(evt, args) {
+        $scope.flip = args;
+      });
 });
