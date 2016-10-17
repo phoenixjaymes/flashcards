@@ -9,15 +9,15 @@
   <form class="cards-form">
     <h3>Select your Cards</h3>
     
-    <label for="flashcard-pos">Part of Speech</label>
-    <select id="flashcard-type" ng-model="cardPos" ng-change="changeCategory(cardPos);">
+    <label class="cards-form__label" for="flashcard-pos">Part of Speech: </label>
+    <select id="flashcard-type" class="cards-form__select" ng-model="cardPos" ng-change="changeCategory(cardPos);">
       <option value="adjective">Adjective</option>
       <option value="noun">Noun</option>
       <option value="verb">Verb</option>
     </select>
-    
-    <label for="flashcard-type">Select your Cards</label>
-    <select id="flashcard-type" ng-model="cardCategory" ng-change="getCards(cardPos, cardCategory)">
+    <br>
+    <label class="cards-form__label" for="flashcard-type">Category: </label>
+    <select id="flashcard-type" class="cards-form__select" ng-model="cardCategory" ng-change="getCards(cardPos, cardCategory)">
       <option ng-repeat="option in posCategory" value="{{option.id}}">{{option.name}}</option>
     </select>
   </form>

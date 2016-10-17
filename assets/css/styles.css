@@ -389,7 +389,7 @@ textarea {
     Author   : Jaymes Young <jaymes@phoenixjaymes.com>
 */
 .main-content__wrap, .main-header__wrap, .main-footer__wrap {
-  padding: 0 20px;
+  padding: 0 10px;
   margin-left: auto;
   margin-right: auto; }
   @media (min-width: 544px) {
@@ -430,6 +430,12 @@ h1, h2 {
   text-align: center;
   margin-bottom: 20px; }
 
+h2 {
+  margin-bottom: 0.9375em; }
+
+h3 {
+  margin-bottom: 0.9375em; }
+
 /* 
     File     : layout/_index.scss
     Date     : Sep 28, 2016
@@ -449,7 +455,6 @@ main {
   flex: 1; }
 
 .flashcards {
-  padding: 15px;
   margin: 0 auto;
   max-width: 800px; }
 
@@ -464,6 +469,7 @@ main {
     Author   : Jaymes Young <jaymes@phoenixjaymes.com>
 */
 .card {
+  background: lightsalmon;
   height: 400px;
   margin: 0 auto 20px auto;
   position: relative;
@@ -506,7 +512,18 @@ main {
     Author   : Jaymes Young <jaymes@phoenixjaymes.com>
 */
 .cards-form {
-  margin-bottom: 20px; }
+  margin: 0 auto 1.25em auto;
+  max-width: 300px; }
+  .cards-form__label {
+    display: inline-block;
+    height: 30px;
+    padding: 5px 0;
+    width: 120px; }
+  .cards-form__select {
+    display: inline-block;
+    height: 30px;
+    margin-bottom: 10px;
+    width: 150px; }
 
 /* 
     File     : _cards-controls.scss
@@ -526,7 +543,8 @@ main {
     Author   : Jaymes Young <jaymes@phoenixjaymes.com>
 */
 .main-header {
-  background: #efefef; }
+  background: #efefef;
+  margin-bottom: 1.25em; }
   .main-header__wrap {
     display: flex;
     flex-flow: row wrap; }

@@ -5,5 +5,22 @@
 */
 
 .cards-form {
-  margin-bottom: 20px;
+  margin: 0 auto em(20px) auto;
+  max-width: 300px;
+    
+  &__label {
+    display: inline-block;
+    
+    
+    height: 30px;
+    padding: 5px 0;
+    width: 120px;
+  }
+  
+  &__select {
+    display: inline-block;
+    height: 30px;
+    margin-bottom: 10px;
+    width: 150px;
+  }
 }
