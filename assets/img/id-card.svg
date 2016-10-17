@@ -1,0 +1,22 @@
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <title>id-card</title>
+  <g>
+    <path d="M59,12.14H5a3,3,0,0,0-3,3V48.85a3,3,0,0,0,3,3H59a3,3,0,0,0,3-3V15.15A3,3,0,0,0,59,12.14ZM21.45,17.75a1.64,1.64,0,1,1,1.64-1.64A1.64,1.64,0,0,1,21.45,17.75Zm15.92,0H26.63a1.64,1.64,0,0,1,0-3.29H37.37a1.64,1.64,0,0,1,0,3.29Zm5.18,0a1.64,1.64,0,1,1,1.64-1.64A1.64,1.64,0,0,1,42.55,17.75Z" fill="#36495e"/>
+    <rect x="2" y="20.08" width="60" height="23.84" transform="translate(64 64) rotate(-180)" fill="#c7e9f4"/>
+    <g>
+      <rect x="43.6" y="45.56" width="1.51" height="4.67" transform="translate(88.72 95.78) rotate(-180)" fill="#a7a9ac"/>
+      <rect x="40.51" y="45.56" width="1.51" height="4.67" transform="translate(82.54 95.78) rotate(-180)" fill="#a7a9ac"/>
+      <rect x="31.24" y="45.56" width="1.51" height="4.67" transform="translate(64 95.78) rotate(-180)" fill="#a7a9ac"/>
+      <rect x="28.15" y="45.56" width="1.51" height="4.67" transform="translate(57.82 95.78) rotate(-180)" fill="#a7a9ac"/>
+      <rect x="25.06" y="45.56" width="1.51" height="4.67" transform="translate(51.64 95.78) rotate(-180)" fill="#a7a9ac"/>
+      <rect x="21.97" y="45.56" width="1.51" height="4.67" transform="translate(45.46 95.78) rotate(-180)" fill="#a7a9ac"/>
+      <rect x="18.88" y="45.56" width="1.51" height="4.67" transform="translate(39.28 95.78) rotate(-180)" fill="#a7a9ac"/>
+    </g>
+    <rect x="38.16" y="20.08" width="23.84" height="23.84" transform="translate(100.16 64) rotate(-180)" fill="#fff"/>
+    <rect x="11.11" y="23.01" width="24.61" height="2.08" rx="0.94" ry="0.94" transform="translate(46.83 48.11) rotate(-180)" fill="#6d6e71"/>
+    <rect x="4.12" y="34.36" width="31.6" height="2.08" transform="translate(39.84 70.81) rotate(-180)" fill="#6d6e71"/>
+    <rect x="4.12" y="38.91" width="31.6" height="2.08" transform="translate(39.84 79.89) rotate(-180)" fill="#6d6e71"/>
+    <circle cx="50.08" cy="28.56" r="4.5" fill="#51b3da"/>
+    <path d="M55.91,35.39a2.27,2.27,0,0,0-2-1.23H46.28a2.27,2.27,0,0,0-2,1.23L42.38,39a2.27,2.27,0,0,0,2,3.31H55.76a2.27,2.27,0,0,0,2-3.31Z" fill="#51b3da"/>
+  </g>
+</svg>

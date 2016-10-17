@@ -57,20 +57,22 @@ angular.module('flashcards')
       $scope.totalCards = $scope.cards.length;
       $scope.flip = false;
       
-      // Options for flash cards
-      $scope.cardOptions = [
-        {name : 'All',      value : 'all'},
-        {name : 'Body',   value : '1'},
-        {name : 'Colors',   value : '6'},
-        {name : 'Clothing',  value : '2'},
-        {name : 'Descriptions',  value : '7'},
-        {name : 'Geography',  value : '3'},
-        {name : 'Weather',  value : '4'},
-        {name : 'Other',    value : '5'},
-        {name : 'Leisure Time', value : '8'},
-        {name : 'Places', value: '9'}
-      ];
+      // Get categories from service
+      var getAllCategories = function() {
+        cardsService.getCategories(function(response) {
+          $scope.cardAllCategories = response.data;
+        });
+      };
       
+      // Change category options
+      // If pos is verb get verbs until verbs have categories
+      $scope.changeCategory = function(cardPos) {
+        if (cardPos === 'verb') {
+          $scope.getCards(cardPos);
+        } else {
+          $scope.posCategory = $scope.cardAllCategories[cardPos];
+        }
+      };
       
       // Set card
       var setCard = function(card) {
@@ -109,15 +111,12 @@ angular.module('flashcards')
       $scope.getCards = function(pos, category) {
         cardsService.getWords(pos, category, function(response) {
           $scope.cards = response.data;
-          
-          console.log($scope.cards);
 
-          
           $scope.totalCards = $scope.cards.length;
-          // Reset current card
+          
+          // Reset current card and set card
           $scope.currentCard = 1;
           setCard(0);
-          
           
         });
       };
@@ -149,13 +148,16 @@ angular.module('flashcards')
       };
       
       
-      // Set initial card
-      setCard(0);
-      
       // Flip back of card to front
       $scope.$on('cardBackFlip', function(evt, args) {
         $scope.flip = args;
       });
+      
+      // Set initial card
+      setCard(0);
+      
+      // Get categories
+      getAllCategories();
 });
 /* 
  File     : directives.js
@@ -190,43 +192,24 @@ angular.module('flashcards')
             
       // Get words
       this.getWords = function(pos, category, callback) {
-        console.log('Part of speech: ' + pos + ' - Category: ' + category);
-//        if (type === 'body') {
-//          var url = 'assets/inc/fc-german.php?category=body';
-//        } else if (type === 'colors') {
-//          var url = 'assets/inc/fc-german.php?category=colors'; 
-//        } else if (type === 'clothing') {
-//          var url = 'assets/inc/fc-german.php?category=clothing'; 
-//        } else if (type === 'descriptions') {
-//          var url = 'assets/inc/fc-german.php?category=descriptions';     
-//        } else if (type === 'geography') {
-//          var url = 'assets/inc/fc-german.php?category=geography';  
-//        } else if (type === 'nature') {
-//          var url = 'assets/inc/fc-german.php?category=nature';
-//        } else {
-//          var url = 'assets/inc/fc-german.php?category=none';   
-//        }
         
-        
-        
-        if (pos === 'noun') {
-          var url = 'assets/inc/fc-german.php?pos=' + pos + '&category=all';
+        if (pos === 'adjective') {
+          var url = 'assets/inc/fc-german.php?pos=' + pos + '&category=' + category;
+        } else if (pos === 'noun') {
+          var url = 'assets/inc/fc-german.php?pos=' + pos + '&category=' + category;
         } else if (pos === 'verb') {
-          var url = 'assets/inc/fc-german.php?pos=' + pos + '&category=all';
+          var url = 'assets/inc/fc-german.php?pos=' + pos;
         } else {
-          var url = 'assets/inc/fc-german.php?category=' + category;
+          var url = 'assets/inc/fc-german.php?pos=noun&category=' + 1;
         }
         
-        
-        
-//        if (category === 'all') {
-//          var url = 'assets/inc/fc-german.php?category=all';
-//        } else {
-//          var url = 'assets/inc/fc-german.php?category=' + category;
-//        }
-        
         $http.get(url).then(callback); 
-      }; 
+      };
+      
+      this.getCategories = function(callback) {
+        var url = 'assets/inc/fc-german-categories.php';
+        $http.get(url).then(callback);
+      };
 });
 
 //# sourceMappingURL=app.js.map

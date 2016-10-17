@@ -10,16 +10,15 @@
     <h3>Select your Cards</h3>
     
     <label for="flashcard-pos">Part of Speech</label>
-    <select id="flashcard-type" ng-model="cardPos" ng-change="">
-      <option value="any">Any</option>
+    <select id="flashcard-type" ng-model="cardPos" ng-change="changeCategory(cardPos);">
       <option value="adjective">Adjective</option>
       <option value="noun">Noun</option>
       <option value="verb">Verb</option>
     </select>
     
     <label for="flashcard-type">Select your Cards</label>
-    <select id="flashcard-type" ng-model="cardType" ng-change="getCards(cardPos, cardType)">
-      <option ng-repeat="option in cardOptions" value="{{option.value}}">{{option.name}}</option>
+    <select id="flashcard-type" ng-model="cardCategory" ng-change="getCards(cardPos, cardCategory)">
+      <option ng-repeat="option in posCategory" value="{{option.id}}">{{option.name}}</option>
     </select>
   </form>
   

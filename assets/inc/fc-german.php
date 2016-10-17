@@ -1,7 +1,7 @@
 <?php
 /* 
- * File Name: doctor-who.php
- * Date: 23 Jul 16
+ * File Name: fc-german.php
+ * Date: 16 Oct 16
  * Programmer: Jaymes Young-Liebgott
  */
 
@@ -17,32 +17,13 @@ $mySqli->getConnection();
   
 $arr_cards = [];
 
-//
-
-//  if (isset($_GET) && $_GET['category'] === 'body') {
-//    $sql = "SELECT * FROM fc_german WHERE category = 'body'";
-//  } elseif (isset($_GET) && $_GET['category'] === 'clothing') {
-//    $sql = "SELECT * FROM fc_german WHERE category = 'clothing'";
-//  } elseif (isset($_GET) && $_GET['category'] === 'colors') {
-//    $sql = "SELECT * FROM fc_german WHERE category = 'colors'";
-//  } elseif (isset($_GET) && $_GET['category'] === 'descriptions') {
-//    $sql = "SELECT * FROM fc_german WHERE category = 'descriptions'";
-//  } elseif (isset($_GET) && $_GET['category'] === 'geography') {
-//    $sql = "SELECT * FROM fc_german WHERE category = 'geography'";
-//  } elseif (isset($_GET) && $_GET['category'] === 'nature') {
-//    $sql = "SELECT * FROM fc_german WHERE category = 'nature'";
-//  } else {
-//    $sql = "SELECT * FROM fc_german WHERE category = 'none' LIMIT 20";
-//  }
-
-
-
-
-// filter_input(INPUT_GET, 'pg', FILTER_SANITIZE_NUMBER_INT);
 
 $pos = filter_input(INPUT_GET, 'pos', FILTER_SANITIZE_STRING);
 
 if ($pos === 'verb') {
+  // Verbs
+  $category = filter_input(INPUT_GET, 'category', FILTER_SANITIZE_STRING);
+  
   $sql = 'SELECT english, translation, ich, du, er_sie_es, wir, ihr, sie_Sie, img FROM fc_german_verbs';
   $result = $mySqli->handleQuery($sql);
   
@@ -68,31 +49,13 @@ if ($pos === 'verb') {
   echo $json;
   exit();  
   
-} else {
+} elseif ($pos === 'adjective') {
+  $category = filter_input(INPUT_GET, 'category', FILTER_SANITIZE_STRING);
   
-    // Nouns and adjectives
-  if (isset($_GET) && isset($_GET['category']) && $_GET['category'] === 'all') {
-    $sql = "(SELECT english, translation, img, 'none' AS gender FROM fc_german_adjectives LIMIT 15)"
-        . " UNION "
-        . " (SELECT english, translation, img, gender FROM fc_german_nouns LIMIT 15)";
-  } else if (isset($_GET) && isset($_GET['category'])) {
-    $sql = "SELECT english, translation, img, 'none' AS gender FROM fc_german_adjectives WHERE category = {$_GET['category']}"
-        . " UNION "
-        . " SELECT english, translation, img, gender FROM fc_german_nouns      WHERE category = {$_GET['category']}";
-  } else {
-     $sql = "SELECT * FROM fc_german_nouns WHERE category = 5 LIMIT 20";
-   }
-
-
-  $testArray = array('english'=>'blue', 'translation'=> 'blau', 'img'=>'blue.gif', 'gender'=>'none');
-
-
+  // Adjectives
+  $sql = "SELECT english, translation, img, 'none' AS gender FROM fc_german_adjectives WHERE category = '{$category}'";
+  
   $result = $mySqli->handleQuery($sql);
-
-  // Arrays
-  $arr_json = [];
-
-  //$arr_cards[] = $testArray;
 
 
   // Get cards
@@ -112,4 +75,64 @@ if ($pos === 'verb') {
   echo $json;
   exit();
   
+} elseif ($pos === 'noun') {
+  $category = filter_input(INPUT_GET, 'category', FILTER_SANITIZE_STRING);
+  // Nouns
+  $sql = "SELECT english, translation, img, gender FROM fc_german_nouns WHERE category = '{$category}'";
+  
+  $result = $mySqli->handleQuery($sql);
+
+
+  // Get cards
+  while($row = $result->fetch_assoc()) {
+    $arr_card = [];
+    $arr_card['english'] = $row['english'];
+    $arr_card['translation'] = $row['translation'];
+    $arr_card['img'] = $row['img'];
+    $arr_card['gender'] = $row['gender'];
+
+    $arr_cards[] = $arr_card;
+  }
+
+
+  // Encode arrays
+  $json = json_encode($arr_cards);
+  echo $json;
+  exit();
+  
+} else {
+  $category = filter_input(INPUT_GET, 'category', FILTER_SANITIZE_STRING);
+  
+  // Nouns and adjectives
+  if (isset($_GET) && isset($_GET['category']) && $_GET['category'] === 'all') {
+    $sql = "(SELECT english, translation, img, 'none' AS gender FROM fc_german_adjectives LIMIT 15)"
+        . " UNION "
+        . " (SELECT english, translation, img, gender FROM fc_german_nouns LIMIT 15)";
+  } else if (isset($_GET) && isset($_GET['category'])) {
+    $sql = "SELECT english, translation, img, 'none' AS gender FROM fc_german_adjectives WHERE category = {$category}"
+        . " UNION "
+        . " SELECT english, translation, img, gender FROM fc_german_nouns      WHERE category = {$category}";
+  } else {
+     $sql = "SELECT * FROM fc_german_nouns WHERE category = 5 LIMIT 20";
+   }
+
+
+  $result = $mySqli->handleQuery($sql);
+
+  // Get cards
+  while($row = $result->fetch_assoc()) {
+    $arr_card = [];
+    $arr_card['english'] = $row['english'];
+    $arr_card['translation'] = $row['translation'];
+    $arr_card['img'] = $row['img'];
+    $arr_card['gender'] = $row['gender'];
+
+    $arr_cards[] = $arr_card;
+  }
+
+
+  // Encode arrays
+  $json = json_encode($arr_cards);
+  echo $json;
+  exit();
 }

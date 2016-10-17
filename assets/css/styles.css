@@ -492,7 +492,7 @@ main {
 
 .card__text {
   padding-top: 10px;
-  font-size: 2em; }
+  font-size: 1.25em; }
 
 .card.js-flip-card .card__front {
   transform: rotateY(179deg); }

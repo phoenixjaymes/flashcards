@@ -20,20 +20,22 @@ angular.module('flashcards')
       $scope.totalCards = $scope.cards.length;
       $scope.flip = false;
       
-      // Options for flash cards
-      $scope.cardOptions = [
-        {name : 'All',      value : 'all'},
-        {name : 'Body',   value : '1'},
-        {name : 'Colors',   value : '6'},
-        {name : 'Clothing',  value : '2'},
-        {name : 'Descriptions',  value : '7'},
-        {name : 'Geography',  value : '3'},
-        {name : 'Weather',  value : '4'},
-        {name : 'Other',    value : '5'},
-        {name : 'Leisure Time', value : '8'},
-        {name : 'Places', value: '9'}
-      ];
+      // Get categories from service
+      var getAllCategories = function() {
+        cardsService.getCategories(function(response) {
+          $scope.cardAllCategories = response.data;
+        });
+      };
       
+      // Change category options
+      // If pos is verb get verbs until verbs have categories
+      $scope.changeCategory = function(cardPos) {
+        if (cardPos === 'verb') {
+          $scope.getCards(cardPos);
+        } else {
+          $scope.posCategory = $scope.cardAllCategories[cardPos];
+        }
+      };
       
       // Set card
       var setCard = function(card) {
@@ -72,15 +74,12 @@ angular.module('flashcards')
       $scope.getCards = function(pos, category) {
         cardsService.getWords(pos, category, function(response) {
           $scope.cards = response.data;
-          
-          console.log($scope.cards);
 
-          
           $scope.totalCards = $scope.cards.length;
-          // Reset current card
+          
+          // Reset current card and set card
           $scope.currentCard = 1;
           setCard(0);
-          
           
         });
       };
@@ -112,11 +111,14 @@ angular.module('flashcards')
       };
       
       
-      // Set initial card
-      setCard(0);
-      
       // Flip back of card to front
       $scope.$on('cardBackFlip', function(evt, args) {
         $scope.flip = args;
       });
+      
+      // Set initial card
+      setCard(0);
+      
+      // Get categories
+      getAllCategories();
 });
