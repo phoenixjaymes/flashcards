@@ -7,3 +7,6 @@ nbproject/
 
 # Ignore dist folder
 dist/
+
+# Ignore img folder
+assets/img

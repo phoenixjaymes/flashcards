@@ -54,8 +54,8 @@ angular.module('flashcards')
             $scope.ihr = $scope.cards[card].ihr;
             $scope.sie_Sie = $scope.cards[card].sie_Sie;
             
-            
             $scope.image = $scope.cards[card].img;
+            $scope.gender = $scope.cards[card].gender;
             
           }, 500);
         } else {

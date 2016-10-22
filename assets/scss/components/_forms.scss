@@ -1,0 +1,43 @@
+/* 
+    File     : _forms.scss
+    Date     : Oct 19, 2016
+    Author   : Jaymes Young <jaymes@phoenixjaymes.com>
+*/
+
+.form__label {
+  display: block;
+  font-size: 1.3em;
+  margin-bottom: 5px;
+}
+
+.form__input {
+  border-radius: $brd-radius;
+  display: block;
+  height: 35px;
+  margin-bottom: 15px;
+  width: 100%;
+}
+
+.form__select {
+  border-radius: $brd-radius;
+  height: 35px;
+  margin-bottom: 15px;
+  width: 100%;
+}
+
+.form__button {
+  border-radius: $brd-radius;
+  height: 35px;
+  margin-top: 20px;
+  width: 100%;
+}
+
+
+// Login form
+.login-form, .add-word-form, .add-category-form, .update-form, .register-form  {
+  background: blueviolet;
+  border-radius: $brd-radius;  
+  margin: 20px auto 0 auto;
+  padding: 10px;
+  width: 300px;
+}

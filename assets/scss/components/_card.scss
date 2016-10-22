@@ -4,7 +4,7 @@
     Author   : Jaymes Young <jaymes@phoenixjaymes.com>
 */
 
-.card { background: lightsalmon;
+.card {
   height: 400px;
   margin: 0 auto 20px auto;
   position: relative;
@@ -15,30 +15,30 @@
 .card__front {
   @extend %card-display;
   background: #ededed;
+  padding: 20px;
   transform: rotateX(0) rotateY(0);
 }
 
 .card__back {
   @extend %card-display;
+  @extend %card-gender;
+  
+  padding: 20px;
   transform: rotateY(-179deg);
   
-  &.male {
-    background: #89cff0;
-  }
-  
-  &.female {
-    background: #f4c2c2;
-  }
-  
-  &.neuter {
-    background: #efdecd;
-  }
-  
-  &.none {
-    background: #efefef;
+  &--verb {
+    @extend %card-display;
+    @extend %card-gender;
+    
+    padding: 20px 10px;
+    transform: rotateY(-179deg);
   }
   
 }
+
+
+
+
 
 .card__img {
   border-radius: 5px;
@@ -51,10 +51,34 @@
   font-size: 1.25em;
 }
 
+.card__table {
+  border-collapse: collapse;
+  font-size: 1.1em;
+  text-align: left;
+  width: 280px;
+  
+  tr:nth-child(even) {
+    background: #fff;
+  }
+  
+  
+}
+
+.card__table-col-one {
+  padding: 2px 0 2px 3px;
+  width: 35%;
+}
+
+.card__table-col-two {
+  padding: 2px 0 2px 3px;
+}
+
+
 .card.js-flip-card .card__front {
   transform: rotateY(179deg);
 }
 
-.card.js-flip-card .card__back {
+.card.js-flip-card .card__back, .card.js-flip-card .card__back--verb {
   transform: rotateY(0deg);
 }
+

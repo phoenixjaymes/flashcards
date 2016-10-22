@@ -27,3 +27,37 @@ main {
 .main-content__wrap {
   @extend %wrap-max-width;
 }
+
+// Modal
+
+login, register, addword, updateword, addcategory {
+  display: none;
+}
+
+
+
+/*login.modal {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 100;
+  
+  background: rgba(225, 225, 225, .9);
+  display: block;
+  height: 100%;
+  width: 100%;
+  
+}*/
+
+.modal {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 100;
+  
+  background: rgba(225, 225, 225, .9);
+  display: block;
+  height: 100%;
+  width: 100%;
+  
+}

@@ -1,0 +1,15 @@
+<closebutton></closebutton>
+
+<form class="register-form">
+  <h3>Please Register</h3>
+  <label class="form__label login-form__label" for="txtUser">User</label>
+  <input id="txtUser" class="form__input" type="text">
+  
+  <label class="form__label login-form__label" for="txtPassword1">Password</label>
+  <input id="txtPassword1" class="form__input" type="password">
+  
+  <label class="form__label login-form__label" for="txtPassword2">Re-enter Password</label>
+  <input id="txtPassword2" class="form__input" type="password">
+  
+  <button class="form__button" ng-model="loginSubmit" ng-click="$emit('loginClick')">Register</button>
+</form>

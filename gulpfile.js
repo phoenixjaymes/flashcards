@@ -25,7 +25,8 @@ gulp.task("concatScripts", function() {
     'app/main.js',
     'app/cards.js',
     'app/directives.js',
-    'app/cards.service.js'
+    'app/cards.service.js',
+    'app/admin.service.js'
   ])
       .pipe(maps.init())
       .pipe(concat('app.js'))

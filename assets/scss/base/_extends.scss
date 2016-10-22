@@ -28,7 +28,7 @@
 }
 
 
-
+// Cards
 %card-display {
   position: absolute;
   left: 0;
@@ -41,10 +41,27 @@
   
   height: 100%;
   margin: 0;
-  padding: 20px;
   width: 100%;
   
   transform-style: preserve-3d;
   backface-visibility: hidden;
   transition: all .4s ease-in-out;
+}
+
+%card-gender {
+  &.male {
+    background: #89cff0;
+  }
+  
+  &.female {
+    background: #f4c2c2;
+  }
+  
+  &.neuter {
+    background: #efdecd;
+  }
+  
+  &.none {
+    background: #efefef;
+  }
 }

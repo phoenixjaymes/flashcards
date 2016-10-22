@@ -17,4 +17,34 @@ angular.module('flashcards')
       templateUrl : 'app/views/cards.html',
       controller  : 'Cards'
     };
+  })
+  .directive('login', function() {
+    return {
+      templateUrl : 'app/views/partials/login.html'
+    };
+  })
+  .directive('addword', function() {
+    return {
+      templateUrl : 'app/views/partials/add-word.html'
+    };
+  })
+  .directive('updateword', function() {
+    return {
+      templateUrl : 'app/views/partials/update-word.html'
+    };
+  })
+  .directive('addcategory', function() {
+    return {
+      templateUrl : 'app/views/partials/add-category.html'
+    };
+  })
+  .directive('register', function() {
+    return {
+      templateUrl : 'app/views/partials/register.html'
+    };
+  })
+  .directive('closebutton', function() {
+    return {
+      templateUrl : 'app/views/partials/btn-close.html'
+    };
   });

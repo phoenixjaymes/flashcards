@@ -1,0 +1,28 @@
+/* 
+    File     : states.scss
+    Date     : Oct 17, 2016
+    Author   : Jaymes Young <jaymes@phoenixjaymes.com>
+*/
+
+.ang-login {
+  background: url('../img/gear.svg')  no-repeat;
+  display: block;
+  height: 40px;
+  width: 40px;
+}
+
+.ang-logout {
+  background: url('../img/happy-boy.svg')  no-repeat;
+  display: block;
+  height: 40px;
+  width: 40px;
+}
+
+
+.ang-show-options {
+  visibility: visible;
+}
+
+.ang-hide-options {
+  visibility: hidden;
+}

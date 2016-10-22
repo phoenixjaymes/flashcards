@@ -1,0 +1,41 @@
+/* 
+    File     : _options-menu.scss
+    Date     : Oct 21, 2016
+    Author   : Jaymes Young <jaymes@phoenixjaymes.com>
+*/
+
+.options-menu {
+  position: absolute;
+  right: 0px;
+  top: 100px;
+  
+  
+  list-style: none;
+  width: 200px;
+  
+  background: rgba(0, 200, 0, .5);
+  
+  @media #{$brk-md} {
+    top: 60px;
+  }
+  
+  
+  &__item {
+    a {
+      display: block;
+      padding: 10px;
+      text-align: right;
+      text-decoration: none;
+      
+      
+      &:link, &:visited {
+        color: yellow;
+      }
+      
+      &:hover {
+        color: pink;
+      }
+    }
+  }
+}
+

@@ -33,6 +33,100 @@ angular.module('flashcards')
 
 angular.module('flashcards')
     .controller('Main', function($scope) {
+      $scope.loggedIn = false;
+      $scope.displayLogin = false;
+      $scope.displayOptions = false;
+      $scope.displayAddWord = false;
+      $scope.displayUpdateWord = false;
+      $scope.displayAddCategory = false;
+      
+      
+      $scope.showOptions = function() {
+        // Check if logged user is logged in
+        if ($scope.loggedIn === false) {
+          
+          $scope.displayLogin = true;
+          
+          
+          // temp Success on login
+          $scope.loggedIn = true;
+          
+          
+        } else if ($scope.loggedIn === true) {
+          //
+          $scope.displayOptions = !$scope.displayOptions;
+        }
+      };
+      
+      
+      // Logging in and logging out
+      $scope.logOut = function() {
+        // Looged out
+        // create login service
+        $scope.loggedIn = false;
+        // Hide options
+        $scope.displayOptions = false;
+      };
+      
+      
+      // Display add and update forms
+      $scope.displayForm = function(form) {
+        if(form === 'addcategory') {
+          $scope.displayAddWord = false;
+          $scope.displayUpdateWord = false;
+          $scope.displayAddCategory = true;
+          $scope.displayOptions = false;
+        } else if (form === 'addword') {
+          $scope.displayAddWord = true;
+          $scope.displayUpdateWord = false;
+          $scope.displayAddCategory = false;
+          $scope.displayOptions = false;
+          
+        } else if (form === 'updateword') {
+          $scope.displayAddWord = false;
+          $scope.displayUpdateWord = true;
+          $scope.displayAddCategory = false;
+          $scope.displayOptions = false;
+        }
+      };
+      
+      
+      // Close modal windows
+      $scope.$on('closeModal', function(evt) {
+        $scope.displayLogin = false;
+        $scope.displayAddWord = false;
+        $scope.displayUpdateWord = false;
+        $scope.displayAddCategory = false;
+      });
+      
+      
+      // Login to options
+      $scope.$on('loginClick', function(evt) {
+        // temp Success on login
+        $scope.loggedIn = true;
+        $scope.displayLogin = false;
+      });
+      
+      
+      // Add category
+      $scope.$on('addCategoryClick', function(evt) {
+        // temp Success add category
+        $scope.displayAddCategory = false;
+      });
+      
+      
+      // Add word
+      $scope.$on('addWordClick', function(evt) {
+        // temp Success add word
+        $scope.displayAddWord = false;
+      });
+      
+      
+      // Update word
+      $scope.$on('updateWordClick', function(evt) {
+        // temp Success update word
+        $scope.displayUpdateWord = false;
+      });
       
 });
 /* 
@@ -91,8 +185,8 @@ angular.module('flashcards')
             $scope.ihr = $scope.cards[card].ihr;
             $scope.sie_Sie = $scope.cards[card].sie_Sie;
             
-            
             $scope.image = $scope.cards[card].img;
+            $scope.gender = $scope.cards[card].gender;
             
           }, 500);
         } else {
@@ -178,6 +272,36 @@ angular.module('flashcards')
       templateUrl : 'app/views/cards.html',
       controller  : 'Cards'
     };
+  })
+  .directive('login', function() {
+    return {
+      templateUrl : 'app/views/partials/login.html'
+    };
+  })
+  .directive('addword', function() {
+    return {
+      templateUrl : 'app/views/partials/add-word.html'
+    };
+  })
+  .directive('updateword', function() {
+    return {
+      templateUrl : 'app/views/partials/update-word.html'
+    };
+  })
+  .directive('addcategory', function() {
+    return {
+      templateUrl : 'app/views/partials/add-category.html'
+    };
+  })
+  .directive('register', function() {
+    return {
+      templateUrl : 'app/views/partials/register.html'
+    };
+  })
+  .directive('closebutton', function() {
+    return {
+      templateUrl : 'app/views/partials/btn-close.html'
+    };
   });
 /* 
  File     : words.service.js
@@ -189,6 +313,39 @@ angular.module('flashcards')
 
 angular.module('flashcards')
     .service('cardsService', function($http) {
+            
+      // Get words
+      this.getWords = function(pos, category, callback) {
+        
+        if (pos === 'adjective') {
+          var url = 'assets/inc/fc-german.php?pos=' + pos + '&category=' + category;
+        } else if (pos === 'noun') {
+          var url = 'assets/inc/fc-german.php?pos=' + pos + '&category=' + category;
+        } else if (pos === 'verb') {
+          var url = 'assets/inc/fc-german.php?pos=' + pos;
+        } else {
+          var url = 'assets/inc/fc-german.php?pos=noun&category=' + 1;
+        }
+        
+        $http.get(url).then(callback); 
+      };
+      
+      this.getCategories = function(callback) {
+        var url = 'assets/inc/fc-german-categories.php';
+        $http.get(url).then(callback);
+      };
+});
+
+/* 
+ File     : words.service.js
+ Date     : Sep 28, 2016
+ Author   : Jaymes Young <jaymes@phoenixjaymes.com>
+ */
+
+'use strict';
+
+angular.module('flashcards')
+    .service('adminService', function($http) {
             
       // Get words
       this.getWords = function(pos, category, callback) {

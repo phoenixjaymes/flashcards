@@ -24,7 +24,7 @@ if ($pos === 'verb') {
   // Verbs
   $category = filter_input(INPUT_GET, 'category', FILTER_SANITIZE_STRING);
   
-  $sql = 'SELECT english, translation, ich, du, er_sie_es, wir, ihr, sie_Sie, img FROM fc_german_verbs';
+  $sql = "SELECT english, translation, ich, du, er_sie_es, wir, ihr, sie_Sie, img, 'none' AS gender FROM fc_german_verbs";
   $result = $mySqli->handleQuery($sql);
   
   // Get cards
@@ -39,6 +39,7 @@ if ($pos === 'verb') {
     $arr_card['ihr'] = $row['ihr'];
     $arr_card['sie_Sie'] = $row['sie_Sie'];
     $arr_card['img'] = $row['img'];
+    $arr_card['gender'] = $row['gender'];
 
     $arr_cards[] = $arr_card;
   }

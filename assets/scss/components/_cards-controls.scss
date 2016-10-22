@@ -10,7 +10,9 @@
   width: 100%;
  
   &__btn {
-    width: 70px;
+    border-radius: $brd-radius;
+    height: 40px;
+    width: 60px;
   } 
   
 }

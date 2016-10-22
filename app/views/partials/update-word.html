@@ -1,0 +1,11 @@
+<closebutton></closebutton>
+
+<form class="login-form">
+  <label class="login-form__label" for="login-user"></label>
+  <input id="login-user" type="text">
+  
+  <label class="login-form__label" for="login-password"></label>
+  <input id="login-password" type="text">
+  
+  <button ng-model="loginSubmit" ng-click="$emit('loginClick')">Login</button>
+</form>

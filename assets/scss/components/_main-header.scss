@@ -22,6 +22,8 @@
   
   &__logo {
     flex-basis: 80px;
+    order: 1;
+    
     height: 60px;
     padding: 0 10px;
     width: 60px;
@@ -29,6 +31,8 @@
   
   &__name {
     flex: 1;
+    order: 2;
+    
     font-size: 1.5em;
     font-weight: bold;
     line-height: 60px;
@@ -40,12 +44,43 @@
   
   &__nav {
     flex-basis: 100%;
+    order: 4;
+    
     height: 40px;
     width: 100%;
     
     @media #{$brk-md} {
       flex-basis: auto;
-      
+      order: 3;
     }
+  }
+  
+  &__settings {
+    position: relative;
+    flex-basis: 60px;
+    order: 3;
+    
+    height: 60px;
+    width: 60px;
+    
+    
+    padding: 10px;
+    
+    @media #{$brk-md} {
+      order: 4;
+    }
+  }
+  
+  &__settings-icon {
+    display: block;
+    height: 40px;
+    width: 40px;
+  }
+  
+}
+
+.main-menu__item-current {
+  a {
+    color: black;
   }
 }
