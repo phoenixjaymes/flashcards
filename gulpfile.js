@@ -24,6 +24,7 @@ gulp.task("concatScripts", function() {
     'app/config.js',
     'app/main.js',
     'app/cards.js',
+    'app/login.js',
     'app/directives.js',
     'app/cards.service.js',
     'app/admin.service.js'

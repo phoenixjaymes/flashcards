@@ -109,9 +109,10 @@ angular.module('flashcards')
       
       
       // Add category
-      $scope.$on('addCategoryClick', function(evt) {
+      $scope.$on('addCategoryClick', function(evt, args) {
         // temp Success add category
         $scope.displayAddCategory = false;
+        console.log('Add category ' + args);
       });
       
       
@@ -124,6 +125,12 @@ angular.module('flashcards')
       
       // Update word
       $scope.$on('updateWordClick', function(evt) {
+        // temp Success update word
+        $scope.displayUpdateWord = false;
+      });
+      
+      // Register
+      $scope.$on('registerClick', function(evt) {
         // temp Success update word
         $scope.displayUpdateWord = false;
       });
@@ -254,6 +261,39 @@ angular.module('flashcards')
       getAllCategories();
 });
 /* 
+ File     : login.js
+ Date     : Oct 22, 2016
+ Author   : Jaymes Young <jaymes@phoenixjaymes.com>
+ */
+
+'use strict';
+
+angular.module('flashcards')
+    .controller('Login', function($scope, adminService) {
+      $scope.learner = {};
+      
+      $scope.login = function() {
+        adminService.login($scope.learner, function(response) {
+          console.log(response.data);
+          
+          
+          if(response.data.success === 'true') {
+            console.log('login sucessful');
+          } else {
+            console.log('login failed');
+          }
+        });
+        
+        //console.log($scope.user);
+      };
+      
+      
+      
+      
+      
+      //$emit('loginClick')
+});
+/* 
  File     : directives.js
  Date     : Sep 28, 2016
  Author   : Jaymes Young <jaymes@phoenixjaymes.com>
@@ -275,7 +315,8 @@ angular.module('flashcards')
   })
   .directive('login', function() {
     return {
-      templateUrl : 'app/views/partials/login.html'
+      templateUrl : 'app/views/partials/login.html',
+      'controller' : 'Login'
     };
   })
   .directive('addword', function() {
@@ -345,28 +386,26 @@ angular.module('flashcards')
 'use strict';
 
 angular.module('flashcards')
-    .service('adminService', function($http) {
-            
+    .service('adminService', function($http, $httpParamSerializerJQLike) {
+      
+      
       // Get words
-      this.getWords = function(pos, category, callback) {
+      this.login = function(learner, callback) {
+        var url = 'assets/inc/fc-login.php';
+        var config = {
+          headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        };
         
-        if (pos === 'adjective') {
-          var url = 'assets/inc/fc-german.php?pos=' + pos + '&category=' + category;
-        } else if (pos === 'noun') {
-          var url = 'assets/inc/fc-german.php?pos=' + pos + '&category=' + category;
-        } else if (pos === 'verb') {
-          var url = 'assets/inc/fc-german.php?pos=' + pos;
-        } else {
-          var url = 'assets/inc/fc-german.php?pos=noun&category=' + 1;
-        }
+        //console.log('logging in: ' + learner);
         
-        $http.get(url).then(callback); 
+        //$http.post(url, "user=john", config).then(callback);
+        $http.post(url, $httpParamSerializerJQLike(learner), config).then(callback); 
       };
       
-      this.getCategories = function(callback) {
-        var url = 'assets/inc/fc-german-categories.php';
-        $http.get(url).then(callback);
-      };
+      
+      
+      
+      // fc_learners
 });
 
 //# sourceMappingURL=app.js.map

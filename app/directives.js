@@ -20,7 +20,8 @@ angular.module('flashcards')
   })
   .directive('login', function() {
     return {
-      templateUrl : 'app/views/partials/login.html'
+      templateUrl : 'app/views/partials/login.html',
+      'controller' : 'Login'
     };
   })
   .directive('addword', function() {

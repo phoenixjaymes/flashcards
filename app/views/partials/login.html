@@ -3,10 +3,10 @@
 <form class="login-form">
   <h3>Please login</h3>
   <label class="form__label login-form__label" for="txtUser">User</label>
-  <input id="txtUser" class="form__input" type="text">
+  <input id="txtUser" class="form__input" type="text" ng-model="learner.user">
   
   <label class="form__label login-form__label" for="txtPassword">Password</label>
-  <input id="txtPassword" class="form__input" type="password">
+  <input id="txtPassword" class="form__input" type="password" ng-model="learner.password">
   
-  <button class="form__button" ng-model="loginSubmit" ng-click="$emit('loginClick')">Login</button>
+  <button class="form__button" ng-model="loginSubmit" ng-click="login()">Login</button>
 </form>

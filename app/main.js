@@ -84,9 +84,10 @@ angular.module('flashcards')
       
       
       // Add category
-      $scope.$on('addCategoryClick', function(evt) {
+      $scope.$on('addCategoryClick', function(evt, args) {
         // temp Success add category
         $scope.displayAddCategory = false;
+        console.log('Add category ' + args);
       });
       
       
@@ -99,6 +100,12 @@ angular.module('flashcards')
       
       // Update word
       $scope.$on('updateWordClick', function(evt) {
+        // temp Success update word
+        $scope.displayUpdateWord = false;
+      });
+      
+      // Register
+      $scope.$on('registerClick', function(evt) {
         // temp Success update word
         $scope.displayUpdateWord = false;
       });

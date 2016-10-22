@@ -7,26 +7,24 @@
 'use strict';
 
 angular.module('flashcards')
-    .service('adminService', function($http) {
-            
+    .service('adminService', function($http, $httpParamSerializerJQLike) {
+      
+      
       // Get words
-      this.getWords = function(pos, category, callback) {
+      this.login = function(learner, callback) {
+        var url = 'assets/inc/fc-login.php';
+        var config = {
+          headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+        };
         
-        if (pos === 'adjective') {
-          var url = 'assets/inc/fc-german.php?pos=' + pos + '&category=' + category;
-        } else if (pos === 'noun') {
-          var url = 'assets/inc/fc-german.php?pos=' + pos + '&category=' + category;
-        } else if (pos === 'verb') {
-          var url = 'assets/inc/fc-german.php?pos=' + pos;
-        } else {
-          var url = 'assets/inc/fc-german.php?pos=noun&category=' + 1;
-        }
+        //console.log('logging in: ' + learner);
         
-        $http.get(url).then(callback); 
+        //$http.post(url, "user=john", config).then(callback);
+        $http.post(url, $httpParamSerializerJQLike(learner), config).then(callback); 
       };
       
-      this.getCategories = function(callback) {
-        var url = 'assets/inc/fc-german-categories.php';
-        $http.get(url).then(callback);
-      };
+      
+      
+      
+      // fc_learners
 });
