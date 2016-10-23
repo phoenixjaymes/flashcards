@@ -14,17 +14,18 @@ angular.module('flashcards')
       $scope.displayAddWord = false;
       $scope.displayUpdateWord = false;
       $scope.displayAddCategory = false;
+      $scope.displayRegister = false;
       
       
       $scope.showOptions = function() {
-        // Check if logged user is logged in
+        // Check if user is logged in
         if ($scope.loggedIn === false) {
           
           $scope.displayLogin = true;
           
           
           // temp Success on login
-          $scope.loggedIn = true;
+          //$scope.loggedIn = true;
           
           
         } else if ($scope.loggedIn === true) {
@@ -72,14 +73,25 @@ angular.module('flashcards')
         $scope.displayAddWord = false;
         $scope.displayUpdateWord = false;
         $scope.displayAddCategory = false;
+        $scope.displayRegister = false;
       });
       
       
       // Login to options
-      $scope.$on('loginClick', function(evt) {
-        // temp Success on login
-        $scope.loggedIn = true;
-        $scope.displayLogin = false;
+      $scope.$on('loginClick', function(evt, args) {
+        
+        if (args === true) {
+          $scope.loggedIn = true;
+          $scope.displayLogin = false;
+        } else if (args === 'incorrect') {
+          console.log('login incorrect');
+        } else if (args === 'register') {
+          
+          $scope.displayLogin = false;
+          $scope.displayRegister = true;
+          
+          console.log('register');
+        }
       });
       
       
@@ -104,10 +116,17 @@ angular.module('flashcards')
         $scope.displayUpdateWord = false;
       });
       
-      // Register
-      $scope.$on('registerClick', function(evt) {
-        // temp Success update word
-        $scope.displayUpdateWord = false;
+      // Register click
+      $scope.$on('registerClick', function(evt, args) {
+        if (args === true) {
+          $scope.loggedIn = true;
+          $scope.displayRegister = false;
+        } else if (args === false) {
+          
+          console.log('false, registration failed');
+        } else if(args === 'incorrect') {
+          console.log('incorrect') ;
+        }
       });
       
 });

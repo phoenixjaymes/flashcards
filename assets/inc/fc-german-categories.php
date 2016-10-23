@@ -6,7 +6,7 @@
  */
 
 require 'db-constants.php';
-require '..//classes/database.php';
+require '../classes/database.php';
 
 // Set content ype to json
 header('content-type: application/json; charset=utf-8');

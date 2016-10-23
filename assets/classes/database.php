@@ -71,9 +71,13 @@ class Database
       $result = $this->mMySqli->query($sql);
 
       if (!$result) {
+         print_r($this->mMySqli);
+         
         exit("<span class=\"bold\">The following query failed:</span><br/>$sql.<br/>"
           . "<span class=\"bold\">On the following page:</span> $_SERVER[PHP_SELF]<br/>"
-          . "<span class=\"bold\">Error: </span>" . $this->mMySqli->errno);
+          . "<span class=\"bold\">Error: </span>" . $this->mMySqli->errno
+          . " - " . $this->mMySqli->error);
+        
       }  
     } elseif($this->bolDebug == false) {
       // Get IP and host address

@@ -6,7 +6,7 @@
  */
 
 require 'db-constants.php';
-require '..//classes/database.php';
+require '../classes/database.php';
 
 // Set content ype to json
 header('content-type: application/json; charset=utf-8');
@@ -17,17 +17,27 @@ $mySqli->getConnection();
   
 $arr_response = [];
 
-//print_r($_POST);
-//exit();
+$learner = filter_input(INPUT_POST, 'txtLearner', FILTER_SANITIZE_STRING);
+$password = filter_input(INPUT_POST, 'txtPassword', FILTER_SANITIZE_STRING);
 
-$user = filter_input(INPUT_POST, 'user', FILTER_SANITIZE_STRING);
-$password = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING);
+// Get row count from db
+$sql = "SELECT  count(*) AS cnt FROM fc_learners";
+$result = $mySqli->handleQuery($sql);
+$row = $result->fetch_assoc();
 
-if ($user) {
-  // Verbs
-  $category = filter_input(INPUT_GET, 'category', FILTER_SANITIZE_STRING);
+// Send register as success if there are not rows in db and exit
+if ($row['cnt'] === '0') {
+  $arr_response['success'] = 'register';
+  // Encode arrays
+  $json = json_encode($arr_response);
+  echo $json;
+  exit();  
+}
+
+// Check for learner
+if ($learner && $password) {
   
-  $sql = "SELECT  learner, learner_pass FROM fc_learners WHERE learner = '{$user}'";
+  $sql = "SELECT  learner, learner_pass FROM fc_learners WHERE learner = '{$learner}'";
   $result = $mySqli->handleQuery($sql);
   
   if($result->num_rows) {
@@ -35,26 +45,20 @@ if ($user) {
     
     // Verify password
     if ($row['learner_pass'] === $password) {
-        $arr_response['success'] = 'true';
+      $arr_response['success'] = true;
+    } else {
+      $arr_response['success'] = 'incorrect';
     }
     
-    
   } else {
-    $arr_response['success'] = 'false';
+    $arr_response['success'] = 'incorrect';
   }
 
-
-  // Encode arrays
-  $json = json_encode($arr_response);
-  echo $json;
-  exit();  
-  
 } else {
-  
-  $arr_response['success'] = 'false';
-
-  // Encode arrays
-  $json = json_encode($arr_response);
-  echo $json;
-  exit();
+  $arr_response['success'] = 'incorrect';
 }
+
+// Encode arrays
+$json = json_encode($arr_response);
+echo $json;
+exit();  

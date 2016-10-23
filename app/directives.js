@@ -41,7 +41,8 @@ angular.module('flashcards')
   })
   .directive('register', function() {
     return {
-      templateUrl : 'app/views/partials/register.html'
+      templateUrl : 'app/views/partials/register.html',
+      controller : 'Login'
     };
   })
   .directive('closebutton', function() {

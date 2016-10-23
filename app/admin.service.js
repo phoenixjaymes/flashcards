@@ -10,21 +10,21 @@ angular.module('flashcards')
     .service('adminService', function($http, $httpParamSerializerJQLike) {
       
       
-      // Get words
-      this.login = function(learner, callback) {
+      // Login learner
+      this.loginLearner = function(learner, callback) {
         var url = 'assets/inc/fc-login.php';
-        var config = {
-          headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-        };
+        var config = {headers: {'Content-Type': 'application/x-www-form-urlencoded'}};
         
-        //console.log('logging in: ' + learner);
-        
-        //$http.post(url, "user=john", config).then(callback);
         $http.post(url, $httpParamSerializerJQLike(learner), config).then(callback); 
       };
       
       
+      // Register new learner
+      this.registerLearner = function(newLearner, callback) {
+        var url = 'assets/inc/fc-register.php';
+        var config = {headers: {'Content-Type': 'application/x-www-form-urlencoded'}};
+        
+        $http.post(url, $httpParamSerializerJQLike(newLearner), config).then(callback);
+      };
       
-      
-      // fc_learners
 });

@@ -39,17 +39,18 @@ angular.module('flashcards')
       $scope.displayAddWord = false;
       $scope.displayUpdateWord = false;
       $scope.displayAddCategory = false;
+      $scope.displayRegister = false;
       
       
       $scope.showOptions = function() {
-        // Check if logged user is logged in
+        // Check if user is logged in
         if ($scope.loggedIn === false) {
           
           $scope.displayLogin = true;
           
           
           // temp Success on login
-          $scope.loggedIn = true;
+          //$scope.loggedIn = true;
           
           
         } else if ($scope.loggedIn === true) {
@@ -97,14 +98,25 @@ angular.module('flashcards')
         $scope.displayAddWord = false;
         $scope.displayUpdateWord = false;
         $scope.displayAddCategory = false;
+        $scope.displayRegister = false;
       });
       
       
       // Login to options
-      $scope.$on('loginClick', function(evt) {
-        // temp Success on login
-        $scope.loggedIn = true;
-        $scope.displayLogin = false;
+      $scope.$on('loginClick', function(evt, args) {
+        
+        if (args === true) {
+          $scope.loggedIn = true;
+          $scope.displayLogin = false;
+        } else if (args === 'incorrect') {
+          console.log('login incorrect');
+        } else if (args === 'register') {
+          
+          $scope.displayLogin = false;
+          $scope.displayRegister = true;
+          
+          console.log('register');
+        }
       });
       
       
@@ -129,10 +141,17 @@ angular.module('flashcards')
         $scope.displayUpdateWord = false;
       });
       
-      // Register
-      $scope.$on('registerClick', function(evt) {
-        // temp Success update word
-        $scope.displayUpdateWord = false;
+      // Register click
+      $scope.$on('registerClick', function(evt, args) {
+        if (args === true) {
+          $scope.loggedIn = true;
+          $scope.displayRegister = false;
+        } else if (args === false) {
+          
+          console.log('false, registration failed');
+        } else if(args === 'incorrect') {
+          console.log('incorrect') ;
+        }
       });
       
 });
@@ -272,26 +291,46 @@ angular.module('flashcards')
     .controller('Login', function($scope, adminService) {
       $scope.learner = {};
       
-      $scope.login = function() {
-        adminService.login($scope.learner, function(response) {
-          console.log(response.data);
+      // Login
+      $scope.loginLearner = function() {
+        adminService.loginLearner($scope.learner, function(response) {
           
+          //console.log(response.data);
           
-          if(response.data.success === 'true') {
-            console.log('login sucessful');
-          } else {
-            console.log('login failed');
+          if(response.data.success === true) {
+            $scope.$emit('loginClick', true);
+            //console.log('login sucessful');
+          } else if (response.data.success === 'incorrect') {
+            $scope.$emit('loginClick', 'incorrect');
+            //console.log('login incorrec');
+          } else if (response.data.success === 'register') {
+            $scope.$emit('loginClick', 'register');
           }
         });
-        
-        //console.log($scope.user);
       };
       
       
+      // Register user
+      $scope.registerLearner = function() {
+        adminService.registerLearner($scope.newLearner, function(response) {
+          
+          console.log(response.data);
+          
+          if (response.data.success === true) {
+            $scope.$emit('registerClick', true);
+            //console.log('success');
+          } else if(response.data.success === 'incorrect') {
+            $scope.$emit('registerClick', 'incorrect');
+            //console.log('fail');
+          }
+          
+        });
+        
+        
+      };
       
       
-      
-      //$emit('loginClick')
+
 });
 /* 
  File     : directives.js
@@ -336,7 +375,8 @@ angular.module('flashcards')
   })
   .directive('register', function() {
     return {
-      templateUrl : 'app/views/partials/register.html'
+      templateUrl : 'app/views/partials/register.html',
+      controller : 'Login'
     };
   })
   .directive('closebutton', function() {
@@ -389,23 +429,23 @@ angular.module('flashcards')
     .service('adminService', function($http, $httpParamSerializerJQLike) {
       
       
-      // Get words
-      this.login = function(learner, callback) {
+      // Login learner
+      this.loginLearner = function(learner, callback) {
         var url = 'assets/inc/fc-login.php';
-        var config = {
-          headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-        };
+        var config = {headers: {'Content-Type': 'application/x-www-form-urlencoded'}};
         
-        //console.log('logging in: ' + learner);
-        
-        //$http.post(url, "user=john", config).then(callback);
         $http.post(url, $httpParamSerializerJQLike(learner), config).then(callback); 
       };
       
       
+      // Register new learner
+      this.registerLearner = function(newLearner, callback) {
+        var url = 'assets/inc/fc-register.php';
+        var config = {headers: {'Content-Type': 'application/x-www-form-urlencoded'}};
+        
+        $http.post(url, $httpParamSerializerJQLike(newLearner), config).then(callback);
+      };
       
-      
-      // fc_learners
 });
 
 //# sourceMappingURL=app.js.map
