@@ -3,13 +3,15 @@
 <form class="register-form" name="formRegister">
   <h3>Please Register</h3>
   <label class="form__label login-form__label" for="txtlearner">User</label>
-  <input id="txtUser" class="form__input" type="text" ng-model="newLearner.txtNewLearner">
+  <input id="txtUser" class="form__input" type="text" ng-model="newLearner.newLearner">
   
   <label class="form__label login-form__label" for="txtPassword1">Password</label>
-  <input id="txtPassword1" class="form__input" type="password" ng-model="newLearner.txtPassword1">
+  <input id="txtPassword1" class="form__input" type="password" ng-model="newLearner.password1">
   
   <label class="form__label login-form__label" for="txtPassword2">Re-enter Password</label>
-  <input id="txtPassword2" class="form__input" type="password" ng-model="newLearner.txtPassword2">
+  <input id="txtPassword2" class="form__input" type="password" ng-model="newLearner.password2">
   
   <button class="form__button" ng-model="loginSubmit" ng-click="registerLearner()">Register</button>
+  
+  <formmessage class="form-message" ng-class="{'ang-show-message' : displayFormMessage}"></formmessage> 
 </form>

@@ -11,6 +11,8 @@ angular.module('flashcards')
       $scope.loggedIn = false;
       $scope.displayLogin = false;
       $scope.displayOptions = false;
+      $scope.displayAddPhrase = false;
+      $scope.displayAddVerb = false;
       $scope.displayAddWord = false;
       $scope.displayUpdateWord = false;
       $scope.displayAddCategory = false;
@@ -48,19 +50,39 @@ angular.module('flashcards')
       // Display add and update forms
       $scope.displayForm = function(form) {
         if(form === 'addcategory') {
+          $scope.displayAddPhrase = false;
+          $scope.displayAddVerb = false;
           $scope.displayAddWord = false;
           $scope.displayUpdateWord = false;
           $scope.displayAddCategory = true;
           $scope.displayOptions = false;
+        } else if (form === 'addphrase') {
+          $scope.displayAddPhrase = true;
+          $scope.displayAddVerb = false;
+          $scope.displayAddWord = false;
+          $scope.displayUpdateWord = false;
+          $scope.displayAddCategory = false;
+          $scope.displayOptions = false;
         } else if (form === 'addword') {
+          $scope.displayAddPhrase = false;
+          $scope.displayAddVerb = false;
           $scope.displayAddWord = true;
           $scope.displayUpdateWord = false;
           $scope.displayAddCategory = false;
           $scope.displayOptions = false;
           
         } else if (form === 'updateword') {
+          $scope.displayAddPhrase = false;
+          $scope.displayAddVerb = false;
           $scope.displayAddWord = false;
           $scope.displayUpdateWord = true;
+          $scope.displayAddCategory = false;
+          $scope.displayOptions = false;
+        } else if (form === 'addverb') {
+          $scope.displayAddPhrase = false;
+          $scope.displayAddVerb = true;
+          $scope.displayAddWord = false;
+          $scope.displayUpdateWord = false;
           $scope.displayAddCategory = false;
           $scope.displayOptions = false;
         }
@@ -70,6 +92,8 @@ angular.module('flashcards')
       // Close modal windows
       $scope.$on('closeModal', function(evt) {
         $scope.displayLogin = false;
+        $scope.displayAddPhrase = false;
+        $scope.displayAddVerb = false;
         $scope.displayAddWord = false;
         $scope.displayUpdateWord = false;
         $scope.displayAddCategory = false;
@@ -83,37 +107,24 @@ angular.module('flashcards')
         if (args === true) {
           $scope.loggedIn = true;
           $scope.displayLogin = false;
+          $scope.displayFormMessage = false;
         } else if (args === 'incorrect') {
-          console.log('login incorrect');
+          
+          console.log('Please fill in all form fields.');
+          
+        } else if (args === 'match') {
+          
+          console.log('Learner or password incorrect.');
+          
         } else if (args === 'register') {
           
           $scope.displayLogin = false;
           $scope.displayRegister = true;
           
-          console.log('register');
+          console.log('Please register.');
+        } else {
+          console.log('Unable to log you in at this time.');
         }
-      });
-      
-      
-      // Add category
-      $scope.$on('addCategoryClick', function(evt, args) {
-        // temp Success add category
-        $scope.displayAddCategory = false;
-        console.log('Add category ' + args);
-      });
-      
-      
-      // Add word
-      $scope.$on('addWordClick', function(evt) {
-        // temp Success add word
-        $scope.displayAddWord = false;
-      });
-      
-      
-      // Update word
-      $scope.$on('updateWordClick', function(evt) {
-        // temp Success update word
-        $scope.displayUpdateWord = false;
       });
       
       // Register click
@@ -121,12 +132,65 @@ angular.module('flashcards')
         if (args === true) {
           $scope.loggedIn = true;
           $scope.displayRegister = false;
+          $scope.displayFormMessage = false;
+        } else if (args === 'incorrect') {
+          
+          console.log('Please fill in all form fields.');
+        } else if (args === 'password') {
+          
+          console.log('Passwords are not the same');
         } else if (args === false) {
           
-          console.log('false, registration failed');
-        } else if(args === 'incorrect') {
-          console.log('incorrect') ;
+          console.log('Unable to register you at this time.');
         }
+      });
+      
+      
+      // Add category
+      $scope.$on('addCategoryClick', function(evt, args) {
+        if(args === true) {
+          console.log('Category added successfully.');
+        } else if (args ===  'incorrect') {
+          console.log('Please fill in all form fields.');
+        } else if (args === 'duplicate') {
+          console.log('This category already exist.');
+        } else if (args === false) {
+          console.log('Unable to add category at this time.');
+        }
+      });
+      
+      
+      // Add word
+      $scope.$on('addWordClick', function(evt, args) {
+        
+        if(args === true) {
+          console.log('Word added successfully.');
+        } else if (args ===  'incorrect') {
+          console.log('Please fill in all form fields.');
+        } else if (args === false) {
+          console.log('Unable to add word at this time.');
+        }
+      });
+      
+      
+      // Add Phrase
+      $scope.$on('addPhraseClick', function(evt, args) {
+        if(args === true) {
+          console.log('Phrase added successfully.');
+        } else if (args ===  'incorrect') {
+          console.log('Please fill in all form fields.');
+        } else if (args === 'duplicate') {
+          console.log('This phrase already exist.');
+        } else if (args === false) {
+          console.log('Unable to add phrase at this time.');
+        }
+      });
+      
+      
+      // Update word
+      $scope.$on('updateWordClick', function(evt) {
+        // temp Success update word
+        $scope.displayUpdateWord = false;
       });
       
 });

@@ -36,6 +36,8 @@ angular.module('flashcards')
       $scope.loggedIn = false;
       $scope.displayLogin = false;
       $scope.displayOptions = false;
+      $scope.displayAddPhrase = false;
+      $scope.displayAddVerb = false;
       $scope.displayAddWord = false;
       $scope.displayUpdateWord = false;
       $scope.displayAddCategory = false;
@@ -73,19 +75,39 @@ angular.module('flashcards')
       // Display add and update forms
       $scope.displayForm = function(form) {
         if(form === 'addcategory') {
+          $scope.displayAddPhrase = false;
+          $scope.displayAddVerb = false;
           $scope.displayAddWord = false;
           $scope.displayUpdateWord = false;
           $scope.displayAddCategory = true;
           $scope.displayOptions = false;
+        } else if (form === 'addphrase') {
+          $scope.displayAddPhrase = true;
+          $scope.displayAddVerb = false;
+          $scope.displayAddWord = false;
+          $scope.displayUpdateWord = false;
+          $scope.displayAddCategory = false;
+          $scope.displayOptions = false;
         } else if (form === 'addword') {
+          $scope.displayAddPhrase = false;
+          $scope.displayAddVerb = false;
           $scope.displayAddWord = true;
           $scope.displayUpdateWord = false;
           $scope.displayAddCategory = false;
           $scope.displayOptions = false;
           
         } else if (form === 'updateword') {
+          $scope.displayAddPhrase = false;
+          $scope.displayAddVerb = false;
           $scope.displayAddWord = false;
           $scope.displayUpdateWord = true;
+          $scope.displayAddCategory = false;
+          $scope.displayOptions = false;
+        } else if (form === 'addverb') {
+          $scope.displayAddPhrase = false;
+          $scope.displayAddVerb = true;
+          $scope.displayAddWord = false;
+          $scope.displayUpdateWord = false;
           $scope.displayAddCategory = false;
           $scope.displayOptions = false;
         }
@@ -95,6 +117,8 @@ angular.module('flashcards')
       // Close modal windows
       $scope.$on('closeModal', function(evt) {
         $scope.displayLogin = false;
+        $scope.displayAddPhrase = false;
+        $scope.displayAddVerb = false;
         $scope.displayAddWord = false;
         $scope.displayUpdateWord = false;
         $scope.displayAddCategory = false;
@@ -108,37 +132,24 @@ angular.module('flashcards')
         if (args === true) {
           $scope.loggedIn = true;
           $scope.displayLogin = false;
+          $scope.displayFormMessage = false;
         } else if (args === 'incorrect') {
-          console.log('login incorrect');
+          
+          console.log('Please fill in all form fields.');
+          
+        } else if (args === 'match') {
+          
+          console.log('Learner or password incorrect.');
+          
         } else if (args === 'register') {
           
           $scope.displayLogin = false;
           $scope.displayRegister = true;
           
-          console.log('register');
+          console.log('Please register.');
+        } else {
+          console.log('Unable to log you in at this time.');
         }
-      });
-      
-      
-      // Add category
-      $scope.$on('addCategoryClick', function(evt, args) {
-        // temp Success add category
-        $scope.displayAddCategory = false;
-        console.log('Add category ' + args);
-      });
-      
-      
-      // Add word
-      $scope.$on('addWordClick', function(evt) {
-        // temp Success add word
-        $scope.displayAddWord = false;
-      });
-      
-      
-      // Update word
-      $scope.$on('updateWordClick', function(evt) {
-        // temp Success update word
-        $scope.displayUpdateWord = false;
       });
       
       // Register click
@@ -146,12 +157,65 @@ angular.module('flashcards')
         if (args === true) {
           $scope.loggedIn = true;
           $scope.displayRegister = false;
+          $scope.displayFormMessage = false;
+        } else if (args === 'incorrect') {
+          
+          console.log('Please fill in all form fields.');
+        } else if (args === 'password') {
+          
+          console.log('Passwords are not the same');
         } else if (args === false) {
           
-          console.log('false, registration failed');
-        } else if(args === 'incorrect') {
-          console.log('incorrect') ;
+          console.log('Unable to register you at this time.');
         }
+      });
+      
+      
+      // Add category
+      $scope.$on('addCategoryClick', function(evt, args) {
+        if(args === true) {
+          console.log('Category added successfully.');
+        } else if (args ===  'incorrect') {
+          console.log('Please fill in all form fields.');
+        } else if (args === 'duplicate') {
+          console.log('This category already exist.');
+        } else if (args === false) {
+          console.log('Unable to add category at this time.');
+        }
+      });
+      
+      
+      // Add word
+      $scope.$on('addWordClick', function(evt, args) {
+        
+        if(args === true) {
+          console.log('Word added successfully.');
+        } else if (args ===  'incorrect') {
+          console.log('Please fill in all form fields.');
+        } else if (args === false) {
+          console.log('Unable to add word at this time.');
+        }
+      });
+      
+      
+      // Add Phrase
+      $scope.$on('addPhraseClick', function(evt, args) {
+        if(args === true) {
+          console.log('Phrase added successfully.');
+        } else if (args ===  'incorrect') {
+          console.log('Please fill in all form fields.');
+        } else if (args === 'duplicate') {
+          console.log('This phrase already exist.');
+        } else if (args === false) {
+          console.log('Unable to add phrase at this time.');
+        }
+      });
+      
+      
+      // Update word
+      $scope.$on('updateWordClick', function(evt) {
+        // temp Success update word
+        $scope.displayUpdateWord = false;
       });
       
 });
@@ -288,49 +352,223 @@ angular.module('flashcards')
 'use strict';
 
 angular.module('flashcards')
-    .controller('Login', function($scope, adminService) {
-      $scope.learner = {};
-      
-      // Login
-      $scope.loginLearner = function() {
-        adminService.loginLearner($scope.learner, function(response) {
-          
-          //console.log(response.data);
-          
-          if(response.data.success === true) {
-            $scope.$emit('loginClick', true);
-            //console.log('login sucessful');
-          } else if (response.data.success === 'incorrect') {
-            $scope.$emit('loginClick', 'incorrect');
-            //console.log('login incorrec');
-          } else if (response.data.success === 'register') {
-            $scope.$emit('loginClick', 'register');
-          }
-        });
-      };
-      
-      
-      // Register user
-      $scope.registerLearner = function() {
-        adminService.registerLearner($scope.newLearner, function(response) {
-          
-          console.log(response.data);
-          
-          if (response.data.success === true) {
-            $scope.$emit('registerClick', true);
-            //console.log('success');
-          } else if(response.data.success === 'incorrect') {
-            $scope.$emit('registerClick', 'incorrect');
-            //console.log('fail');
-          }
-          
-        });
-        
-        
-      };
-      
-      
+  .controller('Login', function($scope, adminService) {
+    $scope.learner = {};
+    $scope.responseMessage;
+    $scope.displayFormMessage = false;
 
+    // Login
+    $scope.loginLearner = function() {
+      $scope.displayFormMessage = false;
+      adminService.loginLearner($scope.learner, function(response) {
+
+        if(response.data.success === true) {
+          $scope.responseMessage = 'You have been logged in.';
+          $scope.displayFormMessage = true;
+          $scope.$emit('loginClick', true);
+        } else if (response.data.success === 'incorrect') {
+          $scope.responseMessage = 'Please fill in all form fields.';
+          $scope.displayFormMessage = true;
+          $scope.$emit('loginClick', 'incorrect');
+        } else if (response.data.success === 'match') {
+          $scope.responseMessage = 'Learner or password incorrect.';
+          $scope.displayFormMessage = true;
+          $scope.$emit('loginClick', 'match');
+        } else if (response.data.success === 'register') {
+          $scope.responseMessage = 'Please register';
+          $scope.displayFormMessage = true;
+          $scope.$emit('loginClick', 'register');
+        } else if (response.data.success === false) {
+          $scope.responseMessage = 'Unable to log you in at this time.';
+          $scope.displayFormMessage = true;
+          $scope.$emit('loginClick', false);
+        }
+      });
+    };
+
+
+    // Register user
+    $scope.registerLearner = function() {
+      $scope.displayFormMessage = false;
+      adminService.registerLearner($scope.newLearner, function(response) {
+
+        if (response.data.success === true) {
+          $scope.responseMessage = 'You have been sucessfully registered.';
+          $scope.displayFormMessage = true;
+          $scope.$emit('registerClick', true);
+        } else if(response.data.success === 'incorrect') {
+          $scope.responseMessage = 'Please fill in all form fields.';
+          $scope.displayFormMessage = true;
+          $scope.$emit('registerClick', 'incorrect');
+        } else if(response.data.success === 'password') {
+          $scope.responseMessage = 'Passwords are not the same';
+          $scope.displayFormMessage = true;
+          $scope.$emit('registerClick', 'password');
+        } else if (response.data.success === false) {
+          $scope.responseMessage = 'Unable to register you at this time.';
+          $scope.displayFormMessage = true;
+          $scope.$emit('addWordClick', false);
+          
+        }
+      });  
+    };
+});
+
+/* 
+ File     : addword.js
+ Date     : Oct 23, 2016
+ Author   : Jaymes Young <jaymes@phoenixjaymes.com>
+ */
+
+'use strict';
+
+angular.module('flashcards')
+  .controller('Addword', function($scope, cardsService, addwordService) {
+    $scope.word = {};
+    $scope.verb = {"pos": "verb"};
+    $scope.category = {"pos": "category"};
+    $scope.phrase = {"pos" : "phrase"};
+    $scope.posCategories;
+    $scope.genderCategories;
+    $scope.responseMessage;
+    $scope.displayFormMessage = false;
+      
+    // Change category options
+    $scope.getCategories = function(wordPos) {
+
+      if ($scope.posCategories === undefined) {
+        cardsService.getAllCategories(function(response) {
+          
+          $scope.posCategories = response.data.word;
+          $scope.genderCategories = response.data.gender;
+
+          
+          // change gender for adjectives, to none
+
+        });
+      }
+    };
+
+    // Add word
+    $scope.addWord = function() {
+      $scope.displayFormMessage = false;
+      
+      addwordService.addWord($scope.word, function(response) {
+        
+        // Check response message
+        if(response.data.success === true) {
+          $scope.responseMessage = 'Word added successfully.';
+          $scope.displayFormMessage = true;
+          $scope.$emit('addWordClick', true);
+          
+        } else if (response.data.success === 'incorrect') {
+          $scope.responseMessage = 'Please fill in all form fields.';
+          $scope.displayFormMessage = true;
+          $scope.$emit('addWordClick', 'incorrect');
+          
+        } else if (response.data.success === false) {
+          $scope.responseMessage = 'Unable to add word at this time.';
+          $scope.displayFormMessage = true;
+          $scope.$emit('addWordClick', false);
+          
+        }
+      });
+    }; 
+    
+    
+    // Add verb
+    $scope.addVerb = function() {
+      $scope.displayFormMessage = false;
+      
+      addwordService.addWord($scope.verb, function(response) {
+        
+        // Check response message
+        if(response.data.success === true) {
+          $scope.responseMessage = 'Word added successfully.';
+          $scope.displayFormMessage = true;
+          $scope.$emit('addVerbClick', true);
+          
+        } else if (response.data.success === 'incorrect') {
+          $scope.responseMessage = 'Please fill in all form fields.';
+          $scope.displayFormMessage = true;
+          $scope.$emit('addVerbClick', 'incorrect');
+          
+        } else if (response.data.success === false) {
+          $scope.responseMessage = 'Unable to add word at this time.';
+          $scope.displayFormMessage = true;
+          $scope.$emit('addVerbClick', false);
+          
+        }
+      });
+    };
+    
+    
+    // Add category
+    $scope.addCategory = function() {
+      $scope.displayFormMessage = false;
+      
+      addwordService.addWord($scope.category, function(response) {
+        
+        // Check response message
+        if(response.data.success === true) {
+          $scope.responseMessage = 'Category added successfully.';
+          $scope.displayFormMessage = true;
+          $scope.$emit('addCategoryClick', true);
+          
+        } else if (response.data.success === 'incorrect') {
+          $scope.responseMessage = 'Please fill in all form fields.';
+          $scope.displayFormMessage = true;
+          $scope.$emit('addCategoryClick', 'incorrect');
+          
+        } else if (response.data.success === 'duplicate') {
+          $scope.responseMessage = 'This category already exist.';
+          $scope.displayFormMessage = true;
+          $scope.$emit('addCategoryClick', 'duplicate');
+          
+        } else if (response.data.success === false) {
+          $scope.responseMessage = 'Unable to add category at this time.';
+          $scope.displayFormMessage = true;
+          $scope.$emit('addCategoryClick', false);
+          
+        }
+      });
+    };
+    
+    
+    // Add Phrase
+    $scope.addPhrase = function() {
+      $scope.displayFormMessage = false;
+      
+      addwordService.addWord($scope.phrase, function(response) {
+        
+        // Check response message
+        if(response.data.success === true) {
+          $scope.responseMessage = 'Phrase added successfully.';
+          $scope.displayFormMessage = true;
+          $scope.$emit('addPhraseClick', true);
+          
+        } else if (response.data.success === 'incorrect') {
+          $scope.responseMessage = 'Please fill in all form fields.';
+          $scope.displayFormMessage = true;
+          $scope.$emit('addPhraseClick', 'incorrect');
+          
+        } else if (response.data.success === 'duplicate') {
+          $scope.responseMessage = 'This category already exist.';
+          $scope.displayFormMessage = true;
+          $scope.$emit('addPhraseClick', 'duplicate');
+          
+        } else if (response.data.success === false) {
+          $scope.responseMessage = 'Unable to add Phrase at this time.';
+          $scope.displayFormMessage = true;
+          $scope.$emit('addPhraseClick', false);
+          
+        }
+      });
+    };
+    
+    
+    
+    
 });
 /* 
  File     : directives.js
@@ -355,12 +593,19 @@ angular.module('flashcards')
   .directive('login', function() {
     return {
       templateUrl : 'app/views/partials/login.html',
-      'controller' : 'Login'
+      controller : 'Login'
     };
   })
   .directive('addword', function() {
     return {
-      templateUrl : 'app/views/partials/add-word.html'
+      templateUrl : 'app/views/partials/add-word.html',
+      controller : 'Addword'
+    };
+  })
+  .directive('addverb', function() {
+    return {
+      templateUrl : 'app/views/partials/add-verb.html',
+      controller : 'Addword'
     };
   })
   .directive('updateword', function() {
@@ -370,7 +615,14 @@ angular.module('flashcards')
   })
   .directive('addcategory', function() {
     return {
-      templateUrl : 'app/views/partials/add-category.html'
+      templateUrl : 'app/views/partials/add-category.html',
+      controller : 'Addword'
+    };
+  })
+  .directive('addphrase', function() {
+    return {
+      templateUrl : 'app/views/partials/add-phrase.html',
+      controller : 'Addword'
     };
   })
   .directive('register', function() {
@@ -383,7 +635,15 @@ angular.module('flashcards')
     return {
       templateUrl : 'app/views/partials/btn-close.html'
     };
+  })
+  .directive('formmessage', function() {
+    return {
+      templateUrl : 'app/views/partials/form-message.html'
+    };
   });
+  
+  
+
 /* 
  File     : words.service.js
  Date     : Sep 28, 2016
@@ -413,6 +673,11 @@ angular.module('flashcards')
       
       this.getCategories = function(callback) {
         var url = 'assets/inc/fc-german-categories.php';
+        $http.get(url).then(callback);
+      };
+      
+      this.getAllCategories = function(callback) {
+        var url = 'assets/inc/fc-german-categories.php?type=all';
         $http.get(url).then(callback);
       };
 });
@@ -445,6 +710,28 @@ angular.module('flashcards')
         
         $http.post(url, $httpParamSerializerJQLike(newLearner), config).then(callback);
       };
+      
+});
+
+/* 
+ File     : words.service.js
+ Date     : Sep 28, 2016
+ Author   : Jaymes Young <jaymes@phoenixjaymes.com>
+ */
+
+'use strict';
+
+angular.module('flashcards')
+  .service('addwordService', function($http, $httpParamSerializerJQLike) {
+
+
+    // Login learner
+    this.addWord = function(word, callback) {
+      var url = 'assets/inc/fc-add-word.php';
+      var config = {headers: {'Content-Type': 'application/x-www-form-urlencoded'}};
+
+      $http.post(url, $httpParamSerializerJQLike(word), config).then(callback); 
+    };
       
 });
 

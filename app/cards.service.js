@@ -29,4 +29,9 @@ angular.module('flashcards')
         var url = 'assets/inc/fc-german-categories.php';
         $http.get(url).then(callback);
       };
+      
+      this.getAllCategories = function(callback) {
+        var url = 'assets/inc/fc-german-categories.php?type=all';
+        $http.get(url).then(callback);
+      };
 });

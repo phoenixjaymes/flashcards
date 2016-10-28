@@ -21,12 +21,19 @@ angular.module('flashcards')
   .directive('login', function() {
     return {
       templateUrl : 'app/views/partials/login.html',
-      'controller' : 'Login'
+      controller : 'Login'
     };
   })
   .directive('addword', function() {
     return {
-      templateUrl : 'app/views/partials/add-word.html'
+      templateUrl : 'app/views/partials/add-word.html',
+      controller : 'Addword'
+    };
+  })
+  .directive('addverb', function() {
+    return {
+      templateUrl : 'app/views/partials/add-verb.html',
+      controller : 'Addword'
     };
   })
   .directive('updateword', function() {
@@ -36,7 +43,14 @@ angular.module('flashcards')
   })
   .directive('addcategory', function() {
     return {
-      templateUrl : 'app/views/partials/add-category.html'
+      templateUrl : 'app/views/partials/add-category.html',
+      controller : 'Addword'
+    };
+  })
+  .directive('addphrase', function() {
+    return {
+      templateUrl : 'app/views/partials/add-phrase.html',
+      controller : 'Addword'
     };
   })
   .directive('register', function() {
@@ -49,4 +63,11 @@ angular.module('flashcards')
     return {
       templateUrl : 'app/views/partials/btn-close.html'
     };
+  })
+  .directive('formmessage', function() {
+    return {
+      templateUrl : 'app/views/partials/form-message.html'
+    };
   });
+  
+  

@@ -30,24 +30,9 @@ main {
 
 // Modal
 
-login, register, addword, updateword, addcategory {
+login, register, addphrase, addword, updateword, addVerb, addcategory {
   display: none;
 }
-
-
-
-/*login.modal {
-  position: fixed;
-  left: 0;
-  top: 0;
-  z-index: 100;
-  
-  background: rgba(225, 225, 225, .9);
-  display: block;
-  height: 100%;
-  width: 100%;
-  
-}*/
 
 .modal {
   position: absolute;

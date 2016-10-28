@@ -17,8 +17,8 @@ $mySqli->getConnection();
   
 $arr_response = [];
 
-$learner = filter_input(INPUT_POST, 'txtLearner', FILTER_SANITIZE_STRING);
-$password = filter_input(INPUT_POST, 'txtPassword', FILTER_SANITIZE_STRING);
+$learner = filter_input(INPUT_POST, 'learner', FILTER_SANITIZE_STRING);
+$password = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING);
 
 // Get row count from db
 $sql = "SELECT  count(*) AS cnt FROM fc_learners";
@@ -35,7 +35,9 @@ if ($row['cnt'] === '0') {
 }
 
 // Check for learner
-if ($learner && $password) {
+if (!$learner || !$password) {
+  $arr_response['success'] = 'incorrect';
+} elseif ($learner && $password) {
   
   $sql = "SELECT  learner, learner_pass FROM fc_learners WHERE learner = '{$learner}'";
   $result = $mySqli->handleQuery($sql);
@@ -44,18 +46,18 @@ if ($learner && $password) {
     $row = $result->fetch_assoc();
     
     // Verify password
-    if ($row['learner_pass'] === $password) {
+    if (password_verify($password, $row['learner_pass'])) {
       $arr_response['success'] = true;
     } else {
-      $arr_response['success'] = 'incorrect';
+      $arr_response['success'] = 'match';
     }
     
   } else {
-    $arr_response['success'] = 'incorrect';
+    $arr_response['success'] = 'match';
   }
 
 } else {
-  $arr_response['success'] = 'incorrect';
+  $arr_response['success'] = false;
 }
 
 // Encode arrays

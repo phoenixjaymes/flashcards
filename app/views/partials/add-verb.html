@@ -1,41 +1,33 @@
 <closebutton></closebutton>
 
-<form class="add-word-form" name="formAddWord">
-  <h3>Add a New Word</h3>
-  
-  <label class="form__label" for="selPos">Part of Speech</label>
-  <select id="selPos" class="form__select" name="selPos">
-    <option>Adjective</option>
-    <option>Noun</option>
-    <option>Phrase</option>
-    <option>Verb</option>
-  </select>
-  
-  
-  <label class="form__label" for="selCategory">Category</label>
-  <select id="selCategory" class="form__select" name="selCategory">
-    <option>Body</option>
-    <option>Geography</option>
-    <option>School</option>
-    <option>Weather</option>
-  </select>
+<form class="add-verb-form" name="formAddVerb">
+  <h3>Add a New Verb</h3>
   
   <label class="form__label" for="txtEnglish">English</label>
-  <input id="txtPos" class="form__input" type="text">
+  <input id="txtPos" class="form__input" type="text" ng-model="verb.english">
   
   <label  class="form__label" for="txtTranslation">Translation</label>
-  <input id="txtWord" class="form__input" type="text">
+  <input id="txtWord" class="form__input" type="text" ng-model="verb.translation">
   
-  <label class="form__label" for="txtImg">Image</label>
-  <input id="txtImg" class="form__input" type="text">
+  <label class="form__label" for="txtIch">ich</label>
+  <input id="txtIch" class="form__input" type="text" ng-model="verb.ich">
   
-  <label class="form__label" for="selGender">Gender</label>
-  <select id="selGender" class="form__select" name="selGender">
-    <option>Masculine</option>
-    <option>Feminine</option>
-    <option>Neuter</option>
-    <option>None</option>
-  </select>
+  <label class="form__label" for="txtDu">du</label>
+  <input id="txtDu" class="form__input" type="text" ng-model="verb.du">
   
-  <button  class="form__button" ng-model="loginSubmit" ng-click="$emit('addWordClick')">Add Word</button>
+  <label class="form__label" for="txtErEsSie">er, sie, es</label>
+  <input id="txtErEsSie" class="form__input" type="text" ng-model="verb.er_sie_es">
+  
+  <label class="form__label" for="txtWir">wir</label>
+  <input id="txtWir" class="form__input" type="text" ng-model="verb.wir">
+  
+  <label class="form__label" for="txtIhr">ihr</label>
+  <input id="txtIhr" class="form__input" type="text" ng-model="verb.ihr">
+  
+  <label class="form__label" for="txtSieSie">sie, Sie</label>
+  <input id="txtSieSie" class="form__input" type="text" ng-model="verb.sie_sie">  
+
+  <button  class="form__button" ng-model="loginSubmit" ng-click="addVerb()">Add Verb</button>
+  
+  <formmessage class="form-message" ng-class="{'ang-show-message' : displayFormMessage}"></formmessage>
 </form>

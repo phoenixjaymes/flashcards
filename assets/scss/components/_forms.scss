@@ -14,30 +14,70 @@
   border-radius: $brd-radius;
   display: block;
   height: 35px;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
   width: 100%;
 }
 
 .form__select {
   border-radius: $brd-radius;
   height: 35px;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
   width: 100%;
 }
 
 .form__button {
   border-radius: $brd-radius;
   height: 35px;
-  margin-top: 20px;
+  margin-top: 10px;
   width: 100%;
 }
 
 
 // Login form
-.login-form, .add-word-form, .add-category-form, .update-form, .register-form  {
+.login-form, .add-verb-form, .add-word-form, .add-category-form, .add-phrase-form, .update-form, .register-form  {
   background: blueviolet;
   border-radius: $brd-radius;  
   margin: 20px auto 0 auto;
+  overflow: hidden;
   padding: 10px;
+  position: relative;
   width: 300px;
+}
+
+.form-message {
+  position: absolute;
+  left: 0;
+  top: -50px;
+  
+  background: lightsalmon;
+  border-radius: $brd-radius $brd-radius 0 0;
+  display: none;
+  padding: 5px 10px;
+  width: 100%;
+}
+
+
+.form-message.ang-show-message {
+  display: block;
+  animation: show-message 5s linear backwards;
+}
+
+
+// Form message animation
+@keyframes show-message {
+  0% {
+    top: -50px;
+  }
+  
+  10% {
+    top: 0;
+  }
+  
+  90% {
+    top: 0;
+  }
+
+  100% {
+    top: -50px; 
+  }
 }

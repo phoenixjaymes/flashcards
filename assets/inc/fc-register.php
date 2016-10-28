@@ -17,14 +17,17 @@ $mySqli->getConnection();
   
 $arr_response = [];
 
-$newlearner = filter_input(INPUT_POST, 'txtNewLearner', FILTER_SANITIZE_STRING);
-$password1 = filter_input(INPUT_POST, 'txtPassword1', FILTER_SANITIZE_STRING);
-$password2 = filter_input(INPUT_POST, 'txtPassword2', FILTER_SANITIZE_STRING);
+$newlearner = filter_input(INPUT_POST, 'newLearner', FILTER_SANITIZE_STRING);
+$password1 = filter_input(INPUT_POST, 'password1', FILTER_SANITIZE_STRING);
+$password2 = filter_input(INPUT_POST, 'password2', FILTER_SANITIZE_STRING);
 
-if ($newlearner && $password1 && $password2) {
-  
-  
-  $sql = "INSERT INTO fc_learners (learner, learner_pass) VALUES ('$newlearner', '$password1')";
+if (!$newlearner || !$password1 || !$password2) {
+  $arr_response['success'] = 'incorrect';
+} elseif ($password1 !== $password2) {
+  $arr_response['success'] = 'password';
+} elseif ($newlearner && $password1 && $password2) {
+  $hashPassword = password_hash($password1, PASSWORD_DEFAULT);
+  $sql = "INSERT INTO fc_learners (learner, learner_pass) VALUES ('$newlearner', '$hashPassword')";
   $result = $mySqli->handleQuery($sql);
   
   if ($result) {

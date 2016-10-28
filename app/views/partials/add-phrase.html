@@ -1,9 +1,14 @@
 <closebutton></closebutton>
 
-<form class="add-category-form" name="formAddCategory">
-  <h3>Add a Category</h3>
-  <label class="form__label" for="txtCategory">Category Name</label>
-  <input id="txtCategory" class="form__input" ng-model="catName" type="text">
+<form class="add-phrase-form" name="formAddPhrase">
+  <h3>Add a Phrase</h3>
+  <label class="form__label" for="txtEnglish">English</label>
+  <input id="txtEnglish" class="form__input" ng-model="phrase.english" type="text">
   
-  <button class="form__button" ng-model="loginSubmit" ng-click="$emit('addCategoryClick', catName)">Add Category</button>
+  <label class="form__label" for="txtTranslation">Translation</label>
+  <input id="txtTranslation" class="form__input" ng-model="phrase.translation" type="text">
+  
+  <button class="form__button" ng-model="loginSubmit" ng-click="addPhrase()">Add Phrase</button>
+  
+  <formmessage class="form-message" ng-class="{'ang-show-message' : displayFormMessage}"></formmessage>  
 </form>

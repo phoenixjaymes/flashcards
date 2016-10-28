@@ -8,7 +8,6 @@
   background: #efefef;
   margin-bottom: em(20px);
   
-  
   &__wrap {
     @extend %wrap-max-width;
     display: flex;
@@ -57,6 +56,7 @@
   
   &__settings {
     position: relative;
+    z-index: 50;
     flex-basis: 60px;
     order: 3;
     

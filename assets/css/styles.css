@@ -9,6 +9,7 @@
     Author   : Jaymes Young <jaymes@phoenixjaymes.com>
 */
 /*! normalize.css v4.1.1 | MIT License | github.com/necolas/normalize.css */
+@import url("https://fonts.googleapis.com/css?family=Germania+One|Open+Sans");
 * {
   padding: 0;
   box-sizing: border-box; }
@@ -420,12 +421,15 @@ textarea {
   backface-visibility: hidden;
   transition: all .4s ease-in-out; }
 
-.male.card__back, .male.card__back--verb {
+.masculine.card__back, .masculine.card__back--verb {
   background: #89cff0; }
-.female.card__back, .female.card__back--verb {
+
+.feminine.card__back, .feminine.card__back--verb {
   background: #f4c2c2; }
+
 .neuter.card__back, .neuter.card__back--verb {
   background: #efdecd; }
+
 .none.card__back, .none.card__back--verb {
   background: #efefef; }
 
@@ -469,21 +473,9 @@ main {
   margin: 0 auto;
   max-width: 800px; }
 
-login, register, addword, updateword, addcategory {
+login, register, addphrase, addword, updateword, addVerb, addcategory {
   display: none; }
 
-/*login.modal {
-  position: fixed;
-  left: 0;
-  top: 0;
-  z-index: 100;
-  
-  background: rgba(225, 225, 225, .9);
-  display: block;
-  height: 100%;
-  width: 100%;
-  
-}*/
 .modal {
   position: absolute;
   left: 0;
@@ -627,6 +619,7 @@ login, register, addword, updateword, addcategory {
         order: 3; } }
   .main-header__settings {
     position: relative;
+    z-index: 50;
     flex-basis: 60px;
     order: 3;
     height: 60px;
@@ -695,27 +688,53 @@ login, register, addword, updateword, addcategory {
   border-radius: 5px;
   display: block;
   height: 35px;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
   width: 100%; }
 
 .form__select {
   border-radius: 5px;
   height: 35px;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
   width: 100%; }
 
 .form__button {
   border-radius: 5px;
   height: 35px;
-  margin-top: 20px;
+  margin-top: 10px;
   width: 100%; }
 
-.login-form, .add-word-form, .add-category-form, .update-form, .register-form {
+.login-form, .add-verb-form, .add-word-form, .add-category-form, .add-phrase-form, .update-form, .register-form {
   background: blueviolet;
   border-radius: 5px;
   margin: 20px auto 0 auto;
+  overflow: hidden;
   padding: 10px;
+  position: relative;
   width: 300px; }
+
+.form-message {
+  position: absolute;
+  left: 0;
+  top: -50px;
+  background: lightsalmon;
+  border-radius: 5px 5px 0 0;
+  display: none;
+  padding: 5px 10px;
+  width: 100%; }
+
+.form-message.ang-show-message {
+  display: block;
+  animation: show-message 5s linear backwards; }
+
+@keyframes show-message {
+  0% {
+    top: -50px; }
+  10% {
+    top: 0; }
+  90% {
+    top: 0; }
+  100% {
+    top: -50px; } }
 
 /* 
     File     : _options-menu.scss

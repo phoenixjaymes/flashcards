@@ -4,38 +4,36 @@
   <h3>Add a New Word</h3>
   
   <label class="form__label" for="selPos">Part of Speech</label>
-  <select id="selPos" class="form__select" name="selPos">
-    <option>Adjective</option>
-    <option>Noun</option>
-    <option>Phrase</option>
-    <option>Verb</option>
+  <select id="selPos" class="form__select" name="selPos" ng-model="word.pos"  ng-change="getCategories(word.pos)">
+    <option value="adjective">Adjective</option>
+    <option value="noun">Noun</option>
+    <option value="phrase">Phrase</option>
   </select>
   
-  
   <label class="form__label" for="selCategory">Category</label>
-  <select id="selCategory" class="form__select" name="selCategory">
-    <option>Body</option>
-    <option>Geography</option>
-    <option>School</option>
-    <option>Weather</option>
+  <select id="selCategory" class="form__select" name="selCategory" ng-model="word.category">
+    <option ng-repeat="option in posCategories" value="{{option.id}}">{{option.category}}</option>
   </select>
   
   <label class="form__label" for="txtEnglish">English</label>
-  <input id="txtPos" class="form__input" type="text">
+  <input id="txtPos" class="form__input" type="text" ng-model="word.english">
   
   <label  class="form__label" for="txtTranslation">Translation</label>
-  <input id="txtWord" class="form__input" type="text">
+  <input id="txtWord" class="form__input" type="text" ng-model="word.translation">
+  <div class="form__umlauts">
+    <button>&Uuml;</button>
+  </div>
   
   <label class="form__label" for="txtImg">Image</label>
-  <input id="txtImg" class="form__input" type="text">
+  <input id="txtImg" class="form__input" type="text" ng-model="word.img">
   
   <label class="form__label" for="selGender">Gender</label>
-  <select id="selGender" class="form__select" name="selGender">
-    <option>Masculine</option>
-    <option>Feminine</option>
-    <option>Neuter</option>
-    <option>None</option>
+  <select id="selGender" class="form__select" name="selGender" ng-model="word.gender">
+    <option ng-repeat="gender in genderCategories" value="{{gender.id}}">{{gender.gender}}</option>
   </select>
   
-  <button  class="form__button" ng-model="loginSubmit" ng-click="$emit('addWordClick')">Add Word</button>
+  <button  class="form__button" ng-model="loginSubmit" ng-click="addWord()">Add Word</button>
+  
+  <formmessage class="form-message" ng-class="{'ang-show-message' : displayFormMessage}"></formmessage>
 </form>
+

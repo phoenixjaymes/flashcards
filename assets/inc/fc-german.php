@@ -79,7 +79,8 @@ if ($pos === 'verb') {
 } elseif ($pos === 'noun') {
   $category = filter_input(INPUT_GET, 'category', FILTER_SANITIZE_STRING);
   // Nouns
-  $sql = "SELECT english, translation, img, gender FROM fc_german_nouns WHERE category = '{$category}'";
+  $sql = "SELECT english, translation, img, fc_categories_gender.gender AS gender"
+       . " FROM fc_german_nouns, fc_categories_gender WHERE fc_german_nouns.gender = fc_categories_gender.id AND category = '{$category}'";
   
   $result = $mySqli->handleQuery($sql);
 
