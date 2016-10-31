@@ -5,7 +5,9 @@
 */
 
 .main-footer {
-  background: #efefef;
+  background: $header-footer-color;
+  color: $header-text;
+  letter-spacing: 1px;
   text-align: center;
   
   &__wrap {

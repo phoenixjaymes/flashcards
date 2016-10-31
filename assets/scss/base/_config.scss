@@ -17,37 +17,44 @@ $font-family--secondary     : 'Germania One', 'Brush Script MT', cursive;
 $font-weight--medium        : 400; 
 $font-weight--bold          : 600; 
 
-// http://paletton.com/#uid=61L0E0kqJPSeSVtleSxyWMrHKuB
+// http://paletton.com/#uid=43+0u0ksSIb8PMvkqGcNgDPTRrj
 // Decriptive color variables
 
 $white                  : #fff;
 $black                  : #000;
 $light-grey             : #ededed;
-$red                    : #f00;
-$sunglow                : #ffc52a;
-$purple-heart           : #8e33e2;
-$broom                  : #fff42a;
-$green-yellow           : #acf829;
+$lightning-yellow       : #ffc519;
+$governor-bay           : #3131d2;
+$cold-purple            : #a9a9dc;
+$colonial-white         : #ffedb9;
+
+$masculine              : #89cff0;
+$feminine               : #f4c2c2;
+$neuter                 : #efdecd;
 
 
 // Functional color variables
 $text-color             : $black;
+$header-text            : $lightning-yellow;
+$header-footer-color    : $governor-bay;
+$background-color       : $cold-purple;
 
-$brdr-color             : $broom;
-$brdr-hover-color       : $purple-heart;
+$bg-card-color          : $colonial-white;
+$link-color             : $lightning-yellow;
+$link-hover-color       : $colonial-white;
 
-$brdr-form-color        : $green-yellow;
+$form-color             : $governor-bay;
+$form-heading-color     : $lightning-yellow;
+$form-label-color       : $colonial-white;
+$form-border-color      : $lightning-yellow;
+$form-widget-bg-color   : $colonial-white;
+$form-button-color      : $governor-bay;
+$form-button-bg-color   : $cold-purple;
 
-$error-color            : lighten($red, 10%);
-$success-color          : $sunglow;
 
 // Text
 $base__font-size        : 16px;
 $base__line             : 24px;
-
-// Path to assets
-$path-bg                : 'backgrounds/';
-$path-assets            : '../img/';
 
 
 // Misc variables

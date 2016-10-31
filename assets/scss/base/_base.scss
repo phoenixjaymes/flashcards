@@ -5,11 +5,15 @@
 */
 
 body {
+  @include text($base__font-size, $l-height: 1.25em, $color: $text-color);
+  background: $background-color;
+  font-family: $font-family--primary;
   position: relative;
 }
 
 h1, h2, h3 {
-  $font-family: $font-family--secondary;
+  font-family: $font-family--secondary;
+  letter-spacing: .5px;
 }
 
 h1, h2 {
@@ -18,10 +22,6 @@ h1, h2 {
 }
 
 
-h2 {
-  margin-bottom: em(15px);
-}
-
-h3 {
+h2, h3 {
   margin-bottom: em(15px);
 }

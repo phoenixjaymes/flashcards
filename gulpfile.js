@@ -25,11 +25,11 @@ gulp.task("concatScripts", function() {
     'app/main.js',
     'app/cards.js',
     'app/login.js',
-    'app/addword.js',
+    'app/additem.js',
     'app/directives.js',
     'app/cards.service.js',
     'app/login.service.js',
-    'app/addword.service.js'
+    'app/additem.service.js'
   ])
       .pipe(maps.init())
       .pipe(concat('app.js'))
@@ -122,6 +122,7 @@ gulp.task('build', ['concatScripts', 'minifyStyles'], function() {
     'app/app.js',
     'app/views/**',
     'assets/inc/*.php',
+    '!assets/inc/db*.php',
     'assets/classes/*.php',
     'node_modules/angular/angular.min.js'
   ], {base: './'})

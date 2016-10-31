@@ -10,3 +10,6 @@ dist/
 
 # Ignore img folder
 assets/img
+
+//
+assets/inc/db-constants.php

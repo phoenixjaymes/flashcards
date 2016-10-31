@@ -47,7 +47,7 @@ angular.module('flashcards')
       };
       
       
-      // Display add and update forms
+      // Display admin forms
       $scope.displayForm = function(form) {
         if(form === 'addcategory') {
           $scope.displayAddPhrase = false;
@@ -148,15 +148,15 @@ angular.module('flashcards')
       
       // Add category
       $scope.$on('addCategoryClick', function(evt, args) {
-        if(args === true) {
-          console.log('Category added successfully.');
-        } else if (args ===  'incorrect') {
-          console.log('Please fill in all form fields.');
-        } else if (args === 'duplicate') {
-          console.log('This category already exist.');
-        } else if (args === false) {
-          console.log('Unable to add category at this time.');
-        }
+//        if(args === true) {
+//          console.log('Category added successfully.');
+//        } else if (args ===  'incorrect') {
+//          console.log('Please fill in all form fields.');
+//        } else if (args === 'duplicate') {
+//          console.log('This category already exist.');
+//        } else if (args === false) {
+//          console.log('Unable to add category at this time.');
+//        }
       });
       
       
@@ -190,7 +190,7 @@ angular.module('flashcards')
       // Update word
       $scope.$on('updateWordClick', function(evt) {
         // temp Success update word
-        $scope.displayUpdateWord = false;
+        //$scope.displayUpdateWord = false;
       });
       
 });

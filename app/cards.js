@@ -10,9 +10,9 @@ angular.module('flashcards')
     .controller('Cards', function($scope, $timeout, $sce, cardsService) {
       // Default card
       $scope.cards = [{
-        "translation" : "Ich",
-        "english"     : "I",
-        "img"         : "white.gif",
+        "translation" : "Germany",
+        "english"     : "Deutschland",
+        "img"         : "flashcard-germany.svg",
         "pos"         : "noun",
         "gender"      : "m"
       }];

@@ -51,9 +51,7 @@ if ($type && $type === 'all') {
   }
   
   $arr_categories['gender'] = $arr_cat_gender;
-  
-  
-  
+   
 } else {
 
   // Adjectives
@@ -103,11 +101,6 @@ if ($type && $type === 'all') {
   $arr_categories['noun'] = $arr_cat_noun;
 
 }
-
-
-
-
-
 
 // Encode arrays
 $json = json_encode($arr_categories);

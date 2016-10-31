@@ -1,7 +1,7 @@
 <closebutton></closebutton>
 
-<form class="add-word-form" name="formAddWord">
-  <h3>Add a New Word</h3>
+<form class="form add-word-form" name="formAddWord">
+  <h3 class="form__heading">Add a New Word</h3>
   
   <label class="form__label" for="selPos">Part of Speech</label>
   <select id="selPos" class="form__select" name="selPos" ng-model="word.pos"  ng-change="getCategories(word.pos)">
@@ -32,7 +32,7 @@
     <option ng-repeat="gender in genderCategories" value="{{gender.id}}">{{gender.gender}}</option>
   </select>
   
-  <button  class="form__button" ng-model="loginSubmit" ng-click="addWord()">Add Word</button>
+  <button  class="form__button" ng-model="loginSubmit" ng-click="addItem()">Add Word</button>
   
   <formmessage class="form-message" ng-class="{'ang-show-message' : displayFormMessage}"></formmessage>
 </form>

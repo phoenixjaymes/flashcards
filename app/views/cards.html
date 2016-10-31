@@ -81,10 +81,8 @@
 <!-- on click set flip to false -->
 
   <div class="cards-controls">
-    <button class="cards-controls__btn" ng-click="prevCard()">Prev</button>
-    <span>{{currentCard}} of {{totalCards}}</span>
-    <button class="cards-controls__btn" ng-click="nextCard()">Next</button><br><br>
-    <progress value="{{currentCard}}" max="{{totalCards}}"></progress>
+    <a class="cards-controls__btn" ng-click="prevCard()"><img src="assets/img/prev.svg" alt="previous"></a>
+    <span class="cards-controls__count">{{currentCard}} of {{totalCards}}</span>
+    <a class="cards-controls__btn" ng-click="nextCard()"><img src="assets/img/next.svg" alt="next"></a>
   </div>
- 
 </section>

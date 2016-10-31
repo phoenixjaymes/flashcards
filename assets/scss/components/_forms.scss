@@ -4,38 +4,8 @@
     Author   : Jaymes Young <jaymes@phoenixjaymes.com>
 */
 
-.form__label {
-  display: block;
-  font-size: 1.3em;
-  margin-bottom: 5px;
-}
-
-.form__input {
-  border-radius: $brd-radius;
-  display: block;
-  height: 35px;
-  margin-bottom: 10px;
-  width: 100%;
-}
-
-.form__select {
-  border-radius: $brd-radius;
-  height: 35px;
-  margin-bottom: 10px;
-  width: 100%;
-}
-
-.form__button {
-  border-radius: $brd-radius;
-  height: 35px;
-  margin-top: 10px;
-  width: 100%;
-}
-
-
-// Login form
-.login-form, .add-verb-form, .add-word-form, .add-category-form, .add-phrase-form, .update-form, .register-form  {
-  background: blueviolet;
+.form {
+  background: $form-color;
   border-radius: $brd-radius;  
   margin: 20px auto 0 auto;
   overflow: hidden;
@@ -43,6 +13,61 @@
   position: relative;
   width: 300px;
 }
+
+.form__heading {
+  @include text($size: em(24px), $color: $form-heading-color);
+  letter-spacing: 1px;
+  margin-bottom: 10px;
+}
+
+.form__label {
+  @include text($size: em(18px), $color: $form-label-color);
+  display: block;
+  margin-bottom: 10px;
+}
+
+.form__input {
+  background: $form-widget-bg-color;
+  border: 1px solid $form-border-color;
+  border-radius: $brd-radius;
+  display: block;
+  height: 35px;
+  margin-bottom: 10px;
+  padding: 0 5px;
+  width: 100%;
+}
+
+.form__select {
+  background: $form-widget-bg-color;
+  border: 1px solid $form-border-color;
+  border-radius: $brd-radius;
+  height: 35px;
+  margin-bottom: 10px;
+  width: 100%;
+}
+
+.form__button {
+  background: $form-button-bg-color;
+  border-color: $form-border-color;
+  border-radius: $brd-radius;
+  color: $form-button-color;
+  font-weight: bold;
+  height: 35px;
+  margin-top: 10px;
+  width: 100%;
+}
+
+
+// Login form
+/*.login-form, .add-verb-form, .add-word-form, .add-category-form, .add-phrase-form, .update-form, .register-form  {
+  background: $form-color;
+  border-radius: $brd-radius;  
+  margin: 20px auto 0 auto;
+  overflow: hidden;
+  padding: 10px;
+  position: relative;
+  width: 300px;
+}*/
 
 .form-message {
   position: absolute;

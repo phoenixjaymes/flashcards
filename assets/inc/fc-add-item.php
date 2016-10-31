@@ -21,19 +21,6 @@ $date = date('Y-m-d');
 
 $pos = filter_input(INPUT_POST, 'pos', FILTER_SANITIZE_STRING);
 
-// test
-//print_r($_POST);
-//exit();
-
-
-/*
- * 
- * 
- * Add a duplicate test to all?
- * 
- * 
- */
-
 if ($pos && $pos === 'adjective') {
   $english = filter_input(INPUT_POST, 'english', FILTER_SANITIZE_STRING);
   $translation = filter_input(INPUT_POST, 'translation', FILTER_SANITIZE_STRING);
@@ -44,6 +31,13 @@ if ($pos && $pos === 'adjective') {
   if (!$english || !$translation || !$img || !$category) {
     $arr_response['success'] = 'incorrect';
   } else {
+    // Duplicate check
+    $sqlDuplicate = "SELECT count(*) AS cnt FROM fc_german_adjectives WHERE english = '$english'";
+
+    if(is_duplicate($mySqli, $sqlDuplicate)) {
+      $arr_response['success'] = 'duplicate';     
+      send_data($arr_response);
+    }
     
     $sql = "INSERT INTO fc_german_adjectives (english, translation, img, category, added, last_practiced)"
          . " VALUES ('$english', '$translation', '$img', '$category', '$date', '$date')";
@@ -57,6 +51,8 @@ if ($pos && $pos === 'adjective') {
     }
   }
   
+  send_data($arr_response);
+  
 } elseif ($pos && $pos === 'noun') {
   $english = filter_input(INPUT_POST, 'english', FILTER_SANITIZE_STRING);
   $translation = filter_input(INPUT_POST, 'translation', FILTER_SANITIZE_STRING);
@@ -66,7 +62,16 @@ if ($pos && $pos === 'adjective') {
   
   if (!$english || !$translation || !$img || !$gender || !$category) {
     $arr_response['success'] = 'incorrect';
+    send_data($arr_response);
   } else {
+    // Duplicate check
+    $sqlDuplicate = "SELECT count(*) AS cnt FROM fc_german_nouns WHERE english = '$english'";
+
+    if(is_duplicate($mySqli, $sqlDuplicate)) {
+      $arr_response['success'] = 'duplicate';     
+      send_data($arr_response);
+    }
+    
     $sql = "INSERT INTO fc_german_nouns (english, translation, img, gender, category, added, last_practiced)"
          . " VALUES ('$english', '$translation', '$img', '$gender', '$category', '$date', '$date')";
 
@@ -78,25 +83,39 @@ if ($pos && $pos === 'adjective') {
       $arr_response['success'] = false;
     }
   }
+  
+  send_data($arr_response);
     
 } elseif ($pos && $pos === 'phrase') {
   $english = filter_input(INPUT_POST, 'english', FILTER_SANITIZE_STRING);
   $translation = filter_input(INPUT_POST, 'translation', FILTER_SANITIZE_STRING);
   
-    if (!$english || !$translation ) {
-      $arr_response['success'] = 'incorrect';
-    } else {
-      $sql = "INSERT INTO fc_german_phrases (english, translation, added, last_practiced)"
-         . " VALUES ('$english', '$translation', '$date', '$date')";
+  if (!$english || !$translation ) {
+    $arr_response['success'] = 'incorrect';
+    send_data($arr_response);
+  } else {
+    // Duplicate check
+    $sqlDuplicate = "SELECT count(*) AS cnt FROM fc_german_phrases WHERE english = '$english'";
 
-      $result = $mySqli->handleQuery($sql);
-
-      if ($result) {
-        $arr_response['success'] = true;
-      } else {
-        $arr_response['success'] = false;
-      }
+    if(is_duplicate($mySqli, $sqlDuplicate)) {
+      $arr_response['success'] = 'duplicate';     
+      send_data($arr_response);
     }
+    
+    
+    $sql = "INSERT INTO fc_german_phrases (english, translation, added, last_practiced)"
+       . " VALUES ('$english', '$translation', '$date', '$date')";
+
+    $result = $mySqli->handleQuery($sql);
+
+    if ($result) {
+      $arr_response['success'] = true;
+    } else {
+      $arr_response['success'] = false;
+    }
+  }
+  
+  send_data($arr_response);
   
 } elseif ($pos && $pos === 'verb') {
   $english = filter_input(INPUT_POST, 'english', FILTER_SANITIZE_STRING);
@@ -110,9 +129,19 @@ if ($pos && $pos === 'adjective') {
   
   if (!$english || !$translation || !$ich || !$du || !$er_sie_es || !$wir || !$ihr || !$sie_sie ) {
     $arr_response['success'] = 'incorrect';
+    send_data($arr_response);
   } else {
+    // Duplicate check
+    $sqlDuplicate = "SELECT count(*) AS cnt FROM fc_german_verbs WHERE translation = '$translation'";
+
+    if(is_duplicate($mySqli, $sqlDuplicate)) {
+      $arr_response['success'] = 'duplicate';     
+      send_data($arr_response);
+    }
+    
+    
     $sql = "INSERT INTO fc_german_verbs"
-         . " (english, translation,ich, du, er_sie_es, wir, ihr, sie_Sie, added, last_practiced)"
+         . " (english, translation, ich, du, er_sie_es, wir, ihr, sie_Sie, added, last_practiced)"
          . " VALUES"
          . " ('$english', '$translation','$ich', '$du', '$er_sie_es', '$wir', '$ihr', '$sie_sie',  '$date', '$date')";
 
@@ -124,45 +153,38 @@ if ($pos && $pos === 'adjective') {
       $arr_response['success'] = false;
     }
   }
+ 
+  send_data($arr_response);
   
 } elseif ($pos && $pos === 'category') {
   $name = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_STRING);
   
-    if (!$name) {
-      $arr_response['success'] = 'incorrect';
-    } else {
-      // Duplicate check
-      $sqlDuplicate = "SELECT count(*) AS cnt FROM fc_categories WHERE category = '$name'";
-      $resultDuplicate = $mySqli->handleQuery($sqlDuplicate);
-      $rowDuplicate = $resultDuplicate->fetch_assoc();
-      
-      if($rowDuplicate['cnt'] > 0) {
-        $arr_response['success'] = 'duplicate';
-        // Encode array and send
-        $json = json_encode($arr_response);
-        echo $json;
-        exit();
-      }
+  if (!$name) {
+    $arr_response['success'] = 'incorrect';
+  } else {
+    // Duplicate check
+    $sqlDuplicate = "SELECT count(*) AS cnt FROM fc_categories WHERE category = '$name'";
 
-      // Insert category
-      $sql = "INSERT INTO fc_categories (category)"
-           . " VALUES ('$name')";
-
-      $result = $mySqli->handleQuery($sql);
-
-      if ($result) {
-        $arr_response['success'] = true;
-      } else {
-        $arr_response['success'] = false;
-      }
+    if(is_duplicate($mySqli, $sqlDuplicate)) {
+      $arr_response['success'] = 'duplicate';     
+      send_data($arr_response);
     }
+
+    // Insert category
+    $sql = "INSERT INTO fc_categories (category) VALUES ('$name')";
+
+    $result = $mySqli->handleQuery($sql);
+
+    if ($result) {
+      $arr_response['success'] = true;
+    } else {
+      $arr_response['success'] = false;
+    }
+  }
+  
+  send_data($arr_response);
   
 } else {
   $arr_response['success'] = 'incorrect';
-  
+  send_data($arr_response);
 }
-
-// Encode array and send
-$json = json_encode($arr_response);
-echo $json;
-exit();

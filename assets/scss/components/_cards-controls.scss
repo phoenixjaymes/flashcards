@@ -7,12 +7,29 @@
 .cards-controls {
   margin: 0 auto 20px auto;
   text-align: center;
+  height: 40px;
   width: 100%;
  
   &__btn {
     border-radius: $brd-radius;
+    
+    display: inline-block;
+    
     height: 40px;
-    width: 60px;
-  } 
+    line-height: 40px;
+    width: 40px;
+  }
+  
+  &__count {
+    display: inline-block;
+    
+    height: 40px;
+    line-height: 40px;
+    
+    width: 140px;
+    
+    vertical-align: top;
+    
+  }
   
 }

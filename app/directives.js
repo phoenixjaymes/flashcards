@@ -27,13 +27,13 @@ angular.module('flashcards')
   .directive('addword', function() {
     return {
       templateUrl : 'app/views/partials/add-word.html',
-      controller : 'Addword'
+      controller : 'AddItem'
     };
   })
   .directive('addverb', function() {
     return {
       templateUrl : 'app/views/partials/add-verb.html',
-      controller : 'Addword'
+      controller : 'AddItem'
     };
   })
   .directive('updateword', function() {
@@ -44,13 +44,13 @@ angular.module('flashcards')
   .directive('addcategory', function() {
     return {
       templateUrl : 'app/views/partials/add-category.html',
-      controller : 'Addword'
+      controller : 'AddItem'
     };
   })
   .directive('addphrase', function() {
     return {
       templateUrl : 'app/views/partials/add-phrase.html',
-      controller : 'Addword'
+      controller : 'AddItem'
     };
   })
   .directive('register', function() {

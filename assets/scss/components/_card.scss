@@ -14,7 +14,6 @@
 
 .card__front {
   @extend %card-display;
-  background: #ededed;
   padding: 20px;
   transform: rotateX(0) rotateY(0);
 }
@@ -37,9 +36,6 @@
 }
 
 
-
-
-
 .card__img {
   border-radius: 5px;
   height: 260px;
@@ -60,8 +56,6 @@
   tr:nth-child(even) {
     background: #fff;
   }
-  
-  
 }
 
 .card__table-col-one {

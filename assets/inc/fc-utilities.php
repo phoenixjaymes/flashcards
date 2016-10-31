@@ -7,10 +7,20 @@
 
 
 // Check for duplicate entries
-function duplicate_check($mySqli, $sql) {
+function is_duplicate($mySqli, $sql) {
   $result = $mySqli->handleQuery($sql);
-  
-  
-  print_r($result);
-  return ;
+  $row = $result->fetch_assoc();
+
+  if($row['cnt'] > 0) {
+    return true;
+  } else { 
+    return   false;
+  }
+}
+
+// Encode and send data
+function send_data($arr) {
+  $json = json_encode($arr);
+  echo $json;
+  exit();
 }

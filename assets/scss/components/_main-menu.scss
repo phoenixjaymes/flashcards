@@ -26,11 +26,11 @@
         width: 100%;
       
         &:link, &:visited {
-
+          color: $link-color;
         }
 
         &:hover, &:active {
-          color: #fff;
+          color: $link-hover-color;
         }
         
         @media #{$brk-md} {

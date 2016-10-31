@@ -5,7 +5,7 @@
 */
 
 .main-header {
-  background: #efefef;
+  background: $header-footer-color;
   margin-bottom: em(20px);
   
   &__wrap {
@@ -24,7 +24,7 @@
     order: 1;
     
     height: 60px;
-    padding: 0 10px;
+    padding: 5px 10px;
     width: 60px;
   }
   
@@ -32,8 +32,11 @@
     flex: 1;
     order: 2;
     
+    color: $header-text;
+    font-family: 'Germania One', cursive;
     font-size: 1.5em;
     font-weight: bold;
+    letter-spacing: .5px;
     line-height: 60px;
         
     @media #{$brk-md} {
