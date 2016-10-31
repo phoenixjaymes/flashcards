@@ -11,5 +11,5 @@ dist/
 # Ignore img folder
 assets/img
 
-//
+// Sensitive data
 assets/inc/db-constants.php
