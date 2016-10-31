@@ -8,8 +8,14 @@ nbproject/
 # Ignore dist folder
 dist/
 
+# Ignore mock data
+mock/
+
 # Ignore img folder
 assets/img
 
-// Sensitive data
+# Ignore CSS folder
+assets/css
+
+# Sensitive data
 assets/inc/db-constants.php
