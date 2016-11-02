@@ -33,7 +33,7 @@ angular.module('flashcards')
 
 angular.module('flashcards')
     .controller('Main', function($scope) {
-      $scope.loggedIn = false;
+      $scope.loggedIn = true;
       $scope.displayLogin = false;
       $scope.displayOptions = false;
       $scope.displayAddPhrase = false;
@@ -128,45 +128,24 @@ angular.module('flashcards')
       
       // Login to options
       $scope.$on('loginClick', function(evt, args) {
-        
+        // Clear and close login form or close form and show registration
         if (args === true) {
           $scope.loggedIn = true;
           $scope.displayLogin = false;
           $scope.displayFormMessage = false;
-        } else if (args === 'incorrect') {
-          
-          console.log('Please fill in all form fields.');
-          
-        } else if (args === 'match') {
-          
-          console.log('Learner or password incorrect.');
-          
         } else if (args === 'register') {
-          
           $scope.displayLogin = false;
           $scope.displayRegister = true;
-          
-          console.log('Please register.');
-        } else {
-          console.log('Unable to log you in at this time.');
         }
       });
       
       // Register click
       $scope.$on('registerClick', function(evt, args) {
+        // Clear and close form
         if (args === true) {
           $scope.loggedIn = true;
           $scope.displayRegister = false;
           $scope.displayFormMessage = false;
-        } else if (args === 'incorrect') {
-          
-          console.log('Please fill in all form fields.');
-        } else if (args === 'password') {
-          
-          console.log('Passwords are not the same');
-        } else if (args === false) {
-          
-          console.log('Unable to register you at this time.');
         }
       });
       
@@ -175,12 +154,6 @@ angular.module('flashcards')
       $scope.$on('addCategoryClick', function(evt, args) {
 //        if(args === true) {
 //          console.log('Category added successfully.');
-//        } else if (args ===  'incorrect') {
-//          console.log('Please fill in all form fields.');
-//        } else if (args === 'duplicate') {
-//          console.log('This category already exist.');
-//        } else if (args === false) {
-//          console.log('Unable to add category at this time.');
 //        }
       });
       
@@ -188,27 +161,17 @@ angular.module('flashcards')
       // Add word
       $scope.$on('addWordClick', function(evt, args) {
         
-        if(args === true) {
-          console.log('Word added successfully.');
-        } else if (args ===  'incorrect') {
-          console.log('Please fill in all form fields.');
-        } else if (args === false) {
-          console.log('Unable to add word at this time.');
-        }
+//        if(args === true) {
+//          console.log('Word added successfully.');
+//        }
       });
       
       
       // Add Phrase
       $scope.$on('addPhraseClick', function(evt, args) {
-        if(args === true) {
-          console.log('Phrase added successfully.');
-        } else if (args ===  'incorrect') {
-          console.log('Please fill in all form fields.');
-        } else if (args === 'duplicate') {
-          console.log('This phrase already exist.');
-        } else if (args === false) {
-          console.log('Unable to add phrase at this time.');
-        }
+//        if(args === true) {
+//          console.log('Phrase added successfully.');
+//        }
       });
       
       
@@ -501,6 +464,17 @@ angular.module('flashcards')
       addItemService.addItem($scope.verb, function(response) {
         // Check response message
         if(response.data.success === true) {
+          // clear form
+          $scope.verb.english = '';
+          $scope.verb.translation = '';
+          $scope.verb.ich = '';
+          $scope.verb.du = '';
+          $scope.verb.er_sie_es = '';
+          $scope.verb.wir = '';
+          $scope.verb.ihr = '';
+          $scope.verb.sie_sie = '';
+          
+          
           displayMessage('true');
           $scope.$emit('addVerbClick', true);
         } else if (response.data.success === 'duplicate') {
@@ -524,6 +498,9 @@ angular.module('flashcards')
       addItemService.addItem($scope.category, function(response) {
         // Check response message
         if(response.data.success === true) {
+          // Clear form
+          $scope.category.name = '';
+          
           displayMessage('true');
           $scope.$emit('addCategoryClick', true);
         } else if (response.data.success === 'duplicate') {
@@ -547,6 +524,10 @@ angular.module('flashcards')
       addItemService.addItem($scope.phrase, function(response) {
         // Check response message
         if(response.data.success === true) {
+          // Clear form
+          $scope.phrase.english = '';
+          $scope.phrase.translation = '';
+          
           displayMessage('true');
           $scope.$emit('addPhraseClick', true);
         } else if (response.data.success === 'incorrect') {

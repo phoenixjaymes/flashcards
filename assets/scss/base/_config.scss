@@ -8,14 +8,13 @@
 // ==============================
 
 // Font stacks
-$font-url--google           : 'https://fonts.googleapis.com/css?family=Germania+One|Open+Sans';
+$font-url--google           : 'https://fonts.googleapis.com/css?family=Germania+One|Open+Sans:400,700';
 $font-family--primary       : 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 $font-family--secondary     : 'Germania One', 'Brush Script MT', cursive;
 
 
-// Font weights
-$font-weight--medium        : 400; 
-$font-weight--bold          : 600; 
+// Font weights 
+$font-weight--bold          : 700; 
 
 // http://paletton.com/#uid=43+0u0ksSIb8PMvkqGcNgDPTRrj
 // Decriptive color variables
@@ -36,12 +35,14 @@ $neuter                 : #efdecd;
 // Functional color variables
 $text-color             : $black;
 $header-text            : $lightning-yellow;
-$header-footer-color    : $governor-bay;
+$header-footer-bg-color : $governor-bay;
 $background-color       : $cold-purple;
 
 $bg-card-color          : $colonial-white;
+
 $link-color             : $lightning-yellow;
 $link-hover-color       : $colonial-white;
+$link-hover-bg-color    : $cold-purple;
 
 $form-color             : $governor-bay;
 $form-heading-color     : $lightning-yellow;

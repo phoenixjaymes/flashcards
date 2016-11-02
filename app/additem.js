@@ -68,6 +68,17 @@ angular.module('flashcards')
       addItemService.addItem($scope.verb, function(response) {
         // Check response message
         if(response.data.success === true) {
+          // clear form
+          $scope.verb.english = '';
+          $scope.verb.translation = '';
+          $scope.verb.ich = '';
+          $scope.verb.du = '';
+          $scope.verb.er_sie_es = '';
+          $scope.verb.wir = '';
+          $scope.verb.ihr = '';
+          $scope.verb.sie_sie = '';
+          
+          
           displayMessage('true');
           $scope.$emit('addVerbClick', true);
         } else if (response.data.success === 'duplicate') {
@@ -91,6 +102,9 @@ angular.module('flashcards')
       addItemService.addItem($scope.category, function(response) {
         // Check response message
         if(response.data.success === true) {
+          // Clear form
+          $scope.category.name = '';
+          
           displayMessage('true');
           $scope.$emit('addCategoryClick', true);
         } else if (response.data.success === 'duplicate') {
@@ -114,6 +128,10 @@ angular.module('flashcards')
       addItemService.addItem($scope.phrase, function(response) {
         // Check response message
         if(response.data.success === true) {
+          // Clear form
+          $scope.phrase.english = '';
+          $scope.phrase.translation = '';
+          
           displayMessage('true');
           $scope.$emit('addPhraseClick', true);
         } else if (response.data.success === 'incorrect') {

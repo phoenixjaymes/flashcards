@@ -13,13 +13,11 @@
   
   &__item {
     display: inline-block;
-    font-weight: bold;
-    
+    font-weight: $font-weight--bold;
     width: 80px;
     
     a {
         display: inline-block;
-      
         line-height: 40px;
         text-align: center;
         text-decoration: none;

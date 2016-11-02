@@ -11,9 +11,10 @@
   
   
   list-style: none;
+  padding: 5px;
   width: 200px;
   
-  background: rgba(0, 200, 0, .5);
+  background: $header-footer-bg-color; 
   
   @media #{$brk-md} {
     top: 60px;
@@ -23,17 +24,18 @@
   &__item {
     a {
       display: block;
+      font-weight: $font-weight--bold;
       padding: 10px;
       text-align: right;
       text-decoration: none;
       
-      
       &:link, &:visited {
-        color: yellow;
+        color: $link-color;
       }
       
       &:hover {
-        color: pink;
+        background: $link-hover-bg-color;
+        color: $header-footer-bg-color;
       }
     }
   }
