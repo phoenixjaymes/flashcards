@@ -32,6 +32,10 @@ angular.module('flashcards')
       $scope.changeCategory = function(cardPos) {
         if (cardPos === 'verb') {
           $scope.getCards(cardPos);
+        } else if (cardPos === 'phrase') {
+          $scope.getCards(cardPos);
+        } else if (cardPos === 'mixed') {
+          $scope.getCards(cardPos);
         } else {
           $scope.posCategory = $scope.cardAllCategories[cardPos];
         }
@@ -57,6 +61,14 @@ angular.module('flashcards')
             $scope.image = $scope.cards[card].img;
             $scope.gender = $scope.cards[card].gender;
             
+          }, 500);
+        } else if ($scope.cardPos === 'phrase') {
+          // Wait for card to flip over
+          $timeout(function() {
+            $scope.english = $sce.trustAsHtml($scope.cards[card].english);
+            $scope.translation = $sce.trustAsHtml($scope.cards[card].translation);
+            $scope.image = $scope.cards[card].img;
+            $scope.gender = $scope.cards[card].gender;
           }, 500);
         } else {
           // Wait for card to flip over
@@ -109,6 +121,11 @@ angular.module('flashcards')
         
         setCard($scope.currentCard - 1);
       };
+      
+      // Flip front of card to back
+      $scope.$on('cardFrontFlip', function(evt, args) {
+        $scope.flip = args;
+      });
       
       
       // Flip back of card to front

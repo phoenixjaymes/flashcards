@@ -7,6 +7,7 @@
 
 require 'db-constants.php';
 require '../classes/database.php';
+require 'fc-utilities.php';
 
 // Set content ype to json
 header('content-type: application/json; charset=utf-8');
@@ -20,7 +21,26 @@ $arr_cards = [];
 
 $pos = filter_input(INPUT_GET, 'pos', FILTER_SANITIZE_STRING);
 
-if ($pos === 'verb') {
+if ($pos === 'phrase') {
+  // Phares
+  $category = filter_input(INPUT_GET, 'category', FILTER_SANITIZE_STRING);
+  
+  $sql = "SELECT english, translation, 'none' AS gender FROM fc_german_phrases";
+  $result = $mySqli->handleQuery($sql);
+  
+  // Get cards
+  while($row = $result->fetch_assoc()) {
+    $arr_card = [];
+    $arr_card['english'] = $row['english'];
+    $arr_card['translation'] = $row['translation'];
+    $arr_card['gender'] = $row['gender'];
+
+    $arr_cards[] = $arr_card;
+  }
+
+  send_data($arr_cards);  
+  
+} elseif ($pos === 'verb') {
   // Verbs
   $category = filter_input(INPUT_GET, 'category', FILTER_SANITIZE_STRING);
   
@@ -44,11 +64,7 @@ if ($pos === 'verb') {
     $arr_cards[] = $arr_card;
   }
 
-
-  // Encode arrays
-  $json = json_encode($arr_cards);
-  echo $json;
-  exit();  
+  send_data($arr_cards);   
   
 } elseif ($pos === 'adjective') {
   $category = filter_input(INPUT_GET, 'category', FILTER_SANITIZE_STRING);
@@ -70,11 +86,7 @@ if ($pos === 'verb') {
     $arr_cards[] = $arr_card;
   }
 
-
-  // Encode arrays
-  $json = json_encode($arr_cards);
-  echo $json;
-  exit();
+  send_data($arr_cards); 
   
 } elseif ($pos === 'noun') {
   $category = filter_input(INPUT_GET, 'category', FILTER_SANITIZE_STRING);
@@ -96,11 +108,32 @@ if ($pos === 'verb') {
     $arr_cards[] = $arr_card;
   }
 
+  send_data($arr_cards); 
+  
+} elseif ($pos === 'mixed') {
+  $category = filter_input(INPUT_GET, 'category', FILTER_SANITIZE_STRING);
+  // Nouns
+  $sql = "(SELECT english, translation, img, fc_categories_gender.gender AS gender"
+       . " FROM fc_german_nouns, fc_categories_gender WHERE fc_german_nouns.gender = fc_categories_gender.id ORDER BY added DESC LIMIT 20)"
+       . " UNION"
+       . " (SELECT english, translation, img, 'none' AS gender"
+       . " FROM fc_german_adjectives ORDER BY added DESC LIMIT 20)";
+  
+  $result = $mySqli->handleQuery($sql);
 
-  // Encode arrays
-  $json = json_encode($arr_cards);
-  echo $json;
-  exit();
+
+  // Get cards
+  while($row = $result->fetch_assoc()) {
+    $arr_card = [];
+    $arr_card['english'] = $row['english'];
+    $arr_card['translation'] = $row['translation'];
+    $arr_card['img'] = $row['img'];
+    $arr_card['gender'] = $row['gender'];
+
+    $arr_cards[] = $arr_card;
+  }
+
+  send_data($arr_cards); 
   
 } else {
   $category = filter_input(INPUT_GET, 'category', FILTER_SANITIZE_STRING);
@@ -132,9 +165,5 @@ if ($pos === 'verb') {
     $arr_cards[] = $arr_card;
   }
 
-
-  // Encode arrays
-  $json = json_encode($arr_cards);
-  echo $json;
-  exit();
+  send_data($arr_cards);
 }

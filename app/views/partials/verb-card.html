@@ -1,0 +1,38 @@
+<figure class="card__front" ng-click="$emit('cardFrontFlip', true);">
+  <img class="card__img" ng-src="assets/img/{{image}}" alt="{{english}}">
+<!--      <figcaption class="card__text">{{ english }}</figcaption>-->
+</figure>
+
+<div class="card__back--verb {{gender}}" ng-click="$emit('cardBackFlip', false)">
+  <h3>{{translation}}</h3>
+  <table class="card__table">
+    <tr>
+      <th>Person</th>
+      <th>Present</th>
+    </tr>
+    <tr>
+      <td class="card__table-col-one">ich</td>
+      <td class="card__table-col-two">{{ich}}</td>
+    </tr>
+    <tr>
+      <td class="card__table-col-one">du</td>
+      <td class="card__table-col-two">{{du}}</td>
+    </tr>
+    <tr>
+      <td class="card__table-col-one">er, sie, es</td>
+      <td class="card__table-col-two">{{er_sie_es}}</td>
+    </tr>
+    <tr>
+      <td class="card__table-col-one">wir</td>
+      <td class="card__table-col-two">{{wir}}</td>
+    </tr>
+    <tr>
+      <td class="card__table-col-one">ihr</td>
+      <td class="card__table-col-two">{{ihr}}</td>
+    </tr>
+    <tr>
+      <td class="card__table-col-one">sie, Sie</td>
+      <td class="card__table-col-two">{{sie_Sie}}</td>
+    </tr>
+  </table>
+</div>

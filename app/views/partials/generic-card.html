@@ -1,0 +1,9 @@
+<figure class="card__front" ng-click="$emit('cardFrontFlip', true);">
+  <img class="card__img" ng-src="assets/img/{{image}}" alt="{{english}}">
+<!--      <figcaption class="card__text">{{ english }}</figcaption>-->
+</figure>
+
+<figure class="card__back {{gender}}" ng-click="$emit('cardBackFlip', false);">
+  <img class="card__img" ng-src="assets/img/{{image}}" alt="{{translation}}">
+  <figcaption class="card__text" ng-bind-html="translation"></figcaption>
+</figure>

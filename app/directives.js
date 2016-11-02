@@ -68,6 +68,21 @@ angular.module('flashcards')
     return {
       templateUrl : 'app/views/partials/form-message.html'
     };
+  })
+  .directive('verbcard', function() {
+    return {
+      templateUrl : 'app/views/partials/verb-card.html'
+    };
+  })
+  .directive('phrasecard', function() {
+    return {
+      templateUrl : 'app/views/partials/phrase-card.html'
+    };
+  })
+  .directive('genericcard', function() {
+    return {
+      templateUrl : 'app/views/partials/generic-card.html'
+    };
   });
   
   
