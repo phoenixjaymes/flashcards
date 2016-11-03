@@ -65,6 +65,12 @@ angular.module('flashcards')
     $scope.addVerb = function() {
       $scope.displayFormMessage = false;
       
+      if(!$scope.verb.separable) {
+        $scope.verb.separable = 'no';
+      } else {
+        $scope.verb.separable = 'yes';
+      }
+      
       addItemService.addItem($scope.verb, function(response) {
         // Check response message
         if(response.data.success === true) {
@@ -77,6 +83,7 @@ angular.module('flashcards')
           $scope.verb.wir = '';
           $scope.verb.ihr = '';
           $scope.verb.sie_sie = '';
+          $scope.verb.separable = undefined;
           
           
           displayMessage('true');
@@ -92,6 +99,8 @@ angular.module('flashcards')
           $scope.$emit('addVerbClick', false);
         }
       });
+
+      $scope.verb.separable = undefined;
     };
     
     

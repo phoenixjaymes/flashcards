@@ -120,6 +120,7 @@ if ($pos && $pos === 'adjective') {
 } elseif ($pos && $pos === 'verb') {
   $english = filter_input(INPUT_POST, 'english', FILTER_SANITIZE_STRING);
   $translation = filter_input(INPUT_POST, 'translation', FILTER_SANITIZE_STRING);
+  $separable = filter_input(INPUT_POST, 'separable', FILTER_SANITIZE_STRING);
   $ich = filter_input(INPUT_POST, 'ich', FILTER_SANITIZE_STRING);
   $du = filter_input(INPUT_POST, 'du', FILTER_SANITIZE_STRING);
   $er_sie_es = filter_input(INPUT_POST, 'er_sie_es', FILTER_SANITIZE_STRING);
@@ -141,9 +142,9 @@ if ($pos && $pos === 'adjective') {
     
     
     $sql = "INSERT INTO fc_german_verbs"
-         . " (english, translation, ich, du, er_sie_es, wir, ihr, sie_Sie, added, last_practiced)"
+         . " (english, translation, separable, ich, du, er_sie_es, wir, ihr, sie_Sie, added, last_practiced)"
          . " VALUES"
-         . " ('$english', '$translation','$ich', '$du', '$er_sie_es', '$wir', '$ihr', '$sie_sie',  '$date', '$date')";
+         . " ('$english', '$translation', '$separable', '$ich', '$du', '$er_sie_es', '$wir', '$ihr', '$sie_sie',  '$date', '$date')";
 
     $result = $mySqli->handleQuery($sql);
 

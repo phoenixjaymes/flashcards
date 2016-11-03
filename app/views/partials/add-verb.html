@@ -3,6 +3,9 @@
 <form class="form add-verb-form" name="formAddVerb">
   <h3 class="form__heading">Add a New Verb</h3>
   
+  <label class="form__label--check" for="txtSeparable">Separable</label>
+  <input id="txtSeparable" class="form__check" type="checkbox" ng-model="verb.separable">
+  
   <label class="form__label" for="txtEnglish">English</label>
   <input id="txtPos" class="form__input" type="text" ng-model="verb.english">
   

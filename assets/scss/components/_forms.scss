@@ -17,13 +17,24 @@
 .form__heading {
   @include text($size: em(24px), $color: $form-heading-color);
   letter-spacing: 1px;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
 }
 
 .form__label {
   @include text($size: em(18px), $color: $form-label-color);
   display: block;
   margin-bottom: 10px;
+  
+  &--check {
+    @include text($size: em(18px), $color: $form-label-color);
+    display: inline-block;
+    margin-bottom: 15px;
+    width: 100px;
+  }
+}
+
+.form__check {
+  line-height: 35px;
 }
 
 .form__input {
@@ -57,17 +68,6 @@
   width: 100%;
 }
 
-
-// Login form
-/*.login-form, .add-verb-form, .add-word-form, .add-category-form, .add-phrase-form, .update-form, .register-form  {
-  background: $form-color;
-  border-radius: $brd-radius;  
-  margin: 20px auto 0 auto;
-  overflow: hidden;
-  padding: 10px;
-  position: relative;
-  width: 300px;
-}*/
 
 .form-message {
   position: absolute;
