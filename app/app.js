@@ -235,12 +235,12 @@ angular.module('flashcards')
           $timeout(function() {
             $scope.english = $scope.cards[card].english;
             $scope.translation = $sce.trustAsHtml($scope.cards[card].translation);
-            $scope.ich = $scope.cards[card].ich;
-            $scope.du = $scope.cards[card].du;
-            $scope.er_sie_es = $scope.cards[card].er_sie_es;
-            $scope.wir = $scope.cards[card].wir;
-            $scope.ihr = $scope.cards[card].ihr;
-            $scope.sie_Sie = $scope.cards[card].sie_Sie;
+            $scope.ich = $sce.trustAsHtml($scope.cards[card].ich);
+            $scope.du = $sce.trustAsHtml($scope.cards[card].du);
+            $scope.er_sie_es = $sce.trustAsHtml($scope.cards[card].er_sie_es);
+            $scope.wir = $sce.trustAsHtml($scope.cards[card].wir);
+            $scope.ihr = $sce.trustAsHtml($scope.cards[card].ihr);
+            $scope.sie_Sie = $sce.trustAsHtml($scope.cards[card].sie_Sie);
             
             $scope.image = $scope.cards[card].img;
             $scope.gender = $scope.cards[card].gender;
@@ -249,7 +249,7 @@ angular.module('flashcards')
         } else if ($scope.cardPos === 'phrase') {
           // Wait for card to flip over
           $timeout(function() {
-            $scope.english = $sce.trustAsHtml($scope.cards[card].english);
+            $scope.english = $scope.cards[card].english;
             $scope.translation = $sce.trustAsHtml($scope.cards[card].translation);
             $scope.image = $scope.cards[card].img;
             $scope.gender = $scope.cards[card].gender;

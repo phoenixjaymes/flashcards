@@ -9,7 +9,7 @@
 </figure>-->
 
 <div class="card__front" ng-click="$emit('cardFrontFlip', true);">
-  <p class="card__text" ng-bind-html="english"></p>
+  <p class="card__text">{{english}}</p>
 </div>
 
 <div class="card__back {{gender}}" ng-click="$emit('cardBackFlip', false);">
