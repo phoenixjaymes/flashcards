@@ -8,7 +8,7 @@
 
 angular.module('flashcards')
     .controller('Main', function($scope) {
-      $scope.loggedIn = false;
+      $scope.loggedIn = true;
       $scope.displayLogin = false;
       $scope.displayOptions = false;
       $scope.displayAddPhrase = false;

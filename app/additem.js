@@ -16,6 +16,7 @@ angular.module('flashcards')
     $scope.genderCategories;
     $scope.responseMessage;
     $scope.displayFormMessage = false;
+    $scope.showUpperCase = false;
       
     // Change category options
     $scope.getCategories = function(wordPos) {
@@ -44,9 +45,9 @@ angular.module('flashcards')
           $scope.$emit('addItemClick', true);
           
           // Clear form
-          $scope.word.translation = '';
-          $scope.word.english = '';
-          $scope.word.img = '';
+          //$scope.word.translation = '';
+          //$scope.word.english = '';
+          //$scope.word.img = '';
         } else if (response.data.success === 'duplicate') {
           displayMessage('duplicate');
           $scope.$emit('addItemClick', 'duplicate');
@@ -154,6 +155,15 @@ angular.module('flashcards')
           $scope.$emit('addPhraseClick', false);
         }
       });
+    };
+    
+    //console.log($scope.word.translate);
+    $scope.addCharacter = function(objName, propName, char) {
+      if ($scope[objName][propName] === undefined) {
+        $scope[objName][propName] = '';
+      }
+      
+      $scope[objName][propName] = $scope[objName][propName] + char;
     };
     
     

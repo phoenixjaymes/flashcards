@@ -18,11 +18,21 @@
   width: 40px;
 }
 
-
+// Show and hide options
 .ang-show-options {
   visibility: visible;
 }
 
 .ang-hide-options {
+  visibility: hidden;
+}
+
+
+// Show  and hide Uppercase and lowercase umlauts
+.ang-show-lowercase, .ang-show-uppercase {
+  visibility: visible;
+}
+
+.ang-hide-lowercase, .ang-hide-uppercase {
   visibility: hidden;
 }

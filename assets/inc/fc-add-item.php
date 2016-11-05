@@ -79,6 +79,7 @@ if ($pos && $pos === 'adjective') {
 
     if ($result) {
       $arr_response['success'] = true;
+      
     } else {
       $arr_response['success'] = false;
     }

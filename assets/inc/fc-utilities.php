@@ -24,3 +24,13 @@ function send_data($arr) {
   echo $json;
   exit();
 }
+
+
+// Replace unicode with html
+function replace_unicode($str) {
+  
+  
+  $new_str = str_replace('\u00c4', '&Auml', $str);
+  
+  return $new_str;
+}
