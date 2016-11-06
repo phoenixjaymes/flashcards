@@ -5,4 +5,4 @@
  */
 'use strict';
 
-angular.module('flashcards', []);
+angular.module('flashcards', ['ngCookies']);

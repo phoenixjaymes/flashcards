@@ -7,8 +7,8 @@
 'use strict';
 
 angular.module('flashcards')
-    .controller('Main', function($scope) {
-      $scope.loggedIn = true;
+    .controller('Main', function($scope, $cookies) {
+      $scope.loggedIn = false;
       $scope.displayLogin = false;
       $scope.displayOptions = false;
       $scope.displayAddPhrase = false;
@@ -105,6 +105,10 @@ angular.module('flashcards')
       $scope.$on('loginClick', function(evt, args) {
         // Clear and close login form or close form and show registration
         if (args === true) {
+          
+          $cookies.put('loggedIn', true);
+          
+          
           $scope.loggedIn = true;
           $scope.displayLogin = false;
           $scope.displayFormMessage = false;

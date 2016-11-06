@@ -45,9 +45,9 @@ angular.module('flashcards')
           $scope.$emit('addItemClick', true);
           
           // Clear form
-          //$scope.word.translation = '';
-          //$scope.word.english = '';
-          //$scope.word.img = '';
+          $scope.word.translation = '';
+          $scope.word.english = '';
+          $scope.word.img = '';
         } else if (response.data.success === 'duplicate') {
           displayMessage('duplicate');
           $scope.$emit('addItemClick', 'duplicate');

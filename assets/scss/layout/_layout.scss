@@ -15,6 +15,24 @@ main {
   flex: 1;
 }
 
+.home {
+  
+  &__title {
+    margin-bottom: em(15px);
+    
+    @media #{$brk-sm} {
+      margin-bottom: em(25px);
+    }
+  }
+  
+  &__image {
+    display: block;
+    margin: 0 auto em(20px) auto;
+    max-width: 500px;
+  }
+    
+  
+}
 
 
 .flashcards {

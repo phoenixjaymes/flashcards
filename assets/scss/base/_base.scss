@@ -18,10 +18,10 @@ h1, h2, h3 {
 
 h1, h2 {
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: em(20px);
 }
 
 
-h2, h3 {
+h3 {
   margin-bottom: em(15px);
 }

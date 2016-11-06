@@ -5,7 +5,7 @@
  */
 'use strict';
 
-angular.module('flashcards', []);
+angular.module('flashcards', ['ngCookies']);
 /* 
  File     : config.js
  Date     : Oct 7, 2016
@@ -32,8 +32,8 @@ angular.module('flashcards')
 'use strict';
 
 angular.module('flashcards')
-    .controller('Main', function($scope) {
-      $scope.loggedIn = true;
+    .controller('Main', function($scope, $cookies) {
+      $scope.loggedIn = false;
       $scope.displayLogin = false;
       $scope.displayOptions = false;
       $scope.displayAddPhrase = false;
@@ -130,6 +130,10 @@ angular.module('flashcards')
       $scope.$on('loginClick', function(evt, args) {
         // Clear and close login form or close form and show registration
         if (args === true) {
+          
+          $cookies.put('loggedIn', true);
+          
+          
           $scope.loggedIn = true;
           $scope.displayLogin = false;
           $scope.displayFormMessage = false;
@@ -441,9 +445,9 @@ angular.module('flashcards')
           $scope.$emit('addItemClick', true);
           
           // Clear form
-          //$scope.word.translation = '';
-          //$scope.word.english = '';
-          //$scope.word.img = '';
+          $scope.word.translation = '';
+          $scope.word.english = '';
+          $scope.word.img = '';
         } else if (response.data.success === 'duplicate') {
           displayMessage('duplicate');
           $scope.$emit('addItemClick', 'duplicate');
