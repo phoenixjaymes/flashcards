@@ -125,7 +125,7 @@ gulp.task('build', ['concatScripts', 'minifyStyles'], function() {
     '!assets/inc/db*.php',
     'assets/classes/*.php',
     'node_modules/angular/angular.min.js',
-    'node_modeles/angular-cookies/angular-cookies.min.js'
+    'node_modules/angular-cookies/angular-cookies.min.js'
   ], {base: './'})
       .pipe(gulp.dest('dist'));
 });
