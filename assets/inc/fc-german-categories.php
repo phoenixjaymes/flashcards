@@ -20,7 +20,7 @@ $arr_categories = [];
 $type = filter_input(INPUT_GET, 'type', FILTER_SANITIZE_STRING);
 
 if ($type && $type === 'all') {
-  $sql ='SELECT * FROM fc_categories';
+  $sql ='SELECT * FROM fc_categories ORDER BY category';
   $sql_gender = 'SELECT * FROM fc_categories_gender';
   
   
