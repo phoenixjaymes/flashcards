@@ -21,7 +21,7 @@
           <ul class="main-menu">
             <li class="main-menu__item" ng-class="{'main-menu__item-current' : sectionType == 'home'}" ng-click="sectionType='home'"><a href="">Home</a></li>
             <li class="main-menu__item" ng-class="{'main-menu__item-current' : sectionType == 'cards'}" ng-click="sectionType='cards'"><a href="">German</a></li>
-            <li class="main-menu__item" ng-click="sectionType='cards'"><a href="">Dutch</a></li>
+            <li class="main-menu__item" ng-click="sectionType='dutch'"><a href="">Dutch</a></li>
           </ul>
         </nav>
         <div class="main-header__settings">
@@ -41,6 +41,7 @@
     <main class="main-content">
       <div class="main-content__wrap" ng-switch="sectionType">
         <cards ng-switch-when="cards"></cards>
+        <dutch ng-switch-when="dutch"></dutch>
         <home ng-switch-default></home>
       </div>
     </main>
