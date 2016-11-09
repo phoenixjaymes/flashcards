@@ -52,6 +52,10 @@ $form-widget-bg-color   : $colonial-white;
 $form-button-color      : $governor-bay;
 $form-button-bg-color   : $cold-purple;
 
+$table-row-alt-color    : lighten($colonial-white, 8%);
+
+$card-text-bg-color     : lighten($colonial-white, 8%);
+$card-border-color      : $black;
 
 // Text
 $base__font-size        : 16px;
@@ -59,7 +63,7 @@ $base__line             : 24px;
 
 
 // Misc variables
-$brd-radius         : 5px;
+$brd-radius             : 5px;
 
 
 // Media query breakpoints

@@ -35,6 +35,16 @@
   
 }
 
+.card__figure {
+  max-width: 300px;
+  margin: 0;
+}
+
+.card__caption {
+  padding-top: 10px;
+  font-size: 1.25em;
+}
+
 
 .card__img {
   border-radius: 5px;
@@ -42,9 +52,22 @@
   width: 260px;
 }
 
+.card__text-wrap {
+  background: $card-text-bg-color;
+  border: 1px solid $card-border-color;
+  border-radius: $brd-radius;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 258px;
+  width: 258px;
+}
+
 .card__text {
-  padding-top: 10px;
+  
   font-size: 1.25em;
+  
+  
 }
 
 .card__table {
@@ -54,7 +77,7 @@
   width: 280px;
   
   tr:nth-child(even) {
-    background: #fff;
+    background: $table-row-alt-color;
   }
 }
 
@@ -63,12 +86,25 @@
   width: 35%;
 }
 
-.card__table-col-two {
+.card__table-col-two { 
   padding: 2px 0 2px 3px;
 }
 
+.card__button {
+  @include text(1.7em);
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  
+  cursor: pointer;
+  display: inline-block;
+  font-family: $font-family--secondary;
+  letter-spacing: 1px;
+  padding: 10px 7px;
+}
 
-.card.js-flip-card .card__front {
+
+.card.js-flip-card .card__front { 
   transform: rotateY(179deg);
 }
 

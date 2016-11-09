@@ -1,9 +1,14 @@
-<figure class="card__front" ng-click="$emit('cardFrontFlip', true);">
-  <img class="card__img" ng-src="assets/img/{{image}}" alt="{{english}}">
-<!--      <figcaption class="card__text">{{ english }}</figcaption>-->
-</figure>
+<div class="card__front">
+  <h3>{{ english }}</h3>
+  <figure class="card__figure">
+    <img class="card__img" ng-src="assets/img/{{image}}" alt="{{english}}">
+    <figcaption class="card__caption">{{ english }}</figcaption>
+  </figure>
+  
+  <span class="card__button" ng-click="$emit('cardFrontFlip', true);">Flip</span>
+</div>
 
-<div class="card__back--verb {{gender}}" ng-click="$emit('cardBackFlip', false)">
+<div class="card__back--verb {{gender}}">
   <h3 ng-bind-html="translation"></h3>
   <table class="card__table">
     <tr>
@@ -35,4 +40,6 @@
       <td class="card__table-col-two" ng-bind-html="sie_Sie"></td>
     </tr>
   </table>
+  
+  <span class="card__button" ng-click="$emit('cardBackFlip', false);">Flip</span>
 </div>
