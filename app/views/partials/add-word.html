@@ -1,13 +1,11 @@
-<closebutton></closebutton>
-
 <form class="form add-word-form" name="formAddWord">
+  <closebutton class="form__close-button"></closebutton>
   <h3 class="form__heading">Add a New Word</h3>
   
   <label class="form__label" for="selPos">Part of Speech</label>
   <select id="selPos" class="form__select" name="selPos" ng-model="word.pos"  ng-change="getCategories(word.pos)">
-    <option value="adjective">Adjective</option>
+    <option value="adjective">Adjective / Adverb</option>
     <option value="noun">Noun</option>
-    <option value="phrase">Phrase</option>
   </select>
   
   <label class="form__label" for="selCategory">Category</label>
