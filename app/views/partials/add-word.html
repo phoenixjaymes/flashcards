@@ -44,8 +44,8 @@
   <label class="form__label" for="txtImg">Image</label>
   <input id="txtImg" class="form__input" type="text" ng-model="word.img">
   
-  <label class="form__label" for="selGender">Gender</label>
-  <select id="selGender" class="form__select" name="selGender" ng-model="word.gender">
+  <label class="form__label" for="selGender" ng-show="word.pos !== 'adjective'">Gender</label>
+  <select id="selGender" class="form__select" name="selGender" ng-show="word.pos !== 'adjective'" ng-model="word.gender">
     <option ng-repeat="gender in genderCategories" value="{{gender.id}}">{{gender.gender}}</option>
   </select>
   

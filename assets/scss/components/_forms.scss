@@ -46,6 +46,11 @@
   margin-bottom: 10px;
   padding: 0 5px;
   width: 100%;
+  
+  &:focus {
+    background: $form-widget-bg-focus;
+  }
+  
 }
 
 .form__select {
@@ -55,6 +60,10 @@
   height: 35px;
   margin-bottom: 10px;
   width: 100%;
+  
+  &:focus {
+    background: $form-widget-bg-focus;
+  }
 }
 
 .form__button {
@@ -66,6 +75,10 @@
   height: 35px;
   margin-top: 10px;
   width: 100%;
+  
+  &:focus {
+    background: $form-widget-bg-color;
+  }
 }
 
 
