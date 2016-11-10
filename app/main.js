@@ -39,8 +39,9 @@ angular.module('flashcards')
       
       // Logging in and logging out
       $scope.logOut = function() {
-        // Looged out
-        // create login service
+        // Remove cookie
+        $cookies.remove('loggedIn');
+        // Set loggedIn 
         $scope.loggedIn = false;
         // Hide options
         $scope.displayOptions = false;
@@ -105,9 +106,8 @@ angular.module('flashcards')
       $scope.$on('loginClick', function(evt, args) {
         // Clear and close login form or close form and show registration
         if (args === true) {
-          
+          // Set cookie
           $cookies.put('loggedIn', true);
-          
           
           $scope.loggedIn = true;
           $scope.displayLogin = false;
@@ -159,5 +159,17 @@ angular.module('flashcards')
         // temp Success update word
         //$scope.displayUpdateWord = false;
       });
+      
+      var checkLogin = function() {
+        
+        var loggedIn = $cookies.get('loggedIn');
+        
+        if (loggedIn) {
+          $scope.loggedIn = true;
+        } 
+        
+      };
+      
+      checkLogin();
       
 });
