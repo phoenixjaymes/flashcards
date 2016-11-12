@@ -81,11 +81,21 @@
   }
 }
 
-.form__close-button {
+.form__button-close {
   position: absolute;
-  right: -10px;
-  top: 0px;
+  right: 10px;
+  top: 10px;
+  
+  background: $cold-purple;
+  border-radius: $brd-radius;
+  display: inline-block;
+  height: 40px;
+  line-height: 40px;
+  text-align: center;
+  text-decoration: none;
+  width: 40px;
 }
+
 
 
 .form-message {
@@ -107,7 +117,6 @@
 }
 
 .form-umlauts {
-  //background: yellow;
   height: 35px;
   margin-bottom: 10px;
   position: relative;
@@ -135,7 +144,6 @@
   height: 35px;
   width: 35px;
 }
-
 
 
 // Form message animation

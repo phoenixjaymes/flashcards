@@ -64,11 +64,6 @@ angular.module('flashcards')
       controller : 'Login'
     };
   })
-  .directive('closebutton', function() {
-    return {
-      templateUrl : 'app/views/partials/btn-close.html'
-    };
-  })
   .directive('formmessage', function() {
     return {
       templateUrl : 'app/views/partials/form-message.html'

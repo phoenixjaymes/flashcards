@@ -9,22 +9,25 @@
 angular.module('flashcards')
     .controller('Main', function($scope, $cookies) {
       $scope.loggedIn = false;
-      $scope.displayLogin = false;
       $scope.displayOptions = false;
-      $scope.displayAddPhrase = false;
-      $scope.displayAddVerb = false;
-      $scope.displayAddWord = false;
-      $scope.displayUpdateWord = false;
-      $scope.displayAddCategory = false;
-      $scope.displayRegister = false;
+      
+      $scope.formDisplay = {
+        displayLogin : false,
+        displayOptions : false,
+        displayAddPhrase : false,
+        displayAddVerb : false,
+        displayAddWord : false,
+        displayUpdateWord : false,
+        displayAddCategory : false,
+        displayRegister : false
+      };
       
       
       $scope.showOptions = function() {
         // Check if user is logged in
         if ($scope.loggedIn === false) {
           
-          $scope.displayLogin = true;
-          
+          $scope.formDisplay.displayLogin = true;
           
           // temp Success on login
           //$scope.loggedIn = true;
@@ -50,55 +53,27 @@ angular.module('flashcards')
       
       // Display admin forms
       $scope.displayForm = function(form) {
-        if(form === 'addcategory') {
-          $scope.displayAddPhrase = false;
-          $scope.displayAddVerb = false;
-          $scope.displayAddWord = false;
-          $scope.displayUpdateWord = false;
-          $scope.displayAddCategory = true;
-          $scope.displayOptions = false;
-        } else if (form === 'addphrase') {
-          $scope.displayAddPhrase = true;
-          $scope.displayAddVerb = false;
-          $scope.displayAddWord = false;
-          $scope.displayUpdateWord = false;
-          $scope.displayAddCategory = false;
-          $scope.displayOptions = false;
-        } else if (form === 'addword') {
-          $scope.displayAddPhrase = false;
-          $scope.displayAddVerb = false;
-          $scope.displayAddWord = true;
-          $scope.displayUpdateWord = false;
-          $scope.displayAddCategory = false;
-          $scope.displayOptions = false;
-          
-        } else if (form === 'updateword') {
-          $scope.displayAddPhrase = false;
-          $scope.displayAddVerb = false;
-          $scope.displayAddWord = false;
-          $scope.displayUpdateWord = true;
-          $scope.displayAddCategory = false;
-          $scope.displayOptions = false;
-        } else if (form === 'addverb') {
-          $scope.displayAddPhrase = false;
-          $scope.displayAddVerb = true;
-          $scope.displayAddWord = false;
-          $scope.displayUpdateWord = false;
-          $scope.displayAddCategory = false;
-          $scope.displayOptions = false;
+        // Close all modals
+        for (var prop in $scope.formDisplay) {
+          $scope.formDisplay[prop] = false;
         }
+        
+        // Open selected modal
+        $scope.formDisplay[form] = true;
+        
+        // Close options
+        $scope.displayOptions = false;
+      
       };
       
       
       // Close modal windows
-      $scope.$on('closeModal', function(evt) {
-        $scope.displayLogin = false;
-        $scope.displayAddPhrase = false;
-        $scope.displayAddVerb = false;
-        $scope.displayAddWord = false;
-        $scope.displayUpdateWord = false;
-        $scope.displayAddCategory = false;
-        $scope.displayRegister = false;
+      $scope.$on('closeModal', function(evt, args) {
+        $scope.formDisplay[args] = false;
+        
+        // Don't show message box
+        $scope.displayFormMessage = false;
+        
       });
       
       
@@ -110,10 +85,10 @@ angular.module('flashcards')
           $cookies.put('loggedIn', true);
           
           $scope.loggedIn = true;
-          $scope.displayLogin = false;
+          $scope.formDisplay.displayLogin = false;
           $scope.displayFormMessage = false;
         } else if (args === 'register') {
-          $scope.displayLogin = false;
+          $scope.formDisplay.displayLogin = false;
           $scope.displayRegister = true;
         }
       });
@@ -123,43 +98,12 @@ angular.module('flashcards')
         // Clear and close form
         if (args === true) {
           $scope.loggedIn = true;
-          $scope.displayRegister = false;
+          $scope.formDisplay.displayRegister = false;
           $scope.displayFormMessage = false;
         }
       });
       
-      
-      // Add category
-      $scope.$on('addCategoryClick', function(evt, args) {
-//        if(args === true) {
-//          console.log('Category added successfully.');
-//        }
-      });
-      
-      
-      // Add word
-      $scope.$on('addWordClick', function(evt, args) {
-        
-//        if(args === true) {
-//          console.log('Word added successfully.');
-//        }
-      });
-      
-      
-      // Add Phrase
-      $scope.$on('addPhraseClick', function(evt, args) {
-//        if(args === true) {
-//          console.log('Phrase added successfully.');
-//        }
-      });
-      
-      
-      // Update word
-      $scope.$on('updateWordClick', function(evt) {
-        // temp Success update word
-        //$scope.displayUpdateWord = false;
-      });
-      
+      // Check value of loggdIn cookie
       var checkLogin = function() {
         
         var loggedIn = $cookies.get('loggedIn');
@@ -170,6 +114,6 @@ angular.module('flashcards')
         
       };
       
+      // Check if luser is logged in
       checkLogin();
-      
 });

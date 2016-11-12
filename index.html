@@ -6,10 +6,20 @@
 -->
 <html lang="en" ng-app="flashcards">
   <head>
-    <title>Flashcards</title>
+    <title>German and Dutch Flashcards</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="assets/css/styles.css">
+    <link href="assets/img/favicon.svg" rel="icon" type="image/svg">
+    
+    <meta name="description" content="German and Dutch Flashcards to help with language learning">
+    <meta property="og:title" content="German and Dutch Flashcards">
+    <meta property="og:image" content="http://phoenixjaymes.com/lab/flashcards/assets/img/flashcards-og.jpg">
+    <meta property="og:description" content="German and Dutch Flashcards to help with language learning">
+    <meta property="og:url" content="http://phoenixjaymes.com/lab/flashcards">
+    <meta property="og:site_name" content="PhoenixJaymes Web Devlopment">
+    <meta property="og:type" content="website">
+    
   </head>
 
   <body ng-controller="Main">
@@ -27,11 +37,11 @@
         <div class="main-header__settings">
           <a href="" class="main-header__settings-icon" ng-class="loggedIn ? 'ang-logout' : 'ang-login'" ng-click="showOptions();"></a>
           <ul class="options-menu" ng-class="displayOptions ? 'ang-show-options' : 'ang-hide-options' ">
-            <li class="options-menu__item"><a href="" ng-click="displayForm('addcategory')">Add Category</a></li>
-            <li class="options-menu__item"><a href="" ng-click="displayForm('addverb')">Add Verb</a></li>
-            <li class="options-menu__item"><a href="" ng-click="displayForm('addword')">Add Word</a></li>
-            <li class="options-menu__item"><a href="" ng-click="displayForm('addphrase')">Add Phrase</a></li>
-            <li class="options-menu__item"><a href="" ng-click="displayForm('updateword')">Update Word</a></li>
+            <li class="options-menu__item"><a href="" ng-click="displayForm('displayAddCategory')">Add Category</a></li>
+            <li class="options-menu__item"><a href="" ng-click="displayForm('displayAddVerb')">Add Verb</a></li>
+            <li class="options-menu__item"><a href="" ng-click="displayForm('displayAddWord')">Add Word</a></li>
+            <li class="options-menu__item"><a href="" ng-click="displayForm('displayAddPhrase')">Add Phrase</a></li>
+            <li class="options-menu__item"><a href="" ng-click="displayForm('displayUpdateWord')">Update Word</a></li>
             <li class="options-menu__item"><a href="" ng-click="logOut()">Logout</a></li>
           </ul>
         </div>
@@ -46,13 +56,13 @@
       </div>
     </main>
     
-<login ng-class="{'modal' : displayLogin}"></login>
-<addword ng-class="{'modal' : displayAddWord}"></addword>
-<addVerb ng-class="{'modal' : displayAddVerb}"></addVerb>
-<updateword ng-class="{'modal' : displayUpdateWord}"></updateword>
-<addcategory ng-class="{'modal' : displayAddCategory}"></addcategory>
-<addphrase ng-class="{'modal' : displayAddPhrase}"></addphrase>
-<register ng-class="{'modal' : displayRegister}"></register>
+<login ng-class="{'modal' : formDisplay.displayLogin}"></login>
+<addword ng-class="{'modal' : formDisplay.displayAddWord}"></addword>
+<addVerb ng-class="{'modal' : formDisplay.displayAddVerb}"></addVerb>
+<updateword ng-class="{'modal' : formDisplay.displayUpdateWord}"></updateword>
+<addcategory ng-class="{'modal' : formDisplay.displayAddCategory}"></addcategory>
+<addphrase ng-class="{'modal' : formDisplay.displayAddPhrase}"></addphrase>
+<register ng-class="{'modal' : formDisplay.displayRegister}"></register>
 
     <footer class="main-footer">
       <div class="main-footer__wrap">
@@ -60,7 +70,7 @@
       </div>
     </footer>
     
-    <script src="node_modules/angular/angular.min.js"></script>
+    <script src="node_modules/angular/angular.js"></script>
     <script src="node_modules/angular-cookies/angular-cookies.min.js"></script>
     <script src="app/app.js"></script>
   </body>

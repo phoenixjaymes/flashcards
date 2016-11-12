@@ -34,22 +34,35 @@ angular.module('flashcards')
 angular.module('flashcards')
     .controller('Main', function($scope, $cookies) {
       $scope.loggedIn = false;
-      $scope.displayLogin = false;
       $scope.displayOptions = false;
-      $scope.displayAddPhrase = false;
-      $scope.displayAddVerb = false;
-      $scope.displayAddWord = false;
-      $scope.displayUpdateWord = false;
-      $scope.displayAddCategory = false;
-      $scope.displayRegister = false;
+      
+      // Form display
+//      $scope.displayLogin = false;
+//      $scope.displayOptions = false;
+//      $scope.displayAddPhrase = false;
+//      $scope.displayAddVerb = false;
+//      $scope.displayAddWord = false;
+//      $scope.displayUpdateWord = false;
+//      $scope.displayAddCategory = false;
+//      $scope.displayRegister = false;
+      
+      $scope.formDisplay = {
+        displayLogin : false,
+        displayOptions : false,
+        displayAddPhrase : false,
+        displayAddVerb : false,
+        displayAddWord : false,
+        displayUpdateWord : false,
+        displayAddCategory : false,
+        displayRegister : false
+      };
       
       
       $scope.showOptions = function() {
         // Check if user is logged in
         if ($scope.loggedIn === false) {
           
-          $scope.displayLogin = true;
-          
+          $scope.formDisplay.displayLogin = true;
           
           // temp Success on login
           //$scope.loggedIn = true;
@@ -75,55 +88,27 @@ angular.module('flashcards')
       
       // Display admin forms
       $scope.displayForm = function(form) {
-        if(form === 'addcategory') {
-          $scope.displayAddPhrase = false;
-          $scope.displayAddVerb = false;
-          $scope.displayAddWord = false;
-          $scope.displayUpdateWord = false;
-          $scope.displayAddCategory = true;
-          $scope.displayOptions = false;
-        } else if (form === 'addphrase') {
-          $scope.displayAddPhrase = true;
-          $scope.displayAddVerb = false;
-          $scope.displayAddWord = false;
-          $scope.displayUpdateWord = false;
-          $scope.displayAddCategory = false;
-          $scope.displayOptions = false;
-        } else if (form === 'addword') {
-          $scope.displayAddPhrase = false;
-          $scope.displayAddVerb = false;
-          $scope.displayAddWord = true;
-          $scope.displayUpdateWord = false;
-          $scope.displayAddCategory = false;
-          $scope.displayOptions = false;
-          
-        } else if (form === 'updateword') {
-          $scope.displayAddPhrase = false;
-          $scope.displayAddVerb = false;
-          $scope.displayAddWord = false;
-          $scope.displayUpdateWord = true;
-          $scope.displayAddCategory = false;
-          $scope.displayOptions = false;
-        } else if (form === 'addverb') {
-          $scope.displayAddPhrase = false;
-          $scope.displayAddVerb = true;
-          $scope.displayAddWord = false;
-          $scope.displayUpdateWord = false;
-          $scope.displayAddCategory = false;
-          $scope.displayOptions = false;
+        // Close all modals
+        for (var prop in $scope.formDisplay) {
+          $scope.formDisplay[prop] = false;
         }
+        
+        // Open selected modal
+        $scope.formDisplay[form] = true;
+        
+        // Close options
+        $scope.displayOptions = false;
+      
       };
       
       
       // Close modal windows
-      $scope.$on('closeModal', function(evt) {
-        $scope.displayLogin = false;
-        $scope.displayAddPhrase = false;
-        $scope.displayAddVerb = false;
-        $scope.displayAddWord = false;
-        $scope.displayUpdateWord = false;
-        $scope.displayAddCategory = false;
-        $scope.displayRegister = false;
+      $scope.$on('closeModal', function(evt, args) {
+        $scope.formDisplay[args] = false;
+        
+        // Don't show message box
+        $scope.displayFormMessage = false;
+        
       });
       
       
@@ -135,10 +120,10 @@ angular.module('flashcards')
           $cookies.put('loggedIn', true);
           
           $scope.loggedIn = true;
-          $scope.displayLogin = false;
+          $scope.formDisplay.displayLogin = false;
           $scope.displayFormMessage = false;
         } else if (args === 'register') {
-          $scope.displayLogin = false;
+          $scope.formDisplay.displayLogin = false;
           $scope.displayRegister = true;
         }
       });
@@ -148,7 +133,7 @@ angular.module('flashcards')
         // Clear and close form
         if (args === true) {
           $scope.loggedIn = true;
-          $scope.displayRegister = false;
+          $scope.formDisplay.displayRegister = false;
           $scope.displayFormMessage = false;
         }
       });
@@ -185,6 +170,7 @@ angular.module('flashcards')
         //$scope.displayUpdateWord = false;
       });
       
+      // Check value of loggdIn cookie
       var checkLogin = function() {
         
         var loggedIn = $cookies.get('loggedIn');
@@ -195,8 +181,8 @@ angular.module('flashcards')
         
       };
       
+      // Check if luser is logged in
       checkLogin();
-      
 });
 /* 
  File     : cards.js
@@ -438,10 +424,6 @@ angular.module('flashcards')
           
           $scope.posCategories = response.data.word;
           $scope.genderCategories = response.data.gender;
-
-          
-          // change gender for adjectives, to none
-
         });
       }
     };
@@ -569,7 +551,7 @@ angular.module('flashcards')
       });
     };
     
-    //console.log($scope.word.translate);
+    // Add Umlauts and special characters
     $scope.addCharacter = function(objName, propName, char) {
       if ($scope[objName][propName] === undefined) {
         $scope[objName][propName] = '';
@@ -657,11 +639,6 @@ angular.module('flashcards')
     return {
       templateUrl : 'app/views/partials/register.html',
       controller : 'Login'
-    };
-  })
-  .directive('closebutton', function() {
-    return {
-      templateUrl : 'app/views/partials/btn-close.html'
     };
   })
   .directive('formmessage', function() {

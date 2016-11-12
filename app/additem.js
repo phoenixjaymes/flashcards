@@ -26,10 +26,6 @@ angular.module('flashcards')
           
           $scope.posCategories = response.data.word;
           $scope.genderCategories = response.data.gender;
-
-          
-          // change gender for adjectives, to none
-
         });
       }
     };
@@ -41,22 +37,18 @@ angular.module('flashcards')
       addItemService.addItem($scope.word, function(response) {
         // Check response message
         if(response.data.success === true) {
-          displayMessage('true');
-          $scope.$emit('addItemClick', true);
-          
           // Clear form
           $scope.word.translation = '';
           $scope.word.english = '';
           $scope.word.img = '';
+          
+          displayMessage('true');
         } else if (response.data.success === 'duplicate') {
           displayMessage('duplicate');
-          $scope.$emit('addItemClick', 'duplicate');
         } else if (response.data.success === 'incorrect') {
           displayMessage('incorrect');
-          $scope.$emit('addItemClick', 'incorrect');
         } else if (response.data.success === false) {
           displayMessage('false');
-          $scope.$emit('addItemClick', false);
         }
       });
     }; 
@@ -86,18 +78,13 @@ angular.module('flashcards')
           $scope.verb.sie_sie = '';
           $scope.verb.separable = undefined;
           
-          
           displayMessage('true');
-          $scope.$emit('addVerbClick', true);
         } else if (response.data.success === 'duplicate') {
           displayMessage('duplicate');
-          $scope.$emit('addVerbClick', 'duplicate');
         } else if (response.data.success === 'incorrect') {
           displayMessage('incorrect');
-          $scope.$emit('addVerbClick', 'incorrect');
         } else if (response.data.success === false) {
           displayMessage('false');
-          $scope.$emit('addVerbClick', false);
         }
       });
 
@@ -116,16 +103,12 @@ angular.module('flashcards')
           $scope.category.name = '';
           
           displayMessage('true');
-          $scope.$emit('addCategoryClick', true);
         } else if (response.data.success === 'duplicate') {
           displayMessage('duplicate');
-          $scope.$emit('addCategoryClick', 'duplicate');
         } else if (response.data.success === 'incorrect') {
           displayMessage('incorrect');
-          $scope.$emit('addCategoryClick', 'incorrect');
         } else if (response.data.success === false) {
           displayMessage('false');
-          $scope.$emit('addCategoryClick', false);
         }
       });
     };
@@ -143,21 +126,17 @@ angular.module('flashcards')
           $scope.phrase.translation = '';
           
           displayMessage('true');
-          $scope.$emit('addPhraseClick', true);
         } else if (response.data.success === 'incorrect') {
           displayMessage('incorrect');
-          $scope.$emit('addPhraseClick', 'incorrect');
         } else if (response.data.success === 'duplicate') {
           displayMessage('duplicate');
-          $scope.$emit('addPhraseClick', 'duplicate');
         } else if (response.data.success === false) {
           displayMessage('false');
-          $scope.$emit('addPhraseClick', false);
         }
       });
     };
     
-    //console.log($scope.word.translate);
+    // Add Umlauts and special characters
     $scope.addCharacter = function(objName, propName, char) {
       if ($scope[objName][propName] === undefined) {
         $scope[objName][propName] = '';

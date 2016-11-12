@@ -17,28 +17,21 @@ main {
 
 .home {
   
-  &__title {
-    margin-bottom: em(15px);
-    
-    @media #{$brk-sm} {
-      margin-bottom: em(25px);
-    }
-  }
-  
   &__image {
     display: block;
     margin: 0 auto em(20px) auto;
-    max-width: 400px;
-  }
+    max-width: 250px;
     
-  
+    @media #{$brk-sm} {
+      margin-bottom: em(25px);
+      max-width: 400px;
+    }
+  }
 }
 
 
 .flashcards {
-  //padding: 15px;
   margin: 0 auto;
-  
   max-width: 800px;
 }
 

@@ -1,6 +1,9 @@
 <form class="form add-phrase-form" name="formAddPhrase">
-  <closebutton class="form__close-button"></closebutton>
+  
+  <a class="form__button-close" href="" ng-click="$emit('closeModal', 'displayAddPhrase')">X</a>
+  
   <h3 class="form__heading">Add a Phrase</h3>
+  
   <label class="form__label" for="txtEnglish">English</label>
   <input id="txtEnglish" class="form__input" ng-model="phrase.english" type="text">
   
