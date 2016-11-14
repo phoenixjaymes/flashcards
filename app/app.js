@@ -36,16 +36,6 @@ angular.module('flashcards')
       $scope.loggedIn = false;
       $scope.displayOptions = false;
       
-      // Form display
-//      $scope.displayLogin = false;
-//      $scope.displayOptions = false;
-//      $scope.displayAddPhrase = false;
-//      $scope.displayAddVerb = false;
-//      $scope.displayAddWord = false;
-//      $scope.displayUpdateWord = false;
-//      $scope.displayAddCategory = false;
-//      $scope.displayRegister = false;
-      
       $scope.formDisplay = {
         displayLogin : false,
         displayOptions : false,
@@ -58,24 +48,18 @@ angular.module('flashcards')
       };
       
       
+      // Show login form or show admin options
       $scope.showOptions = function() {
         // Check if user is logged in
         if ($scope.loggedIn === false) {
-          
           $scope.formDisplay.displayLogin = true;
-          
-          // temp Success on login
-          //$scope.loggedIn = true;
-          
-          
         } else if ($scope.loggedIn === true) {
-          //
           $scope.displayOptions = !$scope.displayOptions;
         }
       };
       
       
-      // Logging in and logging out
+      // Logging out
       $scope.logOut = function() {
         // Remove cookie
         $cookies.remove('loggedIn');
@@ -138,38 +122,6 @@ angular.module('flashcards')
         }
       });
       
-      
-      // Add category
-      $scope.$on('addCategoryClick', function(evt, args) {
-//        if(args === true) {
-//          console.log('Category added successfully.');
-//        }
-      });
-      
-      
-      // Add word
-      $scope.$on('addWordClick', function(evt, args) {
-        
-//        if(args === true) {
-//          console.log('Word added successfully.');
-//        }
-      });
-      
-      
-      // Add Phrase
-      $scope.$on('addPhraseClick', function(evt, args) {
-//        if(args === true) {
-//          console.log('Phrase added successfully.');
-//        }
-      });
-      
-      
-      // Update word
-      $scope.$on('updateWordClick', function(evt) {
-        // temp Success update word
-        //$scope.displayUpdateWord = false;
-      });
-      
       // Check value of loggdIn cookie
       var checkLogin = function() {
         
@@ -224,6 +176,9 @@ angular.module('flashcards')
           $scope.getCards(cardPos);
         } else {
           $scope.posCategory = $scope.cardAllCategories[cardPos];
+          
+          
+          
         }
       };
       
@@ -405,7 +360,7 @@ angular.module('flashcards')
 'use strict';
 
 angular.module('flashcards')
-  .controller('AddItem', function($scope, cardsService, addItemService) {
+  .controller('AddItem', function($scope, cardsService, addItemService) {;
     $scope.word = {};
     $scope.verb = {"pos": "verb"};
     $scope.category = {"pos": "category"};
@@ -415,6 +370,8 @@ angular.module('flashcards')
     $scope.responseMessage;
     $scope.displayFormMessage = false;
     $scope.showUpperCase = false;
+    $scope.inputType;
+    $scope.inputField;
       
     // Change category options
     $scope.getCategories = function(wordPos) {
@@ -435,22 +392,18 @@ angular.module('flashcards')
       addItemService.addItem($scope.word, function(response) {
         // Check response message
         if(response.data.success === true) {
-          displayMessage('true');
-          $scope.$emit('addItemClick', true);
-          
           // Clear form
           $scope.word.translation = '';
           $scope.word.english = '';
           $scope.word.img = '';
+          
+          displayMessage('true');
         } else if (response.data.success === 'duplicate') {
           displayMessage('duplicate');
-          $scope.$emit('addItemClick', 'duplicate');
         } else if (response.data.success === 'incorrect') {
           displayMessage('incorrect');
-          $scope.$emit('addItemClick', 'incorrect');
         } else if (response.data.success === false) {
           displayMessage('false');
-          $scope.$emit('addItemClick', false);
         }
       });
     }; 
@@ -480,18 +433,13 @@ angular.module('flashcards')
           $scope.verb.sie_sie = '';
           $scope.verb.separable = undefined;
           
-          
           displayMessage('true');
-          $scope.$emit('addVerbClick', true);
         } else if (response.data.success === 'duplicate') {
           displayMessage('duplicate');
-          $scope.$emit('addVerbClick', 'duplicate');
         } else if (response.data.success === 'incorrect') {
           displayMessage('incorrect');
-          $scope.$emit('addVerbClick', 'incorrect');
         } else if (response.data.success === false) {
           displayMessage('false');
-          $scope.$emit('addVerbClick', false);
         }
       });
 
@@ -510,16 +458,12 @@ angular.module('flashcards')
           $scope.category.name = '';
           
           displayMessage('true');
-          $scope.$emit('addCategoryClick', true);
         } else if (response.data.success === 'duplicate') {
           displayMessage('duplicate');
-          $scope.$emit('addCategoryClick', 'duplicate');
         } else if (response.data.success === 'incorrect') {
           displayMessage('incorrect');
-          $scope.$emit('addCategoryClick', 'incorrect');
         } else if (response.data.success === false) {
           displayMessage('false');
-          $scope.$emit('addCategoryClick', false);
         }
       });
     };
@@ -537,28 +481,36 @@ angular.module('flashcards')
           $scope.phrase.translation = '';
           
           displayMessage('true');
-          $scope.$emit('addPhraseClick', true);
         } else if (response.data.success === 'incorrect') {
           displayMessage('incorrect');
-          $scope.$emit('addPhraseClick', 'incorrect');
         } else if (response.data.success === 'duplicate') {
           displayMessage('duplicate');
-          $scope.$emit('addPhraseClick', 'duplicate');
         } else if (response.data.success === false) {
           displayMessage('false');
-          $scope.$emit('addPhraseClick', false);
         }
       });
     };
     
+    // Set which input umlaut should be added to
+    $scope.umlautFocus = function(pos, propName) {
+      $scope.inputType = pos;
+      $scope.inputField = propName;
+    };
+    
+    
     // Add Umlauts and special characters
     $scope.addCharacter = function(objName, propName, char) {
-      if ($scope[objName][propName] === undefined) {
-        $scope[objName][propName] = '';
+      if(!$scope.inputType || !$scope.inputField) {
+        return;
       }
       
-      $scope[objName][propName] = $scope[objName][propName] + char;
+      if ($scope[$scope.inputType][$scope.inputField] === undefined) {
+        $scope[$scope.inputType][$scope.inputField] = '';
+      }
+      
+      $scope[$scope.inputType][$scope.inputField] = $scope[$scope.inputType][$scope.inputField] + char;
     };
+
     
     
     // Display message
@@ -659,6 +611,12 @@ angular.module('flashcards')
   .directive('genericcard', function() {
     return {
       templateUrl : 'app/views/partials/generic-card.html'
+    };
+  })
+  .directive('umlauts', function() {
+    return {
+      restrict : 'E',      
+      templateUrl : 'app/views/partials/umlauts.html'
     };
   });
   

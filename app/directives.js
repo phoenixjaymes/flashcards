@@ -83,6 +83,12 @@ angular.module('flashcards')
     return {
       templateUrl : 'app/views/partials/generic-card.html'
     };
+  })
+  .directive('umlauts', function() {
+    return {
+      restrict : 'E',      
+      templateUrl : 'app/views/partials/umlauts.html'
+    };
   });
   
   

@@ -1,57 +1,36 @@
-<form class="form add-word-form" name="formAddWord">
+<form class="form add-word-form" name="formAddWord" autocomplete="off">
   
   <a class="form__button-close" href="" ng-click="$emit('closeModal', 'displayAddWord')">X</a>
   
   <h3 class="form__heading">Add a New Word</h3>
   
   <label class="form__label" for="selPos">Part of Speech</label>
-  <select id="selPos" class="form__select" name="selPos" ng-model="word.pos"  ng-change="getCategories(word.pos)">
+  <select id="selPos" class="form__select" name="selPos" ng-model="word.pos"  ng-change="getCategories(word.pos)" ng-focus="umlautFocus(undefined, undefined)">
     <option value="adjective">Adjective / Adverb</option>
     <option value="noun">Noun</option>
   </select>
   
   <label class="form__label" for="selCategory">Category</label>
-  <select id="selCategory" class="form__select" name="selCategory" ng-model="word.category">
+  <select id="selCategory" class="form__select" name="selCategory" ng-model="word.category" ng-focus="umlautFocus(undefined, undefined)">
     <option ng-repeat="option in posCategories" value="{{option.id}}">{{option.category}}</option>
   </select>
   
   <label class="form__label" for="txtEnglish">English</label>
-  <input id="txtPos" class="form__input" type="text" ng-model="word.english">
+  <input id="txtEnglish" class="form__input" type="text" ng-model="word.english" ng-focus="umlautFocus(undefined, undefined)">
   
   <label  class="form__label" for="txtTranslation">Translation</label>
-  <input id="txtWord" class="form__input" type="text" ng-model="word.translation">
-  
-  <div class="form-umlauts">
-    <div class="form-umlauts__lower" ng-class="showUpperCase ? 'ang-hide-lowercase' : 'ang-show-lowercase'">
-      <a class="form-umlauts__button" ng-click="showUpperCase = true"><img src="assets/img/up-arrow.svg" alt=""></a>
-      <a class="form-umlauts__button" ng-click="addCharacter('word', 'translation', '&auml;')"><img src="assets/img/lower-a-uml.svg" alt="lower a umlaut"></a>
-      <a class="form-umlauts__button" ng-click="addCharacter('word', 'translation', '&ouml;')"><img src="assets/img/lower-o-uml.svg" alt="lower o umlaut"></a>
-      <a class="form-umlauts__button" ng-click="addCharacter('word', 'translation', '&uuml;')"><img src="assets/img/lower-u-uml.svg" alt="lower u umlaut"></a>
-      <a class="form-umlauts__button" ng-click="addCharacter('word', 'translation', '&uml;')"><img src="assets/img/umlaut.svg" alt="umlaut"></a>
-      <a class="form-umlauts__button" ng-click="addCharacter('word', 'translation', '&szlig;')"><img src="assets/img/sset.svg" alt="sset"></a>
-      <a class="form-umlauts__button" ng-click="addCharacter('word', 'translation', '&middot;')"><img src="assets/img/mid-dot.svg" alt="mid dot"></a>
-    </div>
-    
-    <div class="form-umlauts__upper" ng-class="showUpperCase ? 'ang-show-uppercase' : 'ang-hide-uppercase'">
-      <a class="form-umlauts__button" ng-click="showUpperCase = false"><img src="assets/img/down-arrow.svg" alt=""></a>
-      <a class="form-umlauts__button" ng-click="addCharacter('word', 'translation', '&Auml;')"><img src="assets/img/upper-a-uml.svg" alt="upper a umlaut"></a>
-      <a class="form-umlauts__button" ng-click="addCharacter('word', 'translation', '&Ouml;')"><img src="assets/img/upper-o-uml.svg" alt="upper o umlaut"></a>
-      <a class="form-umlauts__button" ng-click="addCharacter('word', 'translation', '&Uuml;')"><img src="assets/img/upper-u-uml.svg" alt="upper u umlaut"></a>
-      <a class="form-umlauts__button" ng-click="addCharacter('word', 'translation', '&uml;')"><img src="assets/img/umlaut.svg" alt="umlaut"></a>
-      <a class="form-umlauts__button" ng-click="addCharacter('word', 'translation', '&szlig;')"><img src="assets/img/sset.svg" alt="sset"></a>
-      <a class="form-umlauts__button" ng-click="addCharacter('word', 'translation', '&middot;')"><img src="assets/img/mid-dot.svg" alt="mid dot"></a>
-    </div>
-  </div>
+  <input id="txtTranslation" class="form__input" type="text" ng-model="word.translation" ng-focus="umlautFocus('word', 'translation')">  
+  <umlauts class="form-umlauts" input-type="word" input-field="translation" ></umlauts>
   
   <label class="form__label" for="txtImg">Image</label>
-  <input id="txtImg" class="form__input" type="text" ng-model="word.img">
+  <input id="txtImg" class="form__input" type="text" ng-model="word.img" ng-focus="umlautFocus(undefined, undefined)">
   
   <label class="form__label" for="selGender" ng-show="word.pos !== 'adjective'">Gender</label>
-  <select id="selGender" class="form__select" name="selGender" ng-show="word.pos !== 'adjective'" ng-model="word.gender">
+  <select id="selGender" class="form__select" name="selGender" ng-show="word.pos !== 'adjective'" ng-model="word.gender" ng-focus="umlautFocus(undefined, undefined)">
     <option ng-repeat="gender in genderCategories" value="{{gender.id}}">{{gender.gender}}</option>
   </select>
   
-  <button  class="form__button" ng-model="loginSubmit" ng-click="addItem()">Add Word</button>
+  <button  class="form__button" ng-model="loginSubmit" ng-click="addItem()" ng-focus="umlautFocus(undefined, undefined)">Add Word</button>
   
   <formmessage class="form-message" ng-class="{'ang-show-message' : displayFormMessage}"></formmessage>
 </form>

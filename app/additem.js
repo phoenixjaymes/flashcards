@@ -7,7 +7,7 @@
 'use strict';
 
 angular.module('flashcards')
-  .controller('AddItem', function($scope, cardsService, addItemService) {
+  .controller('AddItem', function($scope, cardsService, addItemService) {;
     $scope.word = {};
     $scope.verb = {"pos": "verb"};
     $scope.category = {"pos": "category"};
@@ -17,6 +17,8 @@ angular.module('flashcards')
     $scope.responseMessage;
     $scope.displayFormMessage = false;
     $scope.showUpperCase = false;
+    $scope.inputType;
+    $scope.inputField;
       
     // Change category options
     $scope.getCategories = function(wordPos) {
@@ -136,14 +138,26 @@ angular.module('flashcards')
       });
     };
     
+    // Set which input umlaut should be added to
+    $scope.umlautFocus = function(pos, propName) {
+      $scope.inputType = pos;
+      $scope.inputField = propName;
+    };
+    
+    
     // Add Umlauts and special characters
     $scope.addCharacter = function(objName, propName, char) {
-      if ($scope[objName][propName] === undefined) {
-        $scope[objName][propName] = '';
+      if(!$scope.inputType || !$scope.inputField) {
+        return;
       }
       
-      $scope[objName][propName] = $scope[objName][propName] + char;
+      if ($scope[$scope.inputType][$scope.inputField] === undefined) {
+        $scope[$scope.inputType][$scope.inputField] = '';
+      }
+      
+      $scope[$scope.inputType][$scope.inputField] = $scope[$scope.inputType][$scope.inputField] + char;
     };
+
     
     
     // Display message

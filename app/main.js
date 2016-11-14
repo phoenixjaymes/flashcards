@@ -23,24 +23,18 @@ angular.module('flashcards')
       };
       
       
+      // Show login form or show admin options
       $scope.showOptions = function() {
         // Check if user is logged in
         if ($scope.loggedIn === false) {
-          
           $scope.formDisplay.displayLogin = true;
-          
-          // temp Success on login
-          //$scope.loggedIn = true;
-          
-          
         } else if ($scope.loggedIn === true) {
-          //
           $scope.displayOptions = !$scope.displayOptions;
         }
       };
       
       
-      // Logging in and logging out
+      // Logging out
       $scope.logOut = function() {
         // Remove cookie
         $cookies.remove('loggedIn');

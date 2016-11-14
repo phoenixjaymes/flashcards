@@ -38,6 +38,9 @@ angular.module('flashcards')
           $scope.getCards(cardPos);
         } else {
           $scope.posCategory = $scope.cardAllCategories[cardPos];
+          
+          
+          
         }
       };
       
