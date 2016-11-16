@@ -64,17 +64,25 @@
 }
 
 .card__text {
-  
   font-size: 1.25em;
-  
-  
+  font-weight: $font-weight--bold;
 }
 
 .card__table {
-  border-collapse: collapse;
+  
+  background: $card-text-bg-color;
+  border: 1px solid $card-border-color;
+  border-radius: 5px;
+  
+  
+  //border-collapse: collapse;
+  
+  
   font-size: 1.1em;
+  margin: 0 auto;
+  padding: 5px;
   text-align: left;
-  width: 280px;
+  width: 270px;
   
   tr:nth-child(even) {
     background: $table-row-alt-color;

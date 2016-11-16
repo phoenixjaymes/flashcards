@@ -1,17 +1,39 @@
-<div class="card__front">  
-  <figure class="card__figure">
-    <img class="card__img" ng-src="assets/img/{{image}}" alt="{{english}}">
-  <!--      <figcaption class="card__text">{{ english }}</figcaption>-->
-  </figure>
-  
-  <span class="card__button" ng-click="$emit('cardFrontFlip', true);">Flip</span>
+<div ng-switch="image">  
+  <div class="card__front" ng-switch-default>  
+    <figure class="card__figure">
+      <img class="card__img" ng-src="assets/img/{{image}}" alt="{{english}}">
+    </figure>
+
+    <span class="card__button" ng-click="$emit('cardFrontFlip', true);">Flip</span>
+  </div>
+
+
+  <div class="card__front" ng-switch-when="none">
+    <div class="card__text-wrap">
+      <p class="card__text">{{english}}</p>
+    </div>
+
+    <span class="card__button" ng-click="$emit('cardFrontFlip', true);">Flip</span>
+  </div>
 </div>
 
-<div class="card__back {{gender}}">
-  <figure class="card__figure">
-    <img class="card__img" ng-src="assets/img/{{image}}" alt="{{translation}}">
-    <figcaption class="card__caption" ng-bind-html="translation"></figcaption>
-  </figure>
+<div ng-switch="image">
+  <div class="card__back {{gender}}" ng-switch-default>
+    <figure class="card__figure">
+      <img class="card__img" ng-src="assets/img/{{image}}" alt="{{translation}}">
+      <figcaption class="card__caption" ng-bind-html="translation"></figcaption>
+    </figure>
+
+    <span class="card__button" ng-click="$emit('cardBackFlip', false);">Flip</span>
+  </div>
+
+  <div class="card__back {{gender}}" ng-switch-when="none">
+    <div class="card__text-wrap">
+      <p class="card__text" ng-bind-html="translation"></p>
+    </div>
+
+   `<span class="card__button" ng-click="$emit('cardFrontFlip', false);">Flip</span>
+ </div>
   
-  <span class="card__button" ng-click="$emit('cardBackFlip', false);">Flip</span>
+  
 </div>
