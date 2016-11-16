@@ -19,6 +19,7 @@ angular.module('flashcards')
       $scope.currentCard = 1;
       $scope.totalCards = $scope.cards.length;
       $scope.flip = false;
+      $scope.showCategory = false;
       
       // Get categories from service
       var getAllCategories = function() {
@@ -32,15 +33,16 @@ angular.module('flashcards')
       $scope.changeCategory = function(cardPos) {
         if (cardPos === 'verb') {
           $scope.getCards(cardPos);
+          $scope.showCategory = false;
         } else if (cardPos === 'phrase') {
           $scope.getCards(cardPos);
+          $scope.showCategory = false;
         } else if (cardPos === 'mixed') {
           $scope.getCards(cardPos);
+          $scope.showCategory = false;
         } else {
           $scope.posCategory = $scope.cardAllCategories[cardPos];
-          
-          
-          
+          $scope.showCategory = true;
         }
       };
       
