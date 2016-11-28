@@ -10,7 +10,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="assets/css/styles.css">
-    <link href="assets/img/favicon.svg" rel="icon" type="image/svg">
+    
+    <link rel="icon" type="image/png" href="assets/img/favicons/favicon-194x194.png" sizes="194x194">
+    <link rel="icon" type="image/png" href="assets/img/favicons/android-chrome-192x192.png" sizes="192x192">
+    <link rel="icon" type="image/png" href="assets/img/favicons/favicon-96x96.png" sizes="96x96">
+    <link rel="icon" type="image/png" href="assets/img/favicons/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="assets/img/favicons/favicon-16x16.png" sizes="16x16">
+   
     
     <meta name="description" content="German and Dutch Flashcards to help with language learning">
     <meta property="og:title" content="German and Dutch Flashcards">
@@ -42,6 +48,7 @@
             <li class="options-menu__item"><a href="" ng-click="displayForm('displayAddWord')">Add Word</a></li>
             <li class="options-menu__item"><a href="" ng-click="displayForm('displayAddPhrase')">Add Phrase</a></li>
             <li class="options-menu__item"><a href="" ng-click="displayForm('displayUpdateWord')">Update Word</a></li>
+            <li class="options-menu__item"><a href="" ng-click="displayForm('displayListWords')">List Words</a></li>
             <li class="options-menu__item"><a href="" ng-click="logOut()">Logout</a></li>
           </ul>
         </div>
@@ -59,9 +66,10 @@
 <login ng-class="{'modal' : formDisplay.displayLogin}"></login>
 <addword ng-class="{'modal' : formDisplay.displayAddWord}"></addword>
 <addVerb ng-class="{'modal' : formDisplay.displayAddVerb}"></addVerb>
-<updateword ng-class="{'modal' : formDisplay.displayUpdateWord}"></updateword>
 <addcategory ng-class="{'modal' : formDisplay.displayAddCategory}"></addcategory>
 <addphrase ng-class="{'modal' : formDisplay.displayAddPhrase}"></addphrase>
+<updateword ng-class="{'modal' : formDisplay.displayUpdateWord}"></updateword>
+<list-words ng-class="{'modal' : formDisplay.displayListWords}"></list-words>
 <register ng-class="{'modal' : formDisplay.displayRegister}"></register>
 
     <footer class="main-footer">

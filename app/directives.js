@@ -58,6 +58,11 @@ angular.module('flashcards')
       controller : 'AddItem'
     };
   })
+  .directive('listWords', function() {
+    return {
+      templateUrl : 'app/views/partials/list-words.html'
+    };
+  })
   .directive('register', function() {
     return {
       templateUrl : 'app/views/partials/register.html',

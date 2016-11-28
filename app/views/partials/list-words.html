@@ -1,11 +1,12 @@
 <form class="form">
   
-  <a class="form__button-close" href="" ng-click="$emit('closeModal', 'displayUpdateWord')">X</a>
+  <a class="form__button-close" href="" ng-click="$emit('closeModal', 'displayListWords')">X</a>
   
-  <h3 class="form__heading">Update Word</h3>
+  <h3 class="form__heading">List Words</h3>
   
   <label class="form__label" for="selPos">Part of Speech</label>
-  <select id="selPos" class="form__select" name="selPos">
+  <select id="selPos" class="form__select" name="selPos" ng-model="lwCardPos" ng-change="changeCategory(lwCardPos);">
+    <option>Select</option>
     <option>Adjective</option>
     <option>Noun</option>
     <option>Phrase</option>
@@ -21,22 +22,17 @@
     <option>Weather</option>
   </select>
   
-  <label class="form__label" for="txtEnglish">English</label>
-  <input id="txtPos" class="form__input" type="text">
+  <div>
+    
+  </div>
   
-  <label  class="form__label" for="txtTranslation">Translation</label>
-  <input id="txtWord" class="form__input" type="text">
-  
-  <label class="form__label" for="txtImg">Image</label>
-  <input id="txtImg" class="form__input" type="text">
-  
-  <label class="form__label" for="selGender">Gender</label>
+<!--  <label class="form__label" for="selGender">Gender</label>
   <select id="selGender" class="form__select" name="selGender">
     <option>Masculine</option>
     <option>Feminine</option>
     <option>Neuter</option>
     <option>None</option>
-  </select>
+  </select>-->
   
   <button class="form__button" ng-model="loginSubmit" ng-click="$emit('updateWordClick')">Update Word</button>
 </form>

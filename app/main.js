@@ -12,14 +12,15 @@ angular.module('flashcards')
       $scope.displayOptions = false;
       
       $scope.formDisplay = {
-        displayLogin : false,
-        displayOptions : false,
-        displayAddPhrase : false,
-        displayAddVerb : false,
-        displayAddWord : false,
-        displayUpdateWord : false,
-        displayAddCategory : false,
-        displayRegister : false
+        displayLogin        : false,
+        displayOptions      : false,
+        displayAddPhrase    : false,
+        displayAddVerb      : false,
+        displayAddWord      : false,
+        displayUpdateWord   : false,
+        displayAddCategory  : false,
+        displayRegister     : false,
+        displayListWords    : false
       };
       
       
@@ -46,7 +47,7 @@ angular.module('flashcards')
       
       
       // Display admin forms
-      $scope.displayForm = function(form) {
+      $scope.displayForm = function(form) {  console.log(form);
         // Close all modals
         for (var prop in $scope.formDisplay) {
           $scope.formDisplay[prop] = false;
@@ -86,6 +87,7 @@ angular.module('flashcards')
           $scope.displayRegister = true;
         }
       });
+      
       
       // Register click
       $scope.$on('registerClick', function(evt, args) {
