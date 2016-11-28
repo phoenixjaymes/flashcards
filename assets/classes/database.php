@@ -101,5 +101,10 @@ class Database
     }
     return $result;
   }
+  
+  // Get link
+  public function getLink() {
+    return $this->mMySqli;
+  }
 }
 ?>
