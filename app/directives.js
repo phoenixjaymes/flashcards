@@ -60,7 +60,8 @@ angular.module('flashcards')
   })
   .directive('listWords', function() {
     return {
-      templateUrl : 'app/views/partials/list-words.html'
+      templateUrl : 'app/views/partials/list-words.html',
+      controller: 'Cards'
     };
   })
   .directive('register', function() {

@@ -25,10 +25,12 @@ angular.module('flashcards')
       var getAllCategories = function() {
         cardsService.getCategories(function(response) {
           $scope.cardAllCategories = response.data;
+          
+          
         });
       };
       
-      // Change category options
+      // Change category options for cards
       // If pos is verb get verbs until verbs have categories
       $scope.changeCategory = function(cardPos) {
         if (cardPos === 'verb') {
@@ -45,6 +47,53 @@ angular.module('flashcards')
           $scope.showCategory = true;
         }
       };
+      
+      // Change category options for word list
+      $scope.posCategoryList;
+      $scope.showCategoryWords = false;
+      // If pos is verb get verbs until verbs have categories
+      $scope.changeCategoryLW = function(wordPos) {
+        //console.log(wordPos);
+        //console.log($scope.cardAllCategories);
+        if (wordPos === 'adjective') {
+          $scope.posCategoryList = $scope.cardAllCategories[wordPos];
+          $scope.getWords(wordPos);
+          
+          
+          $scope.showCategoryWords = true;
+        } else if (wordPos === 'noun') {
+          $scope.posCategoryList = $scope.cardAllCategories[wordPos];
+          
+          
+          $scope.showCategoryWords = true;
+        } else if (wordPos === 'phrase') {
+          
+          $scope.getWords(wordPos, '');
+          $scope.showCategoryWords = false;
+        } else if (wordPos === 'verb') {
+          
+          $scope.getWords(wordPos, '');
+          $scope.showCategoryWords = false;
+        } else {
+          //$scope.posCategory = $scope.cardAllCategories[cardPos];
+          //$scope.showCategoryWords = true;
+        }
+      };
+      
+      
+      // Get cards
+      $scope.getWords = function(pos, category) {
+        cardsService.getWords(pos, category, function(response) {
+          $scope.listOfWords = response.data;
+
+          $scope.totalWords = $scope.listOfWords.length;          
+        });
+      };
+      
+      
+      
+      
+      
       
       // Set card
       var setCard = function(card) {

@@ -4,35 +4,27 @@
   
   <h3 class="form__heading">List Words</h3>
   
-  <label class="form__label" for="selPos">Part of Speech</label>
-  <select id="selPos" class="form__select" name="selPos" ng-model="lwCardPos" ng-change="changeCategory(lwCardPos);">
+  <label class="form__label" for="selPosList">Part of Speech</label>
+  <select id="selPosList" class="form__select" name="selPosList" ng-model="wordListPos" ng-change="changeCategoryLW(wordListPos);">
     <option>Select</option>
-    <option>Adjective</option>
-    <option>Noun</option>
-    <option>Phrase</option>
-    <option>Verb</option>
+    <option value="adjective">Adjective</option>
+    <option value="noun">Noun</option>
+    <option value="phrase">Phrase</option>
+    <option value="verb">Verb</option>
   </select>
   
   
-  <label class="form__label" for="selCategory">Category</label>
-  <select id="selCategory" class="form__select" name="selCategory">
-    <option>Body</option>
-    <option>Geography</option>
-    <option>School</option>
-    <option>Weather</option>
+  <label class="form__label" for="selCategoryList"  ng-show="showCategoryWords === true">Category</label>
+  <select id="selCategoryList" class="form__select" name="selCategoryList"
+    ng-model="wordCategory" ng-change="getWords(wordListPos, wordCategory)"  ng-show="showCategoryWords === true">
+    <option>Select</option>
+    <option ng-repeat="option in posCategoryList" value="{{option.id}}">{{option.name}}</option>
   </select>
   
-  <div>
-    
+  <div class="word-list" >
+    <h3>Word List</h3>
+    <div class="word-list__wrap">
+      <p ng-repeat="word in listOfWords">{{word.english}} - {{word.translation}}</p>
+    </div>
   </div>
-  
-<!--  <label class="form__label" for="selGender">Gender</label>
-  <select id="selGender" class="form__select" name="selGender">
-    <option>Masculine</option>
-    <option>Feminine</option>
-    <option>Neuter</option>
-    <option>None</option>
-  </select>-->
-  
-  <button class="form__button" ng-model="loginSubmit" ng-click="$emit('updateWordClick')">Update Word</button>
 </form>

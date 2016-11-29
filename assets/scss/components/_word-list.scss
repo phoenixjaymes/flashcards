@@ -1,0 +1,19 @@
+/* 
+    File     : _word-list.scss
+    Date     : Nov 28, 2016
+    Author   : Jaymes Young <jaymes@phoenixjaymes.com>
+*/
+
+.word-list {
+  
+  margin-bottom: 20px;
+  
+  &__wrap {
+    background: $word-list-bg-color;
+    border-radius: $brd-radius;
+    height: 180px;
+    overflow: scroll;
+    padding: 5px;
+    margin-bottom: 20px;
+  }
+}
