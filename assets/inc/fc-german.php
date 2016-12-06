@@ -43,8 +43,17 @@ if ($pos === 'phrase') {
 } elseif ($pos === 'verb') {
   // Verbs
   $category = filter_input(INPUT_GET, 'category', FILTER_SANITIZE_STRING);
+  $sort = filter_input(INPUT_GET, 'sort', FILTER_SANITIZE_STRING);
   
-  $sql = "SELECT english, translation, ich, du, er_sie_es, wir, ihr, sie_Sie, img, 'none' AS gender FROM fc_german_verbs";
+  
+  if ($sort === 'true') {
+    $sql = "SELECT english, translation, ich, du, er_sie_es, wir, ihr, sie_Sie, img, 'none' AS gender FROM fc_german_verbs ORDER BY translation";
+  } else {
+    $sql = "SELECT english, translation, ich, du, er_sie_es, wir, ihr, sie_Sie, img, 'none' AS gender FROM fc_german_verbs";
+  }
+  
+  
+  
   $result = $mySqli->handleQuery($sql);
   
   // Get cards
@@ -68,9 +77,15 @@ if ($pos === 'phrase') {
   
 } elseif ($pos === 'adjective') {
   $category = filter_input(INPUT_GET, 'category', FILTER_SANITIZE_STRING);
+  $sort = filter_input(INPUT_GET, 'sort', FILTER_SANITIZE_STRING);
   
   // Adjectives
-  $sql = "SELECT english, translation, img, 'none' AS gender FROM fc_german_adjectives WHERE category = '{$category}'";
+  if ($sort === 'true') {
+    $sql = "SELECT english, translation, img, 'none' AS gender FROM fc_german_adjectives WHERE category = '{$category}' ORDER BY translation";
+  } else {
+    $sql = "SELECT english, translation, img, 'none' AS gender FROM fc_german_adjectives WHERE category = '{$category}'";
+  }
+  
   
   $result = $mySqli->handleQuery($sql);
 
@@ -90,11 +105,20 @@ if ($pos === 'phrase') {
   
 } elseif ($pos === 'noun') {
   $category = filter_input(INPUT_GET, 'category', FILTER_SANITIZE_STRING);
+  $sort = filter_input(INPUT_GET, 'sort', FILTER_SANITIZE_STRING);
+  
   // Nouns
-  $sql = "SELECT english, translation, img, fc_categories_gender.gender AS gender"
-       . " FROM fc_german_nouns, fc_categories_gender"
-       . " WHERE fc_german_nouns.gender = fc_categories_gender.id AND category = '{$category}'"
-       . " ORDER BY added DESC";
+  if ($sort === 'true') {
+    $sql = "SELECT english, translation, img, fc_categories_gender.gender AS gender"
+         . " FROM fc_german_nouns, fc_categories_gender"
+         . " WHERE fc_german_nouns.gender = fc_categories_gender.id AND category = '{$category}'"
+         . " ORDER BY translation";
+  } else {
+    $sql = "SELECT english, translation, img, fc_categories_gender.gender AS gender"
+         . " FROM fc_german_nouns, fc_categories_gender"
+         . " WHERE fc_german_nouns.gender = fc_categories_gender.id AND category = '{$category}'"
+         . " ORDER BY added DESC";
+  }
   
   $result = $mySqli->handleQuery($sql);
 
@@ -114,12 +138,14 @@ if ($pos === 'phrase') {
   
 } elseif ($pos === 'mixed') {
   $category = filter_input(INPUT_GET, 'category', FILTER_SANITIZE_STRING);
-  // Nouns
-  $sql = "(SELECT english, translation, img, fc_categories_gender.gender AS gender"
-       . " FROM fc_german_nouns, fc_categories_gender WHERE fc_german_nouns.gender = fc_categories_gender.id ORDER BY added DESC LIMIT 20)"
-       . " UNION"
-       . " (SELECT english, translation, img, 'none' AS gender"
-       . " FROM fc_german_adjectives ORDER BY added DESC LIMIT 20)";
+  $sort = filter_input(INPUT_GET, 'sort', FILTER_SANITIZE_STRING);
+  
+  // Categories
+    $sql = "(SELECT english, translation, img, fc_categories_gender.gender AS gender"
+         . " FROM fc_german_nouns, fc_categories_gender WHERE fc_german_nouns.gender = fc_categories_gender.id ORDER BY added DESC LIMIT 20)"
+         . " UNION"
+         . " (SELECT english, translation, img, 'none' AS gender"
+         . " FROM fc_german_adjectives ORDER BY added DESC LIMIT 20)";
   
   $result = $mySqli->handleQuery($sql);
 

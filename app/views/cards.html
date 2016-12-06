@@ -22,7 +22,7 @@
     <br>
     
     <label class="cards-form__label" for="flashcard-type" ng-show="showCategory === true">Category: </label>
-    <select id="flashcard-type" class="cards-form__select" ng-model="cardCategory" ng-change="getCards(cardPos, cardCategory)" ng-show="showCategory === true">
+    <select id="flashcard-type" class="cards-form__select" ng-model="cardCategory" ng-change="getCards(cardPos, cardCategory, false)" ng-show="showCategory === true">
       <option ng-repeat="option in posCategory" value="{{option.id}}">{{option.name}}</option>
     </select>
   </form>

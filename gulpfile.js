@@ -22,14 +22,16 @@ gulp.task("concatScripts", function() {
   return gulp.src([
     'app/app.module.js',
     'app/config.js',
-    'app/main.js',
-    'app/cards.js',
-    'app/login.js',
-    'app/additem.js',
     'app/directives.js',
-    'app/cards.service.js',
+    'app/main.js',
+    'app/login.js',
     'app/login.service.js',
-    'app/additem.service.js'
+    'app/cards.js',
+    'app/cards.service.js',
+    'app/add-item.js',
+    'app/add-item.service.js',
+    'app/update-item.js',
+    'app/update-item.service.js'
   ])
       .pipe(maps.init())
       .pipe(concat('app.js'))

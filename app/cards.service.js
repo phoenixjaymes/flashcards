@@ -10,16 +10,16 @@ angular.module('flashcards')
     .service('cardsService', function($http) {
             
       // Get words
-      this.getWords = function(pos, category, callback) {
+      this.getWords = function(pos, category, sort, callback) {
         
         if (pos === 'adjective') {
-          var url = 'assets/inc/fc-german.php?pos=' + pos + '&category=' + category;
+          var url = 'assets/inc/fc-german.php?pos=' + pos + '&category=' + category + '&sort=' + sort;
         } else if (pos === 'noun') {
-          var url = 'assets/inc/fc-german.php?pos=' + pos + '&category=' + category;
+          var url = 'assets/inc/fc-german.php?pos=' + pos + '&category=' + category + '&sort=' + sort;
         } else if (pos === 'verb') {
-          var url = 'assets/inc/fc-german.php?pos=' + pos;
+          var url = 'assets/inc/fc-german.php?pos=' + pos + '&sort=' + sort;
         } else if (pos === 'phrase') {
-          var url = 'assets/inc/fc-german.php?pos=' + pos;
+          var url = 'assets/inc/fc-german.php?pos=' + pos + '&sort=' + sort;
         } else if (pos === 'mixed') {
           var url = 'assets/inc/fc-german.php?pos=' + pos;
         } else {

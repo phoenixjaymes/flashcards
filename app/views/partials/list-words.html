@@ -16,7 +16,7 @@
   
   <label class="form__label" for="selCategoryList"  ng-show="showCategoryWords === true">Category</label>
   <select id="selCategoryList" class="form__select" name="selCategoryList"
-    ng-model="wordCategory" ng-change="getWords(wordListPos, wordCategory)"  ng-show="showCategoryWords === true">
+    ng-model="wordCategory" ng-change="getWords(wordListPos, wordCategory, true)"  ng-show="showCategoryWords === true">
     <option>Select</option>
     <option ng-repeat="option in posCategoryList" value="{{option.id}}">{{option.name}}</option>
   </select>
@@ -24,7 +24,24 @@
   <div class="word-list" >
     <h3>Word List</h3>
     <div class="word-list__wrap">
-      <p ng-repeat="word in listOfWords">{{word.english}} - {{word.translation}}</p>
+      <table class="word-list__table">
+        <tbody>
+          <tr>
+            <th class="word-list__table-cell-one">English</th>
+            <th class="word-list__table-cell-two">Translation</th>
+            <th class="word-list__table-cell-three"></th>
+          </tr>
+          
+          <tr ng-repeat="word in listOfWords">
+            <td>{{word.english}}</td>
+            <td>{{word.translation}}</td>
+            <td><a href="" ng-click="$emit('findWord', $index)">{{$index}}</a></td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
+  
+  
+  
 </form>

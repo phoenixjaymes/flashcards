@@ -43,7 +43,8 @@ angular.module('flashcards')
   })
   .directive('updateword', function() {
     return {
-      templateUrl : 'app/views/partials/update-word.html'
+      templateUrl : 'app/views/partials/update-word.html',
+      controller: 'UpdateItem'
     };
   })
   .directive('addcategory', function() {

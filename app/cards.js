@@ -57,22 +57,15 @@ angular.module('flashcards')
         //console.log($scope.cardAllCategories);
         if (wordPos === 'adjective') {
           $scope.posCategoryList = $scope.cardAllCategories[wordPos];
-          $scope.getWords(wordPos);
-          
-          
           $scope.showCategoryWords = true;
         } else if (wordPos === 'noun') {
           $scope.posCategoryList = $scope.cardAllCategories[wordPos];
-          
-          
           $scope.showCategoryWords = true;
         } else if (wordPos === 'phrase') {
-          
-          $scope.getWords(wordPos, '');
+          $scope.getWords(wordPos, '', true);
           $scope.showCategoryWords = false;
         } else if (wordPos === 'verb') {
-          
-          $scope.getWords(wordPos, '');
+          $scope.getWords(wordPos, '', true);
           $scope.showCategoryWords = false;
         } else {
           //$scope.posCategory = $scope.cardAllCategories[cardPos];
@@ -81,9 +74,9 @@ angular.module('flashcards')
       };
       
       
-      // Get cards
-      $scope.getWords = function(pos, category) {
-        cardsService.getWords(pos, category, function(response) {
+      // Get words
+      $scope.getWords = function(pos, category, sort) {
+        cardsService.getWords(pos, category, sort, function(response) {
           $scope.listOfWords = response.data;
 
           $scope.totalWords = $scope.listOfWords.length;          
@@ -137,8 +130,8 @@ angular.module('flashcards')
       
       
       // Get cards
-      $scope.getCards = function(pos, category) {
-        cardsService.getWords(pos, category, function(response) {
+      $scope.getCards = function(pos, category, sort) {
+        cardsService.getWords(pos, category, sort, function(response) {
           $scope.cards = response.data;
 
           $scope.totalCards = $scope.cards.length;

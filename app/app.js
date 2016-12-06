@@ -24,6 +24,108 @@ angular.module('flashcards')
 }]);
 
 /* 
+ File     : directives.js
+ Date     : Sep 28, 2016
+ Author   : Jaymes Young <jaymes@phoenixjaymes.com>
+ */
+
+'use strict';
+
+angular.module('flashcards')
+  .directive('home', function() {
+    return {
+      templateUrl : 'app/views/home.html'
+    };
+  })
+  .directive('cards', function() {
+    return {
+      templateUrl : 'app/views/cards.html',
+      controller  : 'Cards'
+    };
+  })
+  .directive('dutch', function() {
+    return {
+      templateUrl : 'app/views/dutch.html'
+    };
+  })
+  .directive('login', function() {
+    return {
+      templateUrl : 'app/views/partials/login.html',
+      controller : 'Login'
+    };
+  })
+  .directive('addword', function() {
+    return {
+      templateUrl : 'app/views/partials/add-word.html',
+      controller : 'AddItem'
+    };
+  })
+  .directive('addverb', function() {
+    return {
+      templateUrl : 'app/views/partials/add-verb.html',
+      controller : 'AddItem'
+    };
+  })
+  .directive('updateword', function() {
+    return {
+      templateUrl : 'app/views/partials/update-word.html',
+      controller: 'UpdateItem'
+    };
+  })
+  .directive('addcategory', function() {
+    return {
+      templateUrl : 'app/views/partials/add-category.html',
+      controller : 'AddItem'
+    };
+  })
+  .directive('addphrase', function() {
+    return {
+      templateUrl : 'app/views/partials/add-phrase.html',
+      controller : 'AddItem'
+    };
+  })
+  .directive('listWords', function() {
+    return {
+      templateUrl : 'app/views/partials/list-words.html',
+      controller: 'Cards'
+    };
+  })
+  .directive('register', function() {
+    return {
+      templateUrl : 'app/views/partials/register.html',
+      controller : 'Login'
+    };
+  })
+  .directive('formmessage', function() {
+    return {
+      templateUrl : 'app/views/partials/form-message.html'
+    };
+  })
+  .directive('verbcard', function() {
+    return {
+      templateUrl : 'app/views/partials/verb-card.html'
+    };
+  })
+  .directive('phrasecard', function() {
+    return {
+      templateUrl : 'app/views/partials/phrase-card.html'
+    };
+  })
+  .directive('genericcard', function() {
+    return {
+      templateUrl : 'app/views/partials/generic-card.html'
+    };
+  })
+  .directive('umlauts', function() {
+    return {
+      restrict : 'E',      
+      templateUrl : 'app/views/partials/umlauts.html'
+    };
+  });
+  
+  
+
+/* 
  File     : main.js
  Date     : Sep 28, 2016
  Author   : Jaymes Young <jaymes@phoenixjaymes.com>
@@ -139,201 +241,6 @@ angular.module('flashcards')
       checkLogin();
 });
 /* 
- File     : cards.js
- Date     : Sep 28, 2016
- Author   : Jaymes Young <jaymes@phoenixjaymes.com>
- */
-
-'use strict';
-
-angular.module('flashcards')
-    .controller('Cards', function($scope, $timeout, $sce, cardsService) {
-      // Default card
-      $scope.cards = [{
-        "translation" : "Germany",
-        "english"     : "Deutschland",
-        "img"         : "flashcard-germany.svg",
-        "pos"         : "noun",
-        "gender"      : "m"
-      }];
-      $scope.currentCard = 1;
-      $scope.totalCards = $scope.cards.length;
-      $scope.flip = false;
-      $scope.showCategory = false;
-      
-      // Get categories from service
-      var getAllCategories = function() {
-        cardsService.getCategories(function(response) {
-          $scope.cardAllCategories = response.data;
-          
-          
-        });
-      };
-      
-      // Change category options for cards
-      // If pos is verb get verbs until verbs have categories
-      $scope.changeCategory = function(cardPos) {
-        if (cardPos === 'verb') {
-          $scope.getCards(cardPos);
-          $scope.showCategory = false;
-        } else if (cardPos === 'phrase') {
-          $scope.getCards(cardPos);
-          $scope.showCategory = false;
-        } else if (cardPos === 'mixed') {
-          $scope.getCards(cardPos);
-          $scope.showCategory = false;
-        } else {
-          $scope.posCategory = $scope.cardAllCategories[cardPos];
-          $scope.showCategory = true;
-        }
-      };
-      
-      // Change category options for word list
-      $scope.posCategoryList;
-      $scope.showCategoryWords = false;
-      // If pos is verb get verbs until verbs have categories
-      $scope.changeCategoryLW = function(wordPos) {
-        //console.log(wordPos);
-        //console.log($scope.cardAllCategories);
-        if (wordPos === 'adjective') {
-          $scope.posCategoryList = $scope.cardAllCategories[wordPos];
-          $scope.getWords(wordPos);
-          
-          
-          $scope.showCategoryWords = true;
-        } else if (wordPos === 'noun') {
-          $scope.posCategoryList = $scope.cardAllCategories[wordPos];
-          
-          
-          $scope.showCategoryWords = true;
-        } else if (wordPos === 'phrase') {
-          
-          $scope.getWords(wordPos, '');
-          $scope.showCategoryWords = false;
-        } else if (wordPos === 'verb') {
-          
-          $scope.getWords(wordPos, '');
-          $scope.showCategoryWords = false;
-        } else {
-          //$scope.posCategory = $scope.cardAllCategories[cardPos];
-          //$scope.showCategoryWords = true;
-        }
-      };
-      
-      
-      // Get cards
-      $scope.getWords = function(pos, category) {
-        cardsService.getWords(pos, category, function(response) {
-          $scope.listOfWords = response.data;
-
-          $scope.totalWords = $scope.listOfWords.length;          
-        });
-      };
-      
-      
-      
-      
-      
-      
-      // Set card
-      var setCard = function(card) {
-        // Reset card
-        $scope.flip = false;
-        
-        if ($scope.cardPos === 'verb') {
-          // Wait for card to flip over
-          $timeout(function() {
-            $scope.english = $scope.cards[card].english;
-            $scope.translation = $sce.trustAsHtml($scope.cards[card].translation);
-            $scope.ich = $sce.trustAsHtml($scope.cards[card].ich);
-            $scope.du = $sce.trustAsHtml($scope.cards[card].du);
-            $scope.er_sie_es = $sce.trustAsHtml($scope.cards[card].er_sie_es);
-            $scope.wir = $sce.trustAsHtml($scope.cards[card].wir);
-            $scope.ihr = $sce.trustAsHtml($scope.cards[card].ihr);
-            $scope.sie_Sie = $sce.trustAsHtml($scope.cards[card].sie_Sie);
-            
-            $scope.image = $scope.cards[card].img;
-            $scope.gender = $scope.cards[card].gender;
-            
-          }, 500);
-        } else if ($scope.cardPos === 'phrase') {
-          // Wait for card to flip over
-          $timeout(function() {
-            $scope.english = $scope.cards[card].english;
-            $scope.translation = $sce.trustAsHtml($scope.cards[card].translation);
-            $scope.image = $scope.cards[card].img;
-            $scope.gender = $scope.cards[card].gender;
-          }, 500);
-        } else {
-          // Wait for card to flip over
-          $timeout(function() {
-            $scope.english = $scope.cards[card].english;
-            $scope.translation = $sce.trustAsHtml($scope.cards[card].translation);
-            $scope.image = $scope.cards[card].img;
-            $scope.gender = $scope.cards[card].gender;
-          }, 500);
-        }  
-      };
-      
-      
-      // Get cards
-      $scope.getCards = function(pos, category) {
-        cardsService.getWords(pos, category, function(response) {
-          $scope.cards = response.data;
-
-          $scope.totalCards = $scope.cards.length;
-          
-          // Reset current card and set card
-          $scope.currentCard = 1;
-          setCard(0);
-          
-        });
-      };
-      
-      
-      // Go to next card
-      $scope.nextCard = function() {
-        // Check if number is out of bounds
-        if ($scope.currentCard >= $scope.totalCards) {
-          $scope.currentCard = 1;
-        } else {
-          $scope.currentCard++;
-        }
-        
-        setCard($scope.currentCard - 1);
-      };
-      
-      
-      // Go to previous card
-      $scope.prevCard = function() {
-        // Check if number is out of bounds
-        if ($scope.currentCard <= 1) {
-          $scope.currentCard = $scope.totalCards;
-        } else {
-          $scope.currentCard--;
-        }
-        
-        setCard($scope.currentCard - 1);
-      };
-      
-      // Flip front of card to back
-      $scope.$on('cardFrontFlip', function(evt, args) {
-        $scope.flip = args;
-      });
-      
-      
-      // Flip back of card to front
-      $scope.$on('cardBackFlip', function(evt, args) {
-        $scope.flip = args;
-      });
-      
-      // Set initial card
-      setCard(0);
-      
-      // Get categories
-      getAllCategories();
-});
-/* 
  File     : login.js
  Date     : Oct 22, 2016
  Author   : Jaymes Young <jaymes@phoenixjaymes.com>
@@ -402,6 +309,267 @@ angular.module('flashcards')
         }
       });  
     };
+});
+
+/* 
+ File     : words.service.js
+ Date     : Sep 28, 2016
+ Author   : Jaymes Young <jaymes@phoenixjaymes.com>
+ */
+
+'use strict';
+
+angular.module('flashcards')
+    .service('adminService', function($http, $httpParamSerializerJQLike) {
+      
+      
+      // Login learner
+      this.loginLearner = function(learner, callback) {
+        var url = 'assets/inc/fc-login.php';
+        var config = {headers: {'Content-Type': 'application/x-www-form-urlencoded'}};
+        
+        $http.post(url, $httpParamSerializerJQLike(learner), config).then(callback); 
+      };
+      
+      
+      // Register new learner
+      this.registerLearner = function(newLearner, callback) {
+        var url = 'assets/inc/fc-register.php';
+        var config = {headers: {'Content-Type': 'application/x-www-form-urlencoded'}};
+        
+        $http.post(url, $httpParamSerializerJQLike(newLearner), config).then(callback);
+      };
+      
+});
+
+/* 
+ File     : cards.js
+ Date     : Sep 28, 2016
+ Author   : Jaymes Young <jaymes@phoenixjaymes.com>
+ */
+
+'use strict';
+
+angular.module('flashcards')
+    .controller('Cards', function($scope, $timeout, $sce, cardsService) {
+      // Default card
+      $scope.cards = [{
+        "translation" : "Germany",
+        "english"     : "Deutschland",
+        "img"         : "flashcard-germany.svg",
+        "pos"         : "noun",
+        "gender"      : "m"
+      }];
+      $scope.currentCard = 1;
+      $scope.totalCards = $scope.cards.length;
+      $scope.flip = false;
+      $scope.showCategory = false;
+      
+      // Get categories from service
+      var getAllCategories = function() {
+        cardsService.getCategories(function(response) {
+          $scope.cardAllCategories = response.data;
+          
+          
+        });
+      };
+      
+      // Change category options for cards
+      // If pos is verb get verbs until verbs have categories
+      $scope.changeCategory = function(cardPos) {
+        if (cardPos === 'verb') {
+          $scope.getCards(cardPos);
+          $scope.showCategory = false;
+        } else if (cardPos === 'phrase') {
+          $scope.getCards(cardPos);
+          $scope.showCategory = false;
+        } else if (cardPos === 'mixed') {
+          $scope.getCards(cardPos);
+          $scope.showCategory = false;
+        } else {
+          $scope.posCategory = $scope.cardAllCategories[cardPos];
+          $scope.showCategory = true;
+        }
+      };
+      
+      // Change category options for word list
+      $scope.posCategoryList;
+      $scope.showCategoryWords = false;
+      // If pos is verb get verbs until verbs have categories
+      $scope.changeCategoryLW = function(wordPos) {
+        //console.log(wordPos);
+        //console.log($scope.cardAllCategories);
+        if (wordPos === 'adjective') {
+          $scope.posCategoryList = $scope.cardAllCategories[wordPos];
+          $scope.showCategoryWords = true;
+        } else if (wordPos === 'noun') {
+          $scope.posCategoryList = $scope.cardAllCategories[wordPos];
+          $scope.showCategoryWords = true;
+        } else if (wordPos === 'phrase') {
+          $scope.getWords(wordPos, '', true);
+          $scope.showCategoryWords = false;
+        } else if (wordPos === 'verb') {
+          $scope.getWords(wordPos, '', true);
+          $scope.showCategoryWords = false;
+        } else {
+          //$scope.posCategory = $scope.cardAllCategories[cardPos];
+          //$scope.showCategoryWords = true;
+        }
+      };
+      
+      
+      // Get words
+      $scope.getWords = function(pos, category, sort) {
+        cardsService.getWords(pos, category, sort, function(response) {
+          $scope.listOfWords = response.data;
+
+          $scope.totalWords = $scope.listOfWords.length;          
+        });
+      };
+      
+      
+      
+      
+      
+      
+      // Set card
+      var setCard = function(card) {
+        // Reset card
+        $scope.flip = false;
+        
+        if ($scope.cardPos === 'verb') {
+          // Wait for card to flip over
+          $timeout(function() {
+            $scope.english = $scope.cards[card].english;
+            $scope.translation = $sce.trustAsHtml($scope.cards[card].translation);
+            $scope.ich = $sce.trustAsHtml($scope.cards[card].ich);
+            $scope.du = $sce.trustAsHtml($scope.cards[card].du);
+            $scope.er_sie_es = $sce.trustAsHtml($scope.cards[card].er_sie_es);
+            $scope.wir = $sce.trustAsHtml($scope.cards[card].wir);
+            $scope.ihr = $sce.trustAsHtml($scope.cards[card].ihr);
+            $scope.sie_Sie = $sce.trustAsHtml($scope.cards[card].sie_Sie);
+            
+            $scope.image = $scope.cards[card].img;
+            $scope.gender = $scope.cards[card].gender;
+            
+          }, 500);
+        } else if ($scope.cardPos === 'phrase') {
+          // Wait for card to flip over
+          $timeout(function() {
+            $scope.english = $scope.cards[card].english;
+            $scope.translation = $sce.trustAsHtml($scope.cards[card].translation);
+            $scope.image = $scope.cards[card].img;
+            $scope.gender = $scope.cards[card].gender;
+          }, 500);
+        } else {
+          // Wait for card to flip over
+          $timeout(function() {
+            $scope.english = $scope.cards[card].english;
+            $scope.translation = $sce.trustAsHtml($scope.cards[card].translation);
+            $scope.image = $scope.cards[card].img;
+            $scope.gender = $scope.cards[card].gender;
+          }, 500);
+        }  
+      };
+      
+      
+      // Get cards
+      $scope.getCards = function(pos, category, sort) {
+        cardsService.getWords(pos, category, sort, function(response) {
+          $scope.cards = response.data;
+
+          $scope.totalCards = $scope.cards.length;
+          
+          // Reset current card and set card
+          $scope.currentCard = 1;
+          setCard(0);
+          
+        });
+      };
+      
+      
+      // Go to next card
+      $scope.nextCard = function() {
+        // Check if number is out of bounds
+        if ($scope.currentCard >= $scope.totalCards) {
+          $scope.currentCard = 1;
+        } else {
+          $scope.currentCard++;
+        }
+        
+        setCard($scope.currentCard - 1);
+      };
+      
+      
+      // Go to previous card
+      $scope.prevCard = function() {
+        // Check if number is out of bounds
+        if ($scope.currentCard <= 1) {
+          $scope.currentCard = $scope.totalCards;
+        } else {
+          $scope.currentCard--;
+        }
+        
+        setCard($scope.currentCard - 1);
+      };
+      
+      // Flip front of card to back
+      $scope.$on('cardFrontFlip', function(evt, args) {
+        $scope.flip = args;
+      });
+      
+      
+      // Flip back of card to front
+      $scope.$on('cardBackFlip', function(evt, args) {
+        $scope.flip = args;
+      });
+      
+      // Set initial card
+      setCard(0);
+      
+      // Get categories
+      getAllCategories();
+});
+/* 
+ File     : words.service.js
+ Date     : Sep 28, 2016
+ Author   : Jaymes Young <jaymes@phoenixjaymes.com>
+ */
+
+'use strict';
+
+angular.module('flashcards')
+    .service('cardsService', function($http) {
+            
+      // Get words
+      this.getWords = function(pos, category, sort, callback) {
+        
+        if (pos === 'adjective') {
+          var url = 'assets/inc/fc-german.php?pos=' + pos + '&category=' + category + '&sort=' + sort;
+        } else if (pos === 'noun') {
+          var url = 'assets/inc/fc-german.php?pos=' + pos + '&category=' + category + '&sort=' + sort;
+        } else if (pos === 'verb') {
+          var url = 'assets/inc/fc-german.php?pos=' + pos + '&sort=' + sort;
+        } else if (pos === 'phrase') {
+          var url = 'assets/inc/fc-german.php?pos=' + pos + '&sort=' + sort;
+        } else if (pos === 'mixed') {
+          var url = 'assets/inc/fc-german.php?pos=' + pos;
+        } else {
+          var url = 'assets/inc/fc-german.php?pos=noun&category=' + 1;
+        }
+        
+        $http.get(url).then(callback); 
+      };
+      
+      this.getCategories = function(callback) {
+        var url = 'assets/inc/fc-german-categories.php';
+        $http.get(url).then(callback);
+      };
+      
+      this.getAllCategories = function(callback) {
+        var url = 'assets/inc/fc-german-categories.php?type=all';
+        $http.get(url).then(callback);
+      };
 });
 
 /* 
@@ -581,180 +749,6 @@ angular.module('flashcards')
     
 });
 /* 
- File     : directives.js
- Date     : Sep 28, 2016
- Author   : Jaymes Young <jaymes@phoenixjaymes.com>
- */
-
-'use strict';
-
-angular.module('flashcards')
-  .directive('home', function() {
-    return {
-      templateUrl : 'app/views/home.html'
-    };
-  })
-  .directive('cards', function() {
-    return {
-      templateUrl : 'app/views/cards.html',
-      controller  : 'Cards'
-    };
-  })
-  .directive('dutch', function() {
-    return {
-      templateUrl : 'app/views/dutch.html'
-    };
-  })
-  .directive('login', function() {
-    return {
-      templateUrl : 'app/views/partials/login.html',
-      controller : 'Login'
-    };
-  })
-  .directive('addword', function() {
-    return {
-      templateUrl : 'app/views/partials/add-word.html',
-      controller : 'AddItem'
-    };
-  })
-  .directive('addverb', function() {
-    return {
-      templateUrl : 'app/views/partials/add-verb.html',
-      controller : 'AddItem'
-    };
-  })
-  .directive('updateword', function() {
-    return {
-      templateUrl : 'app/views/partials/update-word.html'
-    };
-  })
-  .directive('addcategory', function() {
-    return {
-      templateUrl : 'app/views/partials/add-category.html',
-      controller : 'AddItem'
-    };
-  })
-  .directive('addphrase', function() {
-    return {
-      templateUrl : 'app/views/partials/add-phrase.html',
-      controller : 'AddItem'
-    };
-  })
-  .directive('listWords', function() {
-    return {
-      templateUrl : 'app/views/partials/list-words.html',
-      controller: 'Cards'
-    };
-  })
-  .directive('register', function() {
-    return {
-      templateUrl : 'app/views/partials/register.html',
-      controller : 'Login'
-    };
-  })
-  .directive('formmessage', function() {
-    return {
-      templateUrl : 'app/views/partials/form-message.html'
-    };
-  })
-  .directive('verbcard', function() {
-    return {
-      templateUrl : 'app/views/partials/verb-card.html'
-    };
-  })
-  .directive('phrasecard', function() {
-    return {
-      templateUrl : 'app/views/partials/phrase-card.html'
-    };
-  })
-  .directive('genericcard', function() {
-    return {
-      templateUrl : 'app/views/partials/generic-card.html'
-    };
-  })
-  .directive('umlauts', function() {
-    return {
-      restrict : 'E',      
-      templateUrl : 'app/views/partials/umlauts.html'
-    };
-  });
-  
-  
-
-/* 
- File     : words.service.js
- Date     : Sep 28, 2016
- Author   : Jaymes Young <jaymes@phoenixjaymes.com>
- */
-
-'use strict';
-
-angular.module('flashcards')
-    .service('cardsService', function($http) {
-            
-      // Get words
-      this.getWords = function(pos, category, callback) {
-        
-        if (pos === 'adjective') {
-          var url = 'assets/inc/fc-german.php?pos=' + pos + '&category=' + category;
-        } else if (pos === 'noun') {
-          var url = 'assets/inc/fc-german.php?pos=' + pos + '&category=' + category;
-        } else if (pos === 'verb') {
-          var url = 'assets/inc/fc-german.php?pos=' + pos;
-        } else if (pos === 'phrase') {
-          var url = 'assets/inc/fc-german.php?pos=' + pos;
-        } else if (pos === 'mixed') {
-          var url = 'assets/inc/fc-german.php?pos=' + pos;
-        } else {
-          var url = 'assets/inc/fc-german.php?pos=noun&category=' + 1;
-        }
-        
-        $http.get(url).then(callback); 
-      };
-      
-      this.getCategories = function(callback) {
-        var url = 'assets/inc/fc-german-categories.php';
-        $http.get(url).then(callback);
-      };
-      
-      this.getAllCategories = function(callback) {
-        var url = 'assets/inc/fc-german-categories.php?type=all';
-        $http.get(url).then(callback);
-      };
-});
-
-/* 
- File     : words.service.js
- Date     : Sep 28, 2016
- Author   : Jaymes Young <jaymes@phoenixjaymes.com>
- */
-
-'use strict';
-
-angular.module('flashcards')
-    .service('adminService', function($http, $httpParamSerializerJQLike) {
-      
-      
-      // Login learner
-      this.loginLearner = function(learner, callback) {
-        var url = 'assets/inc/fc-login.php';
-        var config = {headers: {'Content-Type': 'application/x-www-form-urlencoded'}};
-        
-        $http.post(url, $httpParamSerializerJQLike(learner), config).then(callback); 
-      };
-      
-      
-      // Register new learner
-      this.registerLearner = function(newLearner, callback) {
-        var url = 'assets/inc/fc-register.php';
-        var config = {headers: {'Content-Type': 'application/x-www-form-urlencoded'}};
-        
-        $http.post(url, $httpParamSerializerJQLike(newLearner), config).then(callback);
-      };
-      
-});
-
-/* 
  File     : words.service.js
  Date     : Sep 28, 2016
  Author   : Jaymes Young <jaymes@phoenixjaymes.com>
@@ -766,7 +760,7 @@ angular.module('flashcards')
   .service('addItemService', function($http, $httpParamSerializerJQLike) {
 
 
-    // Login learner
+    // Add items
     this.addItem = function(item, callback) {
       var url = 'assets/inc/fc-add-item.php';
       var config = {headers: {'Content-Type': 'application/x-www-form-urlencoded'}};
@@ -776,4 +770,282 @@ angular.module('flashcards')
       
 });
 
+/* 
+ File     : addword.js
+ Date     : Oct 23, 2016
+ Author   : Jaymes Young <jaymes@phoenixjaymes.com>
+ */
+
+'use strict';
+
+angular.module('flashcards')
+  .controller('UpdateItem', function($scope, cardsService, updateItemService) {;
+    $scope.word = {};
+    $scope.verb = {"pos": "verb"};
+    $scope.category = {"pos": "category"};
+    $scope.phrase = {"pos" : "phrase"};
+    $scope.posCategories;
+    $scope.genderCategories;
+    $scope.responseMessage;
+    $scope.displayFormMessage = false;
+    $scope.showUpperCase = false;
+    $scope.inputType;
+    $scope.inputField;
+      
+    // Change category options
+    $scope.getCategories = function(wordPos) {
+
+      if ($scope.posCategories === undefined) {
+        cardsService.getAllCategories(function(response) {
+          
+          $scope.posCategories = response.data.word;
+          $scope.genderCategories = response.data.gender;
+        });
+      }
+    };
+    
+    
+    // Change category options for word list
+    $scope.posCategoryList;
+    $scope.showCategoryWords = false;
+    // If pos is verb get verbs until verbs have categories
+    $scope.changeCategoryUpdate = function(wordPos) {
+      console.log(wordPos);
+      console.log($scope.cardAllCategories);
+      if (wordPos === 'adjective') {
+        $scope.posCategoriesUpdate = $scope.cardAllCategories[wordPos];
+        //$scope.getWords(wordPos);
+
+
+        $scope.showCategoryWords = true;
+      } else if (wordPos === 'noun') {
+        $scope.posCategoriesUpdate = $scope.cardAllCategories[wordPos];
+
+
+        $scope.showCategoryWords = true;
+      } else if (wordPos === 'phrase') {
+
+        $scope.getWords(wordPos, '', true);
+        $scope.showCategoryWords = false;
+      } else if (wordPos === 'verb') {
+
+        $scope.getWords(wordPos, '', true);
+        $scope.showCategoryWords = false;
+      } else {
+        //$scope.posCategory = $scope.cardAllCategories[cardPos];
+        //$scope.showCategoryWords = true;
+      }
+    };
+
+
+    // Get list of words
+    $scope.getWords = function(pos, category, sort) {
+      cardsService.getWords(pos, category, sort, function(response) {
+        $scope.listOfWords = response.data;
+
+        $scope.totalWords = $scope.listOfWords.length;          
+      });
+    };
+    
+    
+    
+    // Find single word and fill in form
+    $scope.$on('findWord', function(evt, args) {
+      $scope.word.id = args;
+      console.log('find word ' + args + ' ' + $scope.word.pos + ' ' + $scope.word.category);
+      
+      updateItemService.findWord($scope.word, function(response) {
+        console.log(response.data);
+        
+        $scope.updateWord = response.data;
+        console.log($scope.updateWord.item.english);
+        console.log($scope.updateWord.item.translation);
+        console.log($scope.updateWord.item.image);
+        
+        $scope.word.english = $scope.updateWord.item.english;
+        $scope.word.translation = $scope.updateWord.item.translation;
+        $scope.word.image = $scope.updateWord.item.image;
+      });
+      
+    });
+    
+    
+    
+      
+    
+    
+    
+    
+    
+    
+
+    // Update word
+    $scope.addItem = function() {
+      $scope.displayFormMessage = false;
+      
+      updateItemService.updateItem($scope.word, function(response) {
+        // Check response message
+        if(response.data.success === true) {
+          // Clear form
+          $scope.word.translation = '';
+          $scope.word.english = '';
+          $scope.word.img = '';
+          
+          displayMessage('true');
+        } else if (response.data.success === 'duplicate') {
+          displayMessage('duplicate');
+        } else if (response.data.success === 'incorrect') {
+          displayMessage('incorrect');
+        } else if (response.data.success === false) {
+          displayMessage('false');
+        }
+      });
+    }; 
+    
+    
+    // Update verb
+    $scope.addVerb = function() {
+      $scope.displayFormMessage = false;
+      
+      if(!$scope.verb.separable) {
+        $scope.verb.separable = 'no';
+      } else {
+        $scope.verb.separable = 'yes';
+      }
+      
+      updateItemService.updateItem($scope.verb, function(response) {
+        // Check response message
+        if(response.data.success === true) {
+          // clear form
+          $scope.verb.english = '';
+          $scope.verb.translation = '';
+          $scope.verb.ich = '';
+          $scope.verb.du = '';
+          $scope.verb.er_sie_es = '';
+          $scope.verb.wir = '';
+          $scope.verb.ihr = '';
+          $scope.verb.sie_sie = '';
+          $scope.verb.separable = undefined;
+          
+          displayMessage('true');
+        } else if (response.data.success === 'duplicate') {
+          displayMessage('duplicate');
+        } else if (response.data.success === 'incorrect') {
+          displayMessage('incorrect');
+        } else if (response.data.success === false) {
+          displayMessage('false');
+        }
+      });
+
+      $scope.verb.separable = undefined;
+    };
+    
+    
+    // Uupdate category
+    $scope.addCategory = function() {
+      $scope.displayFormMessage = false;
+      
+      updateItemService.updateItem($scope.category, function(response) {
+        // Check response message
+        if(response.data.success === true) {
+          // Clear form
+          $scope.category.name = '';
+          
+          displayMessage('true');
+        } else if (response.data.success === 'duplicate') {
+          displayMessage('duplicate');
+        } else if (response.data.success === 'incorrect') {
+          displayMessage('incorrect');
+        } else if (response.data.success === false) {
+          displayMessage('false');
+        }
+      });
+    };
+    
+    
+    // Update Phrase
+    $scope.addPhrase = function() {
+      $scope.displayFormMessage = false;
+      
+      updateItemService.updateItem($scope.phrase, function(response) {
+        // Check response message
+        if(response.data.success === true) {
+          // Clear form
+          $scope.phrase.english = '';
+          $scope.phrase.translation = '';
+          
+          displayMessage('true');
+        } else if (response.data.success === 'incorrect') {
+          displayMessage('incorrect');
+        } else if (response.data.success === 'duplicate') {
+          displayMessage('duplicate');
+        } else if (response.data.success === false) {
+          displayMessage('false');
+        }
+      });
+    };
+    
+    // Set which input umlaut should be added to
+    $scope.umlautFocus = function(pos, propName) {
+      $scope.inputType = pos;
+      $scope.inputField = propName;
+    };
+    
+    
+    // Add Umlauts and special characters
+    $scope.addCharacter = function(objName, propName, char) {
+      if(!$scope.inputType || !$scope.inputField) {
+        return;
+      }
+      
+      if ($scope[$scope.inputType][$scope.inputField] === undefined) {
+        $scope[$scope.inputType][$scope.inputField] = '';
+      }
+      
+      $scope[$scope.inputType][$scope.inputField] = $scope[$scope.inputType][$scope.inputField] + char;
+    };
+
+    
+    
+    // Display message
+    var displayMessage = function(message) {
+      var objMessages = {
+        'true' : 'Item added successfully.',
+        'incorrect' : 'Please fill in all form fields.',
+        'duplicate' : 'This item already exist.',
+        'false' : 'Unable to add item at this time.'
+      };
+      
+      $scope.responseMessage = objMessages[message];
+      $scope.displayFormMessage = true;
+    };
+    
+});
+/* 
+ File     : words.service.js
+ Date     : Sep 28, 2016
+ Author   : Jaymes Young <jaymes@phoenixjaymes.com>
+ */
+
+'use strict';
+
+angular.module('flashcards')
+  .service('updateItemService', function($http, $httpParamSerializerJQLike) {
+    
+    // Get word
+    this.findWord = function(item, callback) {
+      var url = 'assets/inc/fc-update-item.php';
+      var config = {params: item};
+      $http.get(url, config).then(callback);
+    };
+
+    // Add items
+    this.updateItem = function(item, callback) {
+      var url = 'assets/inc/fc-update-item.php';
+      var config = {headers: {'Content-Type': 'application/x-www-form-urlencoded'}};
+
+      $http.post(url, $httpParamSerializerJQLike(item), config).then(callback); 
+    };
+      
+});
 //# sourceMappingURL=app.js.map

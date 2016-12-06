@@ -12,8 +12,34 @@
     background: $word-list-bg-color;
     border-radius: $brd-radius;
     height: 180px;
-    overflow: scroll;
+    overflow: auto;
     padding: 5px;
     margin-bottom: 20px;
   }
+}
+
+.word-list__table {
+  width: 100%;
+  
+  tr {
+    text-align: left;
+  }
+  
+  td {
+    border: solid #000 1px;
+  }
+  
+}
+
+
+.word-list__table-cell-one {
+  width: 47%;
+}
+
+.word-list__table-cell-two {
+  width: 47%;
+}
+
+.word-list__table-cell-three {
+  width: 6%;
 }

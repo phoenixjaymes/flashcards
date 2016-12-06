@@ -7,7 +7,7 @@
 'use strict';
 
 angular.module('flashcards')
-  .controller('AddItem', function($scope, cardsService, addItemService) {;
+  .controller('UpdateItem', function($scope, cardsService, updateItemService) {;
     $scope.word = {};
     $scope.verb = {"pos": "verb"};
     $scope.category = {"pos": "category"};
@@ -31,12 +31,87 @@ angular.module('flashcards')
         });
       }
     };
+    
+    
+    // Change category options for word list
+    $scope.posCategoryList;
+    $scope.showCategoryWords = false;
+    // If pos is verb get verbs until verbs have categories
+    $scope.changeCategoryUpdate = function(wordPos) {
+      console.log(wordPos);
+      console.log($scope.cardAllCategories);
+      if (wordPos === 'adjective') {
+        $scope.posCategoriesUpdate = $scope.cardAllCategories[wordPos];
+        //$scope.getWords(wordPos);
 
-    // Add word
+
+        $scope.showCategoryWords = true;
+      } else if (wordPos === 'noun') {
+        $scope.posCategoriesUpdate = $scope.cardAllCategories[wordPos];
+
+
+        $scope.showCategoryWords = true;
+      } else if (wordPos === 'phrase') {
+
+        $scope.getWords(wordPos, '', true);
+        $scope.showCategoryWords = false;
+      } else if (wordPos === 'verb') {
+
+        $scope.getWords(wordPos, '', true);
+        $scope.showCategoryWords = false;
+      } else {
+        //$scope.posCategory = $scope.cardAllCategories[cardPos];
+        //$scope.showCategoryWords = true;
+      }
+    };
+
+
+    // Get list of words
+    $scope.getWords = function(pos, category, sort) {
+      cardsService.getWords(pos, category, sort, function(response) {
+        $scope.listOfWords = response.data;
+
+        $scope.totalWords = $scope.listOfWords.length;          
+      });
+    };
+    
+    
+    
+    // Find single word and fill in form
+    $scope.$on('findWord', function(evt, args) {
+      $scope.word.id = args;
+      console.log('find word ' + args + ' ' + $scope.word.pos + ' ' + $scope.word.category);
+      
+      updateItemService.findWord($scope.word, function(response) {
+        console.log(response.data);
+        
+        $scope.updateWord = response.data;
+        console.log($scope.updateWord.item.english);
+        console.log($scope.updateWord.item.translation);
+        console.log($scope.updateWord.item.image);
+        
+        $scope.word.english = $scope.updateWord.item.english;
+        $scope.word.translation = $scope.updateWord.item.translation;
+        $scope.word.image = $scope.updateWord.item.image;
+      });
+      
+    });
+    
+    
+    
+      
+    
+    
+    
+    
+    
+    
+
+    // Update word
     $scope.addItem = function() {
       $scope.displayFormMessage = false;
       
-      addItemService.addItem($scope.word, function(response) {
+      updateItemService.updateItem($scope.word, function(response) {
         // Check response message
         if(response.data.success === true) {
           // Clear form
@@ -56,7 +131,7 @@ angular.module('flashcards')
     }; 
     
     
-    // Add verb
+    // Update verb
     $scope.addVerb = function() {
       $scope.displayFormMessage = false;
       
@@ -66,7 +141,7 @@ angular.module('flashcards')
         $scope.verb.separable = 'yes';
       }
       
-      addItemService.addItem($scope.verb, function(response) {
+      updateItemService.updateItem($scope.verb, function(response) {
         // Check response message
         if(response.data.success === true) {
           // clear form
@@ -94,11 +169,11 @@ angular.module('flashcards')
     };
     
     
-    // Add category
+    // Uupdate category
     $scope.addCategory = function() {
       $scope.displayFormMessage = false;
       
-      addItemService.addItem($scope.category, function(response) {
+      updateItemService.updateItem($scope.category, function(response) {
         // Check response message
         if(response.data.success === true) {
           // Clear form
@@ -116,11 +191,11 @@ angular.module('flashcards')
     };
     
     
-    // Add Phrase
+    // Update Phrase
     $scope.addPhrase = function() {
       $scope.displayFormMessage = false;
       
-      addItemService.addItem($scope.phrase, function(response) {
+      updateItemService.updateItem($scope.phrase, function(response) {
         // Check response message
         if(response.data.success === true) {
           // Clear form
