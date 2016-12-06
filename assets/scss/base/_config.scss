@@ -70,7 +70,10 @@ $brd-radius             : 5px;
 
 
 // Media query breakpoints
-$brk-sm            : '(min-width: 544px)';
-$brk-md            : '(min-width: 720px)';
-$brk-lg            : '(min-width: 940px)';
-$brk-xl            : '(min-width: 1140px)';
+$brk-sm             : '(min-width: 544px)';
+$brk-md             : '(min-width: 720px)';
+$brk-lg             : '(min-width: 940px)';
+$brk-xl             : '(min-width: 1140px)';
+
+$brk-h-sm           : '(min-height: 600px)';
+$brk-h-md           : '(min-height: 700px)';

@@ -11,10 +11,18 @@
   &__wrap {
     background: $word-list-bg-color;
     border-radius: $brd-radius;
-    height: 180px;
+    height: 250px;
     overflow: auto;
     padding: 5px;
     margin-bottom: 20px;
+    
+    @media #{$brk-h-sm} {
+      height: 350px;
+    }
+    
+    @media #{$brk-h-md} {
+      height: 500px;
+    }
   }
 }
 
