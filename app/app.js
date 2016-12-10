@@ -24,108 +24,6 @@ angular.module('flashcards')
 }]);
 
 /* 
- File     : directives.js
- Date     : Sep 28, 2016
- Author   : Jaymes Young <jaymes@phoenixjaymes.com>
- */
-
-'use strict';
-
-angular.module('flashcards')
-  .directive('home', function() {
-    return {
-      templateUrl : 'app/views/home.html'
-    };
-  })
-  .directive('cards', function() {
-    return {
-      templateUrl : 'app/views/cards.html',
-      controller  : 'Cards'
-    };
-  })
-  .directive('dutch', function() {
-    return {
-      templateUrl : 'app/views/dutch.html'
-    };
-  })
-  .directive('login', function() {
-    return {
-      templateUrl : 'app/views/partials/login.html',
-      controller : 'Login'
-    };
-  })
-  .directive('addword', function() {
-    return {
-      templateUrl : 'app/views/partials/add-word.html',
-      controller : 'AddItem'
-    };
-  })
-  .directive('addverb', function() {
-    return {
-      templateUrl : 'app/views/partials/add-verb.html',
-      controller : 'AddItem'
-    };
-  })
-  .directive('updateword', function() {
-    return {
-      templateUrl : 'app/views/partials/update-word.html',
-      controller: 'UpdateItem'
-    };
-  })
-  .directive('addcategory', function() {
-    return {
-      templateUrl : 'app/views/partials/add-category.html',
-      controller : 'AddItem'
-    };
-  })
-  .directive('addphrase', function() {
-    return {
-      templateUrl : 'app/views/partials/add-phrase.html',
-      controller : 'AddItem'
-    };
-  })
-  .directive('listWords', function() {
-    return {
-      templateUrl : 'app/views/partials/list-words.html',
-      controller: 'Cards'
-    };
-  })
-  .directive('register', function() {
-    return {
-      templateUrl : 'app/views/partials/register.html',
-      controller : 'Login'
-    };
-  })
-  .directive('formmessage', function() {
-    return {
-      templateUrl : 'app/views/partials/form-message.html'
-    };
-  })
-  .directive('verbcard', function() {
-    return {
-      templateUrl : 'app/views/partials/verb-card.html'
-    };
-  })
-  .directive('phrasecard', function() {
-    return {
-      templateUrl : 'app/views/partials/phrase-card.html'
-    };
-  })
-  .directive('genericcard', function() {
-    return {
-      templateUrl : 'app/views/partials/generic-card.html'
-    };
-  })
-  .directive('umlauts', function() {
-    return {
-      restrict : 'E',      
-      templateUrl : 'app/views/partials/umlauts.html'
-    };
-  });
-  
-  
-
-/* 
  File     : main.js
  Date     : Sep 28, 2016
  Author   : Jaymes Young <jaymes@phoenixjaymes.com>
@@ -240,108 +138,6 @@ angular.module('flashcards')
       // Check if luser is logged in
       checkLogin();
 });
-/* 
- File     : login.js
- Date     : Oct 22, 2016
- Author   : Jaymes Young <jaymes@phoenixjaymes.com>
- */
-
-'use strict';
-
-angular.module('flashcards')
-  .controller('Login', function($scope, adminService) {
-    $scope.learner = {};
-    $scope.responseMessage;
-    $scope.displayFormMessage = false;
-
-    // Login
-    $scope.loginLearner = function() {
-      $scope.displayFormMessage = false;
-      adminService.loginLearner($scope.learner, function(response) {
-
-        if(response.data.success === true) {
-          $scope.responseMessage = 'You have been logged in.';
-          $scope.displayFormMessage = true;
-          $scope.$emit('loginClick', true);
-        } else if (response.data.success === 'incorrect') {
-          $scope.responseMessage = 'Please fill in all form fields.';
-          $scope.displayFormMessage = true;
-          $scope.$emit('loginClick', 'incorrect');
-        } else if (response.data.success === 'match') {
-          $scope.responseMessage = 'Learner or password incorrect.';
-          $scope.displayFormMessage = true;
-          $scope.$emit('loginClick', 'match');
-        } else if (response.data.success === 'register') {
-          $scope.responseMessage = 'Please register';
-          $scope.displayFormMessage = true;
-          $scope.$emit('loginClick', 'register');
-        } else if (response.data.success === false) {
-          $scope.responseMessage = 'Unable to log you in at this time.';
-          $scope.displayFormMessage = true;
-          $scope.$emit('loginClick', false);
-        }
-      });
-    };
-
-
-    // Register user
-    $scope.registerLearner = function() {
-      $scope.displayFormMessage = false;
-      adminService.registerLearner($scope.newLearner, function(response) {
-
-        if (response.data.success === true) {
-          $scope.responseMessage = 'You have been sucessfully registered.';
-          $scope.displayFormMessage = true;
-          $scope.$emit('registerClick', true);
-        } else if(response.data.success === 'incorrect') {
-          $scope.responseMessage = 'Please fill in all form fields.';
-          $scope.displayFormMessage = true;
-          $scope.$emit('registerClick', 'incorrect');
-        } else if(response.data.success === 'password') {
-          $scope.responseMessage = 'Passwords are not the same';
-          $scope.displayFormMessage = true;
-          $scope.$emit('registerClick', 'password');
-        } else if (response.data.success === false) {
-          $scope.responseMessage = 'Unable to register you at this time.';
-          $scope.displayFormMessage = true;
-          $scope.$emit('addWordClick', false);
-          
-        }
-      });  
-    };
-});
-
-/* 
- File     : words.service.js
- Date     : Sep 28, 2016
- Author   : Jaymes Young <jaymes@phoenixjaymes.com>
- */
-
-'use strict';
-
-angular.module('flashcards')
-    .service('adminService', function($http, $httpParamSerializerJQLike) {
-      
-      
-      // Login learner
-      this.loginLearner = function(learner, callback) {
-        var url = 'assets/inc/fc-login.php';
-        var config = {headers: {'Content-Type': 'application/x-www-form-urlencoded'}};
-        
-        $http.post(url, $httpParamSerializerJQLike(learner), config).then(callback); 
-      };
-      
-      
-      // Register new learner
-      this.registerLearner = function(newLearner, callback) {
-        var url = 'assets/inc/fc-register.php';
-        var config = {headers: {'Content-Type': 'application/x-www-form-urlencoded'}};
-        
-        $http.post(url, $httpParamSerializerJQLike(newLearner), config).then(callback);
-      };
-      
-});
-
 /* 
  File     : cards.js
  Date     : Sep 28, 2016
@@ -531,6 +327,179 @@ angular.module('flashcards')
       getAllCategories();
 });
 /* 
+ File     : login.js
+ Date     : Oct 22, 2016
+ Author   : Jaymes Young <jaymes@phoenixjaymes.com>
+ */
+
+'use strict';
+
+angular.module('flashcards')
+  .controller('Login', function($scope, adminService) {
+    $scope.learner = {};
+    $scope.responseMessage;
+    $scope.displayFormMessage = false;
+
+    // Login
+    $scope.loginLearner = function() {
+      $scope.displayFormMessage = false;
+      adminService.loginLearner($scope.learner, function(response) {
+
+        if(response.data.success === true) {
+          $scope.responseMessage = 'You have been logged in.';
+          $scope.displayFormMessage = true;
+          $scope.$emit('loginClick', true);
+        } else if (response.data.success === 'incorrect') {
+          $scope.responseMessage = 'Please fill in all form fields.';
+          $scope.displayFormMessage = true;
+          $scope.$emit('loginClick', 'incorrect');
+        } else if (response.data.success === 'match') {
+          $scope.responseMessage = 'Learner or password incorrect.';
+          $scope.displayFormMessage = true;
+          $scope.$emit('loginClick', 'match');
+        } else if (response.data.success === 'register') {
+          $scope.responseMessage = 'Please register';
+          $scope.displayFormMessage = true;
+          $scope.$emit('loginClick', 'register');
+        } else if (response.data.success === false) {
+          $scope.responseMessage = 'Unable to log you in at this time.';
+          $scope.displayFormMessage = true;
+          $scope.$emit('loginClick', false);
+        }
+      });
+    };
+
+
+    // Register user
+    $scope.registerLearner = function() {
+      $scope.displayFormMessage = false;
+      adminService.registerLearner($scope.newLearner, function(response) {
+
+        if (response.data.success === true) {
+          $scope.responseMessage = 'You have been sucessfully registered.';
+          $scope.displayFormMessage = true;
+          $scope.$emit('registerClick', true);
+        } else if(response.data.success === 'incorrect') {
+          $scope.responseMessage = 'Please fill in all form fields.';
+          $scope.displayFormMessage = true;
+          $scope.$emit('registerClick', 'incorrect');
+        } else if(response.data.success === 'password') {
+          $scope.responseMessage = 'Passwords are not the same';
+          $scope.displayFormMessage = true;
+          $scope.$emit('registerClick', 'password');
+        } else if (response.data.success === false) {
+          $scope.responseMessage = 'Unable to register you at this time.';
+          $scope.displayFormMessage = true;
+          $scope.$emit('addWordClick', false);
+          
+        }
+      });  
+    };
+});
+
+/* 
+ File     : directives.js
+ Date     : Sep 28, 2016
+ Author   : Jaymes Young <jaymes@phoenixjaymes.com>
+ */
+
+'use strict';
+
+angular.module('flashcards')
+  .directive('home', function() {
+    return {
+      templateUrl : 'app/views/home.html'
+    };
+  })
+  .directive('cards', function() {
+    return {
+      templateUrl : 'app/views/cards.html',
+      controller  : 'Cards'
+    };
+  })
+  .directive('dutch', function() {
+    return {
+      templateUrl : 'app/views/dutch.html'
+    };
+  })
+  .directive('login', function() {
+    return {
+      templateUrl : 'app/views/partials/login.html',
+      controller : 'Login'
+    };
+  })
+  .directive('addword', function() {
+    return {
+      templateUrl : 'app/views/partials/add-word.html',
+      controller : 'AddItem'
+    };
+  })
+  .directive('addverb', function() {
+    return {
+      templateUrl : 'app/views/partials/add-verb.html',
+      controller : 'AddItem'
+    };
+  })
+  .directive('updateword', function() {
+    return {
+      templateUrl : 'app/views/partials/update-word.html',
+      controller: 'UpdateItem'
+    };
+  })
+  .directive('addcategory', function() {
+    return {
+      templateUrl : 'app/views/partials/add-category.html',
+      controller : 'AddItem'
+    };
+  })
+  .directive('addphrase', function() {
+    return {
+      templateUrl : 'app/views/partials/add-phrase.html',
+      controller : 'AddItem'
+    };
+  })
+  .directive('listWords', function() {
+    return {
+      templateUrl : 'app/views/partials/list-words.html',
+      controller: 'Cards'
+    };
+  })
+  .directive('register', function() {
+    return {
+      templateUrl : 'app/views/partials/register.html',
+      controller : 'Login'
+    };
+  })
+  .directive('formmessage', function() {
+    return {
+      templateUrl : 'app/views/partials/form-message.html'
+    };
+  })
+  .directive('verbcard', function() {
+    return {
+      templateUrl : 'app/views/partials/verb-card.html'
+    };
+  })
+  .directive('phrasecard', function() {
+    return {
+      templateUrl : 'app/views/partials/phrase-card.html'
+    };
+  })
+  .directive('genericcard', function() {
+    return {
+      templateUrl : 'app/views/partials/generic-card.html'
+    };
+  })
+  .directive('umlauts', function() {
+    return {
+      restrict : 'E',      
+      templateUrl : 'app/views/partials/umlauts.html'
+    };
+  });
+  
+  
+
+/* 
  File     : words.service.js
  Date     : Sep 28, 2016
  Author   : Jaymes Young <jaymes@phoenixjaymes.com>
@@ -573,182 +542,6 @@ angular.module('flashcards')
 });
 
 /* 
- File     : addword.js
- Date     : Oct 23, 2016
- Author   : Jaymes Young <jaymes@phoenixjaymes.com>
- */
-
-'use strict';
-
-angular.module('flashcards')
-  .controller('AddItem', function($scope, cardsService, addItemService) {;
-    $scope.word = {};
-    $scope.verb = {"pos": "verb"};
-    $scope.category = {"pos": "category"};
-    $scope.phrase = {"pos" : "phrase"};
-    $scope.posCategories;
-    $scope.genderCategories;
-    $scope.responseMessage;
-    $scope.displayFormMessage = false;
-    $scope.showUpperCase = false;
-    $scope.inputType;
-    $scope.inputField;
-      
-    // Change category options
-    $scope.getCategories = function(wordPos) {
-
-      if ($scope.posCategories === undefined) {
-        cardsService.getAllCategories(function(response) {
-          
-          $scope.posCategories = response.data.word;
-          $scope.genderCategories = response.data.gender;
-        });
-      }
-    };
-
-    // Add word
-    $scope.addItem = function() {
-      $scope.displayFormMessage = false;
-      
-      addItemService.addItem($scope.word, function(response) {
-        // Check response message
-        if(response.data.success === true) {
-          // Clear form
-          $scope.word.translation = '';
-          $scope.word.english = '';
-          $scope.word.img = '';
-          
-          displayMessage('true');
-        } else if (response.data.success === 'duplicate') {
-          displayMessage('duplicate');
-        } else if (response.data.success === 'incorrect') {
-          displayMessage('incorrect');
-        } else if (response.data.success === false) {
-          displayMessage('false');
-        }
-      });
-    }; 
-    
-    
-    // Add verb
-    $scope.addVerb = function() {
-      $scope.displayFormMessage = false;
-      
-      if(!$scope.verb.separable) {
-        $scope.verb.separable = 'no';
-      } else {
-        $scope.verb.separable = 'yes';
-      }
-      
-      addItemService.addItem($scope.verb, function(response) {
-        // Check response message
-        if(response.data.success === true) {
-          // clear form
-          $scope.verb.english = '';
-          $scope.verb.translation = '';
-          $scope.verb.ich = '';
-          $scope.verb.du = '';
-          $scope.verb.er_sie_es = '';
-          $scope.verb.wir = '';
-          $scope.verb.ihr = '';
-          $scope.verb.sie_sie = '';
-          $scope.verb.separable = undefined;
-          
-          displayMessage('true');
-        } else if (response.data.success === 'duplicate') {
-          displayMessage('duplicate');
-        } else if (response.data.success === 'incorrect') {
-          displayMessage('incorrect');
-        } else if (response.data.success === false) {
-          displayMessage('false');
-        }
-      });
-
-      $scope.verb.separable = undefined;
-    };
-    
-    
-    // Add category
-    $scope.addCategory = function() {
-      $scope.displayFormMessage = false;
-      
-      addItemService.addItem($scope.category, function(response) {
-        // Check response message
-        if(response.data.success === true) {
-          // Clear form
-          $scope.category.name = '';
-          
-          displayMessage('true');
-        } else if (response.data.success === 'duplicate') {
-          displayMessage('duplicate');
-        } else if (response.data.success === 'incorrect') {
-          displayMessage('incorrect');
-        } else if (response.data.success === false) {
-          displayMessage('false');
-        }
-      });
-    };
-    
-    
-    // Add Phrase
-    $scope.addPhrase = function() {
-      $scope.displayFormMessage = false;
-      
-      addItemService.addItem($scope.phrase, function(response) {
-        // Check response message
-        if(response.data.success === true) {
-          // Clear form
-          $scope.phrase.english = '';
-          $scope.phrase.translation = '';
-          
-          displayMessage('true');
-        } else if (response.data.success === 'incorrect') {
-          displayMessage('incorrect');
-        } else if (response.data.success === 'duplicate') {
-          displayMessage('duplicate');
-        } else if (response.data.success === false) {
-          displayMessage('false');
-        }
-      });
-    };
-    
-    // Set which input umlaut should be added to
-    $scope.umlautFocus = function(pos, propName) {
-      $scope.inputType = pos;
-      $scope.inputField = propName;
-    };
-    
-    
-    // Add Umlauts and special characters
-    $scope.addCharacter = function(objName, propName, char) {
-      if(!$scope.inputType || !$scope.inputField) {
-        return;
-      }
-      
-      if ($scope[$scope.inputType][$scope.inputField] === undefined) {
-        $scope[$scope.inputType][$scope.inputField] = '';
-      }
-      
-      $scope[$scope.inputType][$scope.inputField] = $scope[$scope.inputType][$scope.inputField] + char;
-    };
-
-    
-    
-    // Display message
-    var displayMessage = function(message) {
-      var objMessages = {
-        'true' : 'Item added successfully.',
-        'incorrect' : 'Please fill in all form fields.',
-        'duplicate' : 'This item already exist.',
-        'false' : 'Unable to add item at this time.'
-      };
-      
-      $scope.responseMessage = objMessages[message];
-      $scope.displayFormMessage = true;
-    };
-    
-});
-/* 
  File     : words.service.js
  Date     : Sep 28, 2016
  Author   : Jaymes Young <jaymes@phoenixjaymes.com>
@@ -757,295 +550,26 @@ angular.module('flashcards')
 'use strict';
 
 angular.module('flashcards')
-  .service('addItemService', function($http, $httpParamSerializerJQLike) {
-
-
-    // Add items
-    this.addItem = function(item, callback) {
-      var url = 'assets/inc/fc-add-item.php';
-      var config = {headers: {'Content-Type': 'application/x-www-form-urlencoded'}};
-
-      $http.post(url, $httpParamSerializerJQLike(item), config).then(callback); 
-    };
+    .service('adminService', function($http, $httpParamSerializerJQLike) {
       
-});
-
-/* 
- File     : addword.js
- Date     : Oct 23, 2016
- Author   : Jaymes Young <jaymes@phoenixjaymes.com>
- */
-
-'use strict';
-
-angular.module('flashcards')
-  .controller('UpdateItem', function($scope, cardsService, updateItemService) {;
-    $scope.word = {};
-    $scope.verb = {"pos": "verb"};
-    $scope.category = {"pos": "category"};
-    $scope.phrase = {"pos" : "phrase"};
-    $scope.posCategories;
-    $scope.genderCategories;
-    $scope.responseMessage;
-    $scope.displayFormMessage = false;
-    $scope.showUpperCase = false;
-    $scope.inputType;
-    $scope.inputField;
       
-    // Change category options
-    $scope.getCategories = function(wordPos) {
-
-      if ($scope.posCategories === undefined) {
-        cardsService.getAllCategories(function(response) {
-          
-          $scope.posCategories = response.data.word;
-          $scope.genderCategories = response.data.gender;
-        });
-      }
-    };
-    
-    
-    // Change category options for word list
-    $scope.posCategoryList;
-    $scope.showCategoryWords = false;
-    // If pos is verb get verbs until verbs have categories
-    $scope.changeCategoryUpdate = function(wordPos) {
-      console.log(wordPos);
-      console.log($scope.cardAllCategories);
-      if (wordPos === 'adjective') {
-        $scope.posCategoriesUpdate = $scope.cardAllCategories[wordPos];
-        //$scope.getWords(wordPos);
-
-
-        $scope.showCategoryWords = true;
-      } else if (wordPos === 'noun') {
-        $scope.posCategoriesUpdate = $scope.cardAllCategories[wordPos];
-
-
-        $scope.showCategoryWords = true;
-      } else if (wordPos === 'phrase') {
-
-        $scope.getWords(wordPos, '', true);
-        $scope.showCategoryWords = false;
-      } else if (wordPos === 'verb') {
-
-        $scope.getWords(wordPos, '', true);
-        $scope.showCategoryWords = false;
-      } else {
-        //$scope.posCategory = $scope.cardAllCategories[cardPos];
-        //$scope.showCategoryWords = true;
-      }
-    };
-
-
-    // Get list of words
-    $scope.getWords = function(pos, category, sort) {
-      cardsService.getWords(pos, category, sort, function(response) {
-        $scope.listOfWords = response.data;
-
-        $scope.totalWords = $scope.listOfWords.length;          
-      });
-    };
-    
-    
-    
-    // Find single word and fill in form
-    $scope.$on('findWord', function(evt, args) {
-      $scope.word.id = args;
-      console.log('find word ' + args + ' ' + $scope.word.pos + ' ' + $scope.word.category);
-      
-      updateItemService.findWord($scope.word, function(response) {
-        console.log(response.data);
+      // Login learner
+      this.loginLearner = function(learner, callback) {
+        var url = 'assets/inc/fc-login.php';
+        var config = {headers: {'Content-Type': 'application/x-www-form-urlencoded'}};
         
-        $scope.updateWord = response.data;
-        console.log($scope.updateWord.item.english);
-        console.log($scope.updateWord.item.translation);
-        console.log($scope.updateWord.item.image);
-        
-        $scope.word.english = $scope.updateWord.item.english;
-        $scope.word.translation = $scope.updateWord.item.translation;
-        $scope.word.image = $scope.updateWord.item.image;
-      });
-      
-    });
-    
-    
-    
-      
-    
-    
-    
-    
-    
-    
-
-    // Update word
-    $scope.addItem = function() {
-      $scope.displayFormMessage = false;
-      
-      updateItemService.updateItem($scope.word, function(response) {
-        // Check response message
-        if(response.data.success === true) {
-          // Clear form
-          $scope.word.translation = '';
-          $scope.word.english = '';
-          $scope.word.img = '';
-          
-          displayMessage('true');
-        } else if (response.data.success === 'duplicate') {
-          displayMessage('duplicate');
-        } else if (response.data.success === 'incorrect') {
-          displayMessage('incorrect');
-        } else if (response.data.success === false) {
-          displayMessage('false');
-        }
-      });
-    }; 
-    
-    
-    // Update verb
-    $scope.addVerb = function() {
-      $scope.displayFormMessage = false;
-      
-      if(!$scope.verb.separable) {
-        $scope.verb.separable = 'no';
-      } else {
-        $scope.verb.separable = 'yes';
-      }
-      
-      updateItemService.updateItem($scope.verb, function(response) {
-        // Check response message
-        if(response.data.success === true) {
-          // clear form
-          $scope.verb.english = '';
-          $scope.verb.translation = '';
-          $scope.verb.ich = '';
-          $scope.verb.du = '';
-          $scope.verb.er_sie_es = '';
-          $scope.verb.wir = '';
-          $scope.verb.ihr = '';
-          $scope.verb.sie_sie = '';
-          $scope.verb.separable = undefined;
-          
-          displayMessage('true');
-        } else if (response.data.success === 'duplicate') {
-          displayMessage('duplicate');
-        } else if (response.data.success === 'incorrect') {
-          displayMessage('incorrect');
-        } else if (response.data.success === false) {
-          displayMessage('false');
-        }
-      });
-
-      $scope.verb.separable = undefined;
-    };
-    
-    
-    // Uupdate category
-    $scope.addCategory = function() {
-      $scope.displayFormMessage = false;
-      
-      updateItemService.updateItem($scope.category, function(response) {
-        // Check response message
-        if(response.data.success === true) {
-          // Clear form
-          $scope.category.name = '';
-          
-          displayMessage('true');
-        } else if (response.data.success === 'duplicate') {
-          displayMessage('duplicate');
-        } else if (response.data.success === 'incorrect') {
-          displayMessage('incorrect');
-        } else if (response.data.success === false) {
-          displayMessage('false');
-        }
-      });
-    };
-    
-    
-    // Update Phrase
-    $scope.addPhrase = function() {
-      $scope.displayFormMessage = false;
-      
-      updateItemService.updateItem($scope.phrase, function(response) {
-        // Check response message
-        if(response.data.success === true) {
-          // Clear form
-          $scope.phrase.english = '';
-          $scope.phrase.translation = '';
-          
-          displayMessage('true');
-        } else if (response.data.success === 'incorrect') {
-          displayMessage('incorrect');
-        } else if (response.data.success === 'duplicate') {
-          displayMessage('duplicate');
-        } else if (response.data.success === false) {
-          displayMessage('false');
-        }
-      });
-    };
-    
-    // Set which input umlaut should be added to
-    $scope.umlautFocus = function(pos, propName) {
-      $scope.inputType = pos;
-      $scope.inputField = propName;
-    };
-    
-    
-    // Add Umlauts and special characters
-    $scope.addCharacter = function(objName, propName, char) {
-      if(!$scope.inputType || !$scope.inputField) {
-        return;
-      }
-      
-      if ($scope[$scope.inputType][$scope.inputField] === undefined) {
-        $scope[$scope.inputType][$scope.inputField] = '';
-      }
-      
-      $scope[$scope.inputType][$scope.inputField] = $scope[$scope.inputType][$scope.inputField] + char;
-    };
-
-    
-    
-    // Display message
-    var displayMessage = function(message) {
-      var objMessages = {
-        'true' : 'Item added successfully.',
-        'incorrect' : 'Please fill in all form fields.',
-        'duplicate' : 'This item already exist.',
-        'false' : 'Unable to add item at this time.'
+        $http.post(url, $httpParamSerializerJQLike(learner), config).then(callback); 
       };
       
-      $scope.responseMessage = objMessages[message];
-      $scope.displayFormMessage = true;
-    };
-    
-});
-/* 
- File     : words.service.js
- Date     : Sep 28, 2016
- Author   : Jaymes Young <jaymes@phoenixjaymes.com>
- */
-
-'use strict';
-
-angular.module('flashcards')
-  .service('updateItemService', function($http, $httpParamSerializerJQLike) {
-    
-    // Get word
-    this.findWord = function(item, callback) {
-      var url = 'assets/inc/fc-update-item.php';
-      var config = {params: item};
-      $http.get(url, config).then(callback);
-    };
-
-    // Add items
-    this.updateItem = function(item, callback) {
-      var url = 'assets/inc/fc-update-item.php';
-      var config = {headers: {'Content-Type': 'application/x-www-form-urlencoded'}};
-
-      $http.post(url, $httpParamSerializerJQLike(item), config).then(callback); 
-    };
+      
+      // Register new learner
+      this.registerLearner = function(newLearner, callback) {
+        var url = 'assets/inc/fc-register.php';
+        var config = {headers: {'Content-Type': 'application/x-www-form-urlencoded'}};
+        
+        $http.post(url, $httpParamSerializerJQLike(newLearner), config).then(callback);
+      };
       
 });
+
 //# sourceMappingURL=app.js.map

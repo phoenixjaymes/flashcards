@@ -27,27 +27,30 @@
 }
 
 .word-list__table {
+  border-collapse: collapse;
   width: 100%;
   
   tr {
     text-align: left;
   }
   
-  td {
-    border: solid #000 1px;
+  tr:nth-child(even) {
+    background: $table-row-alt-color;
   }
   
 }
 
-
-.word-list__table-cell-one {
-  width: 47%;
+.word-list__table-td-edit {
+  padding: 5px 0 5px 5px;
+  width: 10%;
 }
 
-.word-list__table-cell-two {
-  width: 47%;
+.word-list__table-td-translation {
+  padding: 5px 0 5px 5px;
+  width: 90%;
 }
 
-.word-list__table-cell-three {
-  width: 6%;
+.word-list__table-td-translation__full {
+  padding: 5px 0 5px 5px;
+  width: 100%;
 }
