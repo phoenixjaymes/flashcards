@@ -27,15 +27,11 @@
       <table class="word-list__table">
         <tbody>
           <tr>
-            <th class="word-list__table-cell-one">English</th>
-            <th class="word-list__table-cell-two">Translation</th>
-            <th class="word-list__table-cell-three"></th>
+            <th class="word-list__table-td-translation__full">Translation</th>
           </tr>
           
           <tr ng-repeat="word in listOfWords">
-            <td>{{word.english}}</td>
-            <td>{{word.translation}}</td>
-            <td><a href="" ng-click="$emit('findWord', $index)">{{$index}}</a></td>
+            <td class="word-list__table-td-translation__full">{{word.translation}} <span class="tool" data-tip="{{word.english}}">-?-</span></td>
           </tr>
         </tbody>
       </table>
