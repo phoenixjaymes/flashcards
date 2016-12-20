@@ -1,0 +1,47 @@
+<form class="form add-verb-form" name="formAddVerb" autocomplete="off">
+  
+  <a class="form__button-close" href="" ng-click="$emit('closeModal', 'displayAddVerb')">X</a>
+  
+  <h3 class="form__heading">Add a New Verb</h3>
+  
+  <label class="form__label--check" for="txtSeparable">Separable</label>
+  <input id="txtSeparable" class="form__check" type="checkbox" ng-model="verb.separable"
+    ng-focus="umlautFocus(undefined, undefined)">
+  
+  <label class="form__label" for="txtVrbEnglish">English</label>
+  <input id="txtVrbEnglish" class="form__input" type="text" ng-model="verb.english"
+    ng-focus="umlautFocus(undefined, undefined)">
+  
+  <label  class="form__label" for="txtVrbTranslation">Translation</label>
+  <input id="txtVrbTranslation" class="form__input" type="text" ng-model="verb.translation"
+    ng-focus="umlautFocus('verb', 'translation')">
+  <umlauts class="form-umlauts" input-type="verb" input-field="translation" ></umlauts>
+  
+  <label class="form__label" for="txtIch">ich</label>
+  <input id="txtIch" class="form__input" type="text" ng-model="verb.ich"
+   ng-focus="umlautFocus('verb', 'ich')">
+  
+  <label class="form__label" for="txtDu">du</label>
+  <input id="txtDu" class="form__input" type="text" ng-model="verb.du"
+    ng-focus="umlautFocus('verb', 'du')">
+  
+  <label class="form__label" for="txtErEsSie">er, sie, es</label>
+  <input id="txtErEsSie" class="form__input" type="text" ng-model="verb.er_sie_es"
+    ng-focus="umlautFocus('verb', 'er_sie_es')">
+  
+  <label class="form__label" for="txtWir">wir</label>
+  <input id="txtWir" class="form__input" type="text" ng-model="verb.wir"
+    ng-focus="umlautFocus('verb', 'wir')">
+  
+  <label class="form__label" for="txtIhr">ihr</label>
+  <input id="txtIhr" class="form__input" type="text" ng-model="verb.ihr"
+    ng-focus="umlautFocus('verb', 'ihr')">
+  
+  <label class="form__label" for="txtSieSie">sie, Sie</label>
+  <input id="txtSieSie" class="form__input" type="text" ng-model="verb.sie_sie"
+    ng-focus="umlautFocus('verb', 'sie_sie')">  
+
+  <button  class="form__button" ng-model="loginSubmit" ng-click="addVerb()">Add Verb</button>
+  
+  <formmessage class="form-message" ng-class="{'ang-show-message' : displayFormMessage}"></formmessage>
+</form>
