@@ -41,12 +41,6 @@ angular.module('flashcards')
       controller : 'AddItem'
     };
   })
-  .directive('updateword', function() {
-    return {
-      templateUrl : 'app/views/partials/update-word.html',
-      controller: 'UpdateItem'
-    };
-  })
   .directive('addcategory', function() {
     return {
       templateUrl : 'app/views/partials/add-category.html',
@@ -62,7 +56,30 @@ angular.module('flashcards')
   .directive('listWords', function() {
     return {
       templateUrl : 'app/views/partials/list-words.html',
-      controller: 'Cards'
+      controller: 'UpdateItem'
+    };
+  })
+  .directive('updateCategory', function() {
+    return {
+      templateUrl : 'app/views/partials/update-category.html',
+      controller: 'UpdateItem'
+    };
+  }).directive('updatePhrase', function() {
+    return {
+      templateUrl : 'app/views/partials/update-phrase.html',
+      controller: 'UpdateItem'
+    };
+  })
+  .directive('updateVerb', function() {
+    return {
+      templateUrl : 'app/views/partials/update-verb.html',
+      controller: 'UpdateItem'
+    };
+  })
+  .directive('updateWord', function() {
+    return {
+      templateUrl : 'app/views/partials/update-word.html',
+      controller: 'UpdateItem'
     };
   })
   .directive('register', function() {
