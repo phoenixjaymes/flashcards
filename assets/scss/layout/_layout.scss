@@ -41,7 +41,8 @@ main {
 
 // Modal
 
-login, register, addphrase, addword, updateword, addVerb, addcategory, list-words {
+login, register, addphrase, addword, addVerb, addcategory, list-words,
+update-category, update-phrase, update-verb, update-word{
   display: none;
 }
 
@@ -50,6 +51,20 @@ login, register, addphrase, addword, updateword, addVerb, addcategory, list-word
   left: 0;
   top: 0;
   z-index: 100;
+  
+  background: rgba(225, 225, 225, .9);
+  display: block;
+  height: 100%;
+  width: 100%;
+  
+}
+
+
+.modal1 {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 150;
   
   background: rgba(225, 225, 225, .9);
   display: block;
