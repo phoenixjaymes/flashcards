@@ -1,7 +1,7 @@
 <?php
 /* 
- * File Name: fc-add-word.php
- * Date: 23 Oct 16
+ * File Name: fc-update-item.php
+ * Date: 22 Dec 16
  * Programmer: Jaymes Young-Liebgott
  */
 
@@ -29,41 +29,42 @@ $date = date('Y-m-d');
 
 $pos = filter_input(INPUT_POST, 'pos', FILTER_SANITIZE_STRING);
 
+//print_r($_POST);
+//exit();
 
 
 //
 if ($pos && $pos === 'adjective') {
   // Sanitize input
+  $id = filter_input(INPUT_POST, 'id', FILTER_SANITIZE_STRING);
   $english = filter_input(INPUT_POST, 'english', FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
   $translation = filter_input(INPUT_POST, 'translation', FILTER_SANITIZE_STRING);
-  $img = filter_input(INPUT_POST, 'img', FILTER_SANITIZE_STRING);
+  $img = filter_input(INPUT_POST, 'image', FILTER_SANITIZE_STRING);
   $category = filter_input(INPUT_POST, 'category', FILTER_SANITIZE_STRING);
   
   // Escape input
+  $id_safe = $linkId->real_escape_string($id);
   $english_safe = $linkId->real_escape_string($english);
   $translation_safe = $linkId->real_escape_string($translation);
   $img_safe = $linkId->real_escape_string($img);
   $category_safe = $linkId->real_escape_string($category);
    
   // Check of empty values
-  if (!$english_safe || !$translation_safe || !$img_safe || !$category_safe) {
+  if (!$id_safe || !$english_safe || !$translation_safe || !$img_safe || !$category_safe) {
     $arr_response['success'] = 'incorrect';
   } else {
-    // Duplicate check
-    $sqlDuplicate = "SELECT count(*) AS cnt FROM fc_german_adjectives WHERE english = '$english_safe'";
-
-    if(is_duplicate($mySqli, $sqlDuplicate)) {
-      $arr_response['success'] = 'duplicate';     
-      send_data($arr_response);
-    }
-    
-    $sql = "INSERT INTO fc_german_adjectives (english, translation, img, category, added, last_practiced)"
-         . " VALUES ('$english_safe', '$translation_safe', '$img_safe', '$category_safe', '$date', '$date')";
+         
+    $sql = "UPDATE fc_german_adjectives"
+      . " SET english = '$english_safe', "
+      . " translation = '$translation_safe', "
+      . " img = '$img_safe', "
+      . " category = '$category_safe' "
+      . " WHERE id = $id_safe";
 
     $result = $mySqli->handleQuery($sql);
 
     if ($result) {
-      $arr_response['success'] = true;
+      $arr_response['success'] = 'updated';
     } else {
       $arr_response['success'] = false;
     }
@@ -73,37 +74,37 @@ if ($pos && $pos === 'adjective') {
   
 } elseif ($pos && $pos === 'noun') {
   // Sanitize input
+  $id = filter_input(INPUT_POST, 'id', FILTER_SANITIZE_STRING);
   $english = filter_input(INPUT_POST, 'english', FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
   $translation = filter_input(INPUT_POST, 'translation', FILTER_SANITIZE_STRING);
-  $img = filter_input(INPUT_POST, 'img', FILTER_SANITIZE_STRING);
+  $img = filter_input(INPUT_POST, 'image', FILTER_SANITIZE_STRING);
   $gender = filter_input(INPUT_POST, 'gender', FILTER_SANITIZE_STRING);
   $category = filter_input(INPUT_POST, 'category', FILTER_SANITIZE_STRING);
   
   // Escape input
+  $id_safe = $linkId->real_escape_string($id);
   $english_safe = $linkId->real_escape_string($english);
   $translation_safe = $linkId->real_escape_string($translation);
   $img_safe = $linkId->real_escape_string($img);
   $category_safe = $linkId->real_escape_string($category);
   
-  if (!$english_safe || !$translation_safe || !$img_safe || !$gender || !$category_safe) {
+  if (!$id_safe || !$english_safe || !$translation_safe || !$img_safe || !$gender || !$category_safe) {
     $arr_response['success'] = 'incorrect';
     send_data($arr_response);
   } else {
-    // Duplicate check
-    $sqlDuplicate = "SELECT count(*) AS cnt FROM fc_german_nouns WHERE english = '$english_safe'";
 
-    if(is_duplicate($mySqli, $sqlDuplicate)) {
-      $arr_response['success'] = 'duplicate';     
-      send_data($arr_response);
-    }
-    
-    $sql = "INSERT INTO fc_german_nouns (english, translation, img, gender, category, added, last_practiced)"
-         . " VALUES ('$english_safe', '$translation_safe', '$img_safe', '$gender', '$category_safe', '$date', '$date')";
+    $sql = "UPDATE fc_german_nouns"
+      . " SET english = '$english_safe', "
+      . " translation = '$translation_safe', "
+      . " img = '$img_safe', "
+      . " gender = $gender, "
+      . " category = '$category_safe' "
+      . " WHERE id = $id_safe";
 
     $result = $mySqli->handleQuery($sql);
 
     if ($result) {
-      $arr_response['success'] = true;
+      $arr_response['success'] = 'updated';
       
     } else {
       $arr_response['success'] = false;
@@ -114,33 +115,29 @@ if ($pos && $pos === 'adjective') {
     
 } elseif ($pos && $pos === 'phrase') {
   // Sainitize input
+  $id = filter_input(INPUT_POST, 'id', FILTER_SANITIZE_STRING);
   $english = filter_input(INPUT_POST, 'english', FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
   $translation = filter_input(INPUT_POST, 'translation', FILTER_SANITIZE_STRING);
   
   // Escape input
+  $id_safe = $linkId->real_escape_string($id);
   $english_safe = $linkId->real_escape_string($english);
   $translation_safe = $linkId->real_escape_string($translation);
   
-  if (!$english_safe || !$translation_safe ) {
+  if (!$id_safe || !$english_safe || !$translation_safe ) {
     $arr_response['success'] = 'incorrect';
     send_data($arr_response);
   } else {
-    // Duplicate check
-    $sqlDuplicate = "SELECT count(*) AS cnt FROM fc_german_phrases WHERE english = '$english_safe'";
 
-    if(is_duplicate($mySqli, $sqlDuplicate)) {
-      $arr_response['success'] = 'duplicate';     
-      send_data($arr_response);
-    }
-    
-    
-    $sql = "INSERT INTO fc_german_phrases (english, translation, added, last_practiced)"
-       . " VALUES ('$english_safe', '$translation_safe', '$date', '$date')";
+    $sql = "UPDATE fc_german_phrases"
+      . " SET english = '$english_safe', "
+      . " translation = '$translation_safe' "
+      . " WHERE id = $id_safe";
  
     $result = $mySqli->handleQuery($sql);
 
     if ($result) {
-      $arr_response['success'] = true;
+      $arr_response['success'] = 'updated';
     } else {
       $arr_response['success'] = false;
     }
@@ -150,6 +147,7 @@ if ($pos && $pos === 'adjective') {
   
 } elseif ($pos && $pos === 'verb') {
   // Sanitize input
+  $id = filter_input(INPUT_POST, 'id', FILTER_SANITIZE_STRING);
   $english = filter_input(INPUT_POST, 'english', FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
   $translation = filter_input(INPUT_POST, 'translation', FILTER_SANITIZE_STRING);
   $separable = filter_input(INPUT_POST, 'separable', FILTER_SANITIZE_STRING);
@@ -161,6 +159,7 @@ if ($pos && $pos === 'adjective') {
   $sie_sie = filter_input(INPUT_POST, 'sie_sie', FILTER_SANITIZE_STRING);
   
   // Escape input
+  $id_safe = $linkId->real_escape_string($id);
   $english_safe = $linkId->real_escape_string($english);
   $translation_safe = $linkId->real_escape_string($translation);
   $ich_safe = $linkId->real_escape_string($ich);
@@ -170,29 +169,27 @@ if ($pos && $pos === 'adjective') {
   $ihr_safe = $linkId->real_escape_string($ihr);
   $sie_sie_safe = $linkId->real_escape_string($sie_sie);
   
-  if (!$english_safe || !$translation_safe || !$ich_safe || !$du_safe || !$er_sie_es_safe || !$wir_safe || !$ihr_safe || !$sie_sie_safe ) {
+  if (!$id_safe || !$english_safe || !$translation_safe || !$ich_safe || !$du_safe || !$er_sie_es_safe || !$wir_safe || !$ihr_safe || !$sie_sie_safe ) {
     $arr_response['success'] = 'incorrect';
     send_data($arr_response);
   } else {
-    // Duplicate check
-    $sqlDuplicate = "SELECT count(*) AS cnt FROM fc_german_verbs WHERE translation = '$translation_safe'";
-
-    if(is_duplicate($mySqli, $sqlDuplicate)) {
-      $arr_response['success'] = 'duplicate';     
-      send_data($arr_response);
-    }
     
-    
-    $sql = "INSERT INTO fc_german_verbs"
-      . " (english, translation, separable, ich, du, er_sie_es, wir, ihr, sie_Sie, added, last_practiced)"
-      . " VALUES"
-      . " ('$english_safe', '$translation_safe', '$separable', '$ich_safe',"
-      . " '$du_safe', '$er_sie_es_safe', '$wir_safe', '$ihr_safe', '$sie_sie_safe', '$date', '$date')";
+    $sql = "UPDATE fc_german_verbs"
+      . " SET english = '$english_safe', "
+      . " translation = '$translation_safe', "
+      . " separable = '$separable', "
+      . " ich = '$ich_safe', "
+      . " du = '$du_safe', "
+      . " er_sie_es = '$er_sie_es_safe', "
+      . " wir = '$wir_safe', "
+      . " ihr = '$ihr_safe', "
+      . " sie_Sie = '$sie_sie_safe' "
+      . " WHERE id = $id_safe";
 
     $result = $mySqli->handleQuery($sql);
 
     if ($result) {
-      $arr_response['success'] = true;
+      $arr_response['success'] = 'updated';
     } else {
       $arr_response['success'] = false;
     }
@@ -202,29 +199,25 @@ if ($pos && $pos === 'adjective') {
   
 } elseif ($pos && $pos === 'category') {
   // Sanitize input
+  $id = filter_input(INPUT_POST, 'id', FILTER_SANITIZE_STRING);
   $name = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
   
   // Escape input
   $name_safe = $linkId->real_escape_string($name);
+  $id_safe = $linkId->real_escape_string($id);
   
-  if (!$name_safe) {
+  if (!$id_safe || !$name_safe) {
     $arr_response['success'] = 'incorrect';
   } else {
-    // Duplicate check
-    $sqlDuplicate = "SELECT count(*) AS cnt FROM fc_categories WHERE category = '$name_safe'";
-
-    if(is_duplicate($mySqli, $sqlDuplicate)) {
-      $arr_response['success'] = 'duplicate';     
-      send_data($arr_response);
-    }
-
-    // Insert category
-    $sql = "INSERT INTO fc_categories (category) VALUES ('$name_safe')";
+    
+    $sql = "UPDATE fc_categories"
+      . " SET category = '$name_safe' "
+      . " WHERE id = $id_safe";
 
     $result = $mySqli->handleQuery($sql);
 
     if ($result) {
-      $arr_response['success'] = true;
+      $arr_response['success'] = 'updated';
     } else {
       $arr_response['success'] = false;
     }

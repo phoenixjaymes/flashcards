@@ -1,7 +1,7 @@
 <?php
 /* 
- * File Name: fc-add-word.php
- * Date: 23 Oct 16
+ * File Name: fc-get-update-item.php
+ * Date: 21 Dec 16
  * Programmer: Jaymes Young-Liebgott
  */
 
@@ -19,9 +19,6 @@ $isConnected = $mySqli->getConnection();
 // Set linkId if connected
  $isConnected ? $linkId = $mySqli->getLink() : $linkId = false;
  
- /*
-  * mysqli->real escape string should be added to class
-  */
  
 $arr_word = [];
 $arr_response = [];
@@ -62,8 +59,6 @@ if ($pos_get && $pos_get === 'adjective') {
 
   //then
   $row = $result->fetch_assoc();
-  
-  //print_r($row);
     
   
   $arr_word['id'] = $row['id'];
@@ -77,13 +72,146 @@ if ($pos_get && $pos_get === 'adjective') {
     
   
   
+  if ($result) {
+    $arr_response['success'] = true;
+  } else {
+    $arr_response['success'] = false;
+  }
+  
+  send_data($arr_response);
   
   
   
   
+} elseif ($pos_get && $pos_get === 'noun') {
+  // Sanitize input
+  $category = filter_input(INPUT_GET, 'category', FILTER_SANITIZE_STRING);
+  $id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_STRING);
+  
+  // Escape input
+  $category_safe = $linkId->real_escape_string($category);
+  $id_safe = $linkId->real_escape_string($id);
+  
+  // Check for empty strings
+  if (!$id_safe || !$category_safe) {
+    $arr_response['success'] = 'incorrect';
+  }
+  
+  
+  $sql = "SELECT id, english, translation, gender, img, category "
+    . "   FROM fc_german_nouns WHERE id = $id_safe";
+
+  $result = $mySqli->handleQuery($sql);
+
+  // check for results
+
+  //then
+  $row = $result->fetch_assoc();
+    
+  
+  $arr_word['id'] = $row['id'];
+  $arr_word['english'] = $row['english'];
+  $arr_word['translation'] = $row['translation'];
+  $arr_word['gender'] = $row['gender'];
+  $arr_word['image'] = $row['img'];
+  $arr_word['category'] = $row['category'];
+  
+  $arr_response['item'] = $arr_word;
+      
+    
+  
+  
+  if ($result) {
+    $arr_response['success'] = true;
+  } else {
+    $arr_response['success'] = false;
+  }
+  
+  send_data($arr_response);
   
   
   
+  
+} elseif ($pos_get && $pos_get === 'phrase') {
+  // Sanitize input
+  $id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_STRING);
+  
+  // Escape input
+  $id_safe = $linkId->real_escape_string($id);
+  
+  // Check for empty strings
+  if (!$id_safe) {
+    $arr_response['success'] = 'incorrect';
+  }
+  
+  
+  $sql = "SELECT id, english, translation "
+    . "   FROM fc_german_phrases WHERE id = $id_safe";
+
+  $result = $mySqli->handleQuery($sql);
+
+  // check for results
+
+  //then
+  $row = $result->fetch_assoc();
+    
+  
+  $arr_word['id'] = $row['id'];
+  $arr_word['english'] = $row['english'];
+  $arr_word['translation'] = $row['translation'];
+  
+  $arr_response['item'] = $arr_word;
+      
+  
+  if ($result) {
+    $arr_response['success'] = true;
+  } else {
+    $arr_response['success'] = false;
+  }
+  
+  send_data($arr_response);
+  
+  
+  
+  
+} elseif ($pos_get && $pos_get === 'verb') {
+  // Sanitize input
+  $id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_STRING);
+  
+  // Escape input
+  $id_safe = $linkId->real_escape_string($id);
+  
+  // Check for empty strings
+  if (!$id_safe) {
+    $arr_response['success'] = 'incorrect';
+  }
+  
+  
+  $sql = "SELECT id, english, translation, separable, ich, du, er_sie_es, wir, ihr, "
+    . " sie_Sie, img, 'none' AS gender FROM fc_german_verbs WHERE id = $id_safe";
+
+  $result = $mySqli->handleQuery($sql);
+
+  // check for results
+
+  //then
+  $row = $result->fetch_assoc();
+    
+  
+  $arr_word['id'] = $row['id'];
+  $arr_word['english'] = $row['english'];
+  $arr_word['translation'] = $row['translation'];
+  $arr_word['separable'] = $row['separable'];
+  $arr_word['ich'] = $row['ich'];
+  $arr_word['du'] = $row['du'];
+  $arr_word['er_sie_es'] = $row['er_sie_es'];
+  $arr_word['wir'] = $row['wir'];
+  $arr_word['ihr'] = $row['ihr'];
+  $arr_word['sie_Sie'] = $row['sie_Sie'];
+  $arr_word['img'] = $row['img'];
+  
+  $arr_response['item'] = $arr_word;
+      
   
   if ($result) {
     $arr_response['success'] = true;

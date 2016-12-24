@@ -53,6 +53,13 @@ if ($type && $type === 'all') {
   $arr_categories['gender'] = $arr_cat_gender;
    
 } else {
+  
+  
+  
+  /*
+   * Union these queries
+   */
+  
 
   // Adjectives
   $sqlAdj = "SELECT fc_german_adjectives.category AS id, fc_categories.category AS name"
@@ -65,6 +72,8 @@ if ($type && $type === 'all') {
        . " FROM fc_german_nouns, fc_categories"
        . " WHERE fc_german_nouns.category = fc_categories.id"
        . " GROUP BY id ORDER BY name";
+  
+  $sqlGender = 'SELECT id, gender FROM fc_categories_gender';
 
 
   // Adjectives
@@ -99,6 +108,23 @@ if ($type && $type === 'all') {
   }
 
   $arr_categories['noun'] = $arr_cat_noun;
+  
+  
+  // Gender
+  $resultGender = $mySqli->handleQuery($sqlGender);
+
+
+  // Get cards
+  $arr_cat_gender = [];
+  while($row = $resultGender->fetch_assoc()) {
+    $arr_new_category = [];
+    $arr_new_category['id'] = $row['id'];
+    $arr_new_category['name'] = $row['gender'];
+
+    $arr_cat_gender[] = $arr_new_category;
+  }
+  
+  $arr_categories['gender'] = $arr_cat_gender;
 
 }
 
