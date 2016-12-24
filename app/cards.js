@@ -11,7 +11,7 @@ angular.module('flashcards')
       // Default card
       $scope.cards = [{
         "translation" : "Germany",
-        "english"     : "Deutschland",
+        "english"     : "Deutschland",    
         "img"         : "flashcard-germany.svg",
         "pos"         : "noun",
         "gender"      : "m"
@@ -25,7 +25,6 @@ angular.module('flashcards')
       var getAllCategories = function() {
         cardsService.getCategories(function(response) {
           $scope.cardAllCategories = response.data;
-          
           
         });
       };

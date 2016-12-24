@@ -17,10 +17,14 @@ angular.module('flashcards')
         displayAddPhrase    : false,
         displayAddVerb      : false,
         displayAddWord      : false,
-        displayUpdateWord   : false,
         displayAddCategory  : false,
         displayRegister     : false,
-        displayListWords    : false
+        displayListWords    : false,
+        displayUpdateAdjective  : false,
+        displayUpdateCategory   : false,
+        displayUpdateNoun       : false,
+        displayUpdatePhrase     : false,
+        displayUpdateVerb       : false,
       };
       
       
@@ -47,7 +51,7 @@ angular.module('flashcards')
       
       
       // Display admin forms
-      $scope.displayForm = function(form) {  console.log(form);
+      $scope.displayForm = function(form) {
         // Close all modals
         for (var prop in $scope.formDisplay) {
           $scope.formDisplay[prop] = false;
@@ -60,7 +64,6 @@ angular.module('flashcards')
         $scope.displayOptions = false;
       
       };
-      
       
       // Close modal windows
       $scope.$on('closeModal', function(evt, args) {
@@ -99,6 +102,14 @@ angular.module('flashcards')
         }
       });
       
+      
+      // Display update forms
+      $scope.$on('displayUpdateForms', function(evt, form) {
+        
+        // Open selected modal
+        $scope.formDisplay[form] = true;
+      });
+      
       // Check value of loggdIn cookie
       var checkLogin = function() {
         
@@ -109,6 +120,22 @@ angular.module('flashcards')
         } 
         
       };
+      
+      // Display message
+    $scope.displayMessage = function(message) {
+      var objMessages = {
+        'true' : 'Item added successfully.',
+        'updated' : 'Item updated successfully.',
+        'incorrect' : 'Please fill in all form fields.',
+        'duplicate' : 'This item already exist.',
+        'false' : 'Unable to add item at this time.'
+      };
+      
+      $scope.responseMessage = objMessages[message];
+      $scope.displayFormMessage = true;
+    };
+      
+      
       
       // Check if luser is logged in
       checkLogin();

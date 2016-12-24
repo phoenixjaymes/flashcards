@@ -29,59 +29,6 @@ angular.module('flashcards')
       controller : 'Login'
     };
   })
-  .directive('addword', function() {
-    return {
-      templateUrl : 'app/views/partials/add-word.html',
-      controller : 'AddItem'
-    };
-  })
-  .directive('addverb', function() {
-    return {
-      templateUrl : 'app/views/partials/add-verb.html',
-      controller : 'AddItem'
-    };
-  })
-  .directive('addcategory', function() {
-    return {
-      templateUrl : 'app/views/partials/add-category.html',
-      controller : 'AddItem'
-    };
-  })
-  .directive('addphrase', function() {
-    return {
-      templateUrl : 'app/views/partials/add-phrase.html',
-      controller : 'AddItem'
-    };
-  })
-  .directive('listWords', function() {
-    return {
-      templateUrl : 'app/views/partials/list-words.html',
-      controller: 'UpdateItem'
-    };
-  })
-  .directive('updateCategory', function() {
-    return {
-      templateUrl : 'app/views/partials/update-category.html',
-      controller: 'UpdateItem'
-    };
-  }).directive('updatePhrase', function() {
-    return {
-      templateUrl : 'app/views/partials/update-phrase.html',
-      controller: 'UpdateItem'
-    };
-  })
-  .directive('updateVerb', function() {
-    return {
-      templateUrl : 'app/views/partials/update-verb.html',
-      controller: 'UpdateItem'
-    };
-  })
-  .directive('updateWord', function() {
-    return {
-      templateUrl : 'app/views/partials/update-word.html',
-      controller: 'UpdateItem'
-    };
-  })
   .directive('register', function() {
     return {
       templateUrl : 'app/views/partials/register.html',
@@ -114,5 +61,3 @@ angular.module('flashcards')
       templateUrl : 'app/views/partials/umlauts.html'
     };
   });
-  
-  
