@@ -28,10 +28,17 @@ gulp.task("concatScripts", function() {
     'app/login.service.js',
     'app/cards.js',
     'app/cards.service.js',
-    'app/add-item.js',
-    'app/add-item.service.js',
-    'app/update-item.js',
-    'app/update-item.service.js'
+    'app/add/add.directives.js',
+    'app/add/add-item.js',
+    'app/add/add-item.service.js',
+    'app/update/update.directives.js',
+    'app/update/update-item.js',
+    'app/update/update-item.service.js',
+    'app/update/update-adjective.js',
+    'app/update/update-category.js',
+    'app/update/update-noun.js',
+    'app/update/update-phrase.js',
+    'app/update/update-verb.js'
   ])
       .pipe(maps.init())
       .pipe(concat('app.js'))
@@ -73,7 +80,7 @@ gulp.task('watchSass', ['compileSass'], function() {
 });
 
 
-// MInify Styles
+// Minify Styles
 gulp.task('minifyStyles', ['compileSass'], function() {
   return gulp.src('assets/css/styles.css')
       .pipe(uglifyCss())
@@ -82,7 +89,7 @@ gulp.task('minifyStyles', ['compileSass'], function() {
 });
 
 
-// Concatenate JS files for watching with browserSync
+// Watch HTML
 gulp.task('watchHtml', function(done) {
   browserSync.reload();
   done();
@@ -96,7 +103,7 @@ gulp.task("serve", function() {
     });
     
   gulp.watch('assets/scss/**/*.scss', ['watchSass']);
-  gulp.watch('app/*.js', ['watchJs']);
+  gulp.watch('app/**/*.js', ['watchJs']);
   gulp.watch('app/views/index.html', ['watchHtml']);
     
 });
