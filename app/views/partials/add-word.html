@@ -30,7 +30,7 @@
     <option ng-repeat="gender in genderCategories" value="{{gender.id}}">{{gender.gender}}</option>
   </select>
   
-  <button  class="form__button" ng-model="loginSubmit" ng-click="addItem()" ng-focus="umlautFocus(undefined, undefined)">Add Word</button>
+  <button  class="form__button" ng-model="addWordSubmit" ng-click="addItem()" ng-focus="umlautFocus(undefined, undefined)">Add Word</button>
   
   <formmessage class="form-message" ng-class="{'ang-show-message' : displayFormMessage}"></formmessage>
 </form>

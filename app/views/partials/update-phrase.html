@@ -1,20 +1,20 @@
-<form class="form add-phrase-form" name="formAddPhrase">
+<form class="form">
   
-  <a class="form__button-close" href="" ng-click="$emit('closeModal', 'displayAddPhrase')">X</a>
+  <a class="form__button-close" href="" ng-click="$emit('closeModal', 'displayUpdatePhrase')">&larr;</a>
   
-  <h3 class="form__heading">Add a Phrase</h3>
+  <h3 class="form__heading">Update Phrase</h3>
   
   <label class="form__label" for="txtPhraseEnglish">English</label>
-  <input id="txtPhraseEnglish" class="form__input" ng-model="phrase.english" type="text"
+  <input id="txtPhraseEnglish" class="form__input" ng-model="formUpdatePhrase.english" type="text"
      ng-focus="umlautFocus(undefined, undefined)">
   
   <label class="form__label" for="txtPhaseTranslation">Translation</label>
-  <input id="txtPhaseTranslation" class="form__input" ng-model="phrase.translation" type="text"
+  <input id="txtPhaseTranslation" class="form__input" ng-model="formUpdatePhrase.translation" type="text"
      ng-focus="umlautFocus('phrase', 'translation')">
   <umlauts class="form-umlauts" input-type="verb" input-field="translation" ></umlauts>
   
-  <button class="form__button" ng-model="loginSubmit" ng-click="addPhrase()"
-     ng-focus="umlautFocus(undefined, undefined)">Add Phrase</button>
+  <button class="form__button" ng-model="formUpdatePhrase.submit" ng-click="updatePhrase()"
+     ng-focus="umlautFocus(undefined, undefined)">Update Phrase</button>
   
   <formmessage class="form-message" ng-class="{'ang-show-message' : displayFormMessage}"></formmessage>  
 </form>
