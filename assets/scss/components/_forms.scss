@@ -25,6 +25,13 @@
   display: block;
   margin-bottom: 10px;
   
+  &--verb { 
+    @include text($size: em(18px), $color: $form-label-color);
+    display: inline-block;
+    margin-bottom: 10px;
+    width: 50px;
+  }
+  
   &--check {
     @include text($size: em(18px), $color: $form-label-color);
     display: inline-block;
@@ -38,14 +45,17 @@
 }
 
 .form__input {
-  background: $form-widget-bg-color;
-  border: 1px solid $form-border-color;
-  border-radius: $brd-radius;
+  @extend %form-textbox-display;
+  
   display: block;
-  height: 35px;
-  margin-bottom: 10px;
-  padding: 0 5px;
   width: 100%;
+  
+  &--verb { 
+    @extend %form-textbox-display;
+    
+    display: inline-block;
+    width: 225px;
+  }
   
   &:focus {
     background: $form-widget-bg-focus;

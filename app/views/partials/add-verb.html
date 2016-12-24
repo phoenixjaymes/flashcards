@@ -12,33 +12,33 @@
   <input id="txtVrbEnglish" class="form__input" type="text" ng-model="verb.english"
     ng-focus="umlautFocus(undefined, undefined)">
   
-  <label  class="form__label" for="txtVrbTranslation">Translation</label>
+  <label class="form__label" for="txtVrbTranslation">Translation</label>
   <input id="txtVrbTranslation" class="form__input" type="text" ng-model="verb.translation"
     ng-focus="umlautFocus('verb', 'translation')">
   <umlauts class="form-umlauts" input-type="verb" input-field="translation" ></umlauts>
   
-  <label class="form__label" for="txtIch">ich</label>
-  <input id="txtIch" class="form__input" type="text" ng-model="verb.ich"
+  <label class="form__label--verb" for="txtIch">ich</label>
+  <input id="txtIch" class="form__input--verb" type="text" ng-model="verb.ich"
    ng-focus="umlautFocus('verb', 'ich')">
   
-  <label class="form__label" for="txtDu">du</label>
-  <input id="txtDu" class="form__input" type="text" ng-model="verb.du"
+  <label class="form__label--verb" for="txtDu">du</label>
+  <input id="txtDu" class="form__input--verb" type="text" ng-model="verb.du"
     ng-focus="umlautFocus('verb', 'du')">
   
-  <label class="form__label" for="txtErEsSie">er, sie, es</label>
-  <input id="txtErEsSie" class="form__input" type="text" ng-model="verb.er_sie_es"
+  <label class="form__label--verb" for="txtErEsSie">er <span class="tool" data-tip="er, sie, es">?</span></label>
+  <input id="txtErEsSie" class="form__input--verb" type="text" ng-model="verb.er_sie_es"
     ng-focus="umlautFocus('verb', 'er_sie_es')">
   
-  <label class="form__label" for="txtWir">wir</label>
-  <input id="txtWir" class="form__input" type="text" ng-model="verb.wir"
+  <label class="form__label--verb" for="txtWir">wir</label>
+  <input id="txtWir" class="form__input--verb" type="text" ng-model="verb.wir"
     ng-focus="umlautFocus('verb', 'wir')">
   
-  <label class="form__label" for="txtIhr">ihr</label>
-  <input id="txtIhr" class="form__input" type="text" ng-model="verb.ihr"
+  <label class="form__label--verb" for="txtIhr">ihr</label>
+  <input id="txtIhr" class="form__input--verb" type="text" ng-model="verb.ihr"
     ng-focus="umlautFocus('verb', 'ihr')">
   
-  <label class="form__label" for="txtSieSie">sie, Sie</label>
-  <input id="txtSieSie" class="form__input" type="text" ng-model="verb.sie_sie"
+  <label class="form__label--verb" for="txtSieSie">sie <span class="tool" data-tip="sie &amp; Sie">?</span></label>
+  <input id="txtSieSie" class="form__input--verb" type="text" ng-model="verb.sie_sie"
     ng-focus="umlautFocus('verb', 'sie_sie')">  
 
   <button  class="form__button" ng-model="loginSubmit" ng-click="addVerb()">Add Verb</button>
