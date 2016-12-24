@@ -1,0 +1,67 @@
+<form class="form">
+  
+  <a class="form__button-close" href="" ng-click="$emit('closeModal', 'displayUpdateWord')">X</a>
+  
+  <h3 class="form__heading">Update Word</h3>
+  
+  <label class="form__label" for="selPosUpdate">Part of Speech</label>
+  <select id="selPosUpdate" class="form__select" name="selPos" ng-model="word.pos"
+    ng-change="changeCategoryUpdate(word.pos)" ng-focus="umlautFocus(undefined, undefined)">
+    <option>Select</option>
+    <option value="adjective">Adjective / Adverb</option>
+    <option value="noun">Noun</option>
+    <option value="phrase">Phrase</option>
+    <option value="verb">Verb</option>
+  </select>
+  
+  <label class="form__label" for="selCategoryUpdate">Category</label>
+  <select id="selCategoryUpdate" class="form__select" name="selCategory"
+    ng-model="word.category" ng-focus="umlautFocus(undefined, undefined)" ng-change="getWords(word.pos, word.category, true)">
+    <option ng-repeat="option in posCategoriesUpdate" value="{{option.id}}">{{option.name}}</option>
+  </select>
+  
+  
+  <div class="word-list" >
+    <h3>Word List</h3>
+    <div class="word-list__wrap">
+      <table class="word-list__table">
+        <tbody>
+          <tr>
+            <th class="word-list__table-td-translation">Translation</th>
+            <th class="word-list__table-td-edit"></th>
+          </tr>
+          
+          <tr ng-repeat="word in listOfWords">
+            <td class="word-list__table-td-translation">{{word.translation}} <span class="tool" data-tip="{{word.english}}">-?-</span></td>
+            <td class="word-list__table-td-edit"><a href="" ng-click="$emit('findWord', $index)">{{$index}}</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  
+  
+  
+  
+  <br><br><p>Old form below</p>
+  
+  
+  <label class="form__label" for="txtEnglish">English</label>
+  <input id="txtPos" class="form__input" type="text" ng-model="word.english">
+  
+  <label  class="form__label" for="txtTranslation">Translation</label>
+  <input id="txtWord" class="form__input" type="text" ng-model="word.translation">
+  
+  <label class="form__label" for="txtImg">Image</label>
+  <input id="txtImg" class="form__input" type="text" ng-model="word.image">
+  
+  <label class="form__label" for="selGender">Gender</label>
+  <select id="selGender" class="form__select" name="selGender">
+    <option>Masculine</option>
+    <option>Feminine</option>
+    <option>Neuter</option>
+    <option>None</option>
+  </select>
+  
+  <button class="form__button" ng-model="loginSubmit" ng-click="$emit('updateWordClick')">Update Word</button>
+</form>
