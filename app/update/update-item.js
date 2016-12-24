@@ -1,5 +1,5 @@
 /* 
- File     : addword.js
+ File     : update-item.js
  Date     : Oct 23, 2016
  Author   : Jaymes Young <jaymes@phoenixjaymes.com>
  */
@@ -8,10 +8,15 @@
 
 angular.module('flashcards')
   .controller('UpdateItem', function($scope, cardsService, updateItemService) {;
-    $scope.word = {};
-    $scope.verb = {"pos": "verb"};
-    $scope.category = {"pos": "category"};
-    $scope.phrase = {"pos" : "phrase"};
+//    $scope.word = {};
+//    $scope.verb = {"pos": "verb"};
+//    $scope.category = {"pos": "category"};
+//    $scope.phrase = {"pos" : "phrase"};
+    $scope.formUpdateAdjective = {"pos": "adjective"};
+    $scope.formUpdateCategory = {"pos": "category"};
+    $scope.formUpdateNoun = {"pos": "noun"};
+    $scope.formUpdatePhrase = {"pos": "phrase"};
+    $scope.formUpdateVerb = {"pos": "verb"};
     $scope.posCategories;
     $scope.genderCategories;
     $scope.responseMessage;
@@ -19,45 +24,53 @@ angular.module('flashcards')
     $scope.showUpperCase = false;
     $scope.inputType;
     $scope.inputField;
+    
+    // Get categories from service
+    var getAllCategories = function() {
+      cardsService.getCategories(function(response) {
+        $scope.cardAllCategories = response.data;
+        
+        $scope.genderCategories = response.data.gender;
+        
+        console.log($scope.genderCategories);
+      });
+    };
       
     // Change category options
     $scope.getCategories = function(wordPos) {
-
       if ($scope.posCategories === undefined) {
         cardsService.getAllCategories(function(response) {
           
           $scope.posCategories = response.data.word;
           $scope.genderCategories = response.data.gender;
+          console.log($scope.genderCategories);
         });
       }
     };
     
     
+    
     // Change category options for word list
     $scope.posCategoryList;
     $scope.showCategoryWords = false;
+    
     // If pos is verb get verbs until verbs have categories
     $scope.changeCategoryUpdate = function(wordPos) {
-      console.log(wordPos);
-      console.log($scope.cardAllCategories);
+      
       if (wordPos === 'adjective') {
         $scope.posCategoriesUpdate = $scope.cardAllCategories[wordPos];
-        //$scope.getWords(wordPos);
-
-
         $scope.showCategoryWords = true;
       } else if (wordPos === 'noun') {
         $scope.posCategoriesUpdate = $scope.cardAllCategories[wordPos];
 
-
         $scope.showCategoryWords = true;
       } else if (wordPos === 'phrase') {
 
-        $scope.getWords(wordPos, '', true);
+        $scope.getWordsUpdate(wordPos, '');
         $scope.showCategoryWords = false;
       } else if (wordPos === 'verb') {
 
-        $scope.getWords(wordPos, '', true);
+        $scope.getWordsUpdate(wordPos, '');
         $scope.showCategoryWords = false;
       } else {
         //$scope.posCategory = $scope.cardAllCategories[cardPos];
@@ -67,47 +80,110 @@ angular.module('flashcards')
 
 
     // Get list of words
-    $scope.getWords = function(pos, category, sort) {
-      cardsService.getWords(pos, category, sort, function(response) {
+    $scope.getWordsUpdate = function(pos, category) {
+      cardsService.getWordsUpdate(pos, category, function(response) {
         $scope.listOfWords = response.data;
 
-        $scope.totalWords = $scope.listOfWords.length;          
+        $scope.totalWords = $scope.listOfWords.length;
       });
     };
     
     
     
     // Find single word and fill in form
-    $scope.$on('findWord', function(evt, args) {
+    $scope.$on('findItem', function(evt, args) {
       $scope.word.id = args;
-      console.log('find word ' + args + ' ' + $scope.word.pos + ' ' + $scope.word.category);
       
-      updateItemService.findWord($scope.word, function(response) {
-        console.log(response.data);
+      updateItemService.findItem($scope.word, function(response) {
+       
+        $scope.updateItem = response.data;
         
-        $scope.updateWord = response.data;
-        console.log($scope.updateWord.item.english);
-        console.log($scope.updateWord.item.translation);
-        console.log($scope.updateWord.item.image);
+        if($scope.word.pos === 'adjective') {
+
+          $scope.formUpdateAdjective.id = $scope.updateItem.item.id;
+          $scope.formUpdateAdjective.category = $scope.updateItem.item.category;
+          $scope.formUpdateAdjective.english = $scope.updateItem.item.english;
+          $scope.formUpdateAdjective.translation = $scope.updateItem.item.translation;
+          $scope.formUpdateAdjective.image = $scope.updateItem.item.image;
+          
+          $scope.$emit('displayUpdateForms', 'displayUpdateAdjective');
+
+
+        } else if($scope.word.pos === 'category') {
+          
+          $scope.formUpdateCategory.id = $scope.updateItem.item.id;
+          $scope.formUpdateCategory.english = $scope.updateItem.item.english;
+          $scope.formUpdateCategory.translation = $scope.updateItem.item.translation;
+          
+          $scope.$emit('displayUpdateForms', 'displayUpdateCategory');
+
+        } else if ($scope.word.pos === 'noun') {
+
+          $scope.formUpdateNoun.id = $scope.updateItem.item.id;
+          $scope.formUpdateNoun.category = $scope.updateItem.item.category;
+          $scope.formUpdateNoun.english = $scope.updateItem.item.english;
+          $scope.formUpdateNoun.translation = $scope.updateItem.item.translation;
+          $scope.formUpdateNoun.image = $scope.updateItem.item.image;
+          $scope.formUpdateNoun.gender = $scope.updateItem.item.gender;
+          
+          $scope.$emit('displayUpdateForms', 'displayUpdateNoun');
+          
+        } else if ($scope.word.pos === 'phrase') {
+
+          $scope.formUpdatePhrase.id = $scope.updateItem.item.id;
+          $scope.formUpdatePhrase.english = $scope.updateItem.item.english;
+          $scope.formUpdatePhrase.translation = $scope.updateItem.item.translation;
+          
+          $scope.$emit('displayUpdateForms', 'displayUpdatePhrase');
+
+        } else if ($scope.word.pos === 'verb') {
+
+          $scope.formUpdateVerb.id = $scope.updateItem.item.id;
+          
+          
+          
+          if ($scope.updateItem.item.separable === 'yes') {
+            $scope.formUpdateVerb.separable = true;
+          } else {
+            $scope.formUpdateVerb.separable = false;
+          }
+          
+          
+          // $scope.updateItem.item.separable
+          // formUpdateVerb.separable
+          
+          $scope.formUpdateVerb.english = $scope.updateItem.item.english;
+          $scope.formUpdateVerb.translation = $scope.updateItem.item.translation;
+          $scope.formUpdateVerb.ich = $scope.updateItem.item.ich;
+          $scope.formUpdateVerb.du = $scope.updateItem.item.du;
+          $scope.formUpdateVerb.er_sie_es = $scope.updateItem.item.er_sie_es;
+          $scope.formUpdateVerb.wir = $scope.updateItem.item.wir;
+          $scope.formUpdateVerb.ihr = $scope.updateItem.item.ihr;
+          $scope.formUpdateVerb.sie_sie = $scope.updateItem.item.sie_Sie;
+          $scope.formUpdateVerb.image = $scope.updateItem.item.img;
+          
+          $scope.$emit('displayUpdateForms', 'displayUpdateVerb');
+        }
         
-        $scope.word.english = $scope.updateWord.item.english;
-        $scope.word.translation = $scope.updateWord.item.translation;
-        $scope.word.image = $scope.updateWord.item.image;
       });
-      
     });
     
     
     
-      
     
     
     
     
     
     
-
-    // Update word
+    
+    
+    
+    
+    
+    
+    
+    // Update item
     $scope.addItem = function() {
       $scope.displayFormMessage = false;
       
@@ -248,4 +324,20 @@ angular.module('flashcards')
       $scope.displayFormMessage = true;
     };
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    // Get categories
+    getAllCategories();
 });

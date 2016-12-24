@@ -7,28 +7,6 @@
 'use strict';
 
 angular.module('flashcards')
-  .directive('home', function() {
-    return {
-      templateUrl : 'app/views/home.html'
-    };
-  })
-  .directive('cards', function() {
-    return {
-      templateUrl : 'app/views/cards.html',
-      controller  : 'Cards'
-    };
-  })
-  .directive('dutch', function() {
-    return {
-      templateUrl : 'app/views/dutch.html'
-    };
-  })
-  .directive('login', function() {
-    return {
-      templateUrl : 'app/views/partials/login.html',
-      controller : 'Login'
-    };
-  })
   .directive('addword', function() {
     return {
       templateUrl : 'app/views/partials/add-word.html',
@@ -51,67 +29,6 @@ angular.module('flashcards')
     return {
       templateUrl : 'app/views/partials/add-phrase.html',
       controller : 'AddItem'
-    };
-  })
-  .directive('listWords', function() {
-    return {
-      templateUrl : 'app/views/partials/list-words.html',
-      controller: 'UpdateItem'
-    };
-  })
-  .directive('updateCategory', function() {
-    return {
-      templateUrl : 'app/views/partials/update-category.html',
-      controller: 'UpdateItem'
-    };
-  }).directive('updatePhrase', function() {
-    return {
-      templateUrl : 'app/views/partials/update-phrase.html',
-      controller: 'UpdateItem'
-    };
-  })
-  .directive('updateVerb', function() {
-    return {
-      templateUrl : 'app/views/partials/update-verb.html',
-      controller: 'UpdateItem'
-    };
-  })
-  .directive('updateWord', function() {
-    return {
-      templateUrl : 'app/views/partials/update-word.html',
-      controller: 'UpdateItem'
-    };
-  })
-  .directive('register', function() {
-    return {
-      templateUrl : 'app/views/partials/register.html',
-      controller : 'Login'
-    };
-  })
-  .directive('formmessage', function() {
-    return {
-      templateUrl : 'app/views/partials/form-message.html'
-    };
-  })
-  .directive('verbcard', function() {
-    return {
-      templateUrl : 'app/views/partials/verb-card.html'
-    };
-  })
-  .directive('phrasecard', function() {
-    return {
-      templateUrl : 'app/views/partials/phrase-card.html'
-    };
-  })
-  .directive('genericcard', function() {
-    return {
-      templateUrl : 'app/views/partials/generic-card.html'
-    };
-  })
-  .directive('umlauts', function() {
-    return {
-      restrict : 'E',      
-      templateUrl : 'app/views/partials/umlauts.html'
     };
   });
   

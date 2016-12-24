@@ -36,6 +36,8 @@ angular.module('flashcards')
     $scope.addItem = function() {
       $scope.displayFormMessage = false;
       
+      console.log('add item');
+      
       addItemService.addItem($scope.word, function(response) {
         // Check response message
         if(response.data.success === true) {
@@ -59,6 +61,8 @@ angular.module('flashcards')
     // Add verb
     $scope.addVerb = function() {
       $scope.displayFormMessage = false;
+      
+      console.log('add verb');
       
       if(!$scope.verb.separable) {
         $scope.verb.separable = 'no';
@@ -98,6 +102,8 @@ angular.module('flashcards')
     $scope.addCategory = function() {
       $scope.displayFormMessage = false;
       
+      console.log('add category');
+      
       addItemService.addItem($scope.category, function(response) {
         // Check response message
         if(response.data.success === true) {
@@ -119,6 +125,8 @@ angular.module('flashcards')
     // Add Phrase
     $scope.addPhrase = function() {
       $scope.displayFormMessage = false;
+      
+      console.log('add phrase');
       
       addItemService.addItem($scope.phrase, function(response) {
         // Check response message

@@ -1,5 +1,5 @@
 /* 
- File     : words.service.js
+ File     : update-item.service.js
  Date     : Sep 28, 2016
  Author   : Jaymes Young <jaymes@phoenixjaymes.com>
  */
@@ -10,8 +10,8 @@ angular.module('flashcards')
   .service('updateItemService', function($http, $httpParamSerializerJQLike) {
     
     // Get word
-    this.findWord = function(item, callback) {
-      var url = 'assets/inc/fc-update-item.php';
+    this.findItem = function(item, callback) {
+      var url = 'assets/inc/fc-get-update-item.php';
       var config = {params: item};
       $http.get(url, config).then(callback);
     };
