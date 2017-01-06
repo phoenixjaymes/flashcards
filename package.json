@@ -13,7 +13,7 @@
   "author": "Jaymes Young",
   "license": "MIT",
   "devDependencies": {
-    "browser-sync": "^2.14.0",
+    "browser-sync": "^2.8.1",
     "del": "^2.2.2",
     "gulp": "^3.9.1",
     "gulp-concat": "^2.6.0",
@@ -26,5 +26,13 @@
   "dependencies": {
     "angular": "^1.5.8",
     "angular-cookies": "^1.5.8"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/phoenixjaymes/flashcards.git"
+  },
+  "bugs": {
+    "url": "https://github.com/phoenixjaymes/flashcards/issues"
+  },
+  "homepage": "https://github.com/phoenixjaymes/flashcards#readme"
 }
