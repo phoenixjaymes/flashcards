@@ -22,16 +22,22 @@ gulp.task("concatScripts", function() {
   return gulp.src([
     'app/app.module.js',
     'app/config.js',
-    'app/directives.js',
     'app/main.js',
+    'app/directives.js',
+    'app/add/add.directives.js',
+    'app/update/update.directives.js',
     'app/login.js',
     'app/login.service.js',
     'app/cards.js',
     'app/cards.service.js',
-    'app/add/add.directives.js',
+    'app/admin.js',
     'app/add/add-item.js',
     'app/add/add-item.service.js',
-    'app/update/update.directives.js',
+    'app/add/add-adjective.js',
+    'app/add/add-category.js',
+    'app/add/add-noun.js',
+    'app/add/add-phrase.js',
+    'app/add/add-verb.js',
     'app/update/update-item.js',
     'app/update/update-item.service.js',
     'app/update/update-adjective.js',
@@ -99,8 +105,8 @@ gulp.task('watchHtml', function(done) {
 // Start server and watch files
 gulp.task("serve", function() {
   browserSync.init({
-      proxy: "http://localhost/flashcards/"
-    });
+    host: "http://flashcards/"
+  });
     
   gulp.watch('assets/scss/**/*.scss', ['watchSass']);
   gulp.watch('app/**/*.js', ['watchJs']);
