@@ -136,16 +136,19 @@ if ($pos === 'phrase') {
 
   send_data($arr_cards); 
   
-} elseif ($pos === 'mixed') {
+} elseif ($pos === 'study') {
   $category = filter_input(INPUT_GET, 'category', FILTER_SANITIZE_STRING);
   $sort = filter_input(INPUT_GET, 'sort', FILTER_SANITIZE_STRING);
   
   // Categories
-    $sql = "(SELECT english, translation, img, fc_categories_gender.gender AS gender"
-         . " FROM fc_german_nouns, fc_categories_gender WHERE fc_german_nouns.gender = fc_categories_gender.id ORDER BY added DESC LIMIT 20)"
+    $sql = "(SELECT fc_german_nouns.id, english, translation, img, fc_categories_gender.gender AS gender, 'noun' AS wordType"
+         . " FROM fc_german_nouns, fc_categories_gender WHERE fc_german_nouns.gender = fc_categories_gender.id ORDER BY last_practiced LIMIT 10)"
          . " UNION"
-         . " (SELECT english, translation, img, 'none' AS gender"
-         . " FROM fc_german_adjectives ORDER BY added DESC LIMIT 20)";
+         . " (SELECT id, english, translation, img, 'none' AS gender, 'adjective' AS wordType"
+         . " FROM fc_german_adjectives ORDER BY last_practiced LIMIT 10)"
+         . " UNION"
+         . " (SELECT id, english, translation, 'none' as img, 'none' AS gender, 'verb' AS wordType"
+         . " FROM fc_german_verbs ORDER BY last_practiced LIMIT 10)";
   
   $result = $mySqli->handleQuery($sql);
 
@@ -153,10 +156,12 @@ if ($pos === 'phrase') {
   // Get cards
   while($row = $result->fetch_assoc()) {
     $arr_card = [];
+    $arr_card['id'] = $row['id'];
     $arr_card['english'] = $row['english'];
     $arr_card['translation'] = $row['translation'];
     $arr_card['img'] = $row['img'];
     $arr_card['gender'] = $row['gender'];
+    $arr_card['wordType'] = $row['wordType'];
 
     $arr_cards[] = $arr_card;
   }
