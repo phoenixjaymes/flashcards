@@ -40,15 +40,10 @@
             <li class="main-menu__item" ng-click="sectionType='dutch'"><a href="">Dutch</a></li>
           </ul>
         </nav>
+        
         <div class="main-header__settings">
           <a href="" class="main-header__settings-icon" ng-class="loggedIn ? 'ang-logout' : 'ang-login'" ng-click="showOptions();"></a>
           <ul class="options-menu" ng-class="displayOptions ? 'ang-show-options' : 'ang-hide-options' ">
-            <li class="options-menu__item"><a href="" ng-click="displayForm('displayAddCategory')">Add Category</a></li>
-            
-            <li class="options-menu__item"><a href="" ng-click="displayForm('displayAddPhrase')">Add Phrase</a></li>
-            <li class="options-menu__item"><a href="" ng-click="displayForm('displayAddVerb')">Add Verb</a></li>
-            <li class="options-menu__item"><a href="" ng-click="displayForm('displayAddWord')">Add Word</a></li>
-            <li class="options-menu__item"><a href="" ng-click="displayForm('displayListWords')">List Words</a></li>
             <li class="options-menu__item"><a href="" ng-click="logOut()">Logout</a></li>
           </ul>
         </div>
@@ -59,26 +54,13 @@
       <div class="main-content__wrap" ng-switch="sectionType">
         <cards ng-switch-when="cards"></cards>
         <dutch ng-switch-when="dutch"></dutch>
+        <admin ng-switch-when="admin"></admin>
         <home ng-switch-default></home>
       </div>
     </main>
     
-<login ng-class="{'modal' : formDisplay.displayLogin}"></login>
-<register ng-class="{'modal' : formDisplay.displayRegister}"></register>
-
-<addcategory ng-class="{'modal' : formDisplay.displayAddCategory}"></addcategory>
-<addphrase ng-class="{'modal' : formDisplay.displayAddPhrase}"></addphrase>
-<addVerb ng-class="{'modal' : formDisplay.displayAddVerb}"></addVerb>
-<addword ng-class="{'modal' : formDisplay.displayAddWord}"></addword>
-
-<list-words ng-class="{'modal' : formDisplay.displayListWords}"></list-words>
-
-<update-adjective ng-class="{'modal1' : formDisplay.displayUpdateAdjective}"></update-adjective>
-<update-category ng-class="{'modal1' : formDisplay.displayUpdateCategory}"></update-category>
-<update-noun ng-class="{'modal1' : formDisplay.displayUpdateNoun}"></update-noun>
-<update-phrase ng-class="{'modal1' : formDisplay.displayUpdatePhrase}"></update-phrase>
-<update-verb ng-class="{'modal1' : formDisplay.displayUpdateVerb}"></update-verb>
-
+    <login ng-class="{'modal' : formDisplay.displayLogin}"></login>
+    <register ng-class="{'modal' : formDisplay.displayRegister}"></register>
 
     <footer class="main-footer">
       <div class="main-footer__wrap">
@@ -89,5 +71,9 @@
     <script src="node_modules/angular/angular.js"></script>
     <script src="node_modules/angular-cookies/angular-cookies.min.js"></script>
     <script src="app/app.js"></script>
+    
+    <script id="__bs_script__">//<![CDATA[
+    document.write("<script async src='http://HOST:3000/browser-sync/browser-sync-client.js?v=2.16.0'><\/script>".replace("HOST", location.hostname));
+//]]></script>
   </body>
 </html>
