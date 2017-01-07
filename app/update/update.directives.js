@@ -7,13 +7,6 @@
 'use strict';
 
 angular.module('flashcards')
-  .directive('listWords', function() {
-    return {
-      templateUrl : 'app/views/partials/list-words.html',
-      controller: 'UpdateItem'
-    };
-  })
-  
   .directive('updateAdjective', function() {
     return {
       templateUrl : 'app/views/partials/update-adjective.html',
