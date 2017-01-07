@@ -1,4 +1,28 @@
 <section class="home">
-  <h1 class="home__title">Dutch Cards</h1>
-  <img class="home__image" src="assets/img/flashcard-dutch-icon.svg" alt="flashcard image">
+  <h1 class="home__title">Admin</h1>
+  
+  <ul class="options-menu" ng-class="">
+    <li class="options-menu__item"><a href="" ng-click="displayForm('displayAddAdjective')">Add Adjective</a></li>
+    <li class="options-menu__item"><a href="" ng-click="displayForm('displayAddCategory')">Add Category</a></li>
+    <li class="options-menu__item"><a href="" ng-click="displayForm('displayAddNoun')">Add Noun</a></li>
+    <li class="options-menu__item"><a href="" ng-click="displayForm('displayAddPhrase')">Add Phrase</a></li>
+    <li class="options-menu__item"><a href="" ng-click="displayForm('displayAddVerb')">Add Verb</a></li>
+    <li class="options-menu__item"><a href="" ng-click="displayForm('displayListWords')">List Words</a></li>
+    <li class="options-menu__item"><a href="" ng-click="logOut()">Logout</a></li>
+  </ul>
 </section>
+
+
+<add-adjective ng-class="{'modal' : formDisplay.displayAddAdjective}"></add-adjective>
+<add-category ng-class="{'modal' : formDisplay.displayAddCategory}"></add-category>
+<add-noun ng-class="{'modal' : formDisplay.displayAddNoun}"></add-noun>
+<add-phrase ng-class="{'modal' : formDisplay.displayAddPhrase}"></add-phrase>
+<add-Verb ng-class="{'modal' : formDisplay.displayAddVerb}"></add-Verb>
+
+<list-words ng-class="{'modal' : formDisplay.displayListWords}"></list-words>
+
+<update-adjective ng-class="{'modal1' : formDisplay.displayUpdateAdjective}"></update-adjective>
+<update-category ng-class="{'modal1' : formDisplay.displayUpdateCategory}"></update-category>
+<update-noun ng-class="{'modal1' : formDisplay.displayUpdateNoun}"></update-noun>
+<update-phrase ng-class="{'modal1' : formDisplay.displayUpdatePhrase}"></update-phrase>
+<update-verb ng-class="{'modal1' : formDisplay.displayUpdateVerb}"></update-verb>
