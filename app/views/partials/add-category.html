@@ -1,12 +1,12 @@
-<form class="form add-category-form" name="formAddCategory">
+<form class="form">
   
   <a class="form__button-close" href="" ng-click="$emit('closeModal', 'displayAddCategory')">X</a>
   
   <h3 class="form__heading">Add a Category</h3>
   <label class="form__label" for="txtCategory">Name</label>
-  <input id="txtCategory" class="form__input" ng-model="category.name" type="text">
+  <input id="txtCategory" class="form__input" ng-model="formAddCategory.name" type="text">
   
-  <button class="form__button" ng-model="loginSubmit" ng-click="addCategory()">Add Category</button>
+  <button class="form__button" ng-model="formAddCategory.Submit" ng-click="addCategory()">Add Category</button>
   
   <formmessage class="form-message" ng-class="{'ang-show-message' : displayFormMessage}"></formmessage>  
 </form>

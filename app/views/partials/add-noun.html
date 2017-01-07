@@ -1,36 +1,31 @@
 <form class="form add-word-form" name="formAddWord" autocomplete="off">
   
-  <a class="form__button-close" href="" ng-click="$emit('closeModal', 'displayAddWord')">X</a>
+  <a class="form__button-close" href="" ng-click="$emit('closeModal', 'displayAddNoun')">X</a>
   
-  <h3 class="form__heading">Add a New Word</h3>
-  
-  <label class="form__label" for="selPos">Part of Speech</label>
-  <select id="selPos" class="form__select" name="selPos" ng-model="word.pos"  ng-change="getCategories(word.pos)" ng-focus="umlautFocus(undefined, undefined)">
-    <option value="adjective">Adjective / Adverb</option>
-    <option value="noun">Noun</option>
-  </select>
+  <h3 class="form__heading">Add Noun</h3>
   
   <label class="form__label" for="selCategory">Category</label>
-  <select id="selCategory" class="form__select" name="selCategory" ng-model="word.category" ng-focus="umlautFocus(undefined, undefined)">
-    <option ng-repeat="option in posCategories" value="{{option.id}}">{{option.category}}</option>
+  <select id="selCategory" class="form__select" name="selCategory" ng-model="formAddNoun.category" ng-focus="umlautFocus(undefined, undefined)">
+    <option value="">Select a Category</option>
+    <option ng-repeat="option in catNouns" value="{{option.id}}">{{option.name}}</option>
   </select>
   
   <label class="form__label" for="txtEnglish">English</label>
-  <input id="txtEnglish" class="form__input" type="text" ng-model="word.english" ng-focus="umlautFocus(undefined, undefined)">
+  <input id="txtEnglish" class="form__input" type="text" ng-model="formAddNoun.english" ng-focus="umlautFocus(undefined, undefined)">
   
   <label  class="form__label" for="txtTranslation">Translation</label>
-  <input id="txtTranslation" class="form__input" type="text" ng-model="word.translation" ng-focus="umlautFocus('word', 'translation')">  
+  <input id="txtTranslation" class="form__input" type="text" ng-model="formAddNoun.translation" ng-focus="umlautFocus('formAddNoun', 'translation')">  
   <umlauts class="form-umlauts" input-type="word" input-field="translation" ></umlauts>
   
   <label class="form__label" for="txtImg">Image</label>
-  <input id="txtImg" class="form__input" type="text" ng-model="word.img" ng-focus="umlautFocus(undefined, undefined)">
+  <input id="txtImg" class="form__input" type="text" ng-model="formAddNoun.img" ng-focus="umlautFocus(undefined, undefined)">
   
   <label class="form__label" for="selGender" ng-show="word.pos !== 'adjective'">Gender</label>
-  <select id="selGender" class="form__select" name="selGender" ng-show="word.pos !== 'adjective'" ng-model="word.gender" ng-focus="umlautFocus(undefined, undefined)">
-    <option ng-repeat="gender in genderCategories" value="{{gender.id}}">{{gender.gender}}</option>
+  <select id="selGender" class="form__select" name="selGender" ng-show="word.pos !== 'adjective'" ng-model="formAddNoun.gender" ng-focus="umlautFocus(undefined, undefined)">
+    <option ng-repeat="gender in catGenders" value="{{gender.id}}">{{gender.name}}</option>
   </select>
   
-  <button  class="form__button" ng-model="addWordSubmit" ng-click="addItem()" ng-focus="umlautFocus(undefined, undefined)">Add Word</button>
+  <button  class="form__button" ng-model="formAddNoun.Submit" ng-click="addNoun()" ng-focus="umlautFocus(undefined, undefined)">Add Noun</button>
   
   <formmessage class="form-message" ng-class="{'ang-show-message' : displayFormMessage}"></formmessage>
 </form>
