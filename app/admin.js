@@ -42,6 +42,11 @@ angular.module('flashcards')
       $scope[$scope.inputType][$scope.inputField] = $scope[$scope.inputType][$scope.inputField] + char;
     };
     
+    
+    $scope.getInfinitive = function(form) {
+      $scope[form].infinitive = $scope[form].translation.replace(/·/g, '');
+    };
+    
     // Display message
     $scope.displayMessage = function(message) {
       var objMessages = {
