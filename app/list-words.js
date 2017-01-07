@@ -1,17 +1,14 @@
 /* 
- File     : update-item.js
- Date     : Oct 23, 2016
+ File     : list-words.js
+ Date     : 23 Oct 2016
  Author   : Jaymes Young <jaymes@phoenixjaymes.com>
  */
 
 'use strict';
 
 angular.module('flashcards')
-  .controller('UpdateItem', function($scope, cardsService, updateItemService) {;
-//    $scope.word = {};
-//    $scope.verb = {"pos": "verb"};
-//    $scope.category = {"pos": "category"};
-//    $scope.phrase = {"pos" : "phrase"};
+  .controller('ListWords', function($scope, cardsService, updateItemService) {;
+
     $scope.formUpdateAdjective = {"pos": "adjective"};
     $scope.formUpdateCategory = {"pos": "category"};
     $scope.formUpdateNoun = {"pos": "noun"};
@@ -22,8 +19,6 @@ angular.module('flashcards')
     $scope.responseMessage;
     $scope.displayFormMessage = false;
     $scope.showUpperCase = false;
-    $scope.inputType;
-    $scope.inputField;
     
     // Get categories from service
     var getAllCategories = function() {
@@ -32,7 +27,6 @@ angular.module('flashcards')
         
         $scope.genderCategories = response.data.gender;
         
-        console.log($scope.genderCategories);
       });
     };
       
@@ -43,7 +37,6 @@ angular.module('flashcards')
           
           $scope.posCategories = response.data.word;
           $scope.genderCategories = response.data.gender;
-          console.log($scope.genderCategories);
         });
       }
     };
@@ -169,148 +162,6 @@ angular.module('flashcards')
     });
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    // Update item
-    $scope.addItem = function() {
-      $scope.displayFormMessage = false;
-      
-      updateItemService.updateItem($scope.word, function(response) {
-        // Check response message
-        if(response.data.success === true) {
-          // Clear form
-          $scope.word.translation = '';
-          $scope.word.english = '';
-          $scope.word.img = '';
-          
-          displayMessage('true');
-        } else if (response.data.success === 'duplicate') {
-          displayMessage('duplicate');
-        } else if (response.data.success === 'incorrect') {
-          displayMessage('incorrect');
-        } else if (response.data.success === false) {
-          displayMessage('false');
-        }
-      });
-    }; 
-    
-    
-    // Update verb
-    $scope.addVerb = function() {
-      $scope.displayFormMessage = false;
-      
-      if(!$scope.verb.separable) {
-        $scope.verb.separable = 'no';
-      } else {
-        $scope.verb.separable = 'yes';
-      }
-      
-      updateItemService.updateItem($scope.verb, function(response) {
-        // Check response message
-        if(response.data.success === true) {
-          // clear form
-          $scope.verb.english = '';
-          $scope.verb.translation = '';
-          $scope.verb.ich = '';
-          $scope.verb.du = '';
-          $scope.verb.er_sie_es = '';
-          $scope.verb.wir = '';
-          $scope.verb.ihr = '';
-          $scope.verb.sie_sie = '';
-          $scope.verb.separable = undefined;
-          
-          displayMessage('true');
-        } else if (response.data.success === 'duplicate') {
-          displayMessage('duplicate');
-        } else if (response.data.success === 'incorrect') {
-          displayMessage('incorrect');
-        } else if (response.data.success === false) {
-          displayMessage('false');
-        }
-      });
-
-      $scope.verb.separable = undefined;
-    };
-    
-    
-    // Uupdate category
-    $scope.addCategory = function() {
-      $scope.displayFormMessage = false;
-      
-      updateItemService.updateItem($scope.category, function(response) {
-        // Check response message
-        if(response.data.success === true) {
-          // Clear form
-          $scope.category.name = '';
-          
-          displayMessage('true');
-        } else if (response.data.success === 'duplicate') {
-          displayMessage('duplicate');
-        } else if (response.data.success === 'incorrect') {
-          displayMessage('incorrect');
-        } else if (response.data.success === false) {
-          displayMessage('false');
-        }
-      });
-    };
-    
-    
-    // Update Phrase
-    $scope.addPhrase = function() {
-      $scope.displayFormMessage = false;
-      
-      updateItemService.updateItem($scope.phrase, function(response) {
-        // Check response message
-        if(response.data.success === true) {
-          // Clear form
-          $scope.phrase.english = '';
-          $scope.phrase.translation = '';
-          
-          displayMessage('true');
-        } else if (response.data.success === 'incorrect') {
-          displayMessage('incorrect');
-        } else if (response.data.success === 'duplicate') {
-          displayMessage('duplicate');
-        } else if (response.data.success === false) {
-          displayMessage('false');
-        }
-      });
-    };
-    
-    // Set which input umlaut should be added to
-    $scope.umlautFocus = function(pos, propName) {
-      $scope.inputType = pos;
-      $scope.inputField = propName;
-    };
-    
-    
-    // Add Umlauts and special characters
-    $scope.addCharacter = function(objName, propName, char) {
-      if(!$scope.inputType || !$scope.inputField) {
-        return;
-      }
-      
-      if ($scope[$scope.inputType][$scope.inputField] === undefined) {
-        $scope[$scope.inputType][$scope.inputField] = '';
-      }
-      
-      $scope[$scope.inputType][$scope.inputField] = $scope[$scope.inputType][$scope.inputField] + char;
-    };
-
-    
-    
     // Display message
     var displayMessage = function(message) {
       var objMessages = {
@@ -323,18 +174,6 @@ angular.module('flashcards')
       $scope.responseMessage = objMessages[message];
       $scope.displayFormMessage = true;
     };
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
     
     
