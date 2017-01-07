@@ -47,13 +47,7 @@ if ($pos === 'phrase') {
   $sort = filter_input(INPUT_GET, 'sort', FILTER_SANITIZE_STRING);
   
   
-  if ($sort === 'true') {
-    $sql = "SELECT id, english, translation, ich, du, er_sie_es, wir, ihr, sie_Sie, img, 'none' AS gender FROM fc_german_verbs ORDER BY translation";
-  } else {
-    $sql = "SELECT id, english, translation, ich, du, er_sie_es, wir, ihr, sie_Sie, img, 'none' AS gender FROM fc_german_verbs";
-  }
-  
-  
+  $sql = "SELECT id, english, translation, ich, du, er_sie_es, wir, ihr, sie_Sie, img, 'none' AS gender FROM fc_german_verbs ORDER BY translation";
   
   $result = $mySqli->handleQuery($sql);
   
