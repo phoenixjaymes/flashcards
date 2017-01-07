@@ -1,34 +1,40 @@
 /* 
- File     : directives.js
- Date     : Sep 28, 2016
+ File     : add.directives.js
+ Date     : 21 Dec 2016
  Author   : Jaymes Young <jaymes@phoenixjaymes.com>
  */
 
 'use strict';
 
 angular.module('flashcards')
-  .directive('addword', function() {
+.directive('addAdjective', function() {
     return {
-      templateUrl : 'app/views/partials/add-word.html',
-      controller : 'AddItem'
+      templateUrl : 'app/views/partials/add-adjective.html',
+      controller : 'AddAdjective'
     };
   })
-  .directive('addverb', function() {
-    return {
-      templateUrl : 'app/views/partials/add-verb.html',
-      controller : 'AddItem'
-    };
-  })
-  .directive('addcategory', function() {
+  .directive('addCategory', function() {
     return {
       templateUrl : 'app/views/partials/add-category.html',
-      controller : 'AddItem'
+      controller : 'AddCategory'
     };
   })
-  .directive('addphrase', function() {
+  .directive('addNoun', function() {
+    return {
+      templateUrl : 'app/views/partials/add-noun.html',
+      controller : 'AddNoun'
+    };
+  })
+  .directive('addPhrase', function() {
     return {
       templateUrl : 'app/views/partials/add-phrase.html',
-      controller : 'AddItem'
+      controller : 'AddPhrase'
+    };
+  })
+  .directive('addVerb', function() {
+    return {
+      templateUrl : 'app/views/partials/add-verb.html',
+      controller : 'AddVerb'
     };
   });
   
