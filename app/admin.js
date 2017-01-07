@@ -13,6 +13,11 @@ angular.module('flashcards')
     $scope.formAddNoun = {"pos": "noun"};
     $scope.formAddPhrase = {"pos" : "phrase"};
     $scope.formAddVerb = {"pos": "verb"};
+    $scope.formUpdateAdjective = {"pos": "adjective"};
+    $scope.formUpdateCategory = {"pos": "category"};
+    $scope.formUpdateNoun = {"pos": "noun"};
+    $scope.formUpdatePhrase = {"pos": "phrase"};
+    $scope.formUpdateVerb = {"pos": "verb"};
     $scope.inputType;
     $scope.inputField;
 

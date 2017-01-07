@@ -7,13 +7,7 @@
 'use strict';
 
 angular.module('flashcards')
-  .controller('ListWords', function($scope, cardsService, updateItemService) {;
-
-    $scope.formUpdateAdjective = {"pos": "adjective"};
-    $scope.formUpdateCategory = {"pos": "category"};
-    $scope.formUpdateNoun = {"pos": "noun"};
-    $scope.formUpdatePhrase = {"pos": "phrase"};
-    $scope.formUpdateVerb = {"pos": "verb"};
+  .controller('ListWords', function($scope, cardsService, updateItemService) {
     $scope.posCategories;
     $scope.genderCategories;
     $scope.responseMessage;
