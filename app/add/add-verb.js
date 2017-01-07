@@ -51,6 +51,6 @@ angular.module('flashcards')
     };
     
     $scope.getInfinitive = function() {
-      $scope.formAddVerb.infinitive = $scope.formAddVerb.translation;
+      $scope.formAddVerb.infinitive = $scope.formAddVerb.translation.replace(/·/g, '');
     };
 });
