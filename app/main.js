@@ -9,11 +9,9 @@
 angular.module('flashcards')
   .controller('Main', function($scope, $cookies, cardsService) {
     $scope.loggedIn = false;
-    $scope.displayOptions = false;
 
     $scope.formDisplay = {
       displayLogin        : false,
-      displayOptions      : false,
       displayAddAdjective : false,
       displayAddCategory  : false,
       displayAddNoun      : false,
@@ -42,12 +40,11 @@ angular.module('flashcards')
 
 
     // Show login form or show admin options
-    $scope.showOptions = function() {
+    $scope.adminClick = function() {
       // Check if user is logged in
       if ($scope.loggedIn === false) {
         $scope.formDisplay.displayLogin = true;
       } else if ($scope.loggedIn === true) {
-        $scope.displayOptions = !$scope.displayOptions;
         $scope.sectionType = 'admin';
       }
     };
