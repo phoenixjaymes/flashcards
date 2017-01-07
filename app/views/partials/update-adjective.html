@@ -11,13 +11,14 @@
   </select>  
   
   <label class="form__label" for="txtEnglish">English</label>
-  <input id="txtPos" class="form__input" type="text" ng-model="formUpdateAdjective.english">
+  <input id="txtPos" class="form__input" type="text" ng-model="formUpdateAdjective.english" ng-focus="umlautFocus(undefined, undefined)">
   
   <label  class="form__label" for="txtTranslation">Translation</label>
-  <input id="txtWord" class="form__input" type="text" ng-model="formUpdateAdjective.translation">
+  <input id="txtWord" class="form__input" type="text" ng-model="formUpdateAdjective.translation"  ng-focus="umlautFocus('formUpdateAdjective', 'translation')">
+  <umlauts class="form-umlauts" input-type="word" input-field="translation" ></umlauts>
   
   <label class="form__label" for="txtImg">Image</label>
-  <input id="txtImg" class="form__input" type="text" ng-model="formUpdateAdjective.image">
+  <input id="txtImg" class="form__input" type="text" ng-model="formUpdateAdjective.image" ng-focus="umlautFocus(undefined, undefined)">
   
   <button class="form__button" ng-model="formUpdateAdjective.submit" ng-click="updateAdjective()">Update Adjective</button>
   

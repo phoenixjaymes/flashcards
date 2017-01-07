@@ -10,7 +10,7 @@
   
   <label class="form__label" for="txtPhaseTranslation">Translation</label>
   <input id="txtPhaseTranslation" class="form__input" ng-model="formUpdatePhrase.translation" type="text"
-     ng-focus="umlautFocus('phrase', 'translation')">
+     ng-focus="umlautFocus('formUpdatePhrase', 'translation')">
   <umlauts class="form-umlauts" input-type="verb" input-field="translation" ></umlauts>
   
   <button class="form__button" ng-model="formUpdatePhrase.submit" ng-click="updatePhrase()"

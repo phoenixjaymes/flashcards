@@ -12,6 +12,12 @@ angular.module('flashcards')
       
       $scope.displayFormMessage = false;
       
+      if(!$scope.formUpdateVerb.separable) {
+        $scope.formUpdateVerb.separable = 'no';
+      } else {
+        $scope.formUpdateVerb.separable = 'yes';
+      }
+      
       updateItemService.updateItem($scope.formUpdateVerb, function(response) {
         
         // Check response message

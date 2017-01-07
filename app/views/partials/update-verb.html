@@ -12,34 +12,34 @@
   <input id="txtVrbEnglish" class="form__input" type="text" ng-model="formUpdateVerb.english"
     ng-focus="umlautFocus(undefined, undefined)">
   
-  <label  class="form__label" for="txtVrbTranslation">Translation</label>
+  <label  class="form__label" for="txtVrbTranslation">Translation - {{formUpdateVerb.infinitive}}</label>
   <input id="txtVrbTranslation" class="form__input" type="text" ng-model="formUpdateVerb.translation"
-    ng-focus="umlautFocus('verb', 'translation')">
+    ng-focus="umlautFocus('formUpdateVerb', 'translation')" ng-keyup="getInfinitive('formUpdateVerb')">
   <umlauts class="form-umlauts" input-type="verb" input-field="translation" ></umlauts>
   
   <label class="form__label" for="txtIch">ich</label>
   <input id="txtIch" class="form__input" type="text" ng-model="formUpdateVerb.ich"
-   ng-focus="umlautFocus('verb', 'ich')">
+   ng-focus="umlautFocus('formUpdateVerb', 'ich')">
   
   <label class="form__label" for="txtDu">du</label>
   <input id="txtDu" class="form__input" type="text" ng-model="formUpdateVerb.du"
-    ng-focus="umlautFocus('verb', 'du')">
+    ng-focus="umlautFocus('formUpdateVerb', 'du')">
   
   <label class="form__label" for="txtErEsSie">er, sie, es</label>
   <input id="txtErEsSie" class="form__input" type="text" ng-model="formUpdateVerb.er_sie_es"
-    ng-focus="umlautFocus('verb', 'er_sie_es')">
+    ng-focus="umlautFocus('formUpdateVerb', 'er_sie_es')">
   
   <label class="form__label" for="txtWir">wir</label>
   <input id="txtWir" class="form__input" type="text" ng-model="formUpdateVerb.wir"
-    ng-focus="umlautFocus('verb', 'wir')">
+    ng-focus="umlautFocus('formUpdateVerb', 'wir')">
   
   <label class="form__label" for="txtIhr">ihr</label>
   <input id="txtIhr" class="form__input" type="text" ng-model="formUpdateVerb.ihr"
-    ng-focus="umlautFocus('verb', 'ihr')">
+    ng-focus="umlautFocus('formUpdateVerb', 'ihr')">
   
   <label class="form__label" for="txtSieSie">sie, Sie</label>
   <input id="txtSieSie" class="form__input" type="text" ng-model="formUpdateVerb.sie_sie"
-    ng-focus="umlautFocus('verb', 'sie_sie')">  
+    ng-focus="umlautFocus('formUpdateVerb', 'sie_sie')">  
 
   <button  class="form__button" ng-model="formUpdateVerb.submit" ng-click="updateVerb()">Update Verb</button>
   
