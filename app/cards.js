@@ -21,13 +21,7 @@ angular.module('flashcards')
       $scope.flip = false;
       $scope.showCategory = false;
       
-      // Get categories from service
-      var getAllCategories = function() {
-        cardsService.getCategories(function(response) {
-          $scope.cardAllCategories = response.data;
-          
-        });
-      };
+      
       
       // Change category options for cards
       // If pos is verb get verbs until verbs have categories
@@ -38,7 +32,7 @@ angular.module('flashcards')
         } else if (cardPos === 'phrase') {
           $scope.getCards(cardPos);
           $scope.showCategory = false;
-        } else if (cardPos === 'mixed') {
+        } else if (cardPos === 'study') {
           $scope.getCards(cardPos);
           $scope.showCategory = false;
         } else {
@@ -52,8 +46,6 @@ angular.module('flashcards')
       $scope.showCategoryWords = false;
       // If pos is verb get verbs until verbs have categories
       $scope.changeCategoryLW = function(wordPos) {
-        //console.log(wordPos);
-        //console.log($scope.cardAllCategories);
         if (wordPos === 'adjective') {
           $scope.posCategoryList = $scope.cardAllCategories[wordPos];
           $scope.showCategoryWords = true;
@@ -181,7 +173,4 @@ angular.module('flashcards')
       
       // Set initial card
       setCard(0);
-      
-      // Get categories
-      getAllCategories();
 });

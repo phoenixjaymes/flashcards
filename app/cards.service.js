@@ -20,7 +20,7 @@ angular.module('flashcards')
           var url = 'assets/inc/fc-german.php?pos=' + pos;
         } else if (pos === 'phrase') {
           var url = 'assets/inc/fc-german.php?pos=' + pos;
-        } else if (pos === 'mixed') {
+        } else if (pos === 'study') {
           var url = 'assets/inc/fc-german.php?pos=' + pos;
         } else {
           var url = 'assets/inc/fc-german.php?pos=noun&category=' + 1;
