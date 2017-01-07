@@ -39,9 +39,9 @@ main {
   @extend %wrap-max-width;
 }
 
-// Modal
 
-login, register, addphrase, addword, addVerb, addcategory, list-words,
+// Modal
+login, register, add-adjective, add-category, add-noun, add-phrase, add-verb, list-words,
 update-adjective, update-category, update-noun, update-phrase, update-verb, update-word{
   display: none;
 }
