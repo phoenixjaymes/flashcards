@@ -19,3 +19,7 @@ assets/css
 
 # Sensitive data
 assets/inc/db-constants.php
+
+# Ignore app and app.js file
+app/app.js
+app/app.js.map
