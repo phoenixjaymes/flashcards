@@ -136,10 +136,8 @@ angular.module('flashcards')
           }
           
           
-          // $scope.updateItem.item.separable
-          // formUpdateVerb.separable
-          
           $scope.formUpdateVerb.english = $scope.updateItem.item.english;
+          $scope.formUpdateVerb.infinitive = $scope.updateItem.item.infinitive;
           $scope.formUpdateVerb.translation = $scope.updateItem.item.translation;
           $scope.formUpdateVerb.ich = $scope.updateItem.item.ich;
           $scope.formUpdateVerb.du = $scope.updateItem.item.du;
