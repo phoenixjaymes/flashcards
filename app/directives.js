@@ -23,6 +23,12 @@ angular.module('flashcards')
       templateUrl : 'app/views/dutch.html'
     };
   })
+  .directive('admin', function() {
+    return {
+      templateUrl : 'app/views/admin.html',
+      controller  : 'Admin'
+    };
+  })
   .directive('login', function() {
     return {
       templateUrl : 'app/views/partials/login.html',
@@ -59,5 +65,11 @@ angular.module('flashcards')
     return {
       restrict : 'E',      
       templateUrl : 'app/views/partials/umlauts.html'
+    };
+  })
+  .directive('listWords', function() {
+    return {
+      templateUrl : 'app/views/partials/list-words.html',
+      controller: 'ListWords'
     };
   });
