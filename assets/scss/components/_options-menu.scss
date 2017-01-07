@@ -5,17 +5,11 @@
 */
 
 .options-menu {
-  position: absolute;
-  right: 0px;
-  top: 100px;
-  
-  
+  background: $header-footer-bg-color;
   list-style: none;
+  margin: auto;
   padding: 5px;
-  visibility: hidden;
   width: 200px;
-  
-  background: $header-footer-bg-color; 
   
   @media #{$brk-md} {
     top: 60px;
@@ -26,8 +20,8 @@
     a {
       display: block;
       font-weight: $font-weight--bold;
-      padding: 10px;
-      text-align: right;
+      padding: 12px;
+      text-align: center;
       text-decoration: none;
       
       &:link, &:visited {
@@ -41,4 +35,3 @@
     }
   }
 }
-
