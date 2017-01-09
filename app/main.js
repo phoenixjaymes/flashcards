@@ -9,6 +9,8 @@
 angular.module('flashcards')
   .controller('Main', function($scope, $cookies, cardsService) {
     $scope.loggedIn = false;
+    $scope.showGerman = false;
+    $scope.showDutch = false;
 
     $scope.formDisplay = {
       displayLogin        : false,
@@ -49,7 +51,6 @@ angular.module('flashcards')
       }
     };
 
-
     // Logging out
     $scope.logOut = function() {
       // Remove cookie
@@ -76,6 +77,20 @@ angular.module('flashcards')
       $scope.displayOptions = false;
 
     };
+    
+    $scope.toggleSubMenu = function(menu) {
+      if (menu === 'german') {
+        $scope.showGerman = !$scope.showGerman;
+        $scope.showDutch = false;
+      } else if (menu === 'dutch') {
+        $scope.showDutch = !$scope.showDutch;
+        $scope.showGerman = false;
+      } else {
+        $scope.showDutch = false;
+        $scope.showGerman = false;
+      }
+    };
+    
 
     // Close modal windows
     $scope.$on('closeModal', function(evt, args) {
