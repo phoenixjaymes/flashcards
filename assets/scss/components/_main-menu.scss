@@ -14,7 +14,8 @@
   &__item {
     display: inline-block;
     font-weight: $font-weight--bold;
-    width: 80px;
+    position: relative;
+    width: 70px;
     
     a {
         display: inline-block;
@@ -36,4 +37,27 @@
         }
     }
   }
+  
+  
 }
+
+
+.sub-menu {
+  background: $header-footer-bg-color;
+  position: absolute;
+  left: 0;
+  top: 40px;
+
+  list-style: none;
+  padding-left: 10px;
+  padding-right: 7px;
+  
+  &__item {
+    min-width: 100px;
+    text-align: left;
+    
+    a {
+      text-align: left;
+    }
+  }
+ }
