@@ -24,13 +24,13 @@ angular.module('flashcards')
           $scope.formAddPhrase.english = '';
           $scope.formAddPhrase.translation = '';
           
-          displayMessage('true');
+          $scope.displayMessage('true');
         } else if (response.data.success === 'incorrect') {
-          displayMessage('incorrect');
+          $scope.displayMessage('incorrect');
         } else if (response.data.success === 'duplicate') {
-          displayMessage('duplicate');
+          $scope.displayMessage('duplicate');
         } else if (response.data.success === false) {
-          displayMessage('false');
+          $scope.displayMessage('false');
         }
       });
     };
