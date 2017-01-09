@@ -1,42 +1,36 @@
 <!--
-  File     : cards.html
-  Date     : Sep 28, 2016
+  File     : words.html
+  Date     : 08 Jan 2016
   Author   : Jaymes Young
 -->
 <section class="flashcards">
-  <h1>German Cards</h1>
+  <h1>German Words</h1>
   
   <form class="cards-form">
-    <h3>Select your Cards</h3>
+    <h3>Select your Words</h3>
     
-    <label class="cards-form__label" for="flashcard-pos">Part of Speech: </label>
-    <select id="flashcard-type" class="cards-form__select" ng-model="cardPos" ng-change="changeCategory(cardPos);">
+    <label class="cards-form__label" for="wordmatch-pos">Part of Speech:</label>
+    <select id="wordmatch-pos" class="cards-form__select" ng-model="wordmatchPos" ng-change="getListOfWords(wordmatchPos);">
       <option value="">Select</option>
       <option value="adjective">Adj &amp; Adverb</option>
       <option value="noun">Noun</option>
       <option value="verb">Verb</option>
-      <option value="phrase">Phrase</option>
-      <option value="study">Study</option>
-    </select>
-    
-    <br>
-    
-    <label class="cards-form__label" for="flashcard-type" ng-show="showCategory === true">Category: </label>
-    <select id="flashcard-type" class="cards-form__select" ng-model="cardCategory" ng-change="getCards(cardPos, cardCategory, false)" ng-show="showCategory === true">
-      <option value="">Select</option>
-      <option ng-repeat="option in posCategory" value="{{option.id}}">{{option.name}}</option>
     </select>
   </form>
   
-  <div class="card" ng-class="{'js-flip-card' : flip}"  ng-switch="cardPos">
-    <verbcard ng-switch-when="verb"></verbcard>
-    <phrasecard ng-switch-when="phrase"></phrasecard>
-    <genericcard ng-switch-default></genericcard>
-  </div>
-  
-  <div class="cards-controls">
-    <a class="cards-controls__btn" ng-click="prevCard()"><img src="assets/img/prev.svg" alt="previous"></a>
-    <span class="cards-controls__count">{{currentCard}} of {{totalCards}}</span>
-    <a class="cards-controls__btn" ng-click="nextCard()"><img src="assets/img/next.svg" alt="next"></a>
+  <div class="words">
+    <ul class="words__wrap">
+      <li class="words__item" ng-class="{'on':item.clicked && wordsClicked.wordOneIndex === $index}" ng-repeat="word in listOfWords"
+        ng-click="item.clicked = true; wordsClicked.wordClick($index, word.id)"><span ng-bind-html="word.word | trustWord"></span></li>
+    </ul>
+    
+    <div class="words__message" ng-show="finalMessage">
+      <h3 class="words__message-text">{{ message }}<br>Play Again?</h3>
+      <p>
+        <a href="" class="words__message-button" ng-click="getListOfWords('adjective'); finalMessage = false">Adjectives</a>
+        <a href="" class="words__message-button" ng-click="getListOfWords('noun'); finalMessage = false">Nouns</a>
+        <a href="" class="words__message-button" ng-click="getListOfWords('verb'); finalMessage = false">Verbs</a>
+      </p>
+    </div>
   </div>
 </section>
