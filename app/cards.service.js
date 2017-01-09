@@ -50,6 +50,20 @@ angular.module('flashcards')
       };
       
       
+      this.getListOfWords = function(pos, callback) {
+        if (pos === 'adjective') {
+          var url = 'assets/inc/fc-get-wordmatch-words.php?pos=' + pos;
+        } else if (pos === 'noun') {
+          var url = 'assets/inc/fc-get-wordmatch-words.php?pos=' + pos;
+        } else if (pos === 'verb') {
+          var url = 'assets/inc/fc-get-wordmatch-words.php?pos=' + pos;
+        } else {
+          var url = 'assets/inc/fc-get-wordmatch-words.php?pos=noun';
+        }
+        
+        $http.get(url).then(callback);
+      };
+      
       
       this.getCategories = function(callback) {
         var url = 'assets/inc/fc-german-categories.php';
