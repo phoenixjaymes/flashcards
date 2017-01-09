@@ -18,6 +18,12 @@ angular.module('flashcards')
       controller  : 'Cards'
     };
   })
+  .directive('words', function() {
+    return {
+      templateUrl : 'app/views/words.html',
+      controller  : 'Words'
+    };
+  })
   .directive('dutch', function() {
     return {
       templateUrl : 'app/views/dutch.html'
