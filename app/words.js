@@ -29,7 +29,7 @@ angular.module('flashcards')
         if((this.wordOneId === this.wordTwoId) && (this.wordOneIndex !== this.wordTwoIndex)) {
 
           if($scope.listOfWords.length === 2) {
-            updateItemService.updateItem($scope.updateIds, function(response) {
+            updateItemService.updateLastPracticed($scope.updateIds, function(response) {
               //console.log(response);
               if (response.data.success === 'updated') {
                 $scope.message = 'Your words have been updated.';
