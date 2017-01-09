@@ -33,14 +33,27 @@
         <p class="main-header__name">Flash Cards</p>
         <nav class="main-header__nav">
           <ul class="main-menu">
-            <li class="main-menu__item" ng-class="{'main-menu__item-current' : sectionType == 'home'}" ng-click="sectionType='home'"><a href="">Home</a></li>
-            <li class="main-menu__item" ng-class="{'main-menu__item-current' : sectionType == 'cards'}" ng-click="sectionType='cards'"><a href="">German</a></li>
-            <li class="main-menu__item" ng-click="sectionType='dutch'"><a href="">Dutch</a></li>
+            <li class="main-menu__item" ng-class="{'main-menu__item-current' : sectionType === 'home'}" ng-click="sectionType='home'">
+              <a href="" ng-click="toggleSubMenu('both')">Home</a></li>
+            <li class="main-menu__item" ng-class="{'main-menu__item-current' : sectionType === 'cards'}">
+              <a href="" ng-click="toggleSubMenu('german')">German</a>
+              <ul class="sub-menu" ng-show="showGerman">
+                <li class="sub-menu__item" ng-click="sectionType='cards'; showGerman = !showGerman"><a href="">Flashcards</a></li>
+                <li class="sub-menu__item" ng-click="sectionType='words'; showGerman = !showGerman"><a href="">Word&nbsp;Match</a></li>
+              </ul>
+            </li>
+            <li class="main-menu__item">
+              <a href="" ng-click="toggleSubMenu('dutch')">Dutch</a>
+              <ul class="sub-menu" ng-show="showDutch">
+                <li class="sub-menu__item" ng-click="sectionType='dutch'; showDutch = !showDutch"><a href="">Flashcards</a></li>
+                <li class="sub-menu__item" ng-click="sectionType='dutch'; showDutch = !showDutch"><a href="">Word&nbsp;Match</a></li>
+              </ul>
+            </li>
           </ul>
         </nav>
         
         <div class="main-header__settings">
-          <a href="" class="main-header__settings-icon" ng-class="loggedIn ? 'ang-logout' : 'ang-login'" ng-click="adminClick();"></a>
+          <a href="" class="main-header__settings-icon" ng-class="loggedIn ? 'ang-logout' : 'ang-login'" ng-click="adminClick();toggleSubMenu('both')"></a>
         </div>
       </div>
     </header>
@@ -48,6 +61,7 @@
     <main class="main-content">
       <div class="main-content__wrap" ng-switch="sectionType">
         <cards ng-switch-when="cards"></cards>
+        <words ng-switch-when="words"></words>
         <dutch ng-switch-when="dutch"></dutch>
         <admin ng-switch-when="admin"></admin>
         <home ng-switch-default></home>
