@@ -37,13 +37,13 @@ angular.module('flashcards')
           $scope.formAddVerb.sie_sie = '';
           $scope.formAddVerb.separable = undefined;
           
-          displayMessage('true');
+          $scope.displayMessage('true');
         } else if (response.data.success === 'duplicate') {
-          displayMessage('duplicate');
+          $scope.displayMessage('duplicate');
         } else if (response.data.success === 'incorrect') {
-          displayMessage('incorrect');
+          $scope.displayMessage('incorrect');
         } else if (response.data.success === false) {
-          displayMessage('false');
+          $scope.displayMessage('false');
         }
       });
 
