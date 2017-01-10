@@ -76,6 +76,7 @@ if ($pos && $pos === 'adjective') {
   // Sanitize input
   $id = filter_input(INPUT_POST, 'id', FILTER_SANITIZE_STRING);
   $english = filter_input(INPUT_POST, 'english', FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+  $base = filter_input(INPUT_POST, 'base', FILTER_SANITIZE_STRING);
   $translation = filter_input(INPUT_POST, 'translation', FILTER_SANITIZE_STRING);
   $img = filter_input(INPUT_POST, 'image', FILTER_SANITIZE_STRING);
   $gender = filter_input(INPUT_POST, 'gender', FILTER_SANITIZE_STRING);
@@ -84,17 +85,19 @@ if ($pos && $pos === 'adjective') {
   // Escape input
   $id_safe = $linkId->real_escape_string($id);
   $english_safe = $linkId->real_escape_string($english);
+  $base_safe = $linkId->real_escape_string($base);
   $translation_safe = $linkId->real_escape_string($translation);
   $img_safe = $linkId->real_escape_string($img);
   $category_safe = $linkId->real_escape_string($category);
   
-  if (!$id_safe || !$english_safe || !$translation_safe || !$img_safe || !$gender || !$category_safe) {
+  if (!$id_safe || !$base_safe || !$english_safe || !$translation_safe || !$img_safe || !$gender || !$category_safe) {
     $arr_response['success'] = 'incorrect';
     send_data($arr_response);
   } else {
 
     $sql = "UPDATE fc_german_nouns"
       . " SET english = '$english_safe', "
+      . " base = '$base_safe', "
       . " translation = '$translation_safe', "
       . " img = '$img_safe', "
       . " gender = $gender, "

@@ -99,6 +99,7 @@ if ($pos && $pos === 'adjective') {
 } elseif ($pos && $pos === 'noun') {
   // Sanitize input
   $english = filter_input(INPUT_POST, 'english', FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+  $base = filter_input(INPUT_POST, 'base', FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
   $translation = filter_input(INPUT_POST, 'translation', FILTER_SANITIZE_STRING);
   $img = filter_input(INPUT_POST, 'img', FILTER_SANITIZE_STRING);
   $gender = filter_input(INPUT_POST, 'gender', FILTER_SANITIZE_STRING);
@@ -106,11 +107,12 @@ if ($pos && $pos === 'adjective') {
   
   // Escape input
   $english_safe = $linkId->real_escape_string($english);
+  $base_safe = $linkId->real_escape_string($base);
   $translation_safe = $linkId->real_escape_string($translation);
   $img_safe = $linkId->real_escape_string($img);
   $category_safe = $linkId->real_escape_string($category);
   
-  if (!$english_safe || !$translation_safe || !$img_safe || !$gender || !$category_safe) {
+  if (!$english_safe || !$base_safe || !$translation_safe || !$img_safe || !$gender || !$category_safe) {
     $arr_response['success'] = 'incorrect';
     send_data($arr_response);
   } else {
@@ -122,8 +124,8 @@ if ($pos && $pos === 'adjective') {
       send_data($arr_response);
     }
     
-    $sql = "INSERT INTO fc_german_nouns (english, translation, img, gender, category, added, last_practiced)"
-         . " VALUES ('$english_safe', '$translation_safe', '$img_safe', '$gender', '$category_safe', '$date', '$date')";
+    $sql = "INSERT INTO fc_german_nouns (english, base, translation, img, gender, category, added, last_practiced)"
+         . " VALUES ('$english_safe', '$english_safe', '$translation_safe', '$img_safe', '$gender', '$category_safe', '$date', '$date')";
 
     $result = $mySqli->handleQuery($sql);
 
