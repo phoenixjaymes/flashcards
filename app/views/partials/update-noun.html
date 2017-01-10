@@ -13,8 +13,9 @@
   <label class="form__label" for="txtEnglish">English</label>
   <input id="txtPos" class="form__input" type="text" ng-model="formUpdateNoun.english" ng-focus="umlautFocus(undefined, undefined)">
   
-  <label  class="form__label" for="txtTranslation">Translation</label>
-  <input id="txtWord" class="form__input" type="text" ng-model="formUpdateNoun.translation" ng-focus="umlautFocus('formUpdateNoun', 'translation')">
+  <label  class="form__label" for="txtTranslation">Translation - {{formUpdateNoun.base}}</label>
+  <input id="txtWord" class="form__input" type="text" ng-model="formUpdateNoun.translation"
+         ng-focus="umlautFocus('formUpdateNoun', 'translation')" ng-keyup="getArticle('formUpdateNoun');getBase('formUpdateNoun')">
   <umlauts class="form-umlauts" input-type="word" input-field="translation" ></umlauts>
   
   <label class="form__label" for="txtImg">Image</label>
@@ -22,7 +23,7 @@
   
   <label class="form__label" for="selGender">Gender</label>
   <select id="selGender" class="form__select" name="selGender" ng-model="formUpdateNoun.gender">
-    <option ng-repeat="option in genderCategories" value="{{option.id}}">{{option.name}}</option>
+    <option ng-repeat="option in genderCategories" value="{{option.id}}">{{option.name | ucWords}}</option>
   </select>
   
   <button class="form__button" ng-model="formUpdateNoun.submit" ng-click="updateNoun()">Update Noun</button>
