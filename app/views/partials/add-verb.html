@@ -15,6 +15,8 @@
   <label class="form__label" for="txtVrbTranslation">Translation - {{formAddVerb.infinitive}}</label>
   <input id="txtVrbTranslation" class="form__input" type="text" ng-model="formAddVerb.translation"
     ng-focus="umlautFocus('formAddVerb', 'translation');" ng-keyup="getInfinitive('formAddVerb')" ng-blur="umlautFocus('formAddVerb', 'translation');">
+  <button ng-click="conjugateVerb('formAddVerb')">C</button>
+  
   <umlauts class="form-umlauts" input-type="verb" input-field="translation" ></umlauts>
   
   <label class="form__label--verb" for="txtIch">ich</label>
