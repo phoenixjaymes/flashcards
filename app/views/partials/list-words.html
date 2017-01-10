@@ -18,7 +18,7 @@
   <select id="selCategoryList" class="form__select" name="selCategoryList"
     ng-model="word.category" ng-change="getWordsUpdate(word.pos, word.category)" ng-show="showCategoryWords === true">
     <option>Select</option>
-    <option ng-repeat="option in posCategoriesUpdate" value="{{option.id}}">{{option.name}}</option>
+    <option ng-repeat="option in posCategoriesUpdate" value="{{option.id}}">{{option.name | ucWords}}</option>
   </select>
   
   <div class="word-list" >

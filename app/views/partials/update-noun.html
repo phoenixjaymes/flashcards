@@ -7,7 +7,7 @@
   <label class="form__label" for="selCategoryUpdate">Category</label>
   <select id="selCategoryUpdate" class="form__select" name="selCategory"
     ng-model="formUpdateNoun.category" ng-focus="umlautFocus(undefined, undefined)">
-    <option ng-repeat="option in posCategoriesUpdate" value="{{option.id}}">{{option.name}}</option>
+    <option ng-repeat="option in posCategoriesUpdate" value="{{option.id}}">{{option.name | ucWords}}</option>
   </select>  
   
   <label class="form__label" for="txtEnglish">English</label>
@@ -16,6 +16,7 @@
   <label  class="form__label" for="txtTranslation">Translation - {{formUpdateNoun.base}}</label>
   <input id="txtWord" class="form__input" type="text" ng-model="formUpdateNoun.translation"
          ng-focus="umlautFocus('formUpdateNoun', 'translation')" ng-keyup="getArticle('formUpdateNoun');getBase('formUpdateNoun')">
+  
   <umlauts class="form-umlauts" input-type="word" input-field="translation" ></umlauts>
   
   <label class="form__label" for="txtImg">Image</label>
