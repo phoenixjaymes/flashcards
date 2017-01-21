@@ -91,6 +91,7 @@ angular.module('flashcards')
           $scope.formUpdateAdjective.category = $scope.updateItem.item.category;
           $scope.formUpdateAdjective.english = $scope.updateItem.item.english;
           $scope.formUpdateAdjective.translation = $scope.updateItem.item.translation;
+          $scope.formUpdateAdjective.example = $scope.updateItem.item.example;
           $scope.formUpdateAdjective.image = $scope.updateItem.item.image;
           
           $scope.$emit('displayUpdateForms', 'displayUpdateAdjective');
@@ -109,7 +110,9 @@ angular.module('flashcards')
           $scope.formUpdateNoun.id = $scope.updateItem.item.id;
           $scope.formUpdateNoun.category = $scope.updateItem.item.category;
           $scope.formUpdateNoun.english = $scope.updateItem.item.english;
+          $scope.formUpdateNoun.base = $scope.updateItem.item.base;
           $scope.formUpdateNoun.translation = $scope.updateItem.item.translation;
+          $scope.formUpdateNoun.example = $scope.updateItem.item.example;
           $scope.formUpdateNoun.image = $scope.updateItem.item.image;
           $scope.formUpdateNoun.gender = $scope.updateItem.item.gender;
           
@@ -139,6 +142,7 @@ angular.module('flashcards')
           $scope.formUpdateVerb.english = $scope.updateItem.item.english;
           $scope.formUpdateVerb.infinitive = $scope.updateItem.item.infinitive;
           $scope.formUpdateVerb.translation = $scope.updateItem.item.translation;
+          $scope.formUpdateVerb.example = $scope.updateItem.item.example;
           $scope.formUpdateVerb.ich = $scope.updateItem.item.ich;
           $scope.formUpdateVerb.du = $scope.updateItem.item.du;
           $scope.formUpdateVerb.er_sie_es = $scope.updateItem.item.er_sie_es;
