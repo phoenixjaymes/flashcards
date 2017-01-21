@@ -21,8 +21,9 @@ angular.module('flashcards')
         // Check response message
         if(response.data.success === true) {
           // Clear form
-          $scope.formAddNoun.translation = '';
           $scope.formAddNoun.english = '';
+          $scope.formAddNoun.translation = '';
+          $scope.formAddNoun.example = '';
           $scope.formAddNoun.img = '';
           
           $scope.displayMessage('true');

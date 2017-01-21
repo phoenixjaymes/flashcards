@@ -29,6 +29,7 @@ angular.module('flashcards')
           // Clear form
           $scope.formAddVerb.english = '';
           $scope.formAddVerb.translation = '';
+          $scope.formAddVerb.example = '';
           $scope.formAddVerb.ich = '';
           $scope.formAddVerb.du = '';
           $scope.formAddVerb.er_sie_es = '';
