@@ -39,6 +39,7 @@ if ($pos && $pos === 'adjective') {
   $id = filter_input(INPUT_POST, 'id', FILTER_SANITIZE_STRING);
   $english = filter_input(INPUT_POST, 'english', FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
   $translation = filter_input(INPUT_POST, 'translation', FILTER_SANITIZE_STRING);
+  $example = filter_input(INPUT_POST, 'example', FILTER_SANITIZE_STRING);
   $img = filter_input(INPUT_POST, 'image', FILTER_SANITIZE_STRING);
   $category = filter_input(INPUT_POST, 'category', FILTER_SANITIZE_STRING);
   
@@ -46,17 +47,19 @@ if ($pos && $pos === 'adjective') {
   $id_safe = $linkId->real_escape_string($id);
   $english_safe = $linkId->real_escape_string($english);
   $translation_safe = $linkId->real_escape_string($translation);
+  $example_safe = $linkId->real_escape_string($example);
   $img_safe = $linkId->real_escape_string($img);
   $category_safe = $linkId->real_escape_string($category);
    
   // Check of empty values
-  if (!$id_safe || !$english_safe || !$translation_safe || !$img_safe || !$category_safe) {
+  if (!$id_safe || !$english_safe || !$translation_safe || !$example_safe || !$img_safe || !$category_safe) {
     $arr_response['success'] = 'incorrect';
   } else {
          
     $sql = "UPDATE fc_german_adjectives"
       . " SET english = '$english_safe', "
       . " translation = '$translation_safe', "
+      . " example = '$example_safe', "
       . " img = '$img_safe', "
       . " category = '$category_safe' "
       . " WHERE id = $id_safe";
@@ -78,6 +81,7 @@ if ($pos && $pos === 'adjective') {
   $english = filter_input(INPUT_POST, 'english', FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
   $base = filter_input(INPUT_POST, 'base', FILTER_SANITIZE_STRING);
   $translation = filter_input(INPUT_POST, 'translation', FILTER_SANITIZE_STRING);
+  $example = filter_input(INPUT_POST, 'example', FILTER_SANITIZE_STRING);
   $img = filter_input(INPUT_POST, 'image', FILTER_SANITIZE_STRING);
   $gender = filter_input(INPUT_POST, 'gender', FILTER_SANITIZE_STRING);
   $category = filter_input(INPUT_POST, 'category', FILTER_SANITIZE_STRING);
@@ -87,10 +91,11 @@ if ($pos && $pos === 'adjective') {
   $english_safe = $linkId->real_escape_string($english);
   $base_safe = $linkId->real_escape_string($base);
   $translation_safe = $linkId->real_escape_string($translation);
+  $example_safe = $linkId->real_escape_string($example);
   $img_safe = $linkId->real_escape_string($img);
   $category_safe = $linkId->real_escape_string($category);
   
-  if (!$id_safe || !$base_safe || !$english_safe || !$translation_safe || !$img_safe || !$gender || !$category_safe) {
+  if (!$id_safe || !$base_safe || !$english_safe || !$translation_safe || !$example_safe || !$img_safe || !$gender || !$category_safe) {
     $arr_response['success'] = 'incorrect';
     send_data($arr_response);
   } else {
@@ -99,6 +104,7 @@ if ($pos && $pos === 'adjective') {
       . " SET english = '$english_safe', "
       . " base = '$base_safe', "
       . " translation = '$translation_safe', "
+      . " example = '$example_safe', "
       . " img = '$img_safe', "
       . " gender = $gender, "
       . " category = '$category_safe' "
@@ -154,6 +160,7 @@ if ($pos && $pos === 'adjective') {
   $english = filter_input(INPUT_POST, 'english', FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
   $infinitive = filter_input(INPUT_POST, 'infinitive', FILTER_SANITIZE_STRING);
   $translation = filter_input(INPUT_POST, 'translation', FILTER_SANITIZE_STRING);
+  $example = filter_input(INPUT_POST, 'example', FILTER_SANITIZE_STRING);
   $separable = filter_input(INPUT_POST, 'separable', FILTER_SANITIZE_STRING);
   $ich = filter_input(INPUT_POST, 'ich', FILTER_SANITIZE_STRING);
   $du = filter_input(INPUT_POST, 'du', FILTER_SANITIZE_STRING);
@@ -167,6 +174,7 @@ if ($pos && $pos === 'adjective') {
   $english_safe = $linkId->real_escape_string($english);
   $infinitive_safe = $linkId->real_escape_string($infinitive);
   $translation_safe = $linkId->real_escape_string($translation);
+  $example_safe = $linkId->real_escape_string($example);
   $ich_safe = $linkId->real_escape_string($ich);
   $du_safe = $linkId->real_escape_string($du);
   $er_sie_es_safe = $linkId->real_escape_string($er_sie_es);
@@ -174,7 +182,7 @@ if ($pos && $pos === 'adjective') {
   $ihr_safe = $linkId->real_escape_string($ihr);
   $sie_sie_safe = $linkId->real_escape_string($sie_sie);
   
-  if (!$id_safe || !$english_safe || !$infinitive_safe || !$translation_safe || !$ich_safe || !$du_safe || !$er_sie_es_safe || !$wir_safe || !$ihr_safe || !$sie_sie_safe ) {
+  if (!$id_safe || !$english_safe || !$infinitive_safe || !$translation_safe || !$example_safe || !$ich_safe || !$du_safe || !$er_sie_es_safe || !$wir_safe || !$ihr_safe || !$sie_sie_safe ) {
     $arr_response['success'] = 'incorrect';
     send_data($arr_response);
   } else {
@@ -183,6 +191,7 @@ if ($pos && $pos === 'adjective') {
       . " SET english = '$english_safe', "
       . " infinitive = '$infinitive_safe', "
       . " translation = '$translation_safe', "
+      . " example = '$example_safe', "
       . " separable = '$separable', "
       . " ich = '$ich_safe', "
       . " du = '$du_safe', "

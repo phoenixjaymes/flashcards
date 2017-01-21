@@ -43,7 +43,7 @@ if ($pos_get && $pos_get === 'adjective') {
   }
   
   
-  $sql = "SELECT id, english, translation, img, category "
+  $sql = "SELECT id, english, translation, example, img, category "
     . "   FROM fc_german_adjectives WHERE id = $id_safe";
 
   $result = $mySqli->handleQuery($sql);
@@ -57,6 +57,7 @@ if ($pos_get && $pos_get === 'adjective') {
   $arr_word['id'] = $row['id'];
   $arr_word['english'] = $row['english'];
   $arr_word['translation'] = $row['translation'];
+  $arr_word['example'] = $row['example'];
   $arr_word['image'] = $row['img'];
   $arr_word['category'] = $row['category'];
   
@@ -69,7 +70,6 @@ if ($pos_get && $pos_get === 'adjective') {
   }
   
   send_data($arr_response);
-  
   
   
   
@@ -88,7 +88,7 @@ if ($pos_get && $pos_get === 'adjective') {
   }
   
   
-  $sql = "SELECT id, english, translation, gender, img, category "
+  $sql = "SELECT id, english, base, translation, example, gender, img, category "
     . "   FROM fc_german_nouns WHERE id = $id_safe";
 
   $result = $mySqli->handleQuery($sql);
@@ -101,7 +101,9 @@ if ($pos_get && $pos_get === 'adjective') {
   
   $arr_word['id'] = $row['id'];
   $arr_word['english'] = $row['english'];
+  $arr_word['base'] = $row['base'];
   $arr_word['translation'] = $row['translation'];
+  $arr_word['example'] = $row['example'];
   $arr_word['gender'] = $row['gender'];
   $arr_word['image'] = $row['img'];
   $arr_word['category'] = $row['category'];
@@ -173,7 +175,7 @@ if ($pos_get && $pos_get === 'adjective') {
   }
   
   
-  $sql = "SELECT id, english, infinitive, translation, separable, ich, du, er_sie_es, wir, ihr, "
+  $sql = "SELECT id, english, infinitive, translation, example, separable, ich, du, er_sie_es, wir, ihr, "
     . " sie_Sie, img, 'none' AS gender FROM fc_german_verbs WHERE id = $id_safe";
 
   $result = $mySqli->handleQuery($sql);
@@ -188,6 +190,7 @@ if ($pos_get && $pos_get === 'adjective') {
   $arr_word['english'] = $row['english'];
   $arr_word['infinitive'] = $row['infinitive'];
   $arr_word['translation'] = $row['translation'];
+  $arr_word['example'] = $row['example'];
   $arr_word['separable'] = $row['separable'];
   $arr_word['ich'] = $row['ich'];
   $arr_word['du'] = $row['du'];
