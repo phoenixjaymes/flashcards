@@ -10,15 +10,23 @@
     <option ng-repeat="option in posCategoriesUpdate" value="{{option.id}}">{{option.name | ucWords}}</option>
   </select>  
   
-  <label class="form__label" for="txtEnglish">English</label>
-  <input id="txtPos" class="form__input" type="text" ng-model="formUpdateAdjective.english" ng-focus="umlautFocus(undefined, undefined)">
+  <label class="form__label" for="upAdjEnglish">English</label>
+  <input id="upAdjEnglish" class="form__input" type="text" ng-model="formUpdateAdjective.english"
+    ng-focus="umlautFocus(undefined, undefined, '')">
   
-  <label  class="form__label" for="txtTranslation">Translation</label>
-  <input id="txtWord" class="form__input" type="text" ng-model="formUpdateAdjective.translation"  ng-focus="umlautFocus('formUpdateAdjective', 'translation')">
+  <label  class="form__label" for="upAdjTranslation">Translation</label>
+  <input id="upAdjTranslation" class="form__input" type="text" ng-model="formUpdateAdjective.translation"
+    ng-focus="umlautFocus('formUpdateAdjective', 'translation', 'upAdjTranslation')">
+  
   <umlauts class="form-umlauts" input-type="word" input-field="translation" ></umlauts>
   
-  <label class="form__label" for="txtImg">Image</label>
-  <input id="txtImg" class="form__input" type="text" ng-model="formUpdateAdjective.image" ng-focus="umlautFocus(undefined, undefined)">
+  <label class="form__label" for="upAdjExample">Example</label>
+  <input id="upAdjExample" class="form__input" type="text" ng-model="formUpdateAdjective.example"
+    ng-focus="umlautFocus('formUpdateAdjective', 'example', 'upAdjExample')">
+  
+  <label class="form__label" for="upAdjImg">Image</label>
+  <input id="upAdjImg" class="form__input" type="text" ng-model="formUpdateAdjective.image"
+    ng-focus="umlautFocus(undefined, undefined, '')">
   
   <button class="form__button" ng-model="formUpdateAdjective.submit" ng-click="updateAdjective()">Update Adjective</button>
   

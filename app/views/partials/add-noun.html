@@ -13,16 +13,22 @@
   <label class="form__label" for="txtEnglish">English</label>
   <input id="txtEnglish" class="form__input" type="text" ng-model="formAddNoun.english" ng-focus="umlautFocus(undefined, undefined)">
   
-  <label  class="form__label" for="txtTranslation">Translation - {{formAddNoun.base}}</label>
-  <input id="txtTranslation" class="form__input" type="text" ng-model="formAddNoun.translation"
-         ng-focus="umlautFocus('formAddNoun', 'translation')" ng-keyup="getArticle('formAddNoun');getBase('formAddNoun')">  
+  <label  class="form__label" for="addNounTranslation">Translation - {{formAddNoun.base}}</label>
+  <input id="addNounTranslation" class="form__input" type="text" ng-model="formAddNoun.translation"
+    ng-focus="umlautFocus('formAddNoun', 'translation', 'addNounTranslation')" ng-keyup="getArticle('formAddNoun');getBase('formAddNoun')">
+  
   <umlauts class="form-umlauts" input-type="word" input-field="translation" ></umlauts>
+  
+  <label class="form__label" for="addNounExample">Example</label>
+  <input id="addNounExample" class="form__input" type="text" ng-model="formAddNoun.example"
+    ng-focus="umlautFocus('formAddNoun', 'example', 'addNounExample')">
   
   <label class="form__label" for="txtImg">Image</label>
   <input id="txtImg" class="form__input" type="text" ng-model="formAddNoun.img" ng-focus="umlautFocus(undefined, undefined)">
   
   <label class="form__label" for="selGender" ng-show="word.pos !== 'adjective'">Gender</label>
-  <select id="selGender" class="form__select" name="selGender" ng-show="word.pos !== 'adjective'" ng-model="formAddNoun.gender" ng-focus="umlautFocus(undefined, undefined)">
+  <select id="selGender" class="form__select" name="selGender" ng-show="word.pos !== 'adjective'"
+    ng-model="formAddNoun.gender" ng-focus="umlautFocus(undefined, undefined)">
     <option ng-repeat="gender in catGenders" value="{{gender.id}}">{{gender.name | ucWords}}</option>
   </select>
   

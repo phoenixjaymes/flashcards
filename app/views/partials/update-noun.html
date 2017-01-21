@@ -4,26 +4,32 @@
   
   <h3 class="form__heading">Update Noun</h3>
   
-  <label class="form__label" for="selCategoryUpdate">Category</label>
-  <select id="selCategoryUpdate" class="form__select" name="selCategory"
+  <label class="form__label" for="upNounCategory">Category</label>
+  <select id="upNounCategory" class="form__select" name="selCategory"
     ng-model="formUpdateNoun.category" ng-focus="umlautFocus(undefined, undefined)">
     <option ng-repeat="option in posCategoriesUpdate" value="{{option.id}}">{{option.name | ucWords}}</option>
   </select>  
   
-  <label class="form__label" for="txtEnglish">English</label>
-  <input id="txtPos" class="form__input" type="text" ng-model="formUpdateNoun.english" ng-focus="umlautFocus(undefined, undefined)">
+  <label class="form__label" for="upNounEnglish">English</label>
+  <input id="upNounEnglish" class="form__input" type="text" ng-model="formUpdateNoun.english"
+    ng-focus="umlautFocus(undefined, undefined, '')">
   
-  <label  class="form__label" for="txtTranslation">Translation - {{formUpdateNoun.base}}</label>
-  <input id="txtWord" class="form__input" type="text" ng-model="formUpdateNoun.translation"
-         ng-focus="umlautFocus('formUpdateNoun', 'translation')" ng-keyup="getArticle('formUpdateNoun');getBase('formUpdateNoun')">
+  <label  class="form__label" for="upNounTranslation">Translation - {{formUpdateNoun.base}}</label>
+  <input id="upNounTranslation" class="form__input" type="text" ng-model="formUpdateNoun.translation"
+    ng-focus="umlautFocus('formUpdateNoun', 'translation', 'upNounTranslation')" ng-keyup="getArticle('formUpdateNoun');getBase('formUpdateNoun')">
   
   <umlauts class="form-umlauts" input-type="word" input-field="translation" ></umlauts>
   
-  <label class="form__label" for="txtImg">Image</label>
-  <input id="txtImg" class="form__input" type="text" ng-model="formUpdateNoun.image" ng-focus="umlautFocus(undefined, undefined)">
+  <label class="form__label" for="upNounExample">Example</label>
+  <input id="upNounExample" class="form__input" type="text" ng-model="formUpdateNoun.example"
+    ng-focus="umlautFocus('formUpdateNoun', 'example', 'upNounExample')">
   
-  <label class="form__label" for="selGender">Gender</label>
-  <select id="selGender" class="form__select" name="selGender" ng-model="formUpdateNoun.gender">
+  <label class="form__label" for="upNounImg">Image</label>
+  <input id="upNounImg" class="form__input" type="text" ng-model="formUpdateNoun.image"
+    ng-focus="umlautFocus(undefined, undefined, '')">
+  
+  <label class="form__label" for="upNounGender">Gender</label>
+  <select id="upNounGender" class="form__select" name="selGender" ng-model="formUpdateNoun.gender">
     <option ng-repeat="option in genderCategories" value="{{option.id}}">{{option.name | ucWords}}</option>
   </select>
   

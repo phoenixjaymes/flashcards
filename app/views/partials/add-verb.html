@@ -4,44 +4,49 @@
   
   <h3 class="form__heading">Add a New Verb</h3>
   
-  <label class="form__label--check" for="txtSeparable">Separable</label>
-  <input id="txtSeparable" class="form__check" type="checkbox" ng-model="formAddVerb.separable"
+  <label class="form__label--check" for="addVerbSeparable">Separable</label>
+  <input id="addVerbSeparable" class="form__check" type="checkbox" ng-model="formAddVerb.separable"
     ng-focus="umlautFocus(undefined, undefined)">
   
-  <label class="form__label" for="txtVrbEnglish">English</label>
-  <input id="txtVrbEnglish" class="form__input" type="text" ng-model="formAddVerb.english"
-    ng-focus="umlautFocus(undefined, undefined)">
+  <label class="form__label" for="addVerbEnglish">English</label>
+  <input id="addVerbEnglish" class="form__input" type="text" ng-model="formAddVerb.english"
+    ng-focus="umlautFocus(undefined, undefined, '')">
   
-  <label class="form__label" for="txtVrbTranslation">Translation - {{formAddVerb.infinitive}}</label>
-  <input id="txtVrbTranslation" class="form__input" type="text" ng-model="formAddVerb.translation"
-    ng-focus="umlautFocus('formAddVerb', 'translation');" ng-keyup="getInfinitive('formAddVerb')" ng-blur="umlautFocus('formAddVerb', 'translation');">
+  <label class="form__label" for="addVerbTranslation">Translation - {{formAddVerb.infinitive}}</label>
+  <input id="addVerbTranslation" class="form__input" type="text" ng-model="formAddVerb.translation"
+    ng-focus="umlautFocus('formAddVerb', 'translation', 'addVerbTranslation');" ng-keyup="getInfinitive('formAddVerb')">
+  
   <button ng-click="conjugateVerb('formAddVerb')">C</button>
   
   <umlauts class="form-umlauts" input-type="verb" input-field="translation" ></umlauts>
   
-  <label class="form__label--verb" for="txtIch">ich</label>
-  <input id="txtIch" class="form__input--verb" type="text" ng-model="formAddVerb.ich"
-   ng-focus="umlautFocus('formAddVerb', 'ich')">
+  <label class="form__label" for="addVerbExample">Example</label>
+  <input id="addVerbExample" class="form__input" type="text" ng-model="formAddVerb.example"
+    ng-focus="umlautFocus('formAddVerb', 'example', 'addVerbExample')">
   
-  <label class="form__label--verb" for="txtDu">du</label>
-  <input id="txtDu" class="form__input--verb" type="text" ng-model="formAddVerb.du"
-    ng-focus="umlautFocus('formAddVerb', 'du')">
+  <label class="form__label--verb" for="addVerbIch">ich</label>
+  <input id="addVerbIch" class="form__input--verb" type="text" ng-model="formAddVerb.ich"
+    ng-focus="umlautFocus('formAddVerb', 'ich', 'addVerbIch')">
   
-  <label class="form__label--verb" for="txtErEsSie">er <span class="tool" data-tip="er, sie, es">?</span></label>
-  <input id="txtErEsSie" class="form__input--verb" type="text" ng-model="formAddVerb.er_sie_es"
-    ng-focus="umlautFocus('formAddVerb', 'er_sie_es')">
+  <label class="form__label--verb" for="addVerbDu">du</label>
+  <input id="addVerbDu" class="form__input--verb" type="text" ng-model="formAddVerb.du"
+    ng-focus="umlautFocus('formAddVerb', 'du', 'addVerbDu')">
   
-  <label class="form__label--verb" for="txtWir">wir</label>
-  <input id="txtWir" class="form__input--verb" type="text" ng-model="formAddVerb.wir"
-    ng-focus="umlautFocus('formAddVerb', 'wir')">
+  <label class="form__label--verb" for="addVerbErEsSie">er <span class="tool" data-tip="er, sie, es">?</span></label>
+  <input id="addVerbErEsSie" class="form__input--verb" type="text" ng-model="formAddVerb.er_sie_es"
+    ng-focus="umlautFocus('formAddVerb', 'er_sie_es', 'addVerbErEsSie')">
   
-  <label class="form__label--verb" for="txtIhr">ihr</label>
-  <input id="txtIhr" class="form__input--verb" type="text" ng-model="formAddVerb.ihr"
-    ng-focus="umlautFocus('formAddVerb', 'ihr')">
+  <label class="form__label--verb" for="addVerbWir">wir</label>
+  <input id="addVerbWir" class="form__input--verb" type="text" ng-model="formAddVerb.wir"
+    ng-focus="umlautFocus('formAddVerb', 'wir', 'addVerbWir')">
   
-  <label class="form__label--verb" for="txtSieSie">sie <span class="tool" data-tip="sie &amp; Sie">?</span></label>
-  <input id="txtSieSie" class="form__input--verb" type="text" ng-model="formAddVerb.sie_sie"
-    ng-focus="umlautFocus('formAddVerb', 'sie_sie')">  
+  <label class="form__label--verb" for="addVerbIhr">ihr</label>
+  <input id="addVerbIhr" class="form__input--verb" type="text" ng-model="formAddVerb.ihr"
+    ng-focus="umlautFocus('formAddVerb', 'ihr', 'addVerbIhr')">
+  
+  <label class="form__label--verb" for="addVerbSieSie">Sie <span class="tool" data-tip="sie &amp; Sie">?</span></label>
+  <input id="addVerbSieSie" class="form__input--verb" type="text" ng-model="formAddVerb.sie_sie"
+    ng-focus="umlautFocus('formAddVerb', 'sie_sie', 'addVerbSieSie')">  
 
   <button  class="form__button" ng-model="formAddVerb.Submit" ng-click="addVerb()">Add Verb</button>
   
