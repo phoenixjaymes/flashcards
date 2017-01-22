@@ -1,0 +1,51 @@
+/* 
+    File     : _activity.scss
+    Date     : Jan 21, 2017
+    Author   : Jaymes Young <jaymes@phoenixjaymes.com>
+*/
+
+.activity {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 500;
+  
+  background: $activity-bg-color;
+  height: 100%;
+  width: 100%;
+  
+    
+  
+  &__wrap {
+    margin: 0 auto;
+    
+    @media #{$brk-sm} {
+      max-width: 576px;
+    }
+
+    @media #{$brk-md} {
+      max-width: 720px;
+    }
+  }
+  
+  &__close {
+    background: $activity-btn-color;
+    border-radius: $brd-radius; 
+    display: block;
+    font-weight: $font-weight--bold;
+    height: 40px;
+    line-height: 40px;
+    margin: 5px 0 10px 5px;
+    text-align: center;
+    text-decoration: none;
+    width: 40px;
+    
+    &:link, &:visited, &:hover, &:active {
+      color: $activity-txt-color;
+    }
+    
+    @media #{$brk-sm} {
+      margin:10px 10px 20px 10px;
+    }
+  }
+}
