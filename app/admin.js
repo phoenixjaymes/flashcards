@@ -20,12 +20,14 @@ angular.module('flashcards')
     $scope.formUpdateVerb = {"pos": "verb"};
     $scope.inputType;
     $scope.inputField;
+    $scope.inputId;
 
 
     // Set which input umlaut should be added to
-    $scope.umlautFocus = function(pos, propName) {
+    $scope.umlautFocus = function(pos, propName, id) {
       $scope.inputType = pos;
       $scope.inputField = propName;
+      $scope.inputId = id;
     };
     
     
@@ -34,12 +36,22 @@ angular.module('flashcards')
       if(!$scope.inputType || !$scope.inputField) {
         return;
       }
+        
+      var ele = document.querySelector('#' + $scope.inputId);
+      var eleStart = ele.selectionStart;
+      var eleEnd = ele.selectionEnd;
       
       if ($scope[$scope.inputType][$scope.inputField] === undefined) {
         $scope[$scope.inputType][$scope.inputField] = '';
       }
       
-      $scope[$scope.inputType][$scope.inputField] = $scope[$scope.inputType][$scope.inputField] + char;
+      var word = $scope[$scope.inputType][$scope.inputField].split('');
+      
+      word.splice(eleStart, 0, char);
+      $scope[$scope.inputType][$scope.inputField] = word.join('');
+      
+      ele.focus();
+      ele.setSelectionRange(eleStart, eleEnd);
     };
     
     
@@ -66,7 +78,6 @@ angular.module('flashcards')
     };
     
     
-    
     $scope.getStem = function(form) {
       var intLen = $scope[form].translation.length;
       var ending = $scope[form].translation.substring(intLen-2);
@@ -77,6 +88,7 @@ angular.module('flashcards')
          return $scope[form].translation.substring(0, intLen-1);
        }
     };
+    
     
     $scope.lstChrCheck = function(stem, person) {
       var strLastChr = stem.slice(-1);
@@ -99,8 +111,8 @@ angular.module('flashcards')
       } else if (person === 'ihr') {
         return stem + 't';
       }
-      
     };
+    
     
     $scope.conjugateIch = function(form) {
       var stem = $scope.getStem(form);
