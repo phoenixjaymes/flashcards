@@ -10,6 +10,7 @@ angular.module('flashcards')
   .controller('Words', function($scope, cardsService, updateItemService) {
     $scope.updateIds = {};
     $scope.finalMessage = false;
+    $scope.showWords = false;
     
     $scope.wordsClicked = {
       wordOneId : undefined,
@@ -78,6 +79,8 @@ angular.module('flashcards')
         $scope.updateIds.ids = $scope.getListOfIds($scope.listOfWords);
         $scope.updateIds.pos = pos;
         $scope.wordmatchPos = pos;
+        
+        $scope.showWords = true;
       });
     };
 });

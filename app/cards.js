@@ -20,6 +20,7 @@ angular.module('flashcards')
       $scope.totalCards = $scope.cards.length;
       $scope.flip = false;
       $scope.showCategory = false;
+      $scope.showCards = false;
       
       
       
@@ -29,12 +30,15 @@ angular.module('flashcards')
         if (cardPos === 'verb') {
           $scope.getCards(cardPos);
           $scope.showCategory = false;
+          $scope.showCards = true;
         } else if (cardPos === 'phrase') {
           $scope.getCards(cardPos);
           $scope.showCategory = false;
+          $scope.showCards = true;
         } else if (cardPos === 'study') {
           $scope.getCards(cardPos);
           $scope.showCategory = false;
+          $scope.showCards = true;
         } else {
           $scope.posCategory = $scope.cardAllCategories[cardPos];
           $scope.showCategory = true;
@@ -89,6 +93,7 @@ angular.module('flashcards')
           $timeout(function() {
             $scope.english = $scope.cards[card].english;
             $scope.translation = $sce.trustAsHtml($scope.cards[card].translation);
+            $scope.example = $sce.trustAsHtml($scope.cards[card].example);
             $scope.ich = $sce.trustAsHtml($scope.cards[card].ich);
             $scope.du = $sce.trustAsHtml($scope.cards[card].du);
             $scope.er_sie_es = $sce.trustAsHtml($scope.cards[card].er_sie_es);
@@ -113,6 +118,7 @@ angular.module('flashcards')
           $timeout(function() {
             $scope.english = $scope.cards[card].english;
             $scope.translation = $sce.trustAsHtml($scope.cards[card].translation);
+            $scope.example = $sce.trustAsHtml($scope.cards[card].example);
             $scope.image = $scope.cards[card].img;
             $scope.gender = $scope.cards[card].gender;
           }, 500);
