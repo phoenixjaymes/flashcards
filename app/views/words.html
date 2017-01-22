@@ -18,26 +18,32 @@
     </select>
   </form>
   
-  <div class="" ng-show="showWords === true">
-    <a href="" ng-click="showWords = false">-X-</a>
-    Where words are going to live
+  <div class="activity" ng-show="showWords === true">
     
-    <div class="words">
-      <ul class="words__wrap">
-        <li class="words__item" ng-class="{'on':item.clicked && wordsClicked.wordOneIndex === $index}" ng-repeat="word in listOfWords"
-          ng-click="item.clicked = true; wordsClicked.wordClick($index, word.id)"><span ng-bind-html="word.word | trustWord"></span></li>
-      </ul>
+    <div class="activity__wrap">
+      <a href="" class="activity__close" ng-click="showWords = false">X</a>
 
-      <div class="words__message" ng-show="finalMessage">
-        <h3 class="words__message-text">{{ message }}<br>Play Again?</h3>
-        <p>
-          <a href="" class="words__message-button" ng-click="getListOfWords('adjective'); finalMessage = false">Adjectives</a>
-          <a href="" class="words__message-button" ng-click="getListOfWords('noun'); finalMessage = false">Nouns</a>
-          <a href="" class="words__message-button" ng-click="getListOfWords('verb'); finalMessage = false">Verbs</a>
-        </p>
-      </div>
-    </div>
-  </div>
+      <div class="words">
+
+        <ul class="words__wrap">
+          <li class="words__item" ng-class="{'on':item.clicked && wordsClicked.wordOneIndex === $index}" ng-repeat="word in listOfWords"
+            ng-click="item.clicked = true; wordsClicked.wordClick($index, word.id)"><span ng-bind-html="word.word | trustWord"></span></li>
+        </ul>
+
+        <div class="words__message" ng-show="finalMessage">
+          <h3 class="words__message-text">{{ message }}<br>Play Again?</h3>
+          <p>
+            <a href="" class="words__message-button" ng-click="getListOfWords('adjective'); finalMessage = false">Adjectives</a>
+            <a href="" class="words__message-button" ng-click="getListOfWords('noun'); finalMessage = false">Nouns</a>
+            <a href="" class="words__message-button" ng-click="getListOfWords('verb'); finalMessage = false">Verbs</a>
+          </p>
+        </div>
+
+      </div><!-- End words -->
+        
+    </div><!-- End wrap -->
+
+  </div><!-- End activity -->
   
   
 </section>

@@ -29,22 +29,26 @@
   </form>
   
   
-  <div class="" ng-show="showCards === true">
-    <a href="" ng-click="showCards = false">-X-</a>
-    Where cards are going to live
+  <div class="activity" ng-show="showCards === true">
     
-    <div class="card" ng-class="{'js-flip-card' : flip}"  ng-switch="cardPos">
-      <verbcard ng-switch-when="verb"></verbcard>
-      <phrasecard ng-switch-when="phrase"></phrasecard>
-      <genericcard ng-switch-default></genericcard>
-    </div>
-  
-    <div class="cards-controls">
-      <a class="cards-controls__btn" ng-click="prevCard()"><img src="assets/img/prev.svg" alt="previous"></a>
-      <span class="cards-controls__count">{{currentCard}} of {{totalCards}}</span>
-      <a class="cards-controls__btn" ng-click="nextCard()"><img src="assets/img/next.svg" alt="next"></a>
-    </div>
-  </div>
+    <div class="activity__wrap">
+      <a href="" class="activity__close" ng-click="showCards = false">X</a>
+
+      <div class="card" ng-class="{'js-flip-card' : flip}"  ng-switch="cardPos">
+        <verbcard ng-switch-when="verb"></verbcard>
+        <phrasecard ng-switch-when="phrase"></phrasecard>
+        <genericcard ng-switch-default></genericcard>
+      </div>
+
+      <div class="cards-controls">
+        <a class="cards-controls__btn" ng-click="prevCard()"><img src="assets/img/prev.svg" alt="previous"></a>
+        <span class="cards-controls__count">{{currentCard}} of {{totalCards}}</span>
+        <a class="cards-controls__btn" ng-click="nextCard()"><img src="assets/img/next.svg" alt="next"></a>
+      </div>
+      
+    </div><!-- End wrap -->
+    
+  </div><!-- End activity -->
   
     
 </section>
