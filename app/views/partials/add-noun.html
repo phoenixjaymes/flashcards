@@ -15,7 +15,8 @@
   
   <label  class="form__label" for="addNounTranslation">Translation - {{formAddNoun.base}}</label>
   <input id="addNounTranslation" class="form__input" type="text" ng-model="formAddNoun.translation"
-    ng-focus="umlautFocus('formAddNoun', 'translation', 'addNounTranslation')" ng-keyup="getArticle('formAddNoun');getBase('formAddNoun')">
+    ng-focus="umlautFocus('formAddNoun', 'translation', 'addNounTranslation')" 
+    ng-keyup="getArticle('formAddNoun');getBase('formAddNoun')" ng-blur="getBase('formAddNoun')">
   
   <umlauts class="form-umlauts" input-type="word" input-field="translation" ></umlauts>
   

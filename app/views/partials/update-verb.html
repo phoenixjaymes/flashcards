@@ -14,7 +14,8 @@
   
   <label  class="form__label" for="upVerbTranslation">Translation - {{formUpdateVerb.infinitive}}</label>
   <input id="upVerbTranslation" class="form__input" type="text" ng-model="formUpdateVerb.translation"
-    ng-focus="umlautFocus('formUpdateVerb', 'translation', 'upVerbTranslation')" ng-keyup="getInfinitive('formUpdateVerb')">
+    ng-focus="umlautFocus('formUpdateVerb', 'translation', 'upVerbTranslation')"
+    ng-keyup="getInfinitive('formUpdateVerb')" ng-blur="getInfinitive('formUpdateVerb')">
   
   <umlauts class="form-umlauts" input-type="verb" input-field="translation" ></umlauts>
   
