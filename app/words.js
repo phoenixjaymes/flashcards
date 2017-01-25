@@ -8,6 +8,11 @@
 
 angular.module('flashcards')
   .controller('Words', function($scope, cardsService, updateItemService) {
+    $scope.wordOptions = [
+        {'value' : 'adjective', 'name' : 'Adj &amp; Adverbs'},
+        {'value' : 'noun', 'name' : 'Nouns'},
+        {'value' : 'verb', 'name' : 'Verbs'}     
+      ];
     $scope.updateIds = {};
     $scope.finalMessage = false;
     $scope.showWords = false;

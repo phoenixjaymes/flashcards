@@ -8,6 +8,15 @@
 
 angular.module('flashcards')
     .controller('Cards', function($scope, $timeout, $sce, cardsService) {
+      $scope.cardOptions = [
+        {'value' : 'adjective', 'name' : 'Adj &amp; Adverbs'},
+        {'value' : 'noun', 'name' : 'Nouns'},
+        {'value' : 'verb', 'name' : 'Verbs'},
+        {'value' : 'phrase', 'name' : 'Phrases'},
+        {'value' : 'study', 'name' : 'Study'}      
+      ];
+      $scope.cardOptionsPos;
+      
       // Default card
       $scope.cards = [{
         "translation" : "Germany",
@@ -28,43 +37,24 @@ angular.module('flashcards')
       // If pos is verb get verbs until verbs have categories
       $scope.changeCategory = function(cardPos) {
         if (cardPos === 'verb') {
+          $scope.cardOptionsPos = cardPos;
           $scope.getCards(cardPos);
           $scope.showCategory = false;
           $scope.showCards = true;
         } else if (cardPos === 'phrase') {
+          $scope.cardOptionsPos = cardPos;
           $scope.getCards(cardPos);
           $scope.showCategory = false;
           $scope.showCards = true;
         } else if (cardPos === 'study') {
+          $scope.cardOptionsPos = cardPos;
           $scope.getCards(cardPos);
           $scope.showCategory = false;
           $scope.showCards = true;
         } else {
+          $scope.cardOptionsPos = cardPos;
           $scope.posCategory = $scope.cardAllCategories[cardPos];
           $scope.showCategory = true;
-        }
-      };
-      
-      // Change category options for word list
-      $scope.posCategoryList;
-      $scope.showCategoryWords = false;
-      // If pos is verb get verbs until verbs have categories
-      $scope.changeCategoryLW = function(wordPos) {
-        if (wordPos === 'adjective') {
-          $scope.posCategoryList = $scope.cardAllCategories[wordPos];
-          $scope.showCategoryWords = true;
-        } else if (wordPos === 'noun') {
-          $scope.posCategoryList = $scope.cardAllCategories[wordPos];
-          $scope.showCategoryWords = true;
-        } else if (wordPos === 'phrase') {
-          $scope.getWords(wordPos, '', true);
-          $scope.showCategoryWords = false;
-        } else if (wordPos === 'verb') {
-          $scope.getWords(wordPos, '', true);
-          $scope.showCategoryWords = false;
-        } else {
-          //$scope.posCategory = $scope.cardAllCategories[cardPos];
-          //$scope.showCategoryWords = true;
         }
       };
       
@@ -77,10 +67,6 @@ angular.module('flashcards')
           $scope.totalWords = $scope.listOfWords.length;          
         });
       };
-      
-      
-      
-      
       
       
       // Set card
