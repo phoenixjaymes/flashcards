@@ -1,8 +1,9 @@
 <form class="form">
-  
-  <a class="form__button-close" href="" ng-click="$emit('closeModal', 'displayUpdateCategory')">&larr;</a>
-  
-  <h3 class="form__heading">Update Category</h3>
+  <div class="form-header">
+    <a class="form-header__btn" href="" ng-click="$emit('closeModal', 'displayUpdateCategory')">&larr;</a>
+    <h3 class="form-header__text">Update Category</h3>
+  </div>
+
   <label class="form__label" for="txtCategory">Name</label>
   <input id="txtCategory" class="form__input" ng-model="formUpdateCategory.name" type="text">
   

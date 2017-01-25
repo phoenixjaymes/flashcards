@@ -1,8 +1,8 @@
 <form class="form" autocomplete="off">
-  
-  <a class="form__button-close" href="" ng-click="$emit('closeModal', 'displayAddVerb')">X</a>
-  
-  <h3 class="form__heading">Add a New Verb</h3>
+  <div class="form-header">
+    <a class="form-header__btn" href="" ng-click="$emit('closeModal', 'displayAddVerb')">X</a>
+    <h3 class="form-header__text">Add Verb</h3>
+  </div>
   
   <label class="form__label--check" for="addVerbSeparable">Separable</label>
   <input id="addVerbSeparable" class="form__check" type="checkbox" ng-model="formAddVerb.separable"

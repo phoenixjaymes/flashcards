@@ -1,8 +1,8 @@
-<form class="form register-form" name="formRegister">
-  
-  <a class="form__button-close" href="" ng-click="$emit('closeModal', 'displayRegister')">X</a>
-  
-  <h3 class="form__heading">Please Register</h3>
+<form class="form">
+  <div class="form-header">
+    <a class="form-header__btn" href="" ng-click="$emit('closeModal', 'displayRegister')">X</a>
+    <h3 class="form-header__text">Please Register</h3>
+  </div>
   
   <label class="form__label login-form__label" for="txtlearner">User</label>
   <input id="txtUser" class="form__input" type="text" ng-model="newLearner.newLearner">

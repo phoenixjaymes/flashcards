@@ -1,8 +1,8 @@
-<form class="form add-word-form" name="formAddWord" autocomplete="off">
-  
-  <a class="form__button-close" href="" ng-click="$emit('closeModal', 'displayAddNoun')">X</a>
-  
-  <h3 class="form__heading">Add Noun</h3>
+<form class="form" autocomplete="off">
+  <div class="form-header">
+    <a class="form-header__btn" href="" ng-click="$emit('closeModal', 'displayAddNoun')">X</a>
+    <h3 class="form-header__text">Add Noun</h3>
+  </div>
   
   <label class="form__label" for="selCategory">Category</label>
   <select id="selCategory" class="form__select" name="selCategory" ng-model="formAddNoun.category" ng-focus="umlautFocus(undefined, undefined)">

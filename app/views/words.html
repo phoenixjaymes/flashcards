@@ -6,24 +6,20 @@
 <section class="flashcards">
   <h1>German Words</h1>
   
-  <form class="cards-form">
-    <h3>Select your Words</h3>
-    
-    <label class="cards-form__label" for="wordmatch-pos">Part of Speech:</label>
-    <select id="wordmatch-pos" class="cards-form__select" ng-model="wordmatchPos" ng-change="getListOfWords(wordmatchPos);">
-      <option value="">Select</option>
-      <option value="adjective">Adj &amp; Adverb</option>
-      <option value="noun">Noun</option>
-      <option value="verb">Verb</option>
-    </select>
-  </form>
+  <h3>Select your Words</h3>
+  
+  <div class="activity-buttons">
+    <button class="activity_buttons__btn" ng-repeat="option in wordOptions" ng-click="getListOfWords(option.value)" ng-bind-html="option.name | trustWord"></button>
+  </div>
+  
   
   <div class="activity" ng-show="showWords === true">
     
     <div class="activity__wrap">
-      <a href="" class="activity__close" ng-click="showWords = false">X</a>
+      <a href="" class="activity__close" ng-click="showWords = false; finalMessage = false">X</a>
 
       <div class="words">
+        <h2 class="words__heading">Match the Words</h2>
 
         <ul class="words__wrap">
           <li class="words__item" ng-class="{'on':item.clicked && wordsClicked.wordOneIndex === $index}" ng-repeat="word in listOfWords"

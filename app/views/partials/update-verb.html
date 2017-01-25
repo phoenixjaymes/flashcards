@@ -1,9 +1,9 @@
 <form class="form" autocomplete="off">
-  
-  <a class="form__button-close" href="" ng-click="$emit('closeModal', 'displayUpdateVerb')">&larr;</a>
-  
-  <h3 class="form__heading">Update Verb</h3>
-  
+  <div class="form-header">
+    <a class="form-header__btn" href="" ng-click="$emit('closeModal', 'displayUpdateVerb')">&larr;</a>
+    <h3 class="form-header__text">Update Verb</h3>
+  </div>
+
   <label class="form__label--check" for="upVerbSeparable">Separable</label>
   <input id="upVerbSeparable" class="form__check" type="checkbox" ng-model="formUpdateVerb.separable"
     ng-focus="umlautFocus(undefined, undefined, '')">

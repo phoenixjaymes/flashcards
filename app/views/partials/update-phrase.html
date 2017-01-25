@@ -1,8 +1,8 @@
 <form class="form">
-  
-  <a class="form__button-close" href="" ng-click="$emit('closeModal', 'displayUpdatePhrase')">&larr;</a>
-  
-  <h3 class="form__heading">Update Phrase</h3>
+  <div class="form-header">
+    <a class="form-header__btn" href="" ng-click="$emit('closeModal', 'displayUpdatePhrase')">&larr;</a>
+    <h3 class="form-header__text">Update Phrase</h3>
+  </div>
   
   <label class="form__label" for="txtPhraseEnglish">English</label>
   <input id="txtPhraseEnglish" class="form__input" ng-model="formUpdatePhrase.english" type="text"
@@ -11,6 +11,7 @@
   <label class="form__label" for="txtPhaseTranslation">Translation</label>
   <input id="txtPhaseTranslation" class="form__input" ng-model="formUpdatePhrase.translation" type="text"
      ng-focus="umlautFocus('formUpdatePhrase', 'translation')">
+  
   <umlauts class="form-umlauts" input-type="verb" input-field="translation" ></umlauts>
   
   <button class="form__button" ng-model="formUpdatePhrase.submit" ng-click="updatePhrase()"

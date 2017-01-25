@@ -1,8 +1,8 @@
-<form class="form" name="frmListWords" id="frmListWords">
-  
-  <a class="form__button-close" href="" ng-click="$emit('closeModal', 'displayListWords')">X</a>
-  
-  <h3 class="form__heading">List Words</h3>
+<form class="form" id="frmListWords">
+  <div class="form-header">
+    <a class="form-header__btn" href="" ng-click="$emit('closeModal', 'displayListWords')">X</a>
+    <h3 class="form-header__text">Update / Delete</h3>
+  </div>
   
   <label class="form__label" for="selPosList">Part of Speech</label>
   <select id="selPosList" class="form__select" name="selPosList" ng-model="word.pos" ng-change="changeCategoryUpdate(word.pos)">
@@ -33,7 +33,7 @@
           
           <tr ng-repeat="word in listOfWords">
             <td class="word-list__table-td-translation">{{word.translation}} <span class="tool" data-tip="{{word.english}}">-?-</span></td>
-            <td class="word-list__table-td-edit"><a href="" ng-click="$emit('findItem', word.id)">{{word.id}}</a></td>
+            <td class="word-list__table-td-edit"><a href="" class="btn-admin" ng-click="$emit('findItem', word.id)">{{word.id}}</a></td>
           </tr>
         </tbody>
       </table>

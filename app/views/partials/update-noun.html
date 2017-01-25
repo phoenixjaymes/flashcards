@@ -1,8 +1,8 @@
 <form class="form">
-  
-  <a class="form__button-close" href="" ng-click="$emit('closeModal', 'displayUpdateNoun')">&larr;</a>
-  
-  <h3 class="form__heading">Update Noun</h3>
+  <div class="form-header">
+    <a class="form-header__btn" href="" ng-click="$emit('closeModal', 'displayUpdateNoun')">&larr;</a>
+    <h3 class="form-header__text">Update Noun</h3>
+  </div>
   
   <label class="form__label" for="upNounCategory">Category</label>
   <select id="upNounCategory" class="form__select" name="selCategory"

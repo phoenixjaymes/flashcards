@@ -1,8 +1,9 @@
 <form class="form">
-  
-  <a class="form__button-close" href="" ng-click="$emit('closeModal', 'displayAddCategory')">X</a>
-  
-  <h3 class="form__heading">Add a Category</h3>
+  <div class="form-header">
+    <a class="form-header__btn" href="" ng-click="$emit('closeModal', 'displayAddCategory')">X</a>
+    <h3 class="form-header__text">Add a Category</h3>
+  </div>
+
   <label class="form__label" for="txtCategory">Name</label>
   <input id="txtCategory" class="form__input" ng-model="formAddCategory.name" type="text">
   
