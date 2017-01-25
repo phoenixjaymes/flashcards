@@ -123,7 +123,7 @@ if ($pos && $pos === 'adjective') {
   $ids_safe = $linkId->real_escape_string($ids);
   
   
-  if (!$id_safe ) {
+  if (!$ids_safe ) {
     $arr_response['success'] = 'incorrect';
     send_data($arr_response);
   } else {
