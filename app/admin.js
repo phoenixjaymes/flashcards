@@ -8,6 +8,20 @@
 
 angular.module('flashcards')
   .controller('Admin', function($scope) {
+    $scope.formDisplay = {
+      displayAddAdjective : false,
+      displayAddCategory  : false,
+      displayAddNoun      : false,
+      displayAddPhrase    : false,
+      displayAddVerb      : false,
+      displayListWords    : false,
+      displayUpdateAdjective  : false,
+      displayUpdateCategory   : false,
+      displayUpdateNoun       : false,
+      displayUpdatePhrase     : false,
+      displayUpdateVerb       : false
+    };
+    
     $scope.formAddAdjective = {"pos": "adjective"};
     $scope.formAddCategory = {"pos": "category"};
     $scope.formAddNoun = {"pos": "noun", "translation":""};
@@ -171,4 +185,38 @@ angular.module('flashcards')
       $scope.responseMessage = objMessages[message];
       $scope.displayFormMessage = true;
     };
+    
+    
+    // Display admin forms
+    $scope.displayForm = function(form) {
+      // Close all modals
+      for (var prop in $scope.formDisplay) {
+        $scope.formDisplay[prop] = false;
+      }
+      
+      // Open selected modal
+      $scope.formDisplay[form] = true;
+
+      // Close options
+      $scope.displayOptions = false;
+    };
+    
+    
+    // Close modal windows
+    $scope.$on('closeModal', function(evt, args) {
+      $scope.formDisplay[args] = false;
+
+      // Don't show message box
+      $scope.displayFormMessage = false;
+      console.log(args + ' - ' + $scope.displayFormMessage);
+    });
+    
+    
+    // Display update forms
+    $scope.$on('displayUpdateForms', function(evt, form) {
+
+      // Open selected modal
+      $scope.formDisplay[form] = true;
+    });
+    
 });
