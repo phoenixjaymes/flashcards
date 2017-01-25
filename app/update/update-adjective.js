@@ -10,8 +10,6 @@ angular.module('flashcards')
   .controller('UpdateAdjective', function($scope, updateItemService) {
     $scope.updateAdjective = function() {
       
-      $scope.displayFormMessage = false;
-      
       updateItemService.updateItem($scope.formUpdateAdjective, function(response) {
         
         // Check response message
@@ -24,6 +22,12 @@ angular.module('flashcards')
           $scope.displayMessage('incorrect');
         } else if (response.data.success === false) {
           $scope.displayMessage('false');
+        }
+        
+        if(response.data.success === 'updated') {
+          $scope.messageSuccess = true;
+        } else {
+          $scope.messageSuccess = false;
         }
       });
       

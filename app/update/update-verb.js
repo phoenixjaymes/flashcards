@@ -10,8 +10,6 @@ angular.module('flashcards')
   .controller('UpdateVerb', function($scope, updateItemService) {
     $scope.updateVerb = function() {
       
-      $scope.displayFormMessage = false;
-      
       if(!$scope.formUpdateVerb.separable) {
         $scope.formUpdateVerb.separable = 'no';
       } else {
@@ -29,6 +27,12 @@ angular.module('flashcards')
           $scope.displayMessage('incorrect');
         } else if (response.data.success === false) {
           $scope.displayMessage('false');
+        }
+        
+        if(response.data.success === 'updated') {
+          $scope.messageSuccess = true;
+        } else {
+          $scope.messageSuccess = false;
         }
       });
     };

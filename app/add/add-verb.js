@@ -10,7 +10,6 @@ angular.module('flashcards')
   .controller('AddVerb', function($scope, addItemService) {
     
     $scope.responseMessage;
-    $scope.displayFormMessage = false;
     $scope.showUpperCase = false;
     
     // Add verb
@@ -45,6 +44,12 @@ angular.module('flashcards')
           $scope.displayMessage('incorrect');
         } else if (response.data.success === false) {
           $scope.displayMessage('false');
+        }
+        
+        if(response.data.success === true) {
+          $scope.messageSuccess = true;
+        } else {
+          $scope.messageSuccess = false;
         }
       });
 
