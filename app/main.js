@@ -14,18 +14,7 @@ angular.module('flashcards')
 
     $scope.formDisplay = {
       displayLogin        : false,
-      displayAddAdjective : false,
-      displayAddCategory  : false,
-      displayAddNoun      : false,
-      displayAddPhrase    : false,
-      displayAddVerb      : false,
-      displayRegister     : false,
-      displayListWords    : false,
-      displayUpdateAdjective  : false,
-      displayUpdateCategory   : false,
-      displayUpdateNoun       : false,
-      displayUpdatePhrase     : false,
-      displayUpdateVerb       : false
+      displayRegister     : false
     };
 
 
@@ -36,7 +25,6 @@ angular.module('flashcards')
         $scope.catAdjectives = response.data.adjective;
         $scope.catNouns = response.data.noun;
         $scope.catGenders = response.data.gender;
-
       });
     };
 
@@ -50,6 +38,7 @@ angular.module('flashcards')
         $scope.sectionType = 'admin';
       }
     };
+
 
     // Logging out
     $scope.logOut = function() {
@@ -69,13 +58,12 @@ angular.module('flashcards')
       for (var prop in $scope.formDisplay) {
         $scope.formDisplay[prop] = false;
       }
-
+      
       // Open selected modal
       $scope.formDisplay[form] = true;
 
       // Close options
       $scope.displayOptions = false;
-
     };
     
     $scope.toggleSubMenu = function(menu) {
@@ -98,7 +86,6 @@ angular.module('flashcards')
 
       // Don't show message box
       $scope.displayFormMessage = false;
-
     });
     
     // Login to options
@@ -127,14 +114,7 @@ angular.module('flashcards')
         $scope.displayFormMessage = false;
       }
     });
-
-
-    // Display update forms
-    $scope.$on('displayUpdateForms', function(evt, form) {
-
-      // Open selected modal
-      $scope.formDisplay[form] = true;
-    });
+    
 
     // Check value of loggdIn cookie
     var checkLogin = function() {
@@ -144,7 +124,6 @@ angular.module('flashcards')
       if (loggedIn) {
         $scope.loggedIn = true;
       } 
-
     };
 
     // Display message
@@ -152,7 +131,7 @@ angular.module('flashcards')
     var objMessages = {
       'incorrect' : 'Please fill in all form fields.',
       'duplicate' : 'This item already exist.',
-      'false' : 'Unable to ? at this time.'
+      'false' : 'Unable to process your request.'
     };
 
     $scope.responseMessage = objMessages[message];
