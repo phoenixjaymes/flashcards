@@ -41,16 +41,20 @@
 }
 
 .word-list__table-td-edit {
-  padding: 5px 0 5px 5px;
+  padding: 3px 3px 3px 0;
   width: 10%;
+  
+  a {
+    
+  }
 }
 
 .word-list__table-td-translation {
-  padding: 5px 0 5px 5px;
+  padding: 3px 0 3px 3px;
   width: 90%;
 }
 
-.word-list__table-td-translation__full {
-  padding: 5px 0 5px 5px;
+/*.word-list__table-td-translation__full {
+  padding: 2px 0 2px 5px;
   width: 100%;
-}
+}*/

@@ -8,6 +8,10 @@
   background: $header-footer-bg-color;
   margin-bottom: em(20px);
   
+  @media #{$brk-md} {
+    padding: 10px 0;
+  }
+  
   &__wrap {
     @extend %wrap-max-width;
     display: flex;
@@ -20,12 +24,16 @@
    }
   
   &__logo {
-    flex-basis: 80px;
+    flex-basis: 40px;
     order: 1;
+    height: 40px;
+    padding: 5px;
     
-    height: 60px;
-    padding: 5px 10px;
-    width: 60px;
+    @media #{$brk-md} {
+      flex-basis: 50px;
+      height: 50px;
+      padding: 5px;
+    }
   }
   
   &__name {
@@ -33,39 +41,36 @@
     order: 2;
     
     color: $header-text;
-    font-family: 'Germania One', cursive;
-    font-size: 1.5em;
-    font-weight: bold;
-    letter-spacing: .5px;
-    line-height: 60px;
+    font-family: $font-family--secondary;
+    font-size: 1.375em;
+    line-height: 40px;
+    padding-left: 10px;
         
     @media #{$brk-md} {
-      flex: 0 1 200px;
+      flex: 1 1 0;
+      font-size: 1.5em;
+      line-height: 50px;
+      white-space: nowrap;
     }
   }
   
   &__nav {
     flex-basis: 100%;
     order: 4;
-    
     height: 40px;
-    width: 100%;
     
     @media #{$brk-md} {
       flex-basis: auto;
       order: 3;
+      width: 100%;
     }
   }
   
   &__settings {
     position: relative;
     z-index: 50;
-    flex-basis: 60px;
+    flex-basis: 50px;
     order: 3;
-    
-    height: 60px;
-    padding: 10px;
-    width: 60px;
     
     @media #{$brk-md} {
       order: 4;
@@ -76,12 +81,35 @@
     display: block;
     height: 40px;
     width: 40px;
+    
+    @media #{$brk-md} {
+      height: 50px;
+      width: 50px;
+    }
   }
-  
 }
 
 .main-menu__item-current {
   a {
     color: black;
+  }
+}
+
+
+.ang-login {
+  background: url('../img/gear.svg')  5px 5px / 30px 30px no-repeat;
+  
+  @media #{$brk-md} {
+    background-size: 40px 40px;
+    background-position: 5px 5px;
+  }
+}
+
+.ang-logout {
+  background: url('../img/happy-boy.svg')  5px 5px / 30px 30px no-repeat;
+  
+  @media #{$brk-md} {
+    background-size: 40px 40px;
+    background-position: 5px 5px;
   }
 }

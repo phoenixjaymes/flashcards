@@ -5,17 +5,29 @@
 */
 
 
-.btn-close {
-  position: absolute;
+.btn-nav {
+/*  position: absolute;
   right: 10px;
-  top: 10px;
+  top: 10px;*/
   
-  background: $cold-purple;
+/*  background: $cold-purple;
   border-radius: $brd-radius;
   display: inline-block;
   height: 40px;
   line-height: 40px;
   text-align: center;
   text-decoration: none;
-  width: 40px;
+  width: 40px;*/
+}
+
+
+.btn-admin {
+  background: $cold-purple;
+  border-radius: $brd-radius;
+  display: inline-block;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+  text-decoration: none;
+  width: 30px;
 }

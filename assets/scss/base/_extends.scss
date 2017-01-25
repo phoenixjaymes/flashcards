@@ -18,13 +18,13 @@
     max-width: 720px;
   }
   
-  @media #{$brk-lg} {
+/*  @media #{$brk-lg} {
     max-width: 940px;
   }
   
   @media #{$brk-lg} {
     max-width: 1140px;
-  }
+  }*/
 }
 
 
@@ -75,4 +75,30 @@
   height: 35px;
   margin-bottom: 10px;
   padding: 0 5px;
+}
+
+
+// Modal display
+%modal-display {
+  position: absolute;
+  left: 0;
+  top: 0;
+  
+  background: $bg-modal;
+  display: block;
+  height: 140%;
+  width: 100%;
+}
+
+
+// Nav Buttons display
+%btn-nav {
+  background: $cold-purple;
+  border-radius: $brd-radius;
+  display: inline-block;
+  height: 35px;
+  line-height: 35px;
+  text-align: center;
+  text-decoration: none;
+  width: 35px;
 }

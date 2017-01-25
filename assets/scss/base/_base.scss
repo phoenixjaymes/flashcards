@@ -49,6 +49,7 @@ h2 {
 h3 {
   @include text(1.375em, 1.15384615em, normal);
   margin-bottom: 15px;
+  text-align: center;
   
   @media #{$brk-sm} {
     @include text(1.5em, 1.125em)

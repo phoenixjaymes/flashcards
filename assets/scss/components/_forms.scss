@@ -5,19 +5,33 @@
 */
 
 .form {
-  background: $form-color;
-  border-radius: $brd-radius;  
-  margin: 20px auto 0 auto;
+  background: $form-color; 
+  margin: 0 auto 0 auto;
   overflow: hidden;
   padding: 10px;
   position: relative;
-  width: 300px;
+  max-width: 350px;
+  
+  @media #{$brk-sm} {
+   // width: 300px;
+  }
 }
 
-.form__heading {
-  @include text($size: em(24px), $color: $form-heading-color);
-  letter-spacing: 1px;
-  margin-bottom: 15px;
+.form-header {
+  margin-bottom: 10px;
+  
+  &__btn {
+    @extend %btn-nav;
+  }
+  
+  &__text {
+    color: $header-text;
+    display: inline-block;
+    height: 35px;
+    line-height: 35px;
+    margin: 0;
+    padding-left: 5px;
+  }
 }
 
 .form__label {
@@ -25,11 +39,11 @@
   display: block;
   margin-bottom: 10px;
   
-  &--verb { 
+  &--verb {
     @include text($size: em(18px), $color: $form-label-color);
     display: inline-block;
     margin-bottom: 10px;
-    width: 50px;
+    width: 18%;
   }
   
   &--check {
@@ -50,17 +64,16 @@
   display: block;
   width: 100%;
   
-  &--verb { 
+  &--verb {
     @extend %form-textbox-display;
     
     display: inline-block;
-    width: 225px;
+    width: 80%;
   }
   
   &:focus {
     background: $form-widget-bg-focus;
   }
-  
 }
 
 .form__select {
@@ -106,23 +119,26 @@
   width: 40px;
 }
 
-
-
 .form-message {
   position: absolute;
   left: 0;
   top: -50px;
-  
-  background: lightsalmon;
-  border-radius: $brd-radius $brd-radius 0 0;
-  display: none;
-  padding: 5px 10px;
   width: 100%;
+}
+
+.form-message__text {
+  background: lightsalmon;
+  height: 50px;
+  line-height: 50px;
+  padding: 0 10px;
+}
+
+.form-message__text.messageSuccess {
+  background: green;
 }
 
 
 .form-message.ang-show-message {
-  display: block;
   animation: show-message 5s linear backwards;
 }
 
@@ -146,7 +162,6 @@
     
     visibility: hidden;
   }
-  
 }
 
 .form-umlauts__button {

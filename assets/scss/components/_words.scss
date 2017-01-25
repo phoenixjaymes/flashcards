@@ -12,6 +12,10 @@
   max-width: 580px;
   text-align: center;
   
+  &__heading {
+    margin-bottom: 20px;
+  }
+  
   &__item {
     background: $bg-wordmatch-item;
     border-radius: $brd-radius;
