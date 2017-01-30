@@ -146,7 +146,7 @@ if ($pos === 'adjective') {
   
   if ($sort === 'true') {
     $sql = "SELECT id, english, translation, example, ich, du, er_sie_es, wir, ihr, sie_Sie, img, 'none' AS gender "
-    . "FROM fc_german_verbs ORDER BY translation  LIMIT 10";
+    . "FROM fc_german_verbs ORDER BY translation  LIMIT 20";
   } else {
     $sql = "SELECT id,english, translation, example, ich, du, er_sie_es, wir, ihr, sie_Sie, img, 'none' AS gender FROM"
     . " fc_german_verbs  LIMIT 20";
