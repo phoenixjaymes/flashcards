@@ -31,10 +31,10 @@
     <div class="activity__wrap">
       <a href="" class="activity__close" ng-click="showCards = false">X</a>
 
-      <div class="card" ng-class="{'js-flip-card' : flip}"  ng-switch="cardOptionsPos">
-        <verbcard ng-switch-when="verb"></verbcard>
-        <phrasecard ng-switch-when="phrase"></phrasecard>
-        <genericcard ng-switch-default></genericcard>
+      <div class="card" ng-class="{'js-flip-card' : flipped}"  ng-switch="cardOptionsPos">
+        <verbcard ng-class="{'js-change-card' : changeCard}" ng-switch-when="verb"></verbcard>
+        <phrasecard ng-class="{'js-change-card' : changeCard}" ng-switch-when="phrase"></phrasecard>
+        <genericcard ng-class="{'js-change-card' : changeCard}" ng-switch-default></genericcard>
       </div>
 
       <div class="cards-controls">
@@ -44,6 +44,10 @@
       </div>
       
     </div><!-- End wrap -->
+    
+    <div class="activity__loader" ng-show="showLoadingImg">
+      <img src="assets/img/loaders/ajax-loader-1.gif" alt="Loading Animation">
+    </div>
     
   </div><!-- End activity -->
   
