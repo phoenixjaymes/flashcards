@@ -6,28 +6,16 @@
 
 
 .btn-nav {
-/*  position: absolute;
-  right: 10px;
-  top: 10px;*/
-  
-/*  background: $cold-purple;
-  border-radius: $brd-radius;
-  display: inline-block;
-  height: 40px;
-  line-height: 40px;
-  text-align: center;
-  text-decoration: none;
-  width: 40px;*/
+  @extend %btn-admin;
 }
 
 
-.btn-admin {
-  background: $cold-purple;
-  border-radius: $brd-radius;
-  display: inline-block;
-  height: 30px;
-  line-height: 30px;
-  text-align: center;
-  text-decoration: none;
-  width: 30px;
+.btn-edit {
+  @extend %btn-admin;
+  background: url('../img/icons/edit.svg') 4px 4px / 21px 21px no-repeat $cold-purple;
+}
+
+.btn-delete {
+  @extend %btn-admin;
+  background: url('../img/icons/delete.svg') 4px 4px / 21px 21px no-repeat $cold-purple;
 }

@@ -45,3 +45,28 @@
 .words__item.on {
   background: lightblue;
 }
+
+
+.words__message.start-ani {
+  opacity: 0;
+  animation: show-final-msg 2s linear forwards;
+}
+
+.words__message.start-ani .words__message-text {
+  //font-size: .5em;
+  
+}
+
+
+
+
+// Form message animation
+@keyframes show-final-msg {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1; 
+  }
+}

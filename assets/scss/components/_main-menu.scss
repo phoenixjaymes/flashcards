@@ -7,16 +7,20 @@
 .main-menu {
   text-align: center;
   
-  @media #{$brk-md} {
+  @media #{$brk-sm} {
     text-align: right;
+  }
+  
+  @media #{$brk-md} {
     height: 50px;
   }
   
   &__item {
     display: inline-block;
     font-weight: $font-weight--bold;
+    padding: 0 5px;
     position: relative;
-    width: 70px;
+    //width: 70px;
     
     @media #{$brk-md} {
       padding-top: 5px;
@@ -50,6 +54,10 @@
   list-style: none;
   padding-left: 10px;
   padding-right: 7px;
+  
+  @media #{$brk-md} {
+    top: 60px;
+  }
   
   &__item {
     min-width: 100px;

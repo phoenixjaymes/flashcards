@@ -45,7 +45,12 @@
     font-size: 1.375em;
     line-height: 40px;
     padding-left: 10px;
-        
+    
+    @media #{$brk-sm} {
+      flex: 0 1 0;
+      white-space: nowrap;
+    }
+    
     @media #{$brk-md} {
       flex: 1 1 0;
       font-size: 1.5em;
@@ -59,9 +64,14 @@
     order: 4;
     height: 40px;
     
-    @media #{$brk-md} {
-      flex-basis: auto;
+    @media #{$brk-sm} {
+      flex: 1 0 auto;
       order: 3;
+      //width: 100%;
+    }
+    
+    @media #{$brk-md} {
+      flex: 0 1 auto;
       width: 100%;
     }
   }
@@ -71,6 +81,10 @@
     z-index: 50;
     flex-basis: 50px;
     order: 3;
+    
+    @media #{$brk-sm} {
+      order: 4;
+    }
     
     @media #{$brk-md} {
       order: 4;

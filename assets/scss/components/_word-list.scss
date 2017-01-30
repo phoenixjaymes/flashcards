@@ -40,21 +40,12 @@
   
 }
 
-.word-list__table-td-edit {
-  padding: 3px 3px 3px 0;
-  width: 10%;
-  
-  a {
-    
-  }
+.word-list__table-td-edit { vertical-align: middle;
+  padding: 5px 1px 1px 0;
+  width: 23%;
 }
 
 .word-list__table-td-translation {
   padding: 3px 0 3px 3px;
-  width: 90%;
+  width: 77%;
 }
-
-/*.word-list__table-td-translation__full {
-  padding: 2px 0 2px 5px;
-  width: 100%;
-}*/
