@@ -27,9 +27,9 @@ if ($pos === 'adjective') {
   
   // Adjectives
   if ($sort === 'true') {
-    $sql = "SELECT english, translation, example, img, 'none' AS gender FROM fc_german_adjectives WHERE category = '{$category}' ORDER BY translation";
+    $sql = "SELECT id, english, translation, example, img, 'none' AS gender FROM fc_german_adjectives WHERE category = '{$category}' ORDER BY translation";
   } else {
-    $sql = "SELECT english, translation, example, img, 'none' AS gender FROM fc_german_adjectives WHERE category = '{$category}'";
+    $sql = "SELECT id, english, translation, example, img, 'none' AS gender FROM fc_german_adjectives WHERE category = '{$category}'";
   }
   
   
@@ -39,6 +39,7 @@ if ($pos === 'adjective') {
   // Get cards
   while($row = $result->fetch_assoc()) {
     $arr_card = [];
+    $arr_card['id'] = $row['id'];
     $arr_card['english'] = $row['english'];
     $arr_card['translation'] = $row['translation'];
     $arr_card['example'] = $row['example'];
@@ -56,12 +57,12 @@ if ($pos === 'adjective') {
   
   // Nouns
   if ($sort === 'true') {
-    $sql = "SELECT english, translation, example, img, fc_categories_gender.gender AS gender"
+    $sql = "SELECT fc_german_nouns.id, english, translation, example, img, fc_categories_gender.gender AS gender"
          . " FROM fc_german_nouns, fc_categories_gender"
          . " WHERE fc_german_nouns.gender = fc_categories_gender.id AND category = '{$category}'"
          . " ORDER BY translation";
   } else {
-    $sql = "SELECT english, translation, example, img, fc_categories_gender.gender AS gender"
+    $sql = "SELECT fc_german_nouns.id, english, translation, example, img, fc_categories_gender.gender AS gender"
          . " FROM fc_german_nouns, fc_categories_gender"
          . " WHERE fc_german_nouns.gender = fc_categories_gender.id AND category = '{$category}'"
          . " ORDER BY added DESC";
@@ -73,6 +74,7 @@ if ($pos === 'adjective') {
   // Get cards
   while($row = $result->fetch_assoc()) {
     $arr_card = [];
+    $arr_card['id'] = $row['id'];
     $arr_card['english'] = $row['english'];
     $arr_card['translation'] = $row['translation'];
     $arr_card['example'] = $row['example'];
@@ -143,9 +145,11 @@ if ($pos === 'adjective') {
   
   
   if ($sort === 'true') {
-    $sql = "SELECT english, translation, example, ich, du, er_sie_es, wir, ihr, sie_Sie, img, 'none' AS gender FROM fc_german_verbs ORDER BY translation";
+    $sql = "SELECT id, english, translation, example, ich, du, er_sie_es, wir, ihr, sie_Sie, img, 'none' AS gender "
+    . "FROM fc_german_verbs ORDER BY translation  LIMIT 10";
   } else {
-    $sql = "SELECT english, translation, example, ich, du, er_sie_es, wir, ihr, sie_Sie, img, 'none' AS gender FROM fc_german_verbs";
+    $sql = "SELECT id,english, translation, example, ich, du, er_sie_es, wir, ihr, sie_Sie, img, 'none' AS gender FROM"
+    . " fc_german_verbs  LIMIT 20";
   }
   
   
@@ -155,6 +159,7 @@ if ($pos === 'adjective') {
   // Get cards
   while($row = $result->fetch_assoc()) {
     $arr_card = [];
+    $arr_card['id'] = $row['id'];
     $arr_card['english'] = $row['english'];
     $arr_card['translation'] = $row['translation'];
     $arr_card['example'] = $row['example'];
