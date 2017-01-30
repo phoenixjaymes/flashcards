@@ -4,31 +4,34 @@
   Author   : Jaymes Young
 -->
 <section class="flashcards">
-  <h1>German Cards</h1>
+  <h1>{{language | ucWords}} Cards</h1>
   
-  <h3>Select your Cards</h3>
-  
-  <div class="activity-buttons">
-    <button class="activity_buttons__btn" ng-repeat="option in cardOptions" ng-click="changeCategory(option.value)" ng-bind-html="option.name | trustWord"></button>
+  <div ng-hide="language === 'dutch'">
+    <h3>Select your Cards</h3>
+
+    <div class="activity-buttons">
+      <button class="activity_buttons__btn" ng-repeat="option in cardOptions" ng-click="changeCategory(option.value)" ng-bind-html="option.name | trustWord"></button>
+    </div>
+
+    <form class="cards-form">
+      <label class="cards-form__label" for="flashcard-type" ng-show="showCategory === true">Category: </label>
+      <select id="flashcard-type" class="cards-form__select" ng-model="cardCategory" ng-change="getCards(cardOptionsPos, cardCategory, false); showCards = true" ng-show="showCategory === true">
+        <option value="">Select</option>
+        <option ng-repeat="option in posCategory" value="{{option.id}}">{{option.name}}</option>
+      </select>
+    </form>
   </div>
   
-  <form class="cards-form">
-    
-    
-    <label class="cards-form__label" for="flashcard-type" ng-show="showCategory === true">Category: </label>
-    <select id="flashcard-type" class="cards-form__select" ng-model="cardCategory" ng-change="getCards(cardOptionsPos, cardCategory, false); showCards = true" ng-show="showCategory === true">
-      <option value="">Select</option>
-      <option ng-repeat="option in posCategory" value="{{option.id}}">{{option.name}}</option>
-    </select>
-  </form>
-  
+  <div ng-if="language === 'dutch'">
+    <img class="home__image" src="assets/img/flashcard-dutch-icon.svg" alt="flashcard image">
+  </div>
   
   <div class="activity" ng-show="showCards === true">
     
     <div class="activity__wrap">
       <a href="" class="activity__close" ng-click="showCards = false">X</a>
 
-      <div class="card" ng-class="{'js-flip-card' : flip}"  ng-switch="cardPos">
+      <div class="card" ng-class="{'js-flip-card' : flip}"  ng-switch="cardOptionsPos">
         <verbcard ng-switch-when="verb"></verbcard>
         <phrasecard ng-switch-when="phrase"></phrasecard>
         <genericcard ng-switch-default></genericcard>

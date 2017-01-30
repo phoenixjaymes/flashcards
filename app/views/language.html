@@ -1,4 +1,8 @@
 <section class="home">
-  <h1 class="home__title">Dutch Cards</h1>
-  <img class="home__image" src="assets/img/flashcard-dutch-icon.svg" alt="flashcard image">
+  <h1 class="home__title">{{language | ucWords}} Learning Aids</h1>
+  
+  <div ng-switch="language">
+  <img class="home__image" ng-switch-when="dutch" src="assets/img/flashcard-dutch-icon.svg" alt="flashcard image">
+  <img class="home__image"ng-switch-when="german" src="assets/img/flashcard-icon.svg" alt="flashcard image">
+  </div>
 </section>

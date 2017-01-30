@@ -4,12 +4,18 @@
   Author   : Jaymes Young
 -->
 <section class="flashcards">
-  <h1>German Words</h1>
+  <h1>{{language | ucWords}} Words</h1>
   
-  <h3>Select your Words</h3>
+  <div ng-hide="language === 'dutch'">
+    <h3>Select your Words</h3>
+
+    <div class="activity-buttons">
+      <button class="activity_buttons__btn" ng-repeat="option in wordOptions" ng-click="getListOfWords(option.value)" ng-bind-html="option.name | trustWord"></button>
+    </div>
+  </div>
   
-  <div class="activity-buttons">
-    <button class="activity_buttons__btn" ng-repeat="option in wordOptions" ng-click="getListOfWords(option.value)" ng-bind-html="option.name | trustWord"></button>
+  <div ng-if="language === 'dutch'">
+    <img class="home__image" src="assets/img/flashcard-dutch-icon.svg" alt="flashcard image">
   </div>
   
   
@@ -26,7 +32,7 @@
             ng-click="item.clicked = true; wordsClicked.wordClick($index, word.id)"><span ng-bind-html="word.word | trustWord"></span></li>
         </ul>
 
-        <div class="words__message" ng-show="finalMessage">
+        <div class="words__message" ng-class="{'start-ani' : 'finalMessage'}" ng-show="finalMessage">
           <h3 class="words__message-text">{{ message }}<br>Play Again?</h3>
           <p>
             <a href="" class="words__message-button" ng-click="getListOfWords('adjective'); finalMessage = false">Adjectives</a>

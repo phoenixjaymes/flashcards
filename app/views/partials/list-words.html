@@ -32,8 +32,11 @@
           </tr>
           
           <tr ng-repeat="word in listOfWords">
-            <td class="word-list__table-td-translation">{{word.translation}} <span class="tool" data-tip="{{word.english}}">-?-</span></td>
-            <td class="word-list__table-td-edit"><a href="" class="btn-admin" ng-click="$emit('findItem', word.id)">{{word.id}}</a></td>
+            <td class="word-list__table-td-translation" ng-bind-html=" word.translation | trustWord"> <span class="tool" data-tip="{{word.english}}">-?-</span></td>
+            <td class="word-list__table-td-edit">
+              <a href="" class="btn-edit" ng-click="$emit('findItem', word.id)"></a>
+              <a href="" class="btn-delete" ng-click="$emit('findItem', word.id)"></a>
+            </td>
           </tr>
         </tbody>
       </table>
