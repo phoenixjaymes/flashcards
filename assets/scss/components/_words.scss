@@ -19,6 +19,7 @@
   &__item {
     background: $bg-wordmatch-item;
     border-radius: $brd-radius;
+    cursor: pointer;
     display: inline-block;
     font-weight: $font-weight--bold;
     margin: 2px;
@@ -32,13 +33,7 @@
   }
   
   &__message-button {
-    background: $bg-wordmatch-item;
-    border-radius: $brd-radius;
-    display: inline-block;
-    font-weight: $font-weight--bold;
-    margin: 2px;
-    padding: 10px 5px;
-    text-decoration: none;
+    @extend %btn-activity;
   }
 }
 

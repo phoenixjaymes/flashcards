@@ -10,15 +10,5 @@
 }
 
 .activity_buttons__btn {
-  background: $governor-bay;
-  border: 0;
-  border-radius: $brd-radius;
-  color: $light-grey ;
-  cursor: pointer;
-  display: inline-block;
-  height: 30px;
-  margin: 3px;
-  padding: 0 7px;
-  text-align: center;
-  text-decoration: none;
+  @extend %btn-activity;
 }

@@ -112,3 +112,16 @@
   text-decoration: none;
   width: 30px;
 }
+
+%btn-activity {
+  background: $governor-bay;
+  border-radius: $brd-radius;
+  color: $light-grey ;
+  display: inline-block;
+  height: 30px;
+  line-height: 30px;
+  margin: 3px;
+  padding: 0 7px;
+  text-align: center;
+  text-decoration: none;
+}
