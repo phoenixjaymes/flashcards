@@ -27,13 +27,18 @@ angular.module('flashcards')
           this.wordOneId = id;
           this.wordOneIndex = index;
           return;
+        } else if (this.wordOneIndex === index && this.wordTwoId === undefined) {
+          this.wordOneId = undefined;
+          this.wordOneIndex = undefined;
         } else if (this.wordOneId !== undefined && this.wordTwoId === undefined) {
           this.wordTwoId = id;
           this.wordTwoIndex = index;
         }
         
+        
         if((this.wordOneId === this.wordTwoId) && (this.wordOneIndex !== this.wordTwoIndex)) {
 
+          // If last words then show final message
           if($scope.listOfWords.length === 2) {
             updateItemService.updateLastPracticed($scope.updateIds, function(response) {
               //console.log(response);
@@ -45,6 +50,7 @@ angular.module('flashcards')
             });
           }
 
+          // Remove items in correct order
           if (this.wordOneIndex > this.wordTwoIndex) {
             $scope.listOfWords.splice(this.wordOneIndex, 1);
             $scope.listOfWords.splice(this.wordTwoIndex, 1);
@@ -52,13 +58,15 @@ angular.module('flashcards')
             $scope.listOfWords.splice(this.wordTwoIndex, 1);
             $scope.listOfWords.splice(this.wordOneIndex, 1);
           }
-
+          
+          // Reset ids and indexes
           this.wordOneId = undefined;
           this.wordTwoId = undefined;
           this.wordOneIndex = undefined;
           this.wordTwoIndex = undefined;
 
         } else {
+          // Reset word two id and index
           this.wordTwoId = undefined;
           this.wordTwoIndex = undefined;
         } 
