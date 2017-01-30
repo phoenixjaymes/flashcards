@@ -12,6 +12,11 @@ angular.module('flashcards')
       templateUrl : 'app/views/home.html'
     };
   })
+  .directive('language', function() {
+    return {
+      templateUrl : 'app/views/language.html'
+    };
+  })
   .directive('cards', function() {
     return {
       templateUrl : 'app/views/cards.html',
