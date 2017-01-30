@@ -44,6 +44,7 @@
             
             <li class="main-menu__item" ng-click="sectionType='cards';showSubMenu = false"><a href="">Cards</a></li>
             <li class="main-menu__item" ng-click="sectionType='words';showSubMenu = false"><a href="">Words</a></li>
+            <li class="main-menu__item" ng-click="sectionType='sentences';showSubMenu = false"><a href="">Sent</a></li>
           </ul>
         </nav>
         
@@ -55,10 +56,10 @@
 
     <main class="main-content" ng-click="showSubMenu = false">
       <div class="main-content__wrap" ng-switch="sectionType">
-        
-        <words ng-switch-when="words"></words>
         <language ng-switch-when="language"></language>
         <cards ng-switch-when="cards"></cards>
+        <words ng-switch-when="words"></words>
+        <words ng-switch-when="sentences"></words>
         <admin ng-switch-when="admin"></admin>
         <home ng-switch-default></home>
       </div>
