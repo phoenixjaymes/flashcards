@@ -17,16 +17,7 @@
   @media #{$brk-md} {
     max-width: 720px;
   }
-  
-/*  @media #{$brk-lg} {
-    max-width: 940px;
-  }
-  
-  @media #{$brk-lg} {
-    max-width: 1140px;
-  }*/
 }
-
 
 // Cards
 %card-display {
@@ -124,4 +115,10 @@
   padding: 0 7px;
   text-align: center;
   text-decoration: none;
+}
+
+// Change card transition
+%change-card-trans {
+  opacity: 1;
+  //transition: opacity .2s ease-out;
 }

@@ -49,3 +49,21 @@
     }
   }
 }
+
+
+.activity__loader {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 200;
+  
+  background: $background-color;
+  height: 100%;
+  width: 100%;
+  
+  img { 
+    position: absolute;
+    left: calc(50% - 24px);
+    top: calc(50% - 24px);
+  }
+}

@@ -56,6 +56,8 @@
 .card__figure {
   max-width: 300px;
   margin: 0 0 10px 0;
+  
+  @extend %change-card-trans;
 }
 
 .card__caption {
@@ -86,6 +88,9 @@
   height: 210px;
   width: 210px;
   
+  
+  @extend %change-card-trans;
+  
   @media #{$brk-sm} {
     height: 298px;
     width: 298px;
@@ -95,6 +100,12 @@
 .card__text {
   font-size: 1.25em;
   font-weight: $font-weight--bold;
+  
+  @extend %change-card-trans;
+}
+
+.card__example {
+  @extend %change-card-trans;
 }
 
 .card__heading {
@@ -106,7 +117,6 @@
 }
 
 .card__table {
-  
   background: $card-text-bg-color;
   border: 1px solid $card-border-color;
   border-radius: 5px;
@@ -116,6 +126,8 @@
   padding: 5px;
   text-align: left;
   width: 270px;
+  
+  @extend %change-card-trans;
   
   @media #{$brk-sm} {
     margin-bottom: 20px;
@@ -158,3 +170,35 @@
   transform: rotateY(0deg);
 }
 
+
+
+.js-change-card .card__text-wrap, .js-change-card .card__text,
+.js-change-card .card__example,
+.js-change-card .card__figure,
+.js-change-card .card__table {
+  //opacity: 0;
+  //visibility: hidden;
+  animation: show-change-card-in .5s linear forwards;
+}
+
+// .js-change-card .card__text
+
+
+// Form message animation
+@keyframes show-change-card-in {
+  0% {
+    opacity: 1;
+  }
+  
+  25% {
+    opacity: 0;
+  }
+  
+  75% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1; 
+  }
+}
