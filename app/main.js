@@ -9,8 +9,8 @@
 angular.module('flashcards')
   .controller('Main', function($scope, $cookies, cardsService) {
     $scope.loggedIn = false;
-    $scope.showGerman = false;
-    $scope.showDutch = false;
+    $scope.language = 'german';
+    $scope.showSubMenu = false;
 
     $scope.formDisplay = {
       displayLogin        : false,
@@ -64,19 +64,6 @@ angular.module('flashcards')
 
       // Close options
       $scope.displayOptions = false;
-    };
-    
-    $scope.toggleSubMenu = function(menu) {
-      if (menu === 'german') {
-        $scope.showGerman = !$scope.showGerman;
-        $scope.showDutch = false;
-      } else if (menu === 'dutch') {
-        $scope.showDutch = !$scope.showDutch;
-        $scope.showGerman = false;
-      } else {
-        $scope.showDutch = false;
-        $scope.showGerman = false;
-      }
     };
     
 
