@@ -10,7 +10,7 @@
     <h3>Select your Cards</h3>
 
     <div class="activity-buttons">
-      <button class="activity_buttons__btn" ng-repeat="option in cardOptions" ng-click="changeCategory(option.value)" ng-bind-html="option.name | trustWord"></button>
+      <a href="" class="activity_buttons__btn" ng-repeat="option in cardOptions" ng-click="changeCategory(option.value)" ng-bind-html="option.name | trustWord"></a>
     </div>
 
     <form class="cards-form">
@@ -47,5 +47,4 @@
     
   </div><!-- End activity -->
   
-    
 </section>

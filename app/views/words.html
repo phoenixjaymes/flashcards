@@ -10,14 +10,13 @@
     <h3>Select your Words</h3>
 
     <div class="activity-buttons">
-      <button class="activity_buttons__btn" ng-repeat="option in wordOptions" ng-click="getListOfWords(option.value)" ng-bind-html="option.name | trustWord"></button>
+      <a href="" class="activity_buttons__btn" ng-repeat="option in wordOptions" ng-click="getListOfWords(option.value)" ng-bind-html="option.name | trustWord"></a>
     </div>
   </div>
   
   <div ng-if="language === 'dutch'">
     <img class="home__image" src="assets/img/flashcard-dutch-icon.svg" alt="flashcard image">
   </div>
-  
   
   <div class="activity" ng-show="showWords === true">
     
@@ -46,6 +45,5 @@
     </div><!-- End wrap -->
 
   </div><!-- End activity -->
-  
   
 </section>
