@@ -7,7 +7,7 @@
 'use strict';
 
 angular.module('flashcards')
-    .controller('Cards', function($scope, $timeout, $sce, cardsService) {
+    .controller('Cards', function($scope, $timeout, $sce, cardsService, preloader) {
       $scope.cardOptions = [
         {'value' : 'adjective', 'name' : 'Adj &amp; Adverbs'},
         {'value' : 'noun', 'name' : 'Nouns'},
@@ -16,6 +16,7 @@ angular.module('flashcards')
         {'value' : 'study', 'name' : 'Study'}      
       ];
       $scope.cardOptionsPos;
+      $scope.updateIds = {};
       
       // Default card
       $scope.cards = [{
@@ -27,7 +28,7 @@ angular.module('flashcards')
       }];
       $scope.currentCard = 1;
       $scope.totalCards = $scope.cards.length;
-      $scope.flip = false;
+      $scope.flipped = false;
       $scope.showCategory = false;
       $scope.showCards = false;
       
@@ -59,22 +60,55 @@ angular.module('flashcards')
       };
       
       
-      // Get words
-      $scope.getWords = function(pos, category, sort) {
-        cardsService.getWords(pos, category, sort, function(response) {
-          $scope.listOfWords = response.data;
+      
+      $scope.getListOfIds = function(array) {
+        var arrIds = [];
 
-          $scope.totalWords = $scope.listOfWords.length;          
-        });
+        for(var id in array) {
+          if(arrIds.indexOf(array[id].id) === -1) {
+            arrIds.push(array[id].id);
+          }
+        }
+        
+        return arrIds.join();
       };
+      
+      $scope.getListOfImages = function(array) {
+        var arrImages = [];
+
+        for(var item in array) {
+          if(arrImages.indexOf(array[item].img) === -1 && array[item].img !== 'none') {
+            arrImages.push('assets/img/' + array[item].img);
+          }
+        }
+        
+        return arrImages;
+      };
+    
+      
+      // Get words
+//      $scope.getWords = function(pos, category, sort) {
+//        cardsService.getWords(pos, category, sort, function(response) {
+//          $scope.listOfWords = response.data;
+//          
+////          console.log('GetWords ' + $scope.cards);
+////          $scope.updateIds.ids = $scope.getListOfIds(response.data);
+////          $scope.updateIds.pos = pos;
+//          
+//          $scope.showCards = true;
+//          $scope.totalWords = $scope.listOfWords.length;
+//          
+//        });
+//      };
       
       
       // Set card
       var setCard = function(card) {
         // Reset card
-        $scope.flip = false;
+        $scope.flipped = false;
+        $scope.changeCard = true;
         
-        if ($scope.cardPos === 'verb') {
+        if ($scope.cardOptionsPos === 'verb') {
           // Wait for card to flip over
           $timeout(function() {
             $scope.english = $scope.cards[card].english;
@@ -90,15 +124,19 @@ angular.module('flashcards')
             $scope.image = $scope.cards[card].img;
             $scope.gender = $scope.cards[card].gender;
             
-          }, 500);
-        } else if ($scope.cardPos === 'phrase') {
+          }, 250);
+          
+          $timeout(function() {$scope.changeCard = false;}, 500);
+        } else if ($scope.cardOptionsPos === 'phrase') {
           // Wait for card to flip over
           $timeout(function() {
             $scope.english = $scope.cards[card].english;
             $scope.translation = $sce.trustAsHtml($scope.cards[card].translation);
             $scope.image = $scope.cards[card].img;
             $scope.gender = $scope.cards[card].gender;
-          }, 500);
+          }, 250);
+          
+          $timeout(function() {$scope.changeCard = false;}, 500);
         } else {
           // Wait for card to flip over
           $timeout(function() {
@@ -107,22 +145,62 @@ angular.module('flashcards')
             $scope.example = $sce.trustAsHtml($scope.cards[card].example);
             $scope.image = $scope.cards[card].img;
             $scope.gender = $scope.cards[card].gender;
-          }, 500);
+          }, 250);
+          
+          $timeout(function() {$scope.changeCard = false;}, 500);
         }  
       };
       
       
       // Get cards
       $scope.getCards = function(pos, category, sort) {
+        $scope.imagesArray = [];
+        $scope.updateIds.pos = pos;
+        
+        if (pos === 'phrase') {
+          $scope.showLoadingImg = false;
+        } else {
+          $scope.showLoadingImg = true;
+        }
+        
+        
         cardsService.getWords(pos, category, sort, function(response) {
           $scope.cards = response.data;
-
+          
+          // Get Ids for updating
+          if (pos !== 'phrase' && pos !== 'study') {
+            $scope.updateIds.ids = $scope.getListOfIds(response.data);
+          }
+          
+          // Get images for preloading
+          if (pos !== 'phrase') {            
+            $scope.imagesArray = $scope.getListOfImages(response.data);
+          }
+            
+          
+          // Get number of cards and set current card to 1
           $scope.totalCards = $scope.cards.length;
-          
-          // Reset current card and set card
           $scope.currentCard = 1;
-          setCard(0);
           
+          // Preload images
+          if ($scope.imagesArray.length !== 0) {
+              preloader.preloadImages( $scope.imagesArray ).then(function() {
+              console.log('succeeded loading images');
+              setCard(0);
+              $timeout(function() {
+                $scope.showLoadingImg = false;
+              }, 600);
+              
+            }, function() {
+              console.log('failed loading images');
+              setCard(0);
+              $scope.showLoadingImg = false;
+            });
+          } else {
+            setCard(0);
+            $scope.showLoadingImg = false;
+          }
+           
         });
       };
       
@@ -154,13 +232,13 @@ angular.module('flashcards')
       
       // Flip front of card to back
       $scope.$on('cardFrontFlip', function(evt, args) {
-        $scope.flip = args;
+        $scope.flipped = args;
       });
       
       
       // Flip back of card to front
       $scope.$on('cardBackFlip', function(evt, args) {
-        $scope.flip = args;
+        $scope.flipped = args;
       });
       
       // Set initial card
