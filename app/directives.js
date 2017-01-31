@@ -29,6 +29,12 @@ angular.module('flashcards')
       controller  : 'Words'
     };
   })
+  .directive('sentences', function() {
+    return {
+      templateUrl : 'app/views/sentences.html',
+      controller  : 'Sentences'
+    };
+  })
   .directive('dutch', function() {
     return {
       templateUrl : 'app/views/dutch.html'
