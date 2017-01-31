@@ -32,6 +32,7 @@ gulp.task("concatScripts", function() {
     'app/cards.js',
     'app/cards.service.js',
     'app/words.js',
+    'app/sentences.js',
     'app/admin.js',
     'app/add/add-item.service.js',
     'app/add/add-adjective.js',
