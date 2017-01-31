@@ -1,0 +1,49 @@
+<!--
+  File     : words.html
+  Date     : 08 Jan 2016
+  Author   : Jaymes Young
+-->
+<section class="flashcards">
+  <h1>{{language | ucWords}} Words</h1>
+  
+  <div ng-hide="language === 'dutch'">
+    <h3>Select your Words</h3>
+
+    <div class="activity-buttons">
+      <a href="" class="activity_buttons__btn" ng-repeat="option in wordOptions" ng-click="getListOfWords(option.value)" ng-bind-html="option.name | trustWord"></a>
+    </div>
+  </div>
+  
+  <div ng-if="language === 'dutch'">
+    <img class="home__image" src="assets/img/flashcard-dutch-icon.svg" alt="flashcard image">
+  </div>
+  
+  <div class="activity" ng-show="showWords === true">
+    
+    <div class="activity__wrap">
+      <a href="" class="activity__close" ng-click="showWords = false; finalMessage = false">X</a>
+
+      <div class="words">
+        <h2 class="words__heading">Match the Words</h2>
+
+        <ul class="words__wrap">
+          <li class="words__item" ng-class="{'on':item.clicked && wordsClicked.wordOneIndex === $index}" ng-repeat="word in listOfWords"
+            ng-click="item.clicked = true; wordsClicked.wordClick($index, word.id)"><span ng-bind-html="word.word | trustWord"></span></li>
+        </ul>
+
+        <div class="words__message" ng-class="{'start-ani' : 'finalMessage'}" ng-show="finalMessage">
+          <h3 class="words__message-text">{{ message }}<br>Play Again?</h3>
+          <p>
+            <a href="" class="words__message-button" ng-click="getListOfWords('adjective'); finalMessage = false">Adjectives</a>
+            <a href="" class="words__message-button" ng-click="getListOfWords('noun'); finalMessage = false">Nouns</a>
+            <a href="" class="words__message-button" ng-click="getListOfWords('verb'); finalMessage = false">Verbs</a>
+          </p>
+        </div>
+
+      </div><!-- End words -->
+        
+    </div><!-- End wrap -->
+
+  </div><!-- End activity -->
+  
+</section>
