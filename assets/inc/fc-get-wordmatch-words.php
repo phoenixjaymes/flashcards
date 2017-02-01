@@ -63,7 +63,7 @@ if ($pos === 'adjective') {
     
     $arr_word1 = [];
     $arr_word1['id'] = $row['id'];
-    $arr_word1['word'] = $row['translation'];
+    $arr_word1['word'] = remove_parenthisis($row['translation']);
 
     $arr_words[] = $arr_word;
     $arr_words[] = $arr_word1;

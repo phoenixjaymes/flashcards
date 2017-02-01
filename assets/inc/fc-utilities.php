@@ -25,12 +25,13 @@ function send_data($arr) {
   exit();
 }
 
-
-// Replace unicode with html
-function replace_unicode($str) {
+// Remove parenthesis information
+function remove_parenthisis($str) {
+  $pos = strpos($str, '(');
   
+  if($pos === false) {
+    return trim($str);
+  }
   
-  $new_str = str_replace('\u00c4', '&Auml', $str);
-  
-  return $new_str;
+  return trim(substr($str, 0, $pos));
 }
