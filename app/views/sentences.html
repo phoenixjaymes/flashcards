@@ -4,13 +4,13 @@
   Author   : Jaymes Young
 -->
 <section class="flashcards">
-  <h1>{{language | ucWords}} Words</h1>
+  <h1>{{language | ucWords}} Sentences</h1>
   
   <div ng-hide="language === 'dutch'">
-    <h3>Select your Words</h3>
+    <h3>Sentences</h3>
 
     <div class="activity-buttons">
-      <a href="" class="activity_buttons__btn" ng-repeat="option in wordOptions" ng-click="getListOfWords(option.value)" ng-bind-html="option.name | trustWord"></a>
+      <a href="" class="activity_buttons__btn" ng-repeat="option in sentenceOptions" ng-click="getSentence(0)" ng-bind-html="option.name | trustWord"></a>
     </div>
   </div>
   
@@ -18,18 +18,49 @@
     <img class="home__image" src="assets/img/flashcard-dutch-icon.svg" alt="flashcard image">
   </div>
   
-  <div class="activity" ng-show="showWords === true">
+  <div class="activity" ng-show="showSentences === true">
     
     <div class="activity__wrap">
-      <a href="" class="activity__close" ng-click="showWords = false; finalMessage = false">X</a>
+      <header class="activity__header">
+        <a href="" class="activity__close" ng-click="showSentences = false; finalMessage = false">X</a>
+        <h2 class="activity__heading">Create the Sentence</h2>
+      </header>
 
       <div class="words">
-        <h2 class="words__heading">Match the Words</h2>
-
+        
+        <div>
+          <h3>{{crrntSentence.sentence}}</h3>
+          
+          <ul class="words__wrap">
+            <li class="words__item" ng-class="{'on':item.clicked}" ng-repeat="word in newSentence"
+              ng-click="item.clicked = true; wordsClicked.sentenceWrdClk($index)">
+              <span ng-bind-html="word.word | trustWord"></span>
+            </li>
+          </ul>
+          
+        </div>
+        
+        <br><hr><br>
+        
+        <p>Words to make sentence</p><br>
+        
         <ul class="words__wrap">
-          <li class="words__item" ng-class="{'on':item.clicked && wordsClicked.wordOneIndex === $index}" ng-repeat="word in listOfWords"
-            ng-click="item.clicked = true; wordsClicked.wordClick($index, word.id)"><span ng-bind-html="word.word | trustWord"></span></li>
+          <li class="words__item" ng-class="{'on':item.clicked}"
+            ng-repeat="word in crrntSentence.listOfWords" ng-click="item.clicked = true; wordsClicked.listWrdClk($index)">
+            <span ng-bind-html="word.word | trustWord"></span>
+          </li>
         </ul>
+        
+        <br>
+        <p ng-show="showAnswerCorrect">Correct</p>
+        <p ng-show="showAnswerIncorrect">Incorrect<br>{{crrntSentence.translation}}</p>
+        
+        
+        <br>
+        <a href="" ng-click="checkSentence()" ng-show="showCheck">Check</a>  <a href="" ng-click="getNextSentence()" ng-show="showNext">Next</a>
+        <br><br>
+        
+        <hr>
 
         <div class="words__message" ng-class="{'start-ani' : 'finalMessage'}" ng-show="finalMessage">
           <h3 class="words__message-text">{{ message }}<br>Play Again?</h3>

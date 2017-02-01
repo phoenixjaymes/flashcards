@@ -21,10 +21,14 @@
   <div class="activity" ng-show="showWords === true">
     
     <div class="activity__wrap">
-      <a href="" class="activity__close" ng-click="showWords = false; finalMessage = false">X</a>
+      <header class="activity__header">
+        <a href="" class="activity__close" ng-click="showWords = false; finalMessage = false">X</a>
+        <h2 class="activity__heading">Match the {{wordmatchPos | ucWords}}s</h2>
+      </header>
+      
 
       <div class="words">
-        <h2 class="words__heading">Match the Words</h2>
+        
 
         <ul class="words__wrap">
           <li class="words__item" ng-class="{'on':item.clicked && wordsClicked.wordOneIndex === $index}" ng-repeat="word in listOfWords"

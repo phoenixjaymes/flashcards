@@ -29,7 +29,10 @@
   <div class="activity" ng-show="showCards === true">
     
     <div class="activity__wrap">
-      <a href="" class="activity__close" ng-click="showCards = false">X</a>
+      <header class="activity__header">
+        <a href="" class="activity__close" ng-click="showCards = false; finalMessage = false">X</a>
+        <h2 class="activity__heading">{{cardOptionsPos | ucWords}} Cards</h2>
+      </header>
 
       <div class="card" ng-class="{'js-flip-card' : flipped}"  ng-switch="cardOptionsPos">
         <verbcard ng-class="{'js-change-card' : changeCard}" ng-switch-when="verb"></verbcard>
