@@ -28,14 +28,23 @@
     }
   }
   
+  &__header {
+    position: relative;
+    margin-bottom: 15px;
+  }
+  
   &__close {
+    position: absolute;
+    left: 0;
+    top: 0;
+    
     background: $activity-btn-color;
     border-radius: $brd-radius; 
     display: block;
     font-weight: $font-weight--bold;
     height: 40px;
     line-height: 40px;
-    margin: 5px 0 10px 5px;
+    margin-left: 5px;
     text-align: center;
     text-decoration: none;
     width: 40px;
@@ -43,8 +52,14 @@
     &:link, &:visited, &:hover, &:active {
       color: $activity-txt-color;
     }
+  }
+  
+  &__heading {
+    height: 40px;
+    line-height: 40px;
+    margin-top: 5px;
     
-    @media #{$brk-sm} {
+    @media #{$brk-md} {
       margin:10px 10px 20px 10px;
     }
   }
