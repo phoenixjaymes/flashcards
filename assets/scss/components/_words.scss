@@ -16,7 +16,13 @@
     margin-bottom: 20px;
   }
   
+  &__wrap {
+    padding: 0 10px;
+  }
+  
   &__item {
+    @include text(.95em);
+    
     background: $bg-wordmatch-item;
     border-radius: $brd-radius;
     cursor: pointer;
@@ -24,8 +30,12 @@
     font-weight: $font-weight--bold;
     margin: 2px;
     min-width: 50px;
-    padding: 10px 5px;
+    padding: 7px 5px;
     text-align: center;
+    
+    @media #{$brk-md} {
+      @include text(1.1em);
+    }
   }
   
   &__message-text {
