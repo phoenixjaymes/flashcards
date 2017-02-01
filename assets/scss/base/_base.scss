@@ -28,10 +28,6 @@ h1 {
   @media #{$brk-sm} {
     @include text(2.5em, 1.125em)
   }
-  
-  @media #{$brk-md} {
-    @include text(3em, 1.05em);
-  }
 }
 
 h2 {
@@ -39,10 +35,6 @@ h2 {
   
   @media #{$brk-sm} {
     @include text(2em, 1.125em);
-  }
-  
-  @media #{$brk-md} {
-    @include text(2.5em);
   }
 }
 
@@ -53,10 +45,6 @@ h3 {
   
   @media #{$brk-sm} {
     @include text(1.5em, 1.125em)
-  }
-  
-  @media #{$brk-md} {
-    @include text(1.75em);
   }
 }
 
