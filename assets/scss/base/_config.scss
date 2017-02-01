@@ -8,13 +8,13 @@
 // ==============================
 
 // Font stacks
-$font-url--google           : 'https://fonts.googleapis.com/css?family=Germania+One|Open+Sans:400,700';
+$font-url--google           : 'https://fonts.googleapis.com/css?family=Germania+One|Open+Sans:400,600';
 $font-family--primary       : 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 $font-family--secondary     : 'Germania One', 'Brush Script MT', cursive;
 
 
 // Font weights 
-$font-weight--bold          : 700; 
+$font-weight--bold          : 600; 
 
 // http://paletton.com/#uid=43+0u0ksSIb8PMvkqGcNgDPTRrj
 // Decriptive color variables
@@ -71,7 +71,7 @@ $base__line             : 24px;
 
 
 // Misc variables
-$brd-radius             : 5px;
+$brd-radius             : 4px;
 
 
 // Media query breakpoints
