@@ -85,10 +85,16 @@ angular.module('flashcards')
     
     $scope.getBase = function(form) {
       $scope[form].base = $scope[form].translation.replace(/\bder\s|\bdie\s|\bdas\s/i, '');
+      // Remove information in parenthesis 
+      $scope[form].base = $scope[form].translation.replace(/\([\wÄÖÜäöü¨ß·-]*\)/i, '');
+      console.log($scope[form].base);
     };
     
     $scope.getInfinitive = function(form) {
+      // Remove middot
       $scope[form].infinitive = $scope[form].translation.replace(/·/g, '');
+      // Remove information in parenthesis 
+      $scope[form].infinitive = $scope[form].translation.replace(/\([\wÄÖÜäöü¨ß·-]*\)/i, '');
     };
     
     
