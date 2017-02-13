@@ -46,6 +46,12 @@
     width: 18%;
   }
   
+  &--half {
+    @include text($size: em(18px), $color: $form-label-color);
+    display: block;
+    margin-bottom: 10px;
+  }
+  
   &--check {
     @include text($size: em(18px), $color: $form-label-color);
     display: inline-block;
@@ -58,6 +64,21 @@
   line-height: 35px;
 }
 
+.form__inner {
+  display: flex;
+  justify-content: space-between;
+  
+}
+
+.form__fieldset {
+  border: none;
+  flex:0 0 49%;
+  
+  padding: 0;
+}
+
+
+
 .form__input {
   @extend %form-textbox-display;
   
@@ -69,6 +90,13 @@
     
     display: inline-block;
     width: 80%;
+  }
+  
+  &--half {
+    @extend %form-textbox-display;
+    
+    display: inline-block;
+    width: 100%;
   }
   
   &:focus {

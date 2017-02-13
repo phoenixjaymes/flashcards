@@ -1,32 +1,46 @@
 /* 
-    File     : _words.scss
-    Date     : Jan 8, 2017
+    File     : _sentences.scss
+    Date     : 08 Feb 2017
     Author   : Jaymes Young <jaymes@phoenixjaymes.com>
 */
 
-.words {
-  background: transparent;
+.sentences {
+  display: flex;
+  flex-flow: column nowrap;
+  
   border-radius: $brd-radius;
+  height: 100%;
   list-style: none;
-  margin: 0 auto 20px auto;
+  margin: 0 auto 0px auto;
   max-width: 580px;
+  padding-bottom: 5px;
   padding-top: 60px;
   text-align: center;
+  
+  @media #{$brk-md} {
+    display: block;
+  }
   
   @media #{$brk-md} {
     padding-top: 0;
   }
   
-  &__heading {
-    margin-bottom: 20px;
+
+  &__words {
+    flex: 1;
+    
+    @media #{$brk-md} {
+      margin-bottom: 20px;
+    }
   }
   
-  &__wrap {    
-    margin-bottom: 10px; 
+  &__wrap {
+    background: $bg-sentences-wrap;
+    border-radius: $brd-radius;
+    margin: 0 auto 10px auto; 
     min-height: 100px;
     padding: 5px 10px;
-    
-    
+    width: 95%;
   }
   
   &__item {
@@ -56,19 +70,49 @@
   }
 }
 
-.words__item.on {
+
+// Check answer area
+.sentences__check {
+  
+  @media #{$brk-md} {
+    display: flex;
+  }
+}
+
+.sentences__solution {
+  min-height: 100px;
+  padding: 5px;
+  
+  @media #{$brk-md} {
+    flex: 1;
+    margin-bottom: 15px;
+  }
+}
+
+.sentences__check-btns {
+  min-height: 40px;
+  
+  @media #{$brk-md} {
+    flex: 0 0 200px;
+    height: 40px;
+  }
+}
+
+
+//
+.sentences__item.on {
   background: lightblue;
 }
 
 
-.words__message.start-ani {
+.sentences__message.start-ani {
   @extend %final-msg-display;
   
   opacity: 0;
   animation: show-final-msg 2s linear forwards;
 }
 
-.words__message.start-ani .words__message-text {
+.sentences__message.start-ani .sentences__message-text {
   //font-size: .5em;
   
 }

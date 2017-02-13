@@ -35,6 +35,14 @@
   margin: 0;
   width: 100%;
   
+  -webkit-transform-style: preserve-3d;
+  -webkit-backface-visibility: hidden;
+  -webkit-transition: all .4s ease-in-out;
+  
+  -ms-transform-style: preserve-3d;
+  -ms-backface-visibility: hidden;
+  -ms-transition: all .4s ease-in-out;
+  
   transform-style: preserve-3d;
   backface-visibility: hidden;
   transition: all .4s ease-in-out;
@@ -121,4 +129,18 @@
 %change-card-trans {
   opacity: 1;
   //transition: opacity .2s ease-out;
+}
+
+
+// Final message display
+%final-msg-display {
+  position: absolute;
+  left: calc(50% - 300px);
+  top: calc(50% - 180px);
+  
+  background: $background-color;
+  border-radius: $brd-radius;
+  height: 360px;
+  padding: 100px;
+  width: 600px;
 }

@@ -4,6 +4,13 @@
     Author   : Jaymes Young <jaymes@phoenixjaymes.com>
 */
 
+.cards-container {
+  padding-top: 60px;
+  
+  @media #{$brk-md} {
+    padding-top: 0;
+  }
+}
 .card {
   height: 350px;
   margin: 0 auto 20px auto;
