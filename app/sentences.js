@@ -1,76 +1,45 @@
 /* 
- File     : words.js
- Date     : 08 Jan 2016
+ File     : sentences.js
+ Date     : 30 Jan 2016
  Author   : Jaymes Young <jaymes@phoenixjaymes.com>
  */
 
 'use strict';
 
 angular.module('flashcards')
-  .controller('Words', function($scope, cardsService, updateItemService) {
-    $scope.wordOptions = [
-        {'value' : 'adjective', 'name' : 'Adj &amp; Adverbs'},
-        {'value' : 'noun', 'name' : 'Nouns'},
-        {'value' : 'verb', 'name' : 'Verbs'}     
+  .controller('Sentences', function($scope, cardsService, updateItemService) {
+    $scope.sentenceOptions = [
+        {'value' : 'verb', 'name' : 'Get Sentences'}     
       ];
     $scope.updateIds = {};
     $scope.finalMessage = false;
-    $scope.showWords = false;
+    $scope.showSentences = false;
+    $scope.newSentence = [];
+    $scope.crrntSentence = {};
+    $scope.crrntSentenceNum = 0;
+    $scope.showAnswerCorrect = false;
+    $scope.showAnswerIncorrect = false;
+    $scope.showContinue = false;
+    $scope.showCheck = false;
+    $scope.showFinished = false;
     
     $scope.wordsClicked = {
-      wordOneId : undefined,
-      wordTwoId : undefined,
-      wordOneIndex  : undefined,
-      wordTwoIndex  : undefined,
-      wordClick    : function(index, id) {
-        if (this.wordOneId === undefined) {
-          this.wordOneId = id;
-          this.wordOneIndex = index;
-          return;
-        } else if (this.wordOneIndex === index && this.wordTwoId === undefined) {
-          this.wordOneId = undefined;
-          this.wordOneIndex = undefined;
-        } else if (this.wordOneId !== undefined && this.wordTwoId === undefined) {
-          this.wordTwoId = id;
-          this.wordTwoIndex = index;
-        }
+      
+      listWrdClk   : function(index) {
+        // Remove item from list of words
+        var wordOne = $scope.crrntSentence.listOfWords.splice(index, 1);
+        $scope.showCheck = true;
         
-        
-        if((this.wordOneId === this.wordTwoId) && (this.wordOneIndex !== this.wordTwoIndex)) {
+        // Add word to sentence
+        $scope.newSentence.push(wordOne[0]); 
+      },
+      sentenceWrdClk : function(index) {
+        // Remove item from list of words
+        var wordOne = $scope.newSentence.splice(index, 1);
 
-          // If last words then show final message
-          if($scope.listOfWords.length === 2) {
-            updateItemService.updateLastPracticed($scope.updateIds, function(response) {
-              //console.log(response);
-              if (response.data.success === 'updated') {
-                $scope.message = 'Your words have been updated.';
-              }
-              
-              $scope.finalMessage = true;
-            });
-          }
-
-          // Remove items in correct order
-          if (this.wordOneIndex > this.wordTwoIndex) {
-            $scope.listOfWords.splice(this.wordOneIndex, 1);
-            $scope.listOfWords.splice(this.wordTwoIndex, 1);
-          } else {
-            $scope.listOfWords.splice(this.wordTwoIndex, 1);
-            $scope.listOfWords.splice(this.wordOneIndex, 1);
-          }
-          
-          // Reset ids and indexes
-          this.wordOneId = undefined;
-          this.wordTwoId = undefined;
-          this.wordOneIndex = undefined;
-          this.wordTwoIndex = undefined;
-
-        } else {
-          // Reset word two id and index
-          this.wordTwoId = undefined;
-          this.wordTwoIndex = undefined;
-        } 
-      }
+        // Add word to sentence
+        $scope.crrntSentence.listOfWords.push(wordOne[0]); 
+      } 
     };
 
     
@@ -86,14 +55,81 @@ angular.module('flashcards')
     };
 
     // Get words
-    $scope.getListOfWords = function(pos) {
-      cardsService.getListOfWords(pos, function(response) {
-        $scope.listOfWords = response.data;
-        $scope.updateIds.ids = $scope.getListOfIds($scope.listOfWords);
-        $scope.updateIds.pos = pos;
-        $scope.wordmatchPos = pos;
+    /* Get list of sentenceWords */
+    $scope.getListOfSentences = function(pos) {
+      cardsService.getSentences(pos, function(response) {
+        $scope.listOfSentences = response.data;
+        $scope.updateIds.ids = $scope.getListOfIds($scope.listOfSentences);
         
-        $scope.showWords = true;
       });
     };
+    
+    
+    $scope.getSentence = function(index) {
+      $scope.crrntSentence.sentence = $scope.listOfSentences[index].sentence;
+      $scope.crrntSentence.translation = $scope.listOfSentences[index].answer1;
+      $scope.crrntSentence.listOfWords = $scope.listOfSentences[index].words;
+      $scope.crrntSentence.solution = $scope.listOfSentences[index].solution1;
+      
+      $scope.showSentences = true;
+    };
+    
+    
+    $scope.getNewSolution = function() {
+      var solution = [];
+      if ($scope.newSentence.length === 0) {
+        return false;
+      }
+      
+      for (var i = 0; i < $scope.newSentence.length; i++) {
+        solution.push($scope.newSentence[i].pos); 
+      }
+      
+      return solution.join();
+    };
+    
+    
+    // Check answer
+    $scope.checkSentence = function() {
+      var newSolution = $scope.getNewSolution();
+      if (!newSolution) {
+        return;
+      }
+     
+      // Compare answer with solution
+      if ($scope.crrntSentence.solution === newSolution) {
+        $scope.showAnswerCorrect = true;
+      } else {
+        $scope.showAnswerIncorrect = true;
+      }
+     
+      if ($scope.crrntSentenceNum === $scope.listOfSentences.length - 1) {
+        console.log('finished');
+        console.log($scope.crrntSentenceNum + ' === ' + $scope.listOfSentences.length);
+        $scope.showCheck = false;
+        $scope.showContinue = false;
+        $scope.showFinish = true;
+      } else {
+        $scope.showCheck = false;
+        $scope.showContinue = true;
+      }
+    };
+    
+    // Get next sentences
+    $scope.getNextSentence = function() {
+      // That not at the end of sentences
+      $scope.crrntSentenceNum++;
+      
+      $scope.showAnswerCorrect = false;
+      $scope.showAnswerIncorrect = false;
+      $scope.showContinue = false;
+      $scope.showAnswer = false;
+      $scope.showCheck = true;
+      $scope.newSentence = [];
+      $scope.getSentence($scope.crrntSentenceNum);
+    };
+    
+    // Sentences for DB
+    $scope.getListOfSentences('something');
+    
 });
