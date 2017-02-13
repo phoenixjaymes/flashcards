@@ -185,14 +185,14 @@ angular.module('flashcards')
           // Preload images
           if ($scope.imagesArray.length !== 0) {
               preloader.preloadImages( $scope.imagesArray ).then(function() {
-              console.log('succeeded loading images');
+              
               setCard(0);
               $timeout(function() {
                 $scope.showLoadingImg = false;
-              }, 600);
+              }, 400);
               
             }, function() {
-              console.log('failed loading images');
+              
               setCard(0);
               $scope.showLoadingImg = false;
             });
