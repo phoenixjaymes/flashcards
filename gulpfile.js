@@ -39,6 +39,7 @@ gulp.task("concatScripts", function() {
     'app/add/add-category.js',
     'app/add/add-noun.js',
     'app/add/add-phrase.js',
+    'app/add/add-sentence.js',
     'app/add/add-verb.js',
     'app/list-words.js',
     'app/update/update-item.service.js',
@@ -46,6 +47,7 @@ gulp.task("concatScripts", function() {
     'app/update/update-category.js',
     'app/update/update-noun.js',
     'app/update/update-phrase.js',
+    'app/update/update-sentence.js',
     'app/update/update-verb.js',
     'app/preloader.service.js'
   ])
