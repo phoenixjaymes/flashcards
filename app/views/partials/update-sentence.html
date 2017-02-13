@@ -1,0 +1,34 @@
+<form class="form">
+  <div class="form-header">
+    <a class="form-header__btn" href="" ng-click="$emit('closeModal', 'displayUpdateSentence')">&larr;</a>
+    <h3 class="form-header__text">Update Sentence</h3>
+  </div>
+  
+  <label class="form__label" for="selCategoryUpdate">Category</label>
+  <select id="selCategoryUpdate" class="form__select" name="selCategory"
+    ng-model="formUpdateSentence.category" ng-focus="umlautFocus(undefined, undefined)">
+    <option ng-repeat="option in posCategoriesUpdate" value="{{option.id}}">{{option.name | ucWords}}</option>
+  </select>  
+  
+  <label class="form__label" for="upAdjEnglish">English</label>
+  <input id="upAdjEnglish" class="form__input" type="text" ng-model="formUpdateSentence.english"
+    ng-focus="umlautFocus(undefined, undefined, '')">
+  
+  <label  class="form__label" for="upAdjTranslation">Translation</label>
+  <input id="upAdjTranslation" class="form__input" type="text" ng-model="formUpdateSentence.translation"
+    ng-focus="umlautFocus('formUpdateSentence', 'translation', 'upAdjTranslation')">
+  
+  <umlauts class="form-umlauts" input-type="word" input-field="translation" ></umlauts>
+  
+  <label class="form__label" for="upAdjExample">Example</label>
+  <input id="upAdjExample" class="form__input" type="text" ng-model="formUpdateSentence.example"
+    ng-focus="umlautFocus('formUpdateSentence', 'example', 'upAdjExample')">
+  
+  <label class="form__label" for="upAdjImg">Image</label>
+  <input id="upAdjImg" class="form__input" type="text" ng-model="formUpdateSentence.image"
+    ng-focus="umlautFocus(undefined, undefined, '')">
+  
+  <button class="form__button" ng-model="formUpdateSentence.submit" ng-click="updateAdjective()">Update Adjective</button>
+  
+  <formmessage class="form-message" ng-class="{'ang-show-message' : displayFormMessage}"></formmessage>  
+</form>
