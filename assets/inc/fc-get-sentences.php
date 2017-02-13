@@ -1,7 +1,7 @@
 <?php
 /* 
- * File Name: fc-get-update-words.php
- * Date: 08 Jan 16
+ * File Name: fc-get-sentences.php
+ * Date: 04 Feb 16
  * Programmer: Jaymes Young-Liebgott
  */
 
@@ -16,86 +16,48 @@ header('content-type: application/json; charset=utf-8');
 $mySqli = new Database(DB_SERVER, DB_USER, DB_PASSWORD, DB_DATABASE);
 $mySqli->getConnection();
   
-$arr_words = [];
-$pos = filter_input(INPUT_GET, 'pos', FILTER_SANITIZE_STRING);
+$arr_sentences = [];
 
-if ($pos === 'adjective') {
-  $category = filter_input(INPUT_GET, 'category', FILTER_SANITIZE_STRING);
+//$pos = filter_input(INPUT_GET, 'pos', FILTER_SANITIZE_STRING);
+
+if (isset($_GET)) {
+  //$category = filter_input(INPUT_GET, 'category', FILTER_SANITIZE_STRING);
   
   // Adjectives
-  $sql = "SELECT id, english, translation FROM fc_german_adjectives ORDER BY last_practiced LIMIT 10";
+  $sql = "SELECT * FROM fc_german_sentence, fc_german_sentence_solution "
+    . "WHERE fc_german_sentence.id = fc_german_sentence_solution.fk LIMIT 10";
   
   
   $result = $mySqli->handleQuery($sql);
 
-
-  // Get cards
+  // Get sentences
   while($row = $result->fetch_assoc()) {
-    $arr_word = [];
-    $arr_word['id'] = $row['id'];
-    $arr_word['word'] = $row['english'];
     
-    $arr_word1 = [];
-    $arr_word1['id'] = $row['id'];
-    $arr_word1['word'] = $row['translation'];
-
-    $arr_words[] = $arr_word;
-    $arr_words[] = $arr_word1;
+    $arr_sentence = [];
+    $arr_words = [];
+    
+    foreach ($row as $key => $val) {
+      
+      if (  (!is_null($val) && $key != 'fk'  && strpos($key, 'word') === false )  ) {
+        $arr_sentence[$key] = $val;
+      }
+      
+      if ( !is_null($val) && strpos($key, 'word') === 0  ) {
+        $arr_words[] = ['pos' => substr($key, 4), 'word' => $val];
+      }  
+    }
+    
+    shuffle($arr_words);
+    $arr_sentence['words'] = $arr_words;
+    
+    $arr_sentences[] = $arr_sentence;
   }
   
-  shuffle($arr_words);
-  send_data($arr_words); 
+  send_data($arr_sentences); 
   
-} elseif ($pos === 'noun') {
-  $category = filter_input(INPUT_GET, 'category', FILTER_SANITIZE_STRING);
+} else {
   
-  // Nouns
-  $sql = "SELECT id, english, translation FROM fc_german_nouns ORDER BY last_practiced LIMIT 10";
+  $arr_response['success'] = false;
+  send_data($arr_response); 
   
-  $result = $mySqli->handleQuery($sql);
-
-
-  // Get cards
-  while($row = $result->fetch_assoc()) {
-    $arr_word = [];
-    $arr_word['id'] = $row['id'];
-    $arr_word['word'] = $row['english'];
-    
-    $arr_word1 = [];
-    $arr_word1['id'] = $row['id'];
-    $arr_word1['word'] = remove_parenthisis($row['translation']);
-
-    $arr_words[] = $arr_word;
-    $arr_words[] = $arr_word1;
-  }
-  
-  shuffle($arr_words);
-  send_data($arr_words); 
-  
-} elseif ($pos === 'verb') {
-  // Verbs
-  $category = filter_input(INPUT_GET, 'category', FILTER_SANITIZE_STRING);
-  $sort = filter_input(INPUT_GET, 'sort', FILTER_SANITIZE_STRING);
-  
-  
-  $sql = "SELECT id, english, infinitive FROM fc_german_verbs ORDER BY last_practiced LIMIT 10";
-  
-  $result = $mySqli->handleQuery($sql);
-  
-  // Get cards
-  while($row = $result->fetch_assoc()) {
-    $arr_word = [];
-    $arr_word['id'] = $row['id'];
-    $arr_word['word'] = $row['english'];
-    
-    $arr_word1 = [];
-    $arr_word1['id'] = $row['id'];
-    $arr_word1['word'] = $row['infinitive'];
-
-    $arr_words[] = $arr_word;
-    $arr_words[] = $arr_word1;
-  }
-  
-  shuffle($arr_words);
-  send_data($arr_words);
-}
+} 
