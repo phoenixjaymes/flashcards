@@ -26,48 +26,45 @@
         <h2 class="activity__heading">Create the Sentence</h2>
       </header>
 
-      <div class="words">
+      <div class="sentences">
         
-        <div>
+        <div class="sentences__words">
           <h3>{{crrntSentence.sentence}}</h3>
-          
-          <ul class="words__wrap">
-            <li class="words__item" ng-class="{'on':item.clicked}" ng-repeat="word in newSentence"
+          <ul class="sentences__wrap">
+            <li class="sentences__item" ng-class="{'on':item.clicked}" ng-repeat="word in newSentence"
               ng-click="item.clicked = true; wordsClicked.sentenceWrdClk($index)">
               <span ng-bind-html="word.word | trustWord"></span>
             </li>
           </ul>
-          
+
+          <ul class="sentences__wrap">
+            <li class="sentences__item" ng-class="{'on':item.clicked}"
+              ng-repeat="word in crrntSentence.listOfWords" ng-click="item.clicked = true; wordsClicked.listWrdClk($index)">
+              <span ng-bind-html="word.word | trustWord"></span>
+            </li>
+          </ul>
         </div>
         
-        <br><hr><br>
-        
-        <p>Words to make sentence</p><br>
-        
-        <ul class="words__wrap">
-          <li class="words__item" ng-class="{'on':item.clicked}"
-            ng-repeat="word in crrntSentence.listOfWords" ng-click="item.clicked = true; wordsClicked.listWrdClk($index)">
-            <span ng-bind-html="word.word | trustWord"></span>
-          </li>
-        </ul>
-        
-        <br>
-        <p ng-show="showAnswerCorrect">Correct</p>
-        <p ng-show="showAnswerIncorrect">Incorrect<br>{{crrntSentence.translation}}</p>
-        
-        
-        <br>
-        <a href="" ng-click="checkSentence()" ng-show="showCheck">Check</a>  <a href="" ng-click="getNextSentence()" ng-show="showNext">Next</a>
-        <br><br>
-        
-        <hr>
+        <div class="sentences__check">
+          <div class="sentences__solution">
+            <p ng-show="showAnswerCorrect"><b>Correct</b></p>
+            <p ng-show="showAnswerIncorrect"><b>Incorrect</b><br>{{crrntSentence.translation}}</p>
+          </div>
 
-        <div class="words__message" ng-class="{'start-ani' : 'finalMessage'}" ng-show="finalMessage">
-          <h3 class="words__message-text">{{ message }}<br>Play Again?</h3>
+          <div class="sentences__check-btns">
+            <a href="" ng-click="checkSentence()" ng-show="showCheck">Check</a>
+            <a href="" ng-click="getNextSentence()" ng-show="showContinue">Continue</a>
+            <a href="" ng-click="finalMessage = true" ng-show="showFinish">Finish</a>
+          </div>
+        </div>
+        
+        <div class="sentences__message" ng-class="{'start-ani' : 'finalMessage'}"  ng-show="finalMessage" >
+          <h3 class="sentences__message-text">{{ message }}<br>Play Again?</h3>
           <p>
-            <a href="" class="words__message-button" ng-click="getListOfWords('adjective'); finalMessage = false">Adjectives</a>
-            <a href="" class="words__message-button" ng-click="getListOfWords('noun'); finalMessage = false">Nouns</a>
-            <a href="" class="words__message-button" ng-click="getListOfWords('verb'); finalMessage = false">Verbs</a>
+            Nice Job!
+<!--            <a href="" class="sentences__message-button" ng-click="getListOfWords('adjective'); finalMessage = false">Adjectives</a>
+            <a href="" class="sentences__message-button" ng-click="getListOfWords('noun'); finalMessage = false">Nouns</a>
+            <a href="" class="sentences__message-button" ng-click="getListOfWords('verb'); finalMessage = false">Verbs</a>-->
           </p>
         </div>
 
