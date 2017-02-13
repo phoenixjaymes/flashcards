@@ -35,3 +35,57 @@ function remove_parenthisis($str) {
   
   return trim(substr($str, 0, $pos));
 }
+
+
+function check_empty($linkId, $str ) {
+  if (is_null($str) || empty($str)) {
+    return 'NULL';
+  } else {
+    return "'{$linkId->real_escape_string($str)}'";
+  }
+}
+
+
+function remove_empty() {
+  foreach($_POST as $key => $value) {
+    if (empty($value)) {
+      unset($_POST[$key]);
+    }
+  }
+}
+
+function trim_post() {
+  foreach($_POST as $key => $value) {
+    $_POST[$key] = trim($value);
+  }
+}
+
+
+function word_order_correct(){
+  $arr = [];
+
+  foreach ($_POST as $key => $value) {
+    if ( strpos($key, 'word') === 0 ) {
+      $arr[$key] = trim($value);
+    }
+  }
+  
+  for ($i = 2; $i < count($arr) + 1; $i++) {
+    if (empty($arr['word1']) ) {
+      return false;
+    }
+    
+    $test1 = 'word' . ($i - 1);
+    $test2 = 'word' . $i;
+    
+    if (!isset($arr[$test1], $arr[$test2])) {
+      return false;
+    }
+    
+    if( empty($arr[$test1]) && !empty($arr[$test2])    ) {
+      return false;
+    }
+  }
+  
+  return true;
+}
