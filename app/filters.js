@@ -19,6 +19,5 @@ angular.module('flashcards')
 .filter('trustWord', ['$sce', function($sce) {
     return function(str) {
       return $sce.trustAsHtml(str);
-      console.log(str);
     };
 }]);
