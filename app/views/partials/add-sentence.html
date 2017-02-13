@@ -1,0 +1,37 @@
+<form class="form" autocomplete="off">
+  <div class="form-header">
+    <a class="form-header__btn" href="" ng-click="$emit('closeModal', 'displayAddAdjective')">X</a>
+    <h3 class="form-header__text">Add Adjective</h3>
+  </div>
+  
+  <label class="form__label" for="selCategory">Category</label>
+  <select id="selCategory" class="form__select" name="selCategory" ng-model="formAddAdjective.category"
+    ng-focus="umlautFocus(undefined, undefined)">
+    <option value="">Select a Category</option>
+    <option ng-repeat="option in catAdjectives" value="{{option.id}}">{{option.name | ucWords}}</option>
+  </select>
+
+  <label class="form__label" for="txtEnglish">English</label>
+  <input id="txtEnglish" class="form__input" type="text" ng-model="formAddAdjective.english"
+    ng-focus="umlautFocus(undefined, undefined)">
+  
+  <label  class="form__label" for="addAdjTranslation">Translation</label>
+  <input id="addAdjTranslation" class="form__input" type="text" ng-model="formAddAdjective.translation"
+    ng-focus="umlautFocus('formAddAdjective', 'translation', 'addAdjTranslation')">
+  
+  <umlauts class="form-umlauts" input-type="word" input-field="translation" ></umlauts>
+  
+  <label class="form__label" for="addAdjExample">Example</label>
+  <input id="addAdjExample" class="form__input" type="text" ng-model="formAddAdjective.example"
+    ng-focus="umlautFocus('formAddAdjective', 'example', 'addAdjExample')">
+  
+  <label class="form__label" for="txtImg">Image</label>
+  <input id="txtImg" class="form__input" type="text" ng-model="formAddAdjective.img"
+    ng-focus="umlautFocus(undefined, undefined)">
+  
+  <button  class="form__button" ng-model="formAddAdjective.Submit" ng-click="addAdjective()"
+    ng-focus="umlautFocus(undefined, undefined)">Add Adjective</button>
+  
+  <formmessage class="form-message" ng-class="{'ang-show-message' : displayFormMessage}"></formmessage>
+</form>
+
