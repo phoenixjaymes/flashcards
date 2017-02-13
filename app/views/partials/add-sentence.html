@@ -1,36 +1,116 @@
 <form class="form" autocomplete="off">
   <div class="form-header">
-    <a class="form-header__btn" href="" ng-click="$emit('closeModal', 'displayAddAdjective')">X</a>
-    <h3 class="form-header__text">Add Adjective</h3>
+    <a class="form-header__btn" href="" ng-click="$emit('closeModal', 'displayAddSentence')">X</a>
+    <h3 class="form-header__text">Add Sentence</h3>
   </div>
   
   <label class="form__label" for="selCategory">Category</label>
-  <select id="selCategory" class="form__select" name="selCategory" ng-model="formAddAdjective.category"
+  <select id="selCategory" class="form__select" name="selCategory" ng-model="formAddSentence.category"
     ng-focus="umlautFocus(undefined, undefined)">
-    <option value="">Select a Category</option>
-    <option ng-repeat="option in catAdjectives" value="{{option.id}}">{{option.name | ucWords}}</option>
+    <option value="">Select</option>
+    <option ng-repeat="option in catSentences" value="{{option.id}}">{{option.name | ucWords}}</option>
   </select>
 
-  <label class="form__label" for="txtEnglish">English</label>
-  <input id="txtEnglish" class="form__input" type="text" ng-model="formAddAdjective.english"
-    ng-focus="umlautFocus(undefined, undefined)">
+  <label class="form__label" for="txtSentence">Sentence</label>
+  <input id="txtSentence" class="form__input" type="text" ng-model="formAddSentence.sentence"
+    ng-focus="umlautFocus(undefined, undefined, '')">
   
-  <label  class="form__label" for="addAdjTranslation">Translation</label>
-  <input id="addAdjTranslation" class="form__input" type="text" ng-model="formAddAdjective.translation"
-    ng-focus="umlautFocus('formAddAdjective', 'translation', 'addAdjTranslation')">
   
-  <umlauts class="form-umlauts" input-type="word" input-field="translation" ></umlauts>
+  <div class="form__inner">
+    <fieldset class="form__fieldset">
+      <label class="form__label--half" for="addSentPos1">W1</label>
+      <input id="addSentPos1" class="form__input--half" type="text" ng-model="formAddSentence.word1"
+        ng-focus="umlautFocus('formAddSentence', 'word1', 'addSentPos1')">
+    </fieldset>
+    
+    <fieldset class="form__fieldset">
+      <label class="form__label--half" for="addSentPos2">W2</label>
+      <input id="addSentPos2" class="form__input--half" type="text" ng-model="formAddSentence.word2"
+        ng-focus="umlautFocus('formAddSentence', 'word2', 'addSentPos2')">
+    </fieldset>
+  </div>
   
-  <label class="form__label" for="addAdjExample">Example</label>
-  <input id="addAdjExample" class="form__input" type="text" ng-model="formAddAdjective.example"
-    ng-focus="umlautFocus('formAddAdjective', 'example', 'addAdjExample')">
+  <div class="form__inner">
+    <fieldset class="form__fieldset">
+      <label class="form__label--half" for="addSentPos3">W3</label>
+      <input id="addSentPos3" class="form__input--half" type="text" ng-model="formAddSentence.word3"
+        ng-focus="umlautFocus('formAddSentence', 'word3', 'addSentPos3')">
+    </fieldset>
+    
+    <fieldset class="form__fieldset">
+      <label class="form__label--half" for="addSentPos4">W4</label>
+      <input id="addSentPos4" class="form__input--half" type="text" ng-model="formAddSentence.word4"
+        ng-focus="umlautFocus('formAddSentence', 'word4', 'addSentPos4')">
+    </fieldset>
+  </div>
   
-  <label class="form__label" for="txtImg">Image</label>
-  <input id="txtImg" class="form__input" type="text" ng-model="formAddAdjective.img"
-    ng-focus="umlautFocus(undefined, undefined)">
+  <div class="form__inner">
+    <fieldset class="form__fieldset">
+      <label class="form__label--half" for="addSentPos5">W5</label>
+      <input id="addSentPos5" class="form__input--half" type="text" ng-model="formAddSentence.word5"
+        ng-focus="umlautFocus('formAddSentence', 'word5', 'addSentPos5')">
+    </fieldset>
+    
+    <fieldset class="form__fieldset">
+      <label class="form__label--half" for="addSentPos6">W6</label>
+      <input id="addSentPos6" class="form__input--half" type="text" ng-model="formAddSentence.word6"
+        ng-focus="umlautFocus('formAddSentence', 'word6', 'addSentPos6')">
+    </fieldset>
+  </div>
   
-  <button  class="form__button" ng-model="formAddAdjective.Submit" ng-click="addAdjective()"
-    ng-focus="umlautFocus(undefined, undefined)">Add Adjective</button>
+  <div class="form__inner">
+    <fieldset class="form__fieldset">
+      <label class="form__label--half" for="addSentPos7">W7</label>
+      <input id="addSentPos7" class="form__input--half" type="text" ng-model="formAddSentence.word7"
+        ng-focus="umlautFocus('formAddSentence', 'word7', 'addSentPos7')">
+    </fieldset>
+    
+    <fieldset class="form__fieldset">
+      <label class="form__label--half" for="addSentPos8">W8</label>
+      <input id="addSentPos8" class="form__input--half" type="text" ng-model="formAddSentence.word8"
+        ng-focus="umlautFocus('formAddSentence', 'word8', 'addSentPos8')">
+    </fieldset>
+  </div>
+  
+  <div class="form__inner">
+    <fieldset class="form__fieldset">
+      <label class="form__label--half" for="addSentPos9">W9</label>
+      <input id="addSentPos9" class="form__input--half" type="text" ng-model="formAddSentence.word9"
+        ng-focus="umlautFocus('formAddSentence', 'word9', 'addSentPos9')">
+    </fieldset>
+    
+    <fieldset class="form__fieldset">
+      <label class="form__label--half" for="addSentPos10">W10</label>
+      <input id="addSentPos10" class="form__input--half" type="text" ng-model="formAddSentence.word10"
+        ng-focus="umlautFocus('formAddSentence', 'word10', 'addSentPos10')">
+    </fieldset>
+  </div>
+  
+  
+  <label class="form__label" for="addSentAnswer1">Answer 1</label>
+  <input id="addSentAnswer1" class="form__input" type="text" ng-model="formAddSentence.answer1"
+    ng-focus="umlautFocus('formAddSentence', 'answer1', 'addSentAnswer1')">
+  
+  <label class="form__label" for="addSentAnswer2">Answer 2</label>
+  <input id="addSentAnswer2" class="form__input" type="text" ng-model="formAddSentence.answer2"
+    ng-focus="umlautFocus('formAddSentence', 'answer2', 'addSentAnswer2')">
+  
+  <div class="form__inner">
+    <fieldset class="form__fieldset">
+      <label class="form__label--half" for="txtAddSolution1">Solution 1</label>
+      <input id="addSentSolution1" class="form__input--half" type="text" ng-model="formAddSentence.solution1"
+        ng-focus="umlautFocus(formAddSentence, 'solution1', 'addSentSolution1')">
+    </fieldset>
+    
+    <fieldset class="form__fieldset">
+      <label class="form__label--half" for="txtAddSolution2">Solution 2</label>
+      <input id="addSentSolution2" class="form__input--half" type="text" ng-model="formAddSentence.solution2"
+        ng-focus="umlautFocus(formAddSentence, 'solution2', 'addSentSolution2')">
+    </fieldset>
+  </div>
+  
+  <button  class="form__button" ng-model="formAddSentence.Submit" ng-click="addSentence()"
+    ng-focus="umlautFocus(undefined, undefined, '')">Add Sentence</button>
   
   <formmessage class="form-message" ng-class="{'ang-show-message' : displayFormMessage}"></formmessage>
 </form>
