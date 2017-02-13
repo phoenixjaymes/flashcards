@@ -74,6 +74,8 @@ if ($type && $type === 'all') {
        . " GROUP BY id ORDER BY name";
   
   $sqlGender = 'SELECT id, gender FROM fc_categories_gender';
+  
+  $sqlSentence = 'SELECT id, type FROM fc_categories_sentence';
 
 
   // Adjectives
@@ -125,6 +127,23 @@ if ($type && $type === 'all') {
   }
   
   $arr_categories['gender'] = $arr_cat_gender;
+  
+  
+  // Sentence
+  $resultSentence = $mySqli->handleQuery($sqlSentence);
+
+
+  // Get cards
+  $arr_cat_sentence = [];
+  while($row = $resultSentence->fetch_assoc()) {
+    $arr_new_category = [];
+    $arr_new_category['id'] = $row['id'];
+    $arr_new_category['name'] = $row['type'];
+
+    $arr_cat_sentence[] = $arr_new_category;
+  }
+  
+  $arr_categories['sentence'] = $arr_cat_sentence;
 
 }
 
