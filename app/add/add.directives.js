@@ -31,6 +31,12 @@ angular.module('flashcards')
       controller : 'AddPhrase'
     };
   })
+  .directive('addSentence', function() {
+    return {
+      templateUrl : 'app/views/partials/add-sentence.html',
+      controller : 'AddSentence'
+    };
+  })
   .directive('addVerb', function() {
     return {
       templateUrl : 'app/views/partials/add-verb.html',

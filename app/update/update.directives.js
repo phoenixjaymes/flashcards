@@ -31,6 +31,12 @@ angular.module('flashcards')
       controller: 'UpdatePhrase'
     };
   })
+  .directive('updateSentence', function() {
+    return {
+      templateUrl : 'app/views/partials/update-sentence.html',
+      controller: 'UpdateSentence'
+    };
+  })
   .directive('updateVerb', function() {
     return {
       templateUrl : 'app/views/partials/update-verb.html',

@@ -1,16 +1,16 @@
 /* 
- File     : update-adjective.js
- Date     : Dec 21, 2016
+ File     : update-sentence.js
+ Date     : 04 Feb 2016
  Author   : Jaymes Young <jaymes@phoenixjaymes.com>
  */
 
 'use strict';
 
 angular.module('flashcards')
-  .controller('UpdateAdjective', function($scope, updateItemService) {
-    $scope.updateAdjective = function() {
+  .controller('UpdateSentence', function($scope, updateItemService) {
+    $scope.updateSentence = function() {
       
-      updateItemService.updateItem($scope.formUpdateAdjective, function(response) {
+      updateItemService.updateItem($scope.formUpdateSentence, function(response) {
         
         // Check response message
         if(response.data.success === 'updated') {
