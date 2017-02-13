@@ -25,6 +25,7 @@ angular.module('flashcards')
         $scope.catAdjectives = response.data.adjective;
         $scope.catNouns = response.data.noun;
         $scope.catGenders = response.data.gender;
+        $scope.catSentences = response.data.sentence;
       });
     };
 
