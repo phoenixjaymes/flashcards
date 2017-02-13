@@ -84,22 +84,6 @@ angular.module('flashcards')
         
         return arrImages;
       };
-    
-      
-      // Get words
-//      $scope.getWords = function(pos, category, sort) {
-//        cardsService.getWords(pos, category, sort, function(response) {
-//          $scope.listOfWords = response.data;
-//          
-////          console.log('GetWords ' + $scope.cards);
-////          $scope.updateIds.ids = $scope.getListOfIds(response.data);
-////          $scope.updateIds.pos = pos;
-//          
-//          $scope.showCards = true;
-//          $scope.totalWords = $scope.listOfWords.length;
-//          
-//        });
-//      };
       
       
       // Set card
