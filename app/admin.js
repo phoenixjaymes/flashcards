@@ -13,12 +13,14 @@ angular.module('flashcards')
       displayAddCategory  : false,
       displayAddNoun      : false,
       displayAddPhrase    : false,
+      displayAddSentence  : false,
       displayAddVerb      : false,
       displayListWords    : false,
       displayUpdateAdjective  : false,
       displayUpdateCategory   : false,
       displayUpdateNoun       : false,
       displayUpdatePhrase     : false,
+      displayUpdateSentence   : false,
       displayUpdateVerb       : false
     };
     
@@ -26,11 +28,14 @@ angular.module('flashcards')
     $scope.formAddCategory = {"pos": "category"};
     $scope.formAddNoun = {"pos": "noun", "translation":""};
     $scope.formAddPhrase = {"pos" : "phrase"};
+    $scope.formAddSentence = {"pos": "sentence"};
     $scope.formAddVerb = {"pos": "verb", "translation":""};
+    
     $scope.formUpdateAdjective = {"pos": "adjective"};
     $scope.formUpdateCategory = {"pos": "category"};
     $scope.formUpdateNoun = {"pos": "noun"};
     $scope.formUpdatePhrase = {"pos": "phrase"};
+    $scope.formUpdateSentence = {"pos": "sentence"};
     $scope.formUpdateVerb = {"pos": "verb"};
     $scope.inputType;
     $scope.inputField;
@@ -86,15 +91,14 @@ angular.module('flashcards')
     $scope.getBase = function(form) {
       $scope[form].base = $scope[form].translation.replace(/\bder\s|\bdie\s|\bdas\s/i, '');
       // Remove information in parenthesis 
-      $scope[form].base = $scope[form].translation.replace(/\([\wÄÖÜäöü¨ß·-]*\)/i, '');
-      console.log($scope[form].base);
+      $scope[form].base = $scope[form].base.replace(/\([\wÄÖÜäöü¨ß·-]*\)/i, '');
     };
     
     $scope.getInfinitive = function(form) {
       // Remove middot
       $scope[form].infinitive = $scope[form].translation.replace(/·/g, '');
       // Remove information in parenthesis 
-      $scope[form].infinitive = $scope[form].translation.replace(/\([\wÄÖÜäöü¨ß·-]*\)/i, '');
+      $scope[form].infinitive = $scope[form].infinitive.replace(/\([\wÄÖÜäöü¨ß·-]*\)/i, '');
     };
     
     
@@ -185,8 +189,11 @@ angular.module('flashcards')
         'updated'   : 'Item updated successfully.',
         'incorrect' : 'Please fill in all form fields.',
         'duplicate' : 'This item already exist.',
+        'order'     : 'The word order is incorrect.',
         'false'     : 'Unable to add item at this time.'
       };
+      
+      console.log(message);
       
       $scope.responseMessage = objMessages[message];
       $scope.displayFormMessage = true;
@@ -194,7 +201,7 @@ angular.module('flashcards')
     
     
     // Display admin forms
-    $scope.displayForm = function(form) {
+    $scope.displayForm = function(form) { console.log('Display: ' + form);
       // Close all modals
       for (var prop in $scope.formDisplay) {
         $scope.formDisplay[prop] = false;
@@ -214,7 +221,6 @@ angular.module('flashcards')
 
       // Don't show message box
       $scope.displayFormMessage = false;
-      console.log(args + ' - ' + $scope.displayFormMessage);
     });
     
     
