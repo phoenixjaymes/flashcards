@@ -20,10 +20,22 @@ angular.module('flashcards')
         // Check response message
         if(response.data.success === true) {
           // Clear form
-          $scope.formAddSentence.english = '';
-          $scope.formAddSentence.translation = '';
-          $scope.formAddSentence.example = '';
-          $scope.formAddSentence.img = '';
+          $scope.formAddSentence.sentence = '';
+          $scope.formAddSentence.word1 = '';
+          $scope.formAddSentence.word2 = '';
+          $scope.formAddSentence.word3 = '';
+          $scope.formAddSentence.word4 = '';
+          $scope.formAddSentence.word5 = '';
+          $scope.formAddSentence.word6 = '';
+          $scope.formAddSentence.word7 = '';
+          $scope.formAddSentence.word8 = '';
+          $scope.formAddSentence.word9 = '';
+          $scope.formAddSentence.word10 = '';
+          $scope.formAddSentence.answer1 = '';
+          $scope.formAddSentence.answer2 = '';
+          $scope.formAddSentence.solution1 = '';
+          $scope.formAddSentence.solution2 = '';
+          
           
           $scope.displayMessage('true');
         } else if (response.data.success === 'duplicate') {
