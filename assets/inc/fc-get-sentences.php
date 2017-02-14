@@ -53,6 +53,7 @@ if (isset($_GET)) {
     $arr_sentences[] = $arr_sentence;
   }
   
+  shuffle($arr_sentences);
   send_data($arr_sentences); 
   
 } else {
