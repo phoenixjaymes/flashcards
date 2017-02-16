@@ -67,7 +67,7 @@ angular.module('flashcards')
     
     $scope.getSentence = function(index) {
       $scope.crrntSentence.sentence = $scope.listOfSentences[index].sentence;
-      $scope.crrntSentence.translation = $scope.listOfSentences[index].answer1;
+      $scope.crrntSentence.answer1 = $scope.listOfSentences[index].answer1;
       $scope.crrntSentence.listOfWords = $scope.listOfSentences[index].words;
       $scope.crrntSentence.solution = $scope.listOfSentences[index].solution1;
       
@@ -82,26 +82,29 @@ angular.module('flashcards')
       }
       
       for (var i = 0; i < $scope.newSentence.length; i++) {
-        solution.push($scope.newSentence[i].pos); 
+        solution.push($scope.newSentence[i].word); 
       }
       
-      return solution.join();
+      return solution.join(' ');
     };
     
     
     // Check answer
     $scope.checkSentence = function() {
       var newSolution = $scope.getNewSolution();
+      
       if (!newSolution) {
         return;
       }
-     
-      // Compare answer with solution
-      if ($scope.crrntSentence.solution === newSolution) {
+
+      console.log($scope.crrntSentence.answer1 + ' = ' + newSolution);
+
+      if ($scope.crrntSentence.answer1 === newSolution) {
         $scope.showAnswerCorrect = true;
       } else {
         $scope.showAnswerIncorrect = true;
       }
+
      
       if ($scope.crrntSentenceNum === $scope.listOfSentences.length - 1) {
         console.log('finished');
