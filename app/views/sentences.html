@@ -9,8 +9,9 @@
   <div ng-hide="language === 'dutch'">
     <h3>Sentences</h3>
 
+    <!-- Option Buttons -->
     <div class="activity-buttons">
-      <a href="" class="activity_buttons__btn" ng-repeat="option in sentenceOptions" ng-click="getSentence(0)" ng-bind-html="option.name | trustWord"></a>
+      <a href="" class="activity_buttons__btn" ng-repeat="option in sentenceOptions" ng-click="getListOfSentences('type')" ng-bind-html="option.name | trustWord"></a>
     </div>
   </div>
   
@@ -22,7 +23,7 @@
     
     <div class="activity__wrap">
       <header class="activity__header">
-        <a href="" class="activity__close" ng-click="showSentences = false; finalMessage = false">X</a>
+        <a href="" class="activity__close" ng-click="resetSentences()">X</a>
         <h2 class="activity__heading">Create the Sentence</h2>
       </header>
 
