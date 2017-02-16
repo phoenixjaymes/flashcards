@@ -42,7 +42,7 @@ angular.module('flashcards')
       } 
     };
 
-    
+    // Get ids to update
     $scope.getListOfIds = function(array) {
       var arrIds = [];
       
@@ -54,18 +54,18 @@ angular.module('flashcards')
       return arrIds.join();
     };
 
-    // Get words
-    /* Get list of sentenceWords */
+
+    // Get list of sentenceWords
     $scope.getListOfSentences = function(pos) {
       cardsService.getSentences(pos, function(response) {
         $scope.listOfSentences = response.data;
         $scope.updateIds.ids = $scope.getListOfIds($scope.listOfSentences);
-        
+        $scope.getCurrentSentence(0);
       });
     };
     
-    
-    $scope.getSentence = function(index) {
+    // Get current sentence
+    $scope.getCurrentSentence = function(index) {
       $scope.crrntSentence.sentence = $scope.listOfSentences[index].sentence;
       $scope.crrntSentence.answer1 = $scope.listOfSentences[index].answer1;
       $scope.crrntSentence.listOfWords = $scope.listOfSentences[index].words;
@@ -97,8 +97,6 @@ angular.module('flashcards')
         return;
       }
 
-      console.log($scope.crrntSentence.answer1 + ' = ' + newSolution);
-
       if ($scope.crrntSentence.answer1 === newSolution) {
         $scope.showAnswerCorrect = true;
       } else {
@@ -107,8 +105,6 @@ angular.module('flashcards')
 
      
       if ($scope.crrntSentenceNum === $scope.listOfSentences.length - 1) {
-        console.log('finished');
-        console.log($scope.crrntSentenceNum + ' === ' + $scope.listOfSentences.length);
         $scope.showCheck = false;
         $scope.showContinue = false;
         $scope.showFinish = true;
@@ -129,10 +125,13 @@ angular.module('flashcards')
       $scope.showAnswer = false;
       $scope.showCheck = true;
       $scope.newSentence = [];
-      $scope.getSentence($scope.crrntSentenceNum);
+      $scope.getCurrentSentence($scope.crrntSentenceNum);
     };
     
-    // Sentences for DB
-    $scope.getListOfSentences('something');
-    
+    // Reset sentence variables
+    $scope.resetSentences = function() {
+      $scope.showSentences = false;
+      $scope.finalMessage = false;
+      $scope.listOfSentences = undefined;
+    };
 });
