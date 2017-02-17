@@ -27,6 +27,7 @@
         <h2 class="activity__heading">Create the Sentence</h2>
       </header>
 
+      
       <div class="sentences">
         
         <div class="sentences__words">
@@ -34,14 +35,14 @@
           <ul class="sentences__wrap">
             <li class="sentences__item" ng-class="{'on':item.clicked}" ng-repeat="word in newSentence"
               ng-click="item.clicked = true; wordsClicked.sentenceWrdClk($index)">
-              <span ng-bind-html="word.word | trustWord"></span>
+              <span ng-bind-html="word | trustWord"></span>
             </li>
           </ul>
 
           <ul class="sentences__wrap">
             <li class="sentences__item" ng-class="{'on':item.clicked}"
               ng-repeat="word in crrntSentence.listOfWords" ng-click="item.clicked = true; wordsClicked.listWrdClk($index)">
-              <span ng-bind-html="word.word | trustWord"></span>
+              <span ng-bind-html="word | trustWord"></span>
             </li>
           </ul>
         </div>
