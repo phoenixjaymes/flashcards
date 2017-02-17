@@ -24,8 +24,7 @@ if (isset($_GET)) {
   //$category = filter_input(INPUT_GET, 'category', FILTER_SANITIZE_STRING);
   
   // Adjectives
-  $sql = "SELECT * FROM fc_german_sentence, fc_german_sentence_solution "
-    . "WHERE fc_german_sentence.id = fc_german_sentence_solution.fk LIMIT 10";
+  $sql = "SELECT * FROM fc_german_sentence LIMIT 10";
   
   
   $result = $mySqli->handleQuery($sql);
@@ -38,13 +37,11 @@ if (isset($_GET)) {
     
     foreach ($row as $key => $val) {
       
-      if (  (!is_null($val) && $key != 'fk'  && strpos($key, 'word') === false )  ) {
-        $arr_sentence[$key] = $val;
-      }
+      $arr_sentence[$key] = $val;
       
-      if ( !is_null($val) && strpos($key, 'word') === 0  ) {
-        $arr_words[] = ['pos' => substr($key, 4), 'word' => $val];
-      }  
+      if ( $key === 'answer1' ) {
+        $arr_words = explode(' ', $val);
+      }
     }
     
     shuffle($arr_words);

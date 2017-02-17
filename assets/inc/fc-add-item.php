@@ -185,98 +185,43 @@ if ($pos && $pos === 'adjective') {
   
   remove_empty();
   
-  if(!word_order_correct()) {
-    $arr_response['success'] = 'order';
-    send_data($arr_response);
-  }
-  
   // Sanitize input
   $category = filter_input(INPUT_POST, 'category', FILTER_SANITIZE_STRING);
   $sentence = filter_input(INPUT_POST, 'sentence', FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
-  $word1 = filter_input(INPUT_POST, 'word1', FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
-  $word2 = filter_input(INPUT_POST, 'word2', FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
-  $word3 = filter_input(INPUT_POST, 'word3', FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
-  $word4 = filter_input(INPUT_POST, 'word4', FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
-  $word5 = filter_input(INPUT_POST, 'word5', FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
-  $word6 = filter_input(INPUT_POST, 'word6', FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
-  $word7 = filter_input(INPUT_POST, 'word7', FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
-  $word8 = filter_input(INPUT_POST, 'word8', FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
-  $word9 = filter_input(INPUT_POST, 'word9', FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
-  $word10 = filter_input(INPUT_POST, 'word10', FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
-  
   $answer1 = filter_input(INPUT_POST, 'answer1', FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
   $answer2 = filter_input(INPUT_POST, 'answer2', FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
-  $solution1 = filter_input(INPUT_POST, 'solution1', FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
-  $solution2 = filter_input(INPUT_POST, 'solution2', FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
   
- 
   
   // Escape input
   $sentence_safe = $linkId->real_escape_string($sentence);
-  $word1_safe = $linkId->real_escape_string($word1);
-  $word2_safe = $linkId->real_escape_string($word2);
-  
-  $word3_safe = check_empty($linkId, $word3);
-  $word4_safe = check_empty($linkId, $word4);
-  $word5_safe = check_empty($linkId, $word5);
-  $word6_safe = check_empty($linkId, $word6);
-  $word7_safe = check_empty($linkId, $word7);
-  $word8_safe = check_empty($linkId, $word8);
-  $word9_safe = check_empty($linkId, $word9);
-  $word10_safe = check_empty($linkId, $word10);
-  
   $answer1_safe = $linkId->real_escape_string($answer1);
   $answer2_safe = check_empty($linkId, $answer2);
-  $solution1_safe = $linkId->real_escape_string($solution1);
-  $solution2_safe = check_empty($linkId, $solution2);
   
   
   
-  
-  if (!$category || !$sentence_safe || !$word1_safe || !$word2_safe || !$word3_safe || !$word4_safe || !$answer1_safe || !$solution1_safe ) {
+  if (!$category || !$sentence_safe || !$answer1_safe ) {
     $arr_response['success'] = 'incorrect';
     send_data($arr_response);
   } else {
     
     // Duplicate check
-//    $sqlDuplicate = "SELECT count(*) AS cnt FROM fc_german_verbs WHERE translation = '$translation_safe'";
-//
-//    if(is_duplicate($mySqli, $sqlDuplicate)) {
-//      $arr_response['success'] = 'duplicate';     
-//      send_data($arr_response);
-//    }
-    
-    
-//    echo '<pre>';
-//    print_r($_POST);
-//    echo '</pre><br>';
+    $sqlDuplicate = "SELECT count(*) AS cnt FROM fc_german_sentence WHERE sentence = '$sentence_safe'";
+
+    if(is_duplicate($mySqli, $sqlDuplicate)) {
+      $arr_response['success'] = 'duplicate';     
+      send_data($arr_response);
+    }
     
     
     $sqlSentence = "INSERT INTO fc_german_sentence"
-      . " (sentence, category, word1, word2, word3, word4, word5, word6, word7, word8, word9, word10, added, last_practiced)"
+      . " (sentence, category, answer1, added, last_practiced)"
       . " VALUES"
-      . " ('$sentence_safe', '$category', '$word1_safe', '$word2_safe', $word3_safe, "
-      . " $word4_safe, $word5_safe, $word6_safe, $word7_safe, $word8_safe, $word9_safe, $word10_safe, '$date', '$date')";
+      . " ('$sentence_safe', '$category', '$answer1_safe', '$date', '$date')";
     
-    
-    
+      
     $result = $mySqli->handleQuery($sqlSentence);
 
     if ($result) {
-      $arr_response['success'] = true;
-      $fk = $linkId->insert_id;
-    } else {
-      $arr_response['success'] = false;
-    }
-    
-    $sqlSolution = "INSERT INTO fc_german_sentence_solution"
-      . " (fk, answer1, answer2, solution1, solution2)"
-      . " VALUES"
-      . " ($fk, '$answer1_safe', $answer2_safe, '$solution1_safe', $solution2_safe)";
-    
-    $resultSolution = $mySqli->handleQuery($sqlSolution);
-    
-    if ($resultSolution) {
       $arr_response['success'] = true;
     } else {
       $arr_response['success'] = false;
