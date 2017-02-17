@@ -64,6 +64,7 @@ angular.module('flashcards')
       });
     };
     
+    
     // Get current sentence
     $scope.getCurrentSentence = function(index) {
       $scope.crrntSentence.sentence = $scope.listOfSentences[index].sentence;
@@ -82,7 +83,7 @@ angular.module('flashcards')
       }
       
       for (var i = 0; i < $scope.newSentence.length; i++) {
-        solution.push($scope.newSentence[i].word); 
+        solution.push($scope.newSentence[i]); 
       }
       
       return solution.join(' ');
@@ -96,7 +97,7 @@ angular.module('flashcards')
       if (!newSolution) {
         return;
       }
-
+      
       if ($scope.crrntSentence.answer1 === newSolution) {
         $scope.showAnswerCorrect = true;
       } else {
