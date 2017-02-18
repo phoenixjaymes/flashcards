@@ -88,28 +88,35 @@ angular.module('flashcards')
       }
     };
     
+    
     $scope.getBase = function(form) {
       $scope[form].base = $scope[form].translation.replace(/\bder\s|\bdie\s|\bdas\s/i, '');
       // Remove information in parenthesis 
       $scope[form].base = $scope[form].base.replace(/\([\wÄÖÜäöü¨ß·-]*\)/i, '');
     };
     
+    $scope.removeParenthesis = function(word) {
+      // Remove information in parenthesis and extra spaces 
+      return word.replace(/\([\wÄÖÜäöü¨ß·-]*\)/i, '').trim();
+    };
+    
     $scope.getInfinitive = function(form) {
       // Remove middot
       $scope[form].infinitive = $scope[form].translation.replace(/·/g, '');
       // Remove information in parenthesis 
-      $scope[form].infinitive = $scope[form].infinitive.replace(/\([\wÄÖÜäöü¨ß·-]*\)/i, '');
+      $scope[form].infinitive = $scope.removeParenthesis($scope[form].infinitive);
     };
     
     
     $scope.getStem = function(form) {
-      var intLen = $scope[form].translation.length;
-      var ending = $scope[form].translation.substring(intLen-2);
+      var word =  $scope.removeParenthesis($scope[form].translation); 
+      var intLen = word.length;
+      var ending = word.substring(intLen-2);
       
        if (ending === 'en') {
-         return $scope[form].translation.substring(0, intLen-2);
+         return word.substring(0, intLen-2);
        } else {
-         return $scope[form].translation.substring(0, intLen-1);
+         return word.substring(0, intLen-1);
        }
     };
     
@@ -157,7 +164,7 @@ angular.module('flashcards')
     
     
     $scope.conjugateWir = function(form) {
-      $scope[form].wir = $scope[form].translation;
+      $scope[form].wir = $scope.removeParenthesis($scope[form].translation);
     };
     
     
@@ -168,7 +175,7 @@ angular.module('flashcards')
     
     
     $scope.conjugateSie = function(form) {
-      $scope[form].sie_sie = $scope[form].translation;
+      $scope[form].sie_sie = $scope.removeParenthesis($scope[form].translation);
     };
     
     
