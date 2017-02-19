@@ -7,7 +7,7 @@
 'use strict';
 
 angular.module('flashcards')
-  .controller('Admin', function($scope) {
+  .controller('Admin', function($scope, cardsService) {
     $scope.formDisplay = {
       displayAddAdjective : false,
       displayAddCategory  : false,
@@ -40,6 +40,15 @@ angular.module('flashcards')
     $scope.inputType;
     $scope.inputField;
     $scope.inputId;
+    
+    // Get all admin categories from service
+    var getAdminCategories = function() {
+      cardsService.getCategoriesAdmin(function(response) {
+        $scope.cardAllCategories = response.data;
+        $scope.catGeneric = response.data.generic;
+        $scope.catSentences = response.data.sentence;
+      });
+    };
 
 
     // Set which input umlaut should be added to
@@ -208,7 +217,7 @@ angular.module('flashcards')
     
     
     // Display admin forms
-    $scope.displayForm = function(form) { console.log('Display: ' + form);
+    $scope.displayForm = function(form) {
       // Close all modals
       for (var prop in $scope.formDisplay) {
         $scope.formDisplay[prop] = false;
@@ -237,5 +246,8 @@ angular.module('flashcards')
       // Open selected modal
       $scope.formDisplay[form] = true;
     });
+    
+    // Get Admin categories
+    getAdminCategories();
     
 });
