@@ -7,6 +7,7 @@
 
 require 'db-constants.php';
 require '../classes/database.php';
+require 'fc-utilities.php';
 
 // Set content ype to json
 header('content-type: application/json; charset=utf-8');
@@ -19,131 +20,66 @@ $arr_categories = [];
 
 $type = filter_input(INPUT_GET, 'type', FILTER_SANITIZE_STRING);
 
-if ($type && $type === 'all') {
-  $sql ='SELECT * FROM fc_categories ORDER BY category';
-  $sql_gender = 'SELECT * FROM fc_categories_gender';
-  
+if ($type && $type === 'admin') {
+  // Adjectives and nouns
+  $sql = "SELECT id, category AS name FROM fc_categories ORDER BY name";
+
+  // Sentences
+  $sqlSentences = "SELECT id, type AS name FROM fc_categories_sentence"
+    . " ORDER BY name";
   
   // Word Categories
   $result = $mySqli->handleQuery($sql);
-  $arr_cat = [];
   
-  while($row = $result->fetch_assoc()) {
-    $arr_new_category = [];
-    $arr_new_category['id'] = $row['id'];
-    $arr_new_category['category'] = $row['category'];
-
-    $arr_cat[] = $arr_new_category;
-  }
+  $arr_categories['generic'] = get_categories($result); 
   
-  $arr_categories['word'] = $arr_cat; 
+  // Sentence Categories
+  $result_sentence = $mySqli->handleQuery($sqlSentences);
   
-  // Gender Categories
-  $result_gender = $mySqli->handleQuery($sql_gender);
-  $arr_cat_gender = [];
-  
-  while($rowGender = $result_gender->fetch_assoc()) {
-    $arr_new_category = [];
-    $arr_new_category['id'] = $rowGender['id'];
-    $arr_new_category['gender'] = $rowGender['gender'];
-
-    $arr_cat_gender[] = $arr_new_category;
-  }
-  
-  $arr_categories['gender'] = $arr_cat_gender;
+  $arr_categories['sentence'] = get_categories($result_sentence);
    
 } else {
-  
-  
-  
-  /*
-   * Union these queries
-   */
   
 
   // Adjectives
   $sqlAdj = "SELECT fc_german_adjectives.category AS id, fc_categories.category AS name"
-          . " FROM fc_german_adjectives, fc_categories"
-          . " WHERE fc_german_adjectives.category = fc_categories.id"
-          . " GROUP BY id ORDER BY name";
+    . " FROM fc_german_adjectives, fc_categories"
+    . " WHERE fc_german_adjectives.category = fc_categories.id"
+    . " GROUP BY id ORDER BY name";
 
   // Nouns
   $sqlNouns = "SELECT DISTINCT fc_german_nouns.category AS id, fc_categories.category AS name"
-       . " FROM fc_german_nouns, fc_categories"
-       . " WHERE fc_german_nouns.category = fc_categories.id"
-       . " GROUP BY id ORDER BY name";
+    . " FROM fc_german_nouns, fc_categories"
+    . " WHERE fc_german_nouns.category = fc_categories.id"
+    . " GROUP BY id ORDER BY name";
   
-  $sqlGender = 'SELECT id, gender FROM fc_categories_gender';
+  $sqlGender = 'SELECT id, gender AS name FROM fc_categories_gender';
   
-  $sqlSentence = 'SELECT id, type FROM fc_categories_sentence';
+  $sqlSentence = 'SELECT id, type AS name FROM fc_categories_sentence';
 
 
   // Adjectives
   $resultAdj = $mySqli->handleQuery($sqlAdj);
 
+  $arr_categories['adjective'] = get_categories($resultAdj);
 
-  // Get cards
-  $arr_cat_adj = [];
-  while($row = $resultAdj->fetch_assoc()) {
-    $arr_new_category = [];
-    $arr_new_category['id'] = $row['id'];
-    $arr_new_category['name'] = $row['name'];
-
-    $arr_cat_adj[] = $arr_new_category;
-  }
-
-  $arr_categories['adjective'] = $arr_cat_adj;
-
-
+  
   // Nouns
   $resultNoun = $mySqli->handleQuery($sqlNouns);
 
-
-  // Get cards
-  $arr_cat_noun = [];
-  while($row = $resultNoun->fetch_assoc()) {
-    $arr_new_category = [];
-    $arr_new_category['id'] = $row['id'];
-    $arr_new_category['name'] = $row['name'];
-
-    $arr_cat_noun[] = $arr_new_category;
-  }
-
-  $arr_categories['noun'] = $arr_cat_noun;
+  $arr_categories['noun'] = get_categories($resultNoun);
   
   
   // Gender
   $resultGender = $mySqli->handleQuery($sqlGender);
 
-
-  // Get cards
-  $arr_cat_gender = [];
-  while($row = $resultGender->fetch_assoc()) {
-    $arr_new_category = [];
-    $arr_new_category['id'] = $row['id'];
-    $arr_new_category['name'] = $row['gender'];
-
-    $arr_cat_gender[] = $arr_new_category;
-  }
-  
-  $arr_categories['gender'] = $arr_cat_gender;
+  $arr_categories['gender'] = get_categories($resultGender);
   
   
   // Sentence
   $resultSentence = $mySqli->handleQuery($sqlSentence);
-
-
-  // Get cards
-  $arr_cat_sentence = [];
-  while($row = $resultSentence->fetch_assoc()) {
-    $arr_new_category = [];
-    $arr_new_category['id'] = $row['id'];
-    $arr_new_category['name'] = $row['type'];
-
-    $arr_cat_sentence[] = $arr_new_category;
-  }
   
-  $arr_categories['sentence'] = $arr_cat_sentence;
+  $arr_categories['sentence'] = get_categories($resultSentence);
 
 }
 

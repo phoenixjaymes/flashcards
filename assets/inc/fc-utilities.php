@@ -89,3 +89,24 @@ function word_order_correct(){
   
   return true;
 }
+
+
+function get_categories($result) {
+  $arr_cat = [];
+  
+  while($row = $result->fetch_assoc()) {
+    $arr_new_category = [];
+    $arr_new_category['id'] = $row['id'];
+    $arr_new_category['name'] = $row['name'];
+
+    $arr_cat[] = $arr_new_category;
+  }
+  return $arr_cat;
+}
+
+
+function pre_wrap($array) {
+  echo '<pre>';
+  print_r($array);
+  echo '</pre>';
+}
