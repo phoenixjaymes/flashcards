@@ -69,6 +69,11 @@ angular.module('flashcards')
       var url = 'assets/inc/fc-german-categories.php';
       $http.get(url).then(callback);
     };
+    
+    this.getCategoriesAdmin = function(callback) {
+      var url = 'assets/inc/fc-german-categories.php?type=admin';
+      $http.get(url).then(callback);
+    };
 
     this.getSentences = function(pos, callback) {
       var url = 'assets/inc/fc-get-sentences.php';
