@@ -8,7 +8,7 @@
   <select id="selCategory" class="form__select" name="selCategory" ng-model="formAddAdjective.category"
     ng-focus="umlautFocus(undefined, undefined)">
     <option value="">Select a Category</option>
-    <option ng-repeat="option in catAdjectives" value="{{option.id}}">{{option.name | ucWords}}</option>
+    <option ng-repeat="option in catGeneric" value="{{option.id}}">{{option.name | ucWords}}</option>
   </select>
 
   <label class="form__label" for="txtEnglish">English</label>

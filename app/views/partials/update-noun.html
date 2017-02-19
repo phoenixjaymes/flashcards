@@ -7,7 +7,7 @@
   <label class="form__label" for="upNounCategory">Category</label>
   <select id="upNounCategory" class="form__select" name="selCategory"
     ng-model="formUpdateNoun.category" ng-focus="umlautFocus(undefined, undefined)">
-    <option ng-repeat="option in posCategoriesUpdate" value="{{option.id}}">{{option.name | ucWords}}</option>
+    <option ng-repeat="option in catGeneric" value="{{option.id}}">{{option.name | ucWords}}</option>
   </select>  
   
   <label class="form__label" for="upNounEnglish">English</label>
