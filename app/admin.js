@@ -42,7 +42,7 @@ angular.module('flashcards')
     $scope.inputId;
     
     // Get all admin categories from service
-    var getAdminCategories = function() {
+    $scope.getAdminCategories = function() {
       cardsService.getCategoriesAdmin(function(response) {
         $scope.cardAllCategories = response.data;
         $scope.catGeneric = response.data.generic;
@@ -248,6 +248,6 @@ angular.module('flashcards')
     });
     
     // Get Admin categories
-    getAdminCategories();
+    $scope.getAdminCategories();
     
 });

@@ -22,6 +22,10 @@ angular.module('flashcards')
           // Clear form
           $scope.formAddCategory.name = '';
           
+          // Get categories
+          $scope.getAllCategories();
+          $scope.getAdminCategories();
+          
           $scope.displayMessage('true');
         } else if (response.data.success === 'duplicate') {
           $scope.displayMessage('duplicate');

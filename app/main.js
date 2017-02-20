@@ -19,7 +19,7 @@ angular.module('flashcards')
 
 
     // Get all categories from service
-    var getAllCategories = function() {
+    $scope.getAllCategories = function() {
       cardsService.getCategories(function(response) {
         $scope.cardAllCategories = response.data;
         $scope.catAdjectives = response.data.adjective;
@@ -127,7 +127,7 @@ angular.module('flashcards')
   };
       
     // Get categories
-    getAllCategories();
+    $scope.getAllCategories();
 
     // Check if luser is logged in
     checkLogin();
