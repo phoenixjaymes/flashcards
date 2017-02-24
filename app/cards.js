@@ -8,13 +8,7 @@
 
 angular.module('flashcards')
     .controller('Cards', function($scope, $timeout, $sce, cardsService, preloader) {
-      $scope.cardOptions = [
-        {'value' : 'adjective', 'name' : 'Adj &amp; Adverbs'},
-        {'value' : 'noun', 'name' : 'Nouns'},
-        {'value' : 'verb', 'name' : 'Verbs'},
-        {'value' : 'phrase', 'name' : 'Phrases'},
-        {'value' : 'study', 'name' : 'Study'}      
-      ];
+
       $scope.cardOptionsPos = ''; 
       $scope.updateIds = {};
       
@@ -140,6 +134,7 @@ angular.module('flashcards')
       $scope.getCards = function(pos, category, sort) {
         $scope.imagesArray = [];
         $scope.updateIds.pos = pos;
+        $scope.showCards = true;
         
         if (pos === 'phrase') {
           $scope.showLoadingImg = false;
