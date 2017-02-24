@@ -7,21 +7,21 @@
   <label class="form__label" for="selCategoryUpdate">Category</label>
   <select id="selCategoryUpdate" class="form__select" name="selCategory"
     ng-model="formUpdateSentence.category" ng-focus="umlautFocus(undefined, undefined)">
-    <option ng-repeat="option in posCategoriesUpdate" value="{{option.id}}">{{option.name | ucWords}}</option>
+    <option ng-repeat="option in catSentences" value="{{option.id}}">{{option.name | ucWords}}</option>
   </select>  
   
   <label class="form__label" for="txtSentence">Sentence</label>
-  <input id="txtSentence" class="form__input" type="text" ng-model="formAddSentence.sentence"
+  <input id="txtSentence" class="form__input" type="text" ng-model="formUpdateSentence.sentence"
     ng-focus="umlautFocus(undefined, undefined, '')">
   
   <label class="form__label" for="addSentAnswer1">Answer 1</label>
-  <input id="addSentAnswer1" class="form__input" type="text" ng-model="formAddSentence.answer1"
+  <input id="addSentAnswer1" class="form__input" type="text" ng-model="formUpdateSentence.answer1"
     ng-focus="umlautFocus('formAddSentence', 'answer1', 'addSentAnswer1')">
   
   <umlauts class="form-umlauts" input-type="word" input-field="translation" ></umlauts>
   
   <label class="form__label" for="addSentAnswer2">Answer 2</label>
-  <input id="addSentAnswer2" class="form__input" type="text" ng-model="formAddSentence.answer2"
+  <input id="addSentAnswer2" class="form__input" type="text" ng-model="formUpdateSentence.answer2"
     ng-focus="umlautFocus('formAddSentence', 'answer2', 'addSentAnswer2')">
   
   <button class="form__button" ng-model="formUpdateSentence.submit" ng-click="updateAdjective()">Update Adjective</button>
