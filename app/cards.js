@@ -15,7 +15,7 @@ angular.module('flashcards')
         {'value' : 'phrase', 'name' : 'Phrases'},
         {'value' : 'study', 'name' : 'Study'}      
       ];
-      $scope.cardOptionsPos;
+      $scope.cardOptionsPos = ''; 
       $scope.updateIds = {};
       
       // Default card

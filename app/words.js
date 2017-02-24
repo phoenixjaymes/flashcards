@@ -16,6 +16,7 @@ angular.module('flashcards')
     $scope.updateIds = {};
     $scope.finalMessage = false;
     $scope.showWords = false;
+    $scope.wordmatchPos = '';
     
     $scope.wordsClicked = {
       wordOneId : undefined,
