@@ -130,7 +130,7 @@ if ($pos && $pos === 'adjective') {
     }
     
     $sql = "INSERT INTO fc_german_nouns (english, base, translation, example, img, gender, category, added, last_practiced)"
-         . " VALUES ('$english_safe', '$english_safe', '$translation_safe', '$example_safe', '$img_safe', '$gender', '$category_safe', '$date', '$date')";
+         . " VALUES ('$english_safe', '$base_safe', '$translation_safe', '$example_safe', '$img_safe', '$gender', '$category_safe', '$date', '$date')";
 
     $result = $mySqli->handleQuery($sql);
 
