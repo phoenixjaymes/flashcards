@@ -34,7 +34,6 @@ if ($pos === 'phrase') {
     $arr_card['id'] = $row['id'];
     $arr_card['english'] = $row['english'];
     $arr_card['translation'] = $row['translation'];
-    $arr_card['gender'] = $row['gender'];
 
     $arr_cards[] = $arr_card;
   }
@@ -58,14 +57,6 @@ if ($pos === 'phrase') {
     $arr_card['id'] = $row['id'];
     $arr_card['english'] = $row['english'];
     $arr_card['translation'] = $row['translation'];
-    $arr_card['ich'] = $row['ich'];
-    $arr_card['du'] = $row['du'];
-    $arr_card['er_sie_es'] = $row['er_sie_es'];
-    $arr_card['wir'] = $row['wir'];
-    $arr_card['ihr'] = $row['ihr'];
-    $arr_card['sie_Sie'] = $row['sie_Sie'];
-    $arr_card['img'] = $row['img'];
-    $arr_card['gender'] = $row['gender'];
 
     $arr_cards[] = $arr_card;
   }
@@ -88,8 +79,6 @@ if ($pos === 'phrase') {
     $arr_card['id'] = $row['id'];
     $arr_card['english'] = $row['english'];
     $arr_card['translation'] = $row['translation'];
-    $arr_card['img'] = $row['img'];
-    $arr_card['gender'] = $row['gender'];
 
     $arr_cards[] = $arr_card;
   }
@@ -114,13 +103,36 @@ if ($pos === 'phrase') {
     $arr_card['id'] = $row['id'];
     $arr_card['english'] = $row['english'];
     $arr_card['translation'] = $row['translation'];
-    $arr_card['img'] = $row['img'];
-    $arr_card['gender'] = $row['gender'];
 
     $arr_cards[] = $arr_card;
   }
 
   send_data($arr_cards); 
+  
+} elseif ($pos === 'sentence') {
+  $arr_sentences = [];
+  //$category = filter_input(INPUT_GET, 'category', FILTER_SANITIZE_STRING);
+  
+  $sql = "SELECT * FROM fc_german_sentence ORDER BY sentence";
+
+
+  $result = $mySqli->handleQuery($sql);
+
+  // Get sentences
+  while($row = $result->fetch_assoc()) {
+    
+    $arr_sentence = [];
+    $arr_sentence['id'] = $row['id'];
+    $arr_sentence['english'] = $row['sentence'];
+    $arr_sentence['translation'] = $row['answer1'];
+    
+    
+//    $arr_sentence['category'] = $row['category'];
+    
+    $arr_sentences[] = $arr_sentence;
+  }
+  
+  send_data($arr_sentences);
   
 } else {
   $category = filter_input(INPUT_GET, 'category', FILTER_SANITIZE_STRING);

@@ -159,8 +159,45 @@ if ($pos_get && $pos_get === 'adjective') {
   
   send_data($arr_response);
   
+} elseif ($pos_get && $pos_get === 'sentence') {
+  // Sanitize input
+  $id = filter_input(INPUT_GET, 'id', FILTER_SANITIZE_STRING);
+  
+  // Escape input
+  $id_safe = $linkId->real_escape_string($id);
+  
+  // Check for empty strings
+  if (!$id_safe) {
+    $arr_response['success'] = 'incorrect';
+  }
   
   
+  $sql = "SELECT id, sentence, category, answer1 "
+    . "   FROM fc_german_sentence WHERE id = $id_safe";
+
+  $result = $mySqli->handleQuery($sql);
+
+  // check for results
+
+  //then
+  $row = $result->fetch_assoc();
+    
+  
+  $arr_word['id'] = $row['id'];
+  $arr_word['sentence'] = $row['sentence'];
+  $arr_word['category'] = $row['category'];
+  $arr_word['answer1'] = $row['answer1'];
+  
+  $arr_response['item'] = $arr_word;
+      
+  
+  if ($result) {
+    $arr_response['success'] = true;
+  } else {
+    $arr_response['success'] = false;
+  }
+  
+  send_data($arr_response);
   
 } elseif ($pos_get && $pos_get === 'verb') {
   // Sanitize input
