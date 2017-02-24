@@ -8,14 +8,24 @@
   
   <div ng-hide="language === 'dutch'">
     <h3>Select your Cards</h3>
-
+    
     <div class="activity-buttons">
-      <a href="" class="activity_buttons__btn" ng-repeat="option in cardOptions" ng-click="changeCategory(option.value)" ng-bind-html="option.name | trustWord"></a>
+      <a href="" class="activity_buttons__btn" ng-click="changeCategory('adjective')">Adjectives &amp; Adverbs</a><br>
+      <a href="" class="activity_buttons__btn" ng-click="changeCategory('noun')">Nouns</a>
+      <a href="" class="activity_buttons__btn" ng-click="changeCategory('verb')">Verbs</a><br>
+      <a href="" class="activity_buttons__btn" ng-click="changeCategory('phrase')">Phrases</a>
+      <a href="" class="activity_buttons__btn" ng-click="changeCategory('study')">Study</a>
     </div>
+    
+<!--    <div class="activity-buttons" ng-show="showCategory === true">
+      <a href="" class="activity_buttons__btn"   ng-repeat="option in posCategory"
+        ng-click="getCards(cardOptionsPos, option.id, false);">{{option.name}}</a>
+    </div>-->
 
     <form class="cards-form">
       <label class="cards-form__label" for="flashcard-type" ng-show="showCategory === true">Category: </label>
-      <select id="flashcard-type" class="cards-form__select" ng-model="cardCategory" ng-change="getCards(cardOptionsPos, cardCategory, false); showCards = true" ng-show="showCategory === true">
+      <select id="flashcard-type" class="cards-form__select" ng-model="cardCategory"
+        ng-change="getCards(cardOptionsPos, cardCategory, false);" ng-show="showCategory === true">
         <option value="">Select</option>
         <option ng-repeat="option in posCategory" value="{{option.id}}">{{option.name}}</option>
       </select>
