@@ -40,6 +40,8 @@ angular.module('flashcards')
         var url = 'assets/inc/fc-get-update-words.php?pos=' + pos;
       } else if (pos === 'phrase') {
         var url = 'assets/inc/fc-get-update-words.php?pos=' + pos;
+      } else if (pos === 'sentence') {
+        var url = 'assets/inc/fc-get-update-words.php?pos=' + pos;
       } else if (pos === 'mixed') {
         var url = 'assets/inc/fc-get-update-words.php?pos=' + pos;
       } else {
