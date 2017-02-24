@@ -21,6 +21,7 @@ angular.module('flashcards')
         if(response.data.success === true) {
           // Clear form
           $scope.formAddNoun.english = '';
+          $scope.formAddNoun.base = '';
           $scope.formAddNoun.translation = '';
           $scope.formAddNoun.example = '';
           $scope.formAddNoun.img = '';
