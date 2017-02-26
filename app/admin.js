@@ -209,8 +209,6 @@ angular.module('flashcards')
         'false'     : 'Unable to add item at this time.'
       };
       
-      console.log(message);
-      
       $scope.responseMessage = objMessages[message];
       $scope.displayFormMessage = true;
     };
@@ -249,5 +247,4 @@ angular.module('flashcards')
     
     // Get Admin categories
     $scope.getAdminCategories();
-    
 });
