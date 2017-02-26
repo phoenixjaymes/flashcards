@@ -20,7 +20,9 @@ $isConnected = $mySqli->getConnection();
  $isConnected ? $linkId = $mySqli->getLink() : $linkId = false;
   
 $arr_response = [];
+date_default_timezone_set('America/Los_Angeles');
 $date = date('Y-m-d');
+$date_time = date('Y-m-d H:i:s');
 trim_post();
 
 $pos = filter_input(INPUT_POST, 'pos', FILTER_SANITIZE_STRING);
@@ -54,7 +56,7 @@ if ($pos && $pos === 'adjective') {
     }
     
     $sql = "INSERT INTO fc_german_adjectives (english, translation, example, img, category, added, last_practiced)"
-         . " VALUES ('$english_safe', '$translation_safe', '$example_safe', '$img_safe', '$category_safe', '$date', '$date')";
+         . " VALUES ('$english_safe', '$translation_safe', '$example_safe', '$img_safe', '$category_safe', '$date', '$date_time')";
 
     $result = $mySqli->handleQuery($sql);
 
@@ -130,7 +132,7 @@ if ($pos && $pos === 'adjective') {
     }
     
     $sql = "INSERT INTO fc_german_nouns (english, base, translation, example, img, gender, category, added, last_practiced)"
-         . " VALUES ('$english_safe', '$base_safe', '$translation_safe', '$example_safe', '$img_safe', '$gender', '$category_safe', '$date', '$date')";
+         . " VALUES ('$english_safe', '$base_safe', '$translation_safe', '$example_safe', '$img_safe', '$gender', '$category_safe', '$date', '$date_time')";
 
     $result = $mySqli->handleQuery($sql);
 
@@ -167,7 +169,7 @@ if ($pos && $pos === 'adjective') {
     
     
     $sql = "INSERT INTO fc_german_phrases (english, translation, added, last_practiced)"
-       . " VALUES ('$english_safe', '$translation_safe', '$date', '$date')";
+       . " VALUES ('$english_safe', '$translation_safe', '$date', '$date_time')";
  
     $result = $mySqli->handleQuery($sql);
 
@@ -216,7 +218,7 @@ if ($pos && $pos === 'adjective') {
     $sqlSentence = "INSERT INTO fc_german_sentence"
       . " (sentence, category, answer1, added, last_practiced)"
       . " VALUES"
-      . " ('$sentence_safe', '$category', '$answer1_safe', '$date', '$date')";
+      . " ('$sentence_safe', '$category', '$answer1_safe', '$date', '$date_time')";
     
       
     $result = $mySqli->handleQuery($sqlSentence);
@@ -273,7 +275,7 @@ if ($pos && $pos === 'adjective') {
       . " (english, infinitive, translation, example, separable, ich, du, er_sie_es, wir, ihr, sie_Sie, added, last_practiced)"
       . " VALUES"
       . " ('$english_safe', '$infinitive_safe', '$translation_safe', '$example_safe', '$separable', '$ich_safe',"
-      . " '$du_safe', '$er_sie_es_safe', '$wir_safe', '$ihr_safe', '$sie_sie_safe', '$date', '$date')";
+      . " '$du_safe', '$er_sie_es_safe', '$wir_safe', '$ihr_safe', '$sie_sie_safe', '$date', '$date_time')";
 
     $result = $mySqli->handleQuery($sql);
 
