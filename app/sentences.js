@@ -11,7 +11,7 @@ angular.module('flashcards')
     $scope.sentenceOptions = [
         {'value' : 'verb', 'name' : 'Get Sentences'}     
       ];
-    $scope.updateIds = {};
+    $scope.updateIds = {'pos':'sentence'};
     $scope.finalMessage = false;
     $scope.showSentences = false;
     $scope.newSentence = [];
@@ -109,6 +109,13 @@ angular.module('flashcards')
         $scope.showCheck = false;
         $scope.showContinue = false;
         $scope.showFinish = true;
+        
+        updateItemService.updateLastPracticed($scope.updateIds, function(response) {
+          if (response.data.success === 'updated') {
+            //$scope.message = 'Your words have been updated.';
+          }
+        });
+        
       } else {
         $scope.showCheck = false;
         $scope.showContinue = true;
@@ -124,15 +131,20 @@ angular.module('flashcards')
       $scope.showAnswerIncorrect = false;
       $scope.showContinue = false;
       $scope.showAnswer = false;
-      $scope.showCheck = true;
       $scope.newSentence = [];
       $scope.getCurrentSentence($scope.crrntSentenceNum);
     };
     
     // Reset sentence variables
     $scope.resetSentences = function() {
+      $scope.crrntSentenceNum = 0;
+      $scope.showFinish = false;
+      $scope.showAnswerCorrect = false;
+      $scope.showAnswerIncorrect = false;
+      
       $scope.showSentences = false;
       $scope.finalMessage = false;
+      $scope.newSentence  = [];
       $scope.listOfSentences = undefined;
     };
 });
