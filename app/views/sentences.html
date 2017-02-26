@@ -34,15 +34,16 @@
           <h3>{{crrntSentence.sentence}}</h3>
           
           <ul class="sentences__wrap">
-            <li class="sentences__item" ng-class="{'on':item.clicked}" ng-repeat="word in newSentence track by $index"
+            <li class="sentences__item" ng-repeat="word in newSentence track by $index"
               ng-click="item.clicked = true; wordsClicked.sentenceWrdClk($index)">
               <span ng-bind-html="word | trustWord"></span>
             </li>
           </ul>
 
           <ul class="sentences__wrap">
-            <li class="sentences__item" ng-class="{'on':item.clicked}"
-              ng-repeat="word in crrntSentence.listOfWords track by $index" ng-click="item.clicked = true; wordsClicked.listWrdClk($index)">
+            <li class="sentences__item"
+              ng-repeat="word in crrntSentence.listOfWords track by $index"
+              ng-click="item.clicked = true; wordsClicked.listWrdClk($index)">
               <span ng-bind-html="word | trustWord"></span>
             </li>
           </ul>
