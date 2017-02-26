@@ -23,8 +23,7 @@ $arr_sentences = [];
 if (isset($_GET)) {
   //$category = filter_input(INPUT_GET, 'category', FILTER_SANITIZE_STRING);
   
-  // Adjectives
-  $sql = "SELECT * FROM fc_german_sentence LIMIT 10";
+  $sql = "SELECT * FROM fc_german_sentence ORDER BY last_practiced LIMIT 5";
   
   
   $result = $mySqli->handleQuery($sql);
