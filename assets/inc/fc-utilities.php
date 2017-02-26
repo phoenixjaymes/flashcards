@@ -105,6 +105,34 @@ function get_categories($result) {
 }
 
 
+
+function update_last_practiced($mySqli, $pos, $ids) {
+  global $date;
+  
+  $arr = [
+    'adjective' => 'fc_german_adjectives',
+    'noun' => 'fc_german_nouns',
+    'phrase' => 'fc_german_phrases',
+    'sentence' => 'fc_german_sentence',
+    'verb' => 'fc_german_verbs',
+  ];
+  
+  $sql = "UPDATE {$arr[$pos]}"
+      . " SET last_practiced = '$date' "
+      . " WHERE id IN ($ids)";
+  
+  $result = $mySqli->handleQuery($sql);
+
+  if ($result) {
+    $arr_response['success'] = 'updated';
+  } else {
+    $arr_response['success'] = false;
+  }
+  
+  return $arr_response;
+}
+
+
 function pre_wrap($array) {
   echo '<pre>';
   print_r($array);
