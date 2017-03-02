@@ -23,9 +23,15 @@ $arr_sentences = [];
 if (isset($_GET)) {
   //$category = filter_input(INPUT_GET, 'category', FILTER_SANITIZE_STRING);
   
-  $sql = "SELECT * FROM fc_german_sentence ORDER BY last_practiced LIMIT 5";
+  $date_num = date('j');
   
+  if (  0 ===  ($date_num % 4) ) {
+    $sql = "SELECT * FROM fc_german_sentence ORDER BY RAND() LIMIT 5";
+  } else {
+    $sql = "SELECT * FROM fc_german_sentence ORDER BY last_practiced LIMIT 5";
+  }
   
+
   $result = $mySqli->handleQuery($sql);
 
   // Get sentences
