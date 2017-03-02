@@ -11,13 +11,14 @@
   width: 100%;
  
   &__btn {
-    border-radius: $brd-radius;
+    @extend %btn-nav;
     
-    display: inline-block;
+    background: $governor-bay;
+    color:$lightning-yellow;
     
-    height: 40px;
-    line-height: 40px;
-    width: 40px;
+    &:hover {
+      color: lighten($cold-purple, 3%);
+    }
   }
   
   &__count {

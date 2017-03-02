@@ -95,6 +95,8 @@
   background: $cold-purple;
   border-radius: $brd-radius;
   display: inline-block;
+  font-size: 28px;
+  font-weight: $font-weight--bold;
   height: 35px;
   line-height: 35px;
   text-align: center;
@@ -125,6 +127,7 @@
   text-decoration: none;
   min-width: 75px;
 }
+
 
 // Change card transition
 %change-card-trans {
