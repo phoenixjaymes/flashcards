@@ -14,6 +14,8 @@ angular.module('flashcards')
 
       if (pos === 'adjective') {
         var url = 'assets/inc/fc-german.php?pos=' + pos + '&category=' + category;
+      } else if (pos === 'gender') {
+        var url = 'assets/inc/fc-german.php?pos=' + pos + '&category=' + category;
       } else if (pos === 'noun') {
         var url = 'assets/inc/fc-german.php?pos=' + pos + '&category=' + category;
       } else if (pos === 'verb') {

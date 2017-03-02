@@ -7,7 +7,7 @@
 'use strict';
 
 angular.module('flashcards')
-    .controller('Cards', function($scope, $timeout, $sce, cardsService, preloader) {
+    .controller('Cards', function($scope, $timeout, $sce, cardsService, updateItemService, preloader) {
 
       $scope.cardOptionsPos = ''; 
       $scope.updateIds = {};
@@ -46,6 +46,10 @@ angular.module('flashcards')
           $scope.getCards(cardPos);
           $scope.showCategory = false;
           $scope.showCards = true;
+        } else if (cardPos === 'gender') {
+          $scope.cardOptionsPos = cardPos;
+          $scope.posCategory = $scope.cardAllCategories[cardPos];
+          $scope.showCategory = true;
         } else {
           $scope.cardOptionsPos = cardPos;
           $scope.posCategory = $scope.cardAllCategories[cardPos];
@@ -179,8 +183,10 @@ angular.module('flashcards')
             setCard(0);
             $scope.showLoadingImg = false;
           }
-           
+          
         });
+        
+        
       };
       
       
@@ -189,6 +195,18 @@ angular.module('flashcards')
         // Check if number is out of bounds
         if ($scope.currentCard >= $scope.totalCards) {
           $scope.currentCard = 1;
+          
+          
+          
+          updateItemService.updateLastPracticed($scope.updateIds, function(response) {
+            if (response.data.success === 'updated') {
+              //$scope.message = 'Your words have been updated.';
+            }
+          });
+          
+          
+          
+          
         } else {
           $scope.currentCard++;
         }

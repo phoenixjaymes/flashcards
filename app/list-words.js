@@ -24,6 +24,11 @@ angular.module('flashcards')
       });
     };
       
+      
+      
+      
+      
+    // Remove ?
     // Change category options
     $scope.getCategories = function(wordPos) {
       if ($scope.posCategories === undefined) {
@@ -34,6 +39,10 @@ angular.module('flashcards')
         });
       }
     };
+    
+    
+    
+    
     
     
     
@@ -55,6 +64,10 @@ angular.module('flashcards')
 
         $scope.getWordsUpdate(wordPos, '');
         $scope.showCategoryWords = false;
+      } else if (wordPos === 'sentence') {
+
+        $scope.getWordsUpdate(wordPos, '');
+        $scope.showCategoryWords = false;
       } else if (wordPos === 'verb') {
 
         $scope.getWordsUpdate(wordPos, '');
@@ -63,6 +76,8 @@ angular.module('flashcards')
         //$scope.posCategory = $scope.cardAllCategories[cardPos];
         //$scope.showCategoryWords = true;
       }
+      
+      $scope.word.category = 4;
     };
 
 
@@ -125,6 +140,15 @@ angular.module('flashcards')
           $scope.formUpdatePhrase.translation = $scope.updateItem.item.translation;
           
           $scope.$emit('displayUpdateForms', 'displayUpdatePhrase');
+
+        } else if ($scope.word.pos === 'sentence') {
+
+          $scope.formUpdateSentence.id = $scope.updateItem.item.id;
+          $scope.formUpdateSentence.sentence = $scope.updateItem.item.sentence;
+          $scope.formUpdateSentence.category = $scope.updateItem.item.category;
+          $scope.formUpdateSentence.answer1 = $scope.updateItem.item.answer1;
+          
+          $scope.$emit('displayUpdateForms', 'displayUpdateSentence');
 
         } else if ($scope.word.pos === 'verb') {
 
