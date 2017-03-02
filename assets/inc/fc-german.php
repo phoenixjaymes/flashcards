@@ -24,7 +24,6 @@ $pos = filter_input(INPUT_GET, 'pos', FILTER_SANITIZE_STRING);
 
 if ($pos === 'adjective') {
   $category = filter_input(INPUT_GET, 'category', FILTER_SANITIZE_STRING);
-  $sort = filter_input(INPUT_GET, 'sort', FILTER_SANITIZE_STRING);
   
   // Adjectives
   $sql = "SELECT id, english, translation, example, img, 'none' AS gender "
@@ -49,9 +48,35 @@ if ($pos === 'adjective') {
 
   send_data($arr_cards); 
   
+} elseif ($pos === 'gender') {
+  $category = filter_input(INPUT_GET, 'category', FILTER_SANITIZE_STRING);
+  
+  // Nouns by gender
+  $sql = "SELECT fc_german_nouns.id, english, translation, example, img, fc_categories_gender.gender AS gender"
+    . " FROM fc_german_nouns, fc_categories_gender"
+    . " WHERE fc_german_nouns.gender = fc_categories_gender.id AND fc_german_nouns.gender = '{$category}'"
+    . " ORDER BY last_practiced LIMIT $int_limit";
+  
+  $result = $mySqli->handleQuery($sql);
+
+
+  // Get cards
+  while($row = $result->fetch_assoc()) {
+    $arr_card = [];
+    $arr_card['id'] = $row['id'];
+    $arr_card['english'] = $row['english'];
+    $arr_card['translation'] = $row['translation'];
+    $arr_card['example'] = $row['example'];
+    $arr_card['img'] = $row['img'];
+    $arr_card['gender'] = $row['gender'];
+
+    $arr_cards[] = $arr_card;
+  }
+
+  send_data($arr_cards); 
+  
 } elseif ($pos === 'noun') {
   $category = filter_input(INPUT_GET, 'category', FILTER_SANITIZE_STRING);
-  $sort = filter_input(INPUT_GET, 'sort', FILTER_SANITIZE_STRING);
   
   // Nouns
   $sql = "SELECT fc_german_nouns.id, english, translation, example, img, fc_categories_gender.gender AS gender"

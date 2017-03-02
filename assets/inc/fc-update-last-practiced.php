@@ -22,6 +22,10 @@ $date = date('Y-m-d H:i:s');
 $pos = filter_input(INPUT_POST, 'pos', FILTER_SANITIZE_STRING);
 $ids = filter_input(INPUT_POST, 'ids', FILTER_SANITIZE_STRING);
 
+if ($pos === 'gender') {
+  $pos = 'noun';
+}
+
 
 if ( $pos && $ids ) {
   $arr_response = update_last_practiced($mySqli, $pos, $ids);
