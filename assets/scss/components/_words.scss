@@ -30,7 +30,7 @@
   }
   
   &__item {
-    @include text(.90em);
+    @include text(.95em);
     
     background: $bg-wordmatch-item;
     border-radius: $brd-radius;
@@ -39,7 +39,7 @@
     font-weight: $font-weight--bold;
     margin: 3px 2px;
     min-width: 50px;
-    padding: 6px 5px;
+    padding: 6px 3px;
     text-align: center;
     
     @media #{$brk-md} {
