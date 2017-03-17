@@ -4,13 +4,13 @@
     <h3 class="form-header__text">Update Phrase</h3>
   </div>
   
-  <label class="form__label" for="txtPhraseEnglish">English</label>
-  <input id="txtPhraseEnglish" class="form__input" ng-model="formUpdatePhrase.english" type="text"
+  <label class="form__label" for="upPhraseEnglish">English</label>
+  <input id="upPhraseEnglish" class="form__input" ng-model="formUpdatePhrase.english" type="text"
      ng-focus="umlautFocus(undefined, undefined)">
   
-  <label class="form__label" for="txtPhaseTranslation">Translation</label>
-  <input id="txtPhaseTranslation" class="form__input" ng-model="formUpdatePhrase.translation" type="text"
-     ng-focus="umlautFocus('formUpdatePhrase', 'translation')">
+  <label class="form__label" for="upPhaseTranslation">Translation</label>
+  <input id="upPhaseTranslation" class="form__input" ng-model="formUpdatePhrase.translation" type="text"
+    ng-focus="umlautFocus('formUpdatePhrase', 'translation', 'upPhaseTranslation')">
   
   <umlauts class="form-umlauts" input-type="verb" input-field="translation" ></umlauts>
   
