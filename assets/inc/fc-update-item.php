@@ -29,9 +29,6 @@ $date = date('Y-m-d');
 
 $pos = filter_input(INPUT_POST, 'pos', FILTER_SANITIZE_STRING);
 
-//print_r($_POST);
-//exit();
-
 
 //
 if ($pos && $pos === 'adjective') {
