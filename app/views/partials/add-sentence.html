@@ -12,18 +12,18 @@
   </select>
 
   <label class="form__label" for="txtSentence">Sentence</label>
-  <input id="txtSentence" class="form__input" type="text" ng-model="formAddSentence.sentence"
-    ng-focus="umlautFocus(undefined, undefined, '')">
+  <textarea id="txtSentence" class="form__textarea" ng-model="formAddSentence.sentence"
+    ng-focus="umlautFocus(undefined, undefined, '')"></textarea>
   
   <label class="form__label" for="addSentAnswer1">Answer 1</label>
-  <input id="addSentAnswer1" class="form__input" type="text" ng-model="formAddSentence.answer1"
-    ng-focus="umlautFocus('formAddSentence', 'answer1', 'addSentAnswer1')">
+  <textarea id="addSentAnswer1" class="form__textarea" ng-model="formAddSentence.answer1"
+    ng-focus="umlautFocus('formAddSentence', 'answer1', 'addSentAnswer1')"></textarea>
   
   <umlauts class="form-umlauts" input-type="word" input-field="translation" ></umlauts>
   
-  <label class="form__label" for="addSentAnswer2">Answer 2</label>
-  <input id="addSentAnswer2" class="form__input" type="text" ng-model="formAddSentence.answer2"
-    ng-focus="umlautFocus('formAddSentence', 'answer2', 'addSentAnswer2')">
+  <label class="form__label" for="addSentExtraWords">Extra Words</label>
+  <input id="addSentExtraWords" class="form__input" type="text" ng-model="formAddSentence.extraWords"
+    ng-focus="umlautFocus('formAddSentence', 'extraWords', 'addSentExtraWords')">
   
   <button  class="form__button" ng-model="formAddSentence.Submit" ng-click="addSentence()"
     ng-focus="umlautFocus(undefined, undefined, '')">Add Sentence</button>
