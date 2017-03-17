@@ -132,9 +132,20 @@ function update_last_practiced($mySqli, $pos, $ids) {
   return $arr_response;
 }
 
+// Remove white space and make a list separate with a comma and a space (', ')
+function comma_space_string ($str) {
+  $str_extra = trim(str_replace(',', ' ', $str));
+  $str_extra_trimmed = preg_replace('/\s+/S', ' ', $str_extra);
+  $arr_extra = explode(' ', $str_extra_trimmed);
+  $extra_words = implode(', ', $arr_extra);
+    
+  return $extra_words;
+}
 
+// Wrap and output pre formated array
 function pre_wrap($array) {
   echo '<pre>';
   print_r($array);
   echo '</pre>';
 }
+ 
