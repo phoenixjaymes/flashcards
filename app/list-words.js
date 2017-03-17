@@ -147,6 +147,7 @@ angular.module('flashcards')
           $scope.formUpdateSentence.sentence = $scope.updateItem.item.sentence;
           $scope.formUpdateSentence.category = $scope.updateItem.item.category;
           $scope.formUpdateSentence.answer1 = $scope.updateItem.item.answer1;
+          $scope.formUpdateSentence.extraWords = $scope.updateItem.item.extraWords;
           
           $scope.$emit('displayUpdateForms', 'displayUpdateSentence');
 
