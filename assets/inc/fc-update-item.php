@@ -165,6 +165,11 @@ if ($pos && $pos === 'adjective') {
   $answer1_safe = $linkId->real_escape_string($answer1);
   $extra_words_safe = $linkId->real_escape_string($extra_words);
   
+  // Remove white space and make a list separate with a comma and a space (', ')
+  if ($extra_words_safe !== NULL || $extra_words_safe !== '') {
+    $extra_words_safe = comma_space_string($extra_words_safe);
+  }
+  
   if (!$category || !$sentence_safe || !$answer1_safe ) {
     $arr_response['success'] = 'incorrect';
     send_data($arr_response);
