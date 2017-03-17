@@ -22,7 +22,7 @@ angular.module('flashcards')
           // Clear form
           $scope.formAddSentence.sentence = '';
           $scope.formAddSentence.answer1 = '';
-          $scope.formAddSentence.answer2 = '';
+          $scope.formAddSentence.extraWords = '';
           
           $scope.displayMessage('true');
         } else if (response.data.success === 'duplicate') {
