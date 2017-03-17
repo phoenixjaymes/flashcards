@@ -21,57 +21,12 @@ $arr_cards = [];
 
 $pos = filter_input(INPUT_GET, 'pos', FILTER_SANITIZE_STRING);
 
-if ($pos === 'phrase') {
-  // Phares
+if ($pos === 'adjective') {
   $category = filter_input(INPUT_GET, 'category', FILTER_SANITIZE_STRING);
   
-  $sql = "SELECT id, english, translation, 'none' AS gender FROM fc_german_phrases";
-  $result = $mySqli->handleQuery($sql);
-  
-  // Get cards
-  while($row = $result->fetch_assoc()) {
-    $arr_card = [];
-    $arr_card['id'] = $row['id'];
-    $arr_card['english'] = $row['english'];
-    $arr_card['translation'] = $row['translation'];
-
-    $arr_cards[] = $arr_card;
-  }
-
-  send_data($arr_cards);  
-  
-} elseif ($pos === 'verb') {
-  // Verbs
-  $category = filter_input(INPUT_GET, 'category', FILTER_SANITIZE_STRING);
-  $sort = filter_input(INPUT_GET, 'sort', FILTER_SANITIZE_STRING);
-  
-  
-  $sql = "SELECT id, english, translation, ich, du, er_sie_es, wir, ihr, sie_Sie, img, 'none' AS gender "
-    . "FROM fc_german_verbs ORDER BY infinitive";
-  
-  $result = $mySqli->handleQuery($sql);
-  
-  // Get cards
-  while($row = $result->fetch_assoc()) {
-    $arr_card = [];
-    $arr_card['id'] = $row['id'];
-    $arr_card['english'] = $row['english'];
-    $arr_card['translation'] = $row['translation'];
-
-    $arr_cards[] = $arr_card;
-  }
-
-  send_data($arr_cards);   
-  
-} elseif ($pos === 'adjective') {
-  $category = filter_input(INPUT_GET, 'category', FILTER_SANITIZE_STRING);
-  
-  // Adjectives
   $sql = "SELECT id, english, translation, img, 'none' AS gender FROM fc_german_adjectives WHERE category = '{$category}' ORDER BY translation";
   
-  
   $result = $mySqli->handleQuery($sql);
-
 
   // Get cards
   while($row = $result->fetch_assoc()) {
@@ -109,6 +64,24 @@ if ($pos === 'phrase') {
 
   send_data($arr_cards); 
   
+} elseif ($pos === 'phrase') {
+  
+  $category = filter_input(INPUT_GET, 'category', FILTER_SANITIZE_STRING);
+  
+  $sql = "SELECT id, english, translation, 'none' AS gender FROM fc_german_phrases ORDER BY translation";
+  $result = $mySqli->handleQuery($sql);
+  
+  while($row = $result->fetch_assoc()) {
+    $arr_card = [];
+    $arr_card['id'] = $row['id'];
+    $arr_card['english'] = $row['english'];
+    $arr_card['translation'] = $row['translation'];
+
+    $arr_cards[] = $arr_card;
+  }
+
+  send_data($arr_cards);  
+  
 } elseif ($pos === 'sentence') {
   $arr_sentences = [];
   //$category = filter_input(INPUT_GET, 'category', FILTER_SANITIZE_STRING);
@@ -131,10 +104,32 @@ if ($pos === 'phrase') {
   
   send_data($arr_sentences);
   
+} elseif ($pos === 'verb') {
+  
+  $category = filter_input(INPUT_GET, 'category', FILTER_SANITIZE_STRING);
+  $sort = filter_input(INPUT_GET, 'sort', FILTER_SANITIZE_STRING);
+  
+  
+  $sql = "SELECT id, english, translation, ich, du, er_sie_es, wir, ihr, sie_Sie, img, 'none' AS gender "
+    . "FROM fc_german_verbs ORDER BY infinitive";
+  
+  $result = $mySqli->handleQuery($sql);
+  
+  // Get cards
+  while($row = $result->fetch_assoc()) {
+    $arr_card = [];
+    $arr_card['id'] = $row['id'];
+    $arr_card['english'] = $row['english'];
+    $arr_card['translation'] = $row['translation'];
+
+    $arr_cards[] = $arr_card;
+  }
+
+  send_data($arr_cards);   
+  
 } else {
   $category = filter_input(INPUT_GET, 'category', FILTER_SANITIZE_STRING);
   
-  // Nouns and adjectives
   if (isset($_GET) && isset($_GET['category']) && $_GET['category'] === 'all') {
     $sql = "(SELECT english, translation, img, 'none' AS gender FROM fc_german_adjectives LIMIT 15)"
         . " UNION "
