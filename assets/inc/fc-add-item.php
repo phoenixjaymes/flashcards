@@ -184,7 +184,6 @@ if ($pos && $pos === 'adjective') {
   
 } elseif ($pos && $pos === 'sentence') {
   
-  
   remove_empty();
   
   // Sanitize input
@@ -192,42 +191,47 @@ if ($pos && $pos === 'adjective') {
   $sentence = filter_input(INPUT_POST, 'sentence', FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
   $answer1 = filter_input(INPUT_POST, 'answer1', FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
   $answer2 = filter_input(INPUT_POST, 'answer2', FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+  $extra_words = filter_input(INPUT_POST, 'extraWords', FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+  
   
   
   // Escape input
   $sentence_safe = $linkId->real_escape_string($sentence);
   $answer1_safe = $linkId->real_escape_string($answer1);
   $answer2_safe = check_empty($linkId, $answer2);
-  
-  
+  $extra_words_safe = $linkId->real_escape_string($extra_words);
   
   if (!$category || !$sentence_safe || !$answer1_safe ) {
     $arr_response['success'] = 'incorrect';
     send_data($arr_response);
+  }
+  
+  // Duplicate check
+  $sqlDuplicate = "SELECT count(*) AS cnt FROM fc_german_sentence WHERE sentence = '$sentence_safe'";
+
+  if(is_duplicate($mySqli, $sqlDuplicate)) {
+    $arr_response['success'] = 'duplicate';     
+    send_data($arr_response);
+  }
+
+  $sql = "INSERT INTO fc_german_sentence"
+    . " (sentence, category, answer1, extra, added, last_practiced) VALUES"
+    . " ('$sentence_safe', '$category', '$answer1_safe', ";
+
+  if ($extra_words_safe === NULL || $extra_words_safe === '') {
+    $sql .=  " NULL ";
   } else {
-    
-    // Duplicate check
-    $sqlDuplicate = "SELECT count(*) AS cnt FROM fc_german_sentence WHERE sentence = '$sentence_safe'";
+    $sql .=  " '$extra_words_safe' ";
+  }    
 
-    if(is_duplicate($mySqli, $sqlDuplicate)) {
-      $arr_response['success'] = 'duplicate';     
-      send_data($arr_response);
-    }
-    
-    
-    $sqlSentence = "INSERT INTO fc_german_sentence"
-      . " (sentence, category, answer1, added, last_practiced)"
-      . " VALUES"
-      . " ('$sentence_safe', '$category', '$answer1_safe', '$date', '$date_time')";
-    
-      
-    $result = $mySqli->handleQuery($sqlSentence);
+  $sql .= " , '$date', '$date_time')";
 
-    if ($result) {
-      $arr_response['success'] = true;
-    } else {
-      $arr_response['success'] = false;
-    }
+  $result = $mySqli->handleQuery($sql);
+
+  if ($result) {
+    $arr_response['success'] = true;
+  } else {
+    $arr_response['success'] = false;
   }
  
   send_data($arr_response);

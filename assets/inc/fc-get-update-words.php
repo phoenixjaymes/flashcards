@@ -126,9 +126,6 @@ if ($pos === 'phrase') {
     $arr_sentence['english'] = $row['sentence'];
     $arr_sentence['translation'] = $row['answer1'];
     
-    
-//    $arr_sentence['category'] = $row['category'];
-    
     $arr_sentences[] = $arr_sentence;
   }
   

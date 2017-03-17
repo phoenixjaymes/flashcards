@@ -172,7 +172,7 @@ if ($pos_get && $pos_get === 'adjective') {
   }
   
   
-  $sql = "SELECT id, sentence, category, answer1 "
+  $sql = "SELECT id, sentence, category, answer1, extra "
     . "   FROM fc_german_sentence WHERE id = $id_safe";
 
   $result = $mySqli->handleQuery($sql);
@@ -187,6 +187,7 @@ if ($pos_get && $pos_get === 'adjective') {
   $arr_word['sentence'] = $row['sentence'];
   $arr_word['category'] = $row['category'];
   $arr_word['answer1'] = $row['answer1'];
+  $arr_word['extraWords'] = $row['extra'];
   
   $arr_response['item'] = $arr_word;
       
