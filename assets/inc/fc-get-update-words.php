@@ -86,8 +86,7 @@ if ($pos === 'adjective') {
   $arr_sentences = [];
   //$category = filter_input(INPUT_GET, 'category', FILTER_SANITIZE_STRING);
   
-  $sql = "SELECT * FROM fc_german_sentence ORDER BY sentence";
-
+  $sql = "SELECT * FROM fc_german_sentence ORDER BY answer1";
 
   $result = $mySqli->handleQuery($sql);
 
