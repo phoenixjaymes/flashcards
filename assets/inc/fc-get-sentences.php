@@ -25,13 +25,12 @@ if (isset($_GET)) {
   
   $date_num = date('j');
   
-  if (  0 ===  ($date_num % 4) ) {
-    $sql = "SELECT * FROM fc_german_sentence ORDER BY RAND() LIMIT 5";
+  if ( 0 ===  ($date_num % 3) ) {
+    $sql = "SELECT id, sentence, category, answer1, extra FROM fc_german_sentence ORDER BY RAND() LIMIT 5";
   } else {
-    $sql = "SELECT * FROM fc_german_sentence ORDER BY last_practiced LIMIT 5";
+    $sql = "SELECT id, sentence, category, answer1, extra FROM fc_german_sentence ORDER BY last_practiced LIMIT 5";
   }
   
-
   $result = $mySqli->handleQuery($sql);
 
   // Get sentences
@@ -39,18 +38,31 @@ if (isset($_GET)) {
     
     $arr_sentence = [];
     $arr_words = [];
+    $arr_extra_words = [];
     
     foreach ($row as $key => $val) {
       
-      $arr_sentence[$key] = $val;
+      if ($key !== 'extra') {
+        $arr_sentence[$key] = $val;
+      }
       
       if ( $key === 'answer1' ) {
         $arr_words = explode(' ', $val);
       }
+      
+      if ($key === 'extra' && !is_null($val)) {
+        $arr_extra_words = explode(', ', $val);
+      }
     }
     
-    shuffle($arr_words);
-    $arr_sentence['words'] = $arr_words;
+    if (count($arr_extra_words) === 0) {
+      $arr_all_words = $arr_words;
+    } else {
+      $arr_all_words = array_merge($arr_words, $arr_extra_words);
+    }
+    
+    shuffle($arr_all_words);
+    $arr_sentence['words'] = $arr_all_words;
     
     $arr_sentences[] = $arr_sentence;
   }
