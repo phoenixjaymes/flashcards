@@ -80,20 +80,21 @@
 
 
 .form__input {
-  @extend %form-textbox-display;
+  @extend %form-widget-display;
   
   display: block;
+  height: 35px;
   width: 100%;
   
   &--verb {
-    @extend %form-textbox-display;
+    @extend %form-widget-display;
     
     display: inline-block;
     width: 80%;
   }
   
   &--half {
-    @extend %form-textbox-display;
+    @extend %form-widget-display;
     
     display: inline-block;
     width: 100%;
@@ -104,12 +105,18 @@
   }
 }
 
+.form__textarea {
+  @extend %form-widget-display;
+  
+  height: 60px;
+  padding: 0 5px;
+  width: 100%;
+}
+
 .form__select {
-  background: $form-widget-bg-color;
-  border: 1px solid $form-border-color;
-  border-radius: $brd-radius;
+  @extend %form-widget-display;
+  
   height: 35px;
-  margin-bottom: 10px;
   width: 100%;
   
   &:focus {
